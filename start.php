@@ -3,17 +3,22 @@
 elgg_register_event_handler('init','system','elgg_ggouv_template_init');
 
 function elgg_ggouv_template_init() {
+	global $CONFIG;
 	
-	//elgg_extend_view('css/elgg','ggouv_template/css');
+	elgg_extend_view('css/elgg','ggouv_template/css');
 	//elgg_register_js('jquery.livequery', '/mod/facebook_theme/vendors/jquery.livequery-1.1.1/jquery.livequery.min.js', 'footer');
-	//elgg_extend_view('js/elgg', 'ggouv_template/js');
+	elgg_extend_view('js/elgg', 'ggouv_template/js');
 
-	//elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_page_setup');
+	elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_menu');
 
-	// add actions for header_input
-	//$action_base = $CONFIG->pluginspath . 'thewire/actions';
-	//elgg_register_action("header_input", "$action_base/add.php");
+	// Register actions
+	$action_base = $CONFIG->pluginspath . 'elgg_ggouv_template/actions';
+	elgg_register_action("ggouv_template/header_input", "$action_base/add.php");
 
+	// groups remove option and enable it by default.
+	remove_group_tool_option('activity');
+	elgg_unextend_view('groups/tool_latest', 'groups/profile/activity_module');
+	
 	if (elgg_is_active_plugin('search')) {
 		//elgg_unextend_view('page/elements/header', 'search/search_box');
 		//elgg_extend_view('page/elements/topbar', 'search/search_box');
@@ -21,7 +26,6 @@ function elgg_ggouv_template_init() {
 
 	//elgg_register_plugin_hook_handler('register', 'menu:composer', 'ggouv_theme_composer_menu_handler');
 
-	//elgg_unregister_menu_item('footer', 'report_this');
 
 	// Want ggouv logo present, not Elgg's
 
@@ -35,15 +39,18 @@ function elgg_ggouv_template_init() {
 
 }
 
-function ggouv_custom_page_setup() {
-	global $CONFIG, $fb;
+function ggouv_custom_menu() {
 
 	elgg_unregister_menu_item('topbar', 'elgg_logo');
 	elgg_unregister_menu_item('topbar', 'profile');
 	elgg_unregister_menu_item('topbar', 'dashboard');
 	elgg_unregister_menu_item('topbar', 'friends');
+	elgg_unregister_menu_item('topbar', 'administration');
 	elgg_unregister_menu_item('topbar', 'usersettings');
 	elgg_unregister_menu_item('topbar', 'logout');
+	
+	elgg_unregister_menu_item('footer', 'report_this');
+	elgg_unregister_menu_item('extras', 'bookmark');
 
 	elgg_register_menu_item('topbar', array(
 		'name' => 'logo',
@@ -68,7 +75,6 @@ function ggouv_custom_page_setup() {
 		));
 
 // @ for user profile, friends, collections, search user(@todo)... sub menu at page/elements/ggouv-sub-menu.php
-		$sub_menu = '<ul class="elgg-menu elgg-menu-site elgg-menu-site-default clearfix"><li>Profile</li></ul>';
 		elgg_register_menu_item('topbar', array(
 			'name' => 'at',
 			'href' => '#at',
@@ -83,10 +89,20 @@ function ggouv_custom_page_setup() {
 			'href' => '#groups',
 			'itemClass' => array('ggouv-menu-item-html-char','elgg-parent-menu'),
 			'text' => '!',
-			'priority' => 400,
+			'priority' => 300,
 		));
 
-
+// administration
+		if ( $user->isAdmin() ) {
+			elgg_register_menu_item('topbar', array(
+				'name' => 'administration',
+				'href' => "admin/plugins",
+				'text' => '<span class="ggouv-icons ggouv-icon-administration"></span>',
+				'priority' => 400,
+				'section' => 'alt',
+			));
+		}
+		
 		elgg_register_menu_item('topbar', array(
 			'name' => 'usersettings',
 			'href' => "settings/user/{$user->username}",
@@ -104,6 +120,34 @@ function ggouv_custom_page_setup() {
 			'priority' => 1000,
 			'section' => 'alt',
 		));
+		
+		
+		// Extend footer with report content link
+		$href = "javascript:elgg.forward('reportedcontent/add'";
+		$href .= "+'?address='+encodeURIComponent(location.href)";
+		$href .= "+'&title='+encodeURIComponent(document.title));";
+		
+		elgg_register_menu_item('extras', array(
+			'name' => 'report_this',
+			'href' => $href,
+			'title' => elgg_echo('reportedcontent:this:tooltip'),
+			'text' => elgg_view_icon('attention'),
+			'priority' => 300,
+		));
+		
+		if ( elgg_is_active_plugin('bookmarks') ) {
+			$user_guid = $user->guid;
+			$address = urlencode(current_page_url());
+	
+			elgg_register_menu_item('extras', array(
+				'name' => 'bookmark',
+				'text' => elgg_view_icon('push-pin-alt'),
+				'href' => "bookmarks/add/$user_guid?address=$address",
+				'title' => elgg_echo('bookmarks:this'),
+				'rel' => 'nofollow',
+				'priority' => 200,
+			));
+		}
 	}
 
 }
