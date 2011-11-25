@@ -96,7 +96,7 @@ function ggouv_custom_menu() {
 			'priority' => 300,
 		));
 
-// administration
+// topbar bottom
 		if ( $user->isAdmin() ) {
 			elgg_register_menu_item('topbar', array(
 				'name' => 'administration',
@@ -122,6 +122,15 @@ function ggouv_custom_menu() {
 			'title' => elgg_echo('logout'),
 			'is_action' => TRUE,
 			'priority' => 1000,
+			'section' => 'alt',
+		));
+		
+		elgg_register_menu_item('topbar', array(
+			'name' => 'info',
+			'href' => "#",
+			'text' => '<span class="ggouv-icons ggouv-icon-info"></span>',
+			'title' => elgg_echo('info'),
+			'priority' => 1100,
 			'section' => 'alt',
 		));
 		

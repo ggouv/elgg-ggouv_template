@@ -47,8 +47,8 @@
 	text-align: left;
 	z-index: 3;
 }
-.elgg-submenu-at { top: 88px }
-.elgg-submenu-groups { top: 128px }
+.elgg-submenu-at { top: 96px }
+.elgg-submenu-groups { top: 144px }
 .elgg-child-menu li {
 	border-radius: 6px;
 	padding: 4px 8px;
@@ -144,7 +144,7 @@
 }
 .ggouv-menu-item-html-char.hover > a {
 	color: #4690D6;
-	font-size: 2.4em;
+	font-size: 3em;
 	/*text-shadow: 4px 0px 2px #DEDEDE;*/
 	transform: rotate(-10deg);
 	-moz-transform: rotate(-10deg);
@@ -174,7 +174,17 @@
 .ggouv-icon-logout {
 	background-position: -298px -55px;
 }
-
+.ggouv-icon-info {
+	background-position: -113px -412px;
+	width: 15px;
+	height: 15px;
+	margin: 2px;
+}
+.elgg-menu-item-info {
+	border-top: 1px inset #666666;
+	height: 19px !important;
+	margin-top: 5px !important;
+}
 
 /* the wire-search textarea */
 #thewire-header {

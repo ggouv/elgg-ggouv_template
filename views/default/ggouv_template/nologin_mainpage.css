@@ -1,6 +1,5 @@
 .elgg-page-header .elgg-inner-nolog.main {
 	margin: 0 auto;
-	width: 200px;
 	text-align: center;
 }
 .elgg-inner-nolog.main .elgg-menu-item-logo {
@@ -36,6 +35,8 @@
 	left: 0;
 	font-size: 2em;
 	font-weight: bold;
+	width: 20%;
+	line-height: 1em;
 }
 .title li {
 	float: left;
