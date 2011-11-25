@@ -21,10 +21,10 @@
 	float: left;
 }
 .elgg-inner-nolog h1 {
-	font-size: 3em;
+	font-size: 2em;
 	color: white;
 	text-shadow: 0 0 4px #999;
-	padding:9px;
+	padding: 13px;
 	margin: 0 60px;
 }
 .elgg-page-default .elgg-page-body.nolog {

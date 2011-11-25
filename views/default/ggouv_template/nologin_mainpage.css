@@ -8,7 +8,7 @@
 	float: none;
 }
 .elgg-inner-nolog.main h1 {
-	font-size: 3em;
+	font-size: 4em;
 	color: black;
 	text-shadow: 0 0 4px #CCCCCC;
 	padding: 0;
@@ -49,6 +49,7 @@
   float: right;
   width: 75%;
   margin-top:-68px;
+  font-size:1.2em;
 }
 .content li {
   max-height: 470px;

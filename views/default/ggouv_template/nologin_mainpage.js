@@ -44,14 +44,14 @@ function CalculateArticlePos() {
 			ii = $('.title li:nth-child('+ (parseInt(i)+1) +')');	
 			TitleTop = ii.position().top;
 			TitleWidth = ii.width()+40;
+			TitleHeight = ii.height()+40;
 			break;
 		}
 	}
-	$('#cursor').css({'top' : TitleTop+'px', 'width' : TitleWidth});
+	$('#cursor').css({'top' : TitleTop+'px', 'width' : TitleWidth, 'height' : TitleHeight});
 }
 
 function MiddleWindow() {
-	$('#cursor').css('height', $('.title li').height()+40);
 	var windowHeight = $(window).height();
 	$('.title').css('padding-top', (windowHeight - $('.title').height())/2);
 	$('.background-nolog-main').height(windowHeight-48);
