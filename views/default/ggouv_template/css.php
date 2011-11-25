@@ -1,8 +1,8 @@
 /* 
 * nolog css when non logged in user
 */
-.elgg-page-header-nolog {
-  background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #2E2E2E;
+.elgg-page-header.nolog {
+  background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
   box-shadow: 0 5px 5px 0 white;
   height: 48px;
   position: fixed;
@@ -23,40 +23,13 @@
 .elgg-inner-nolog h1 {
 	font-size: 3em;
 	color: white;
-	text-shadow: 0 0 4px #CCCCCC;
+	text-shadow: 0 0 4px #999;
 	padding:9px;
 	margin: 0 60px;
-}
-.elgg-inner-nolog.main {
-	margin: 0 auto;
-	width: 200px;
-	text-align: center;
-}
-.elgg-inner-nolog.main .elgg-menu-item-logo {
-	margin: 14px auto 0;
-	float: none;
-}
-.elgg-inner-nolog.main h1 {
-	font-size: 3em;
-	color: black;
-	text-shadow: 0 0 4px #CCCCCC;
-	padding: 0;
-	margin: 0;
 }
 .elgg-page-default .elgg-page-body.nolog {
     margin:0 0 0 20px;
     padding-top:48px;
-}
-.elgg-inner-nolog-main {
-	box-shadow:0 0 50px 10px #E6E6E6 inset;
-    height:100%;
-    position:fixed;
-    width:100%;
-    z-index:1;
-    margin: 0 0 0 -20px;
-}
-.elgg-inner-nolog-main .elgg-layout-one-column {
-    padding: 80px;
 }
 
 
@@ -64,7 +37,7 @@
 * topbar
 */
 .elgg-child-menu {
-	background-color: #2E2E2E;
+	background-color: #1F2E3D;
 	border-radius: 0 10px 10px 0;
 	box-shadow: 0 0 6px 2px rgba(10, 10, 10, 0.4);
 	left: 40px;
@@ -223,9 +196,9 @@
 	position: absolute;
 	right: -8px;
 	z-index: 7001;
-	-webkit-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	-moz-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	box-shadow: inset 0 2px 2px 0 #2E2E2E;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
 /* hack Chrome / Safari */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -257,9 +230,9 @@
 	margin-left: -12px;
 	border-radius: 0 4px 4px 0;
 	background-color: white;
-	-webkit-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	-moz-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	box-shadow: inset 0 2px 2px 0 #2E2E2E;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
 #thewire-header > .thewire-button {
 	position: absolute;
@@ -280,9 +253,9 @@
 	color:transparent;
 	text-shadow: none;
 	border-radius: 0 4px 4px 0;
-	-webkit-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	-moz-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	box-shadow: inset 0 2px 2px 0 #2E2E2E;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	transition: none;
 	-webkit-transition: none;
 	-moz-transition: none;
@@ -325,9 +298,9 @@
 	border-radius: 4px;
 	height: 32px;
 	width: 602px;
-	-webkit-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	-moz-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	box-shadow: inset 0 2px 2px 0 #2E2E2E;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
 .elgg-search input[type="text"] {
 	color: #0054A7;
@@ -348,9 +321,9 @@
 	border-radius: 4px 0 0 4px;
 	border: none;
 	height: 32px;
-	-webkit-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	-moz-box-shadow: inset 0 2px 2px 0 #2E2E2E;
-	box-shadow: inset 0 2px 2px 0 #2E2E2E;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
 .elgg-page-header .elgg-search input[type="submit"]:hover {
 	background-position: 8px -88px;

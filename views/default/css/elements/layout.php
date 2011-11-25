@@ -39,7 +39,7 @@
 
 /***** TOPBAR ******/
 .elgg-page-topbar {
-	background: none repeat scroll 0 0 #2E2E2E;
+	background: none repeat scroll 0 0 #1F2E3D;
 	height: 100%;
 	position: fixed;
 	width: 40px;

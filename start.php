@@ -9,6 +9,10 @@ function elgg_ggouv_template_init() {
 	//elgg_register_js('jquery.livequery', '/mod/facebook_theme/vendors/jquery.livequery-1.1.1/jquery.livequery.min.js', 'footer');
 	elgg_extend_view('js/elgg', 'ggouv_template/js');
 
+	elgg_register_css('css.nologin.mainpage',"/mod/elgg_ggouv_template/views/default/ggouv_template/nologin_mainpage.css");
+	elgg_register_js('js.nologin.mainpage',"/mod/elgg_ggouv_template/views/default/ggouv_template/nologin_mainpage.js");
+	elgg_register_js('jquery.scrollTo',"/mod/elgg_ggouv_template/views/default/ggouv_template/jquery.scrollTo-min.js");
+
 	elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_menu');
 
 	// Register actions
@@ -25,7 +29,7 @@ function elgg_ggouv_template_init() {
 	}
 
 	//elgg_register_plugin_hook_handler('register', 'menu:composer', 'ggouv_theme_composer_menu_handler');
-
+	elgg_register_plugin_hook_handler('index', 'system', 'elgg_ggouv_template_nologin_mainpage');
 
 	// Want ggouv logo present, not Elgg's
 
@@ -151,6 +155,30 @@ function ggouv_custom_menu() {
 	}
 
 }
+
+function elgg_ggouv_template_nologin_mainpage() {
+	
+	if (elgg_is_logged_in()) {
+	
+		forward('activity');
+		
+	} else {
+		
+		elgg_load_css('css.nologin.mainpage');
+		elgg_load_js('js.nologin.mainpage');
+		elgg_load_js('jquery.scrollTo');
+		
+		$params = array(
+				'content' => elgg_view('page/elements/nologin_mainpage_content')
+		);
+		$body = elgg_view_layout('one_column', $params);
+		echo elgg_view_page(null, $body);
+	
+	}
+	
+	return true;
+}
+
 
 function mentions_user_rewrite($hook, $entity_type, $returnvalue, $params) {
 	global $CONFIG;

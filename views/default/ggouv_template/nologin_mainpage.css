@@ -1,0 +1,69 @@
+.elgg-page-header .elgg-inner-nolog.main {
+	margin: 0 auto;
+	width: 200px;
+	text-align: center;
+}
+.elgg-inner-nolog.main .elgg-menu-item-logo {
+	margin: 14px auto 0;
+	float: none;
+}
+.elgg-inner-nolog.main h1 {
+	font-size: 3em;
+	color: black;
+	text-shadow: 0 0 4px #CCCCCC;
+	padding: 0;
+	margin: 0;
+}
+.elgg-inner-nolog.main .elgg-layout-one-column {
+	padding: 0;
+}
+.background-nolog-main {
+	box-shadow:0 0 50px 10px #E6E6E6 inset;
+    top:48px;
+    position:fixed;
+    width:100%;
+    z-index:-1;
+    margin: 0 0 0 -20px;
+}
+
+.elgg-output {
+	margin: 0;
+}
+
+.title {
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 2em;
+	font-weight: bold;
+}
+.title li {
+	float: left;
+	clear: both;
+}
+.title li:hover {
+	cursor: pointer;
+}
+.content {
+  color: #333333;
+  float: right;
+  width: 75%;
+  margin-top:-68px;
+}
+.content li {
+  max-height: 470px;
+  overflow: hidden;
+  width: 720px;
+}
+
+#cursor {
+	background-color: #4690D6;
+	position: fixed;
+	left: 0;
+	border-radius: 0 10px 10px 0;
+	
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}

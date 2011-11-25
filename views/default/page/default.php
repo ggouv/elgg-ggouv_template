@@ -44,7 +44,7 @@ header("Content-type: text/html; charset=UTF-8");
 			</div>
 		</div>
 		
-		<?php echo elgg_view('page/elements/ggouv-sub-menu'); ?>
+		<?php echo elgg_view('page/elements/ggouv_sub_menu'); ?>
 	
 		<div class="elgg-page-header">
 			<div class="elgg-inner">
@@ -58,10 +58,16 @@ header("Content-type: text/html; charset=UTF-8");
 			</div>
 		</div>
 	
-	<?php } elseif ( elgg_get_context() == 'main' ) { ?>
+	<?php } else {
 	
-		<div class="elgg-page-header-nolog">
-			<div class="elgg-inner-nolog main">
+		if ( elgg_get_context() == 'main' ) { 
+			$class_main = 'main';
+		} else { 
+			$class_main = '';
+		} ?>
+	
+		<div class="elgg-page-header nolog">
+			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
 				<?php 
 				echo "<div class='elgg-menu-item-logo'><a><span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span></a></div>";
 				echo '<h1>' . elgg_get_config('sitename') . '</h1	>' . elgg_view('core/account/login_dropdown')
@@ -70,57 +76,13 @@ header("Content-type: text/html; charset=UTF-8");
 		</div>
 		
 		<div class="elgg-page-body nolog">
-			<div class="elgg-inner-nolog-main">
-				<?php 
-					$page_top = elgg_get_plugin_setting('page_top_for_home', 'elgg_ggouv_template');
-					$page_top_entity = get_entity($page_top);
-					
-					$title[] = elgg_view('output/longtext', array('value' => $page_top_entity['title']));
-					$desc[] = elgg_view('output/longtext', array('value' => $page_top_entity['description']));
-
-					$pages = elgg_get_entities_from_metadata(array(
-						'type' => 'object',
-						'subtype' => 'page',
-						'metadata_name' => 'parent_guid',
-						'metadata_value' => $page_top,
-					));
-					foreach( $pages as $page) {
-						$title[] = elgg_view('output/longtext', array('value' => $page['title']));
-						$desc[] = elgg_view('output/longtext', array('value' => $page['description']));
-					}
-					
-					$content = '<ul class="title"><li>' . implode('</li><li>', $title) . '</li></ul>';
-					$content .= '<ul class="content"><li>' . implode('</li><li>', $desc) . '</li></ul>';
-					
-					$params = array(
-							'content' => $content,
-					);
-					echo elgg_view_layout('one_column', $params);
-				?>
-			</div>
-		</div>
-		
-	<?php } else { ?>
-	
-		<div class="elgg-page-header-nolog">
-			<div class="elgg-inner-nolog">
-				<?php 
-				echo "<div class='elgg-menu-item-logo'><a><span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span></a></div>";
-				echo '<h1>' . elgg_get_config('sitename') . '</h1	>' . elgg_view('core/account/login_dropdown')
-				?>
-			</div>
-		</div>
-	
-		<div class="elgg-page-body nolog">
-			<div class="elgg-inner">
+			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
 				<?php echo elgg_view('page/elements/body', $vars); ?>
 			</div>
 		</div>
 	
 	<?php } ?>
 	
-	
-
 	<div class="elgg-page-footer">
 		<div class="elgg-inner">
 			<?php // echo elgg_view('page/elements/footer', $vars); ?>
