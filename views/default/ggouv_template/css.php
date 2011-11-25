@@ -396,6 +396,15 @@
 }
 .groups-profile.with_activity_module {
     float:left;
-    margin-bottom:20px;
     width:66.12%;
+}
+#groups-tools.with_activity_module {
+	width:66.12%;
+	float:left;
+}
+#groups-tools.with_activity_module > li {
+	width:49%;
+}
+#groups-tools.with_activity_module > li:nth-child(2n+1) {
+    margin-right:2%;
 }

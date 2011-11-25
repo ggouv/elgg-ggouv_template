@@ -74,7 +74,9 @@ header("Content-type: text/html; charset=UTF-8");
 				<?php 
 					$page_top = elgg_get_plugin_setting('page_top_for_home', 'elgg_ggouv_template');
 					$page_top_entity = get_entity($page_top);
-					$content = $page_top_entity['description'];
+					
+					$title[] = elgg_view('output/longtext', array('value' => $page_top_entity['title']));
+					$desc[] = elgg_view('output/longtext', array('value' => $page_top_entity['description']));
 
 					$pages = elgg_get_entities_from_metadata(array(
 						'type' => 'object',
@@ -83,10 +85,12 @@ header("Content-type: text/html; charset=UTF-8");
 						'metadata_value' => $page_top,
 					));
 					foreach( $pages as $page) {
-						$body = elgg_view('output/longtext', array('value' => $page['description']));
-						$title = '<h3>' . elgg_view('output/longtext', array('value' => $page['title'])) . '</h3>';
-						$content .= $title . $body;	 
+						$title[] = elgg_view('output/longtext', array('value' => $page['title']));
+						$desc[] = elgg_view('output/longtext', array('value' => $page['description']));
 					}
+					
+					$content = '<ul class="title"><li>' . implode('</li><li>', $title) . '</li></ul>';
+					$content .= '<ul class="content"><li>' . implode('</li><li>', $desc) . '</li></ul>';
 					
 					$params = array(
 							'content' => $content,

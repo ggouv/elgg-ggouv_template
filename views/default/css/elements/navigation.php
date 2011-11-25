@@ -294,6 +294,11 @@
 	-webkit-border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
+	
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
 }
 .elgg-menu-filter > li:hover {
 	background: #dedede;
@@ -479,6 +484,11 @@
 	background-color: white;
 	margin: 3px 0 5px 0;
 	padding: 2px 4px 2px 8px;
+	
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
 }
 .elgg-menu-owner-block li a:hover {
 	background-color: #0054A7;
