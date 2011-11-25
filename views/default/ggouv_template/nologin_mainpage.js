@@ -51,7 +51,7 @@ function CalculateArticlePos() {
 }
 
 function MiddleWindow() {
-	$('#cursor').css('height', $('.content li').height()+40);
+	$('#cursor').css('height', $('.title li').height()+40);
 	var windowHeight = $(window).height();
 	$('.title').css('padding-top', (windowHeight - $('.title').height())/2);
 	$('.background-nolog-main').height(windowHeight-48);
