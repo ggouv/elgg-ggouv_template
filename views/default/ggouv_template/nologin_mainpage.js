@@ -37,7 +37,6 @@ function CalculateArticlePos() {
 		posts_offset = $(this).offset();
 		posts_pos.push([ posts_offset.top + $(this).width()/2 ]);
 	});
-		console.log(posts_pos);
 	var TheScroll = $(window).scrollTop()
 	for(var i in posts_pos) {
 		if (TheScroll < Math.round(posts_pos[i])) {

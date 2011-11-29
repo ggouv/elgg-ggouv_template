@@ -59,7 +59,10 @@ header("Content-type: text/html; charset=UTF-8");
 		</div>
 	
 	<?php } else {
-	
+		global $CONFIG;
+		
+		if ( elgg_get_context() == 'activity' ) forward('');
+		
 		if ( elgg_get_context() == 'main' ) { 
 			$class_main = 'main';
 		} else { 
@@ -69,8 +72,8 @@ header("Content-type: text/html; charset=UTF-8");
 		<div class="elgg-page-header nolog">
 			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
 				<?php 
-				echo "<div class='elgg-menu-item-logo'><a><span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span></a></div>";
-				echo '<h1>' . elgg_get_config('sitename') . '</h1	>' . elgg_view('core/account/login_dropdown')
+				echo "<div class='elgg-menu-item-logo'><a href='" . $CONFIG->url . "'><span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span></a></div>";
+				echo '<h1><a href="' . $CONFIG->url . '">' . elgg_get_config('sitename') . '</a></h1>' . elgg_view('core/account/login_dropdown')
 				?>
 			</div>
 		</div>

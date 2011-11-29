@@ -27,6 +27,10 @@
 	padding: 13px;
 	margin: 0 60px;
 }
+.elgg-inner-nolog h1 a {
+	text-decoration: none;
+	color: inherit;
+}
 .elgg-page-default .elgg-page-body.nolog {
     margin:0 0 0 20px;
     padding-top:48px;
@@ -91,6 +95,7 @@
 .elgg-menu-item-logo > a > span {
 	position: absolute;
 	left: 6px;
+	cursor: pointer;
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
