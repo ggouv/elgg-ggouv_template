@@ -6,7 +6,7 @@
 	margin: 14px auto 0;
 	float: none;
 }
-.elgg-inner-nolog.main h1 {
+.elgg-inner-nolog.main > h1 {
 	font-size: 4em;
 	color: black;
 	text-shadow: 0 0 4px #CCCCCC;

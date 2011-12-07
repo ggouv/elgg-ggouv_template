@@ -4,6 +4,7 @@ elgg_register_event_handler('init','system','elgg_ggouv_template_init');
 
 function elgg_ggouv_template_init() {
 	global $CONFIG;
+	$base = elgg_get_plugins_path() . 'elgg_ggouv_template';
 	
 	elgg_extend_view('css/elgg','ggouv_template/css');
 	//elgg_register_js('jquery.livequery', '/mod/facebook_theme/vendors/jquery.livequery-1.1.1/jquery.livequery.min.js', 'footer');
@@ -15,9 +16,13 @@ function elgg_ggouv_template_init() {
 
 	elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_menu');
 
+	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
+    
+    elgg_register_library('twitter_ggouv', "$base/lib/twitter/lib.php");
+	elgg_load_library('twitter_ggouv');
+
 	// Register actions
-	$action_base = $CONFIG->pluginspath . 'elgg_ggouv_template/actions';
-	elgg_register_action("ggouv_template/header_input", "$action_base/add.php");
+	elgg_register_action("ggouv_template/header_input", "$base/actions/add.php");
 
 	// groups remove option and enable it by default.
 	remove_group_tool_option('activity');
@@ -230,4 +235,41 @@ function mentions_group_rewrite($hook, $entity_type, $returnvalue, $params) {
 	), $returnvalue);
 
 	return $returnvalue;
+}
+
+/**
+ * SEO Friendly Titles for special characters, like accents words.
+ *
+ */
+function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params) {
+    $separator = "dash";
+    $lowercase = TRUE;
+
+    if ($entity_type == 'friendly:title') {
+        $title = $params['title'];
+
+        $title = strip_tags($title);
+        $title = preg_replace("`\[.*\]`U","",$title);
+        $title = preg_replace('`&(amp;)?#?[a-z0-9]+;`i','-',$title);
+        $title = htmlentities($title, ENT_COMPAT, 'utf-8');
+        $title = preg_replace( "`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig|quot|rsquo);`i","\\1", $title );
+        $title = preg_replace( "`&([a-z])(elig);`i","\\1e", $title );
+        $title = preg_replace( array("`[^a-z0-9]`i","`[-]+`") , "-", $title);
+
+        if ($lowercase === TRUE) {
+                $title = strtolower($title);
+        }
+
+        if($separator != 'dash') {
+                $title = str_replace('-', '_', $title);
+            $separator = '_';
+        }
+
+        else {
+                $separator = '-';
+        }
+
+        return trim($title, $separator);
+    }
+
 }

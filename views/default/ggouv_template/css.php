@@ -20,14 +20,14 @@
 	width: 38px;
 	float: left;
 }
-.elgg-inner-nolog h1 {
+.elgg-inner-nolog > h1 {
 	font-size: 2em;
 	color: white;
 	text-shadow: 0 0 4px #999;
 	padding: 13px;
 	margin: 0 60px;
 }
-.elgg-inner-nolog h1 a {
+.elgg-inner-nolog > h1 a {
 	text-decoration: none;
 	color: inherit;
 }
