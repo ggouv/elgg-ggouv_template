@@ -35,6 +35,9 @@
     margin:0 0 0 20px;
     padding-top:48px;
 }
+#login-dropdown-box {
+	position: fixed;
+}
 
 
 /* 
