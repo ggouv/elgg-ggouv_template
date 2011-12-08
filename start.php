@@ -23,7 +23,8 @@ function elgg_ggouv_template_init() {
 
 	// Register actions
 	elgg_register_action("ggouv_template/header_input", "$base/actions/add.php");
-	elgg_register_action('register', "$base/actions/register.php");
+	elgg_register_action('register', "$base/actions/register.php", 'public');
+	elgg_register_action('profile/edit', "$base/actions/edit.php");
 
 	// groups remove option and enable it by default.
 	remove_group_tool_option('activity');

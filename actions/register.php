@@ -14,6 +14,7 @@ $password = get_input('password');
 $password2 = get_input('password2');
 $email = get_input('email');
 $name = get_input('name');
+$location = get_input('location');
 $friend_guid = (int) get_input('friend_guid', 0);
 $invitecode = get_input('invitecode');
 
@@ -33,7 +34,7 @@ if (elgg_get_config('allow_registration')) {
 			elgg_clear_sticky_form('register');
 			
 			$new_user = get_entity($guid);
-
+			$new_user->set('location', $location); 
 			// allow plugins to respond to self registration
 			// note: To catch all new users, even those created by an admin,
 			// register for the create, user event instead.
