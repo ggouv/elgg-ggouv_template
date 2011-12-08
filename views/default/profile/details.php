@@ -9,8 +9,8 @@ $user = elgg_get_page_owner_entity();
 $profile_fields = elgg_get_config('profile_fields');
 
 echo '<div id="profile-details" class="elgg-body pll">';
-echo "<h1>{$user->username}</h1>";
-echo "<h2 class='mvm' style='font-weight:normal;'>@{$user->name}</h2>";
+echo "<h1>{$user->realname}</h1>";
+echo "<h2 class='mvm' style='font-weight:normal;'>@{$user->username}</h2>";
 
 echo elgg_view("profile/status", array("entity" => $user));
 

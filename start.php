@@ -18,8 +18,8 @@ function elgg_ggouv_template_init() {
 
 	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
     
-    elgg_register_library('twitter_ggouv', "$base/lib/twitter/lib.php");
-	elgg_load_library('twitter_ggouv');
+    elgg_register_library('user_ggouv', "$base/lib/user/lib.php");
+	elgg_load_library('user_ggouv');
 
 	// Register actions
 	elgg_register_action("ggouv_template/header_input", "$base/actions/add.php");
