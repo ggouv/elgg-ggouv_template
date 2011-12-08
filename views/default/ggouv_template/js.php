@@ -67,6 +67,8 @@ elgg.ggouv_template.init = function() {
 		}
 	});
 	
+	// hide developers-log when empty
+	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
 }
 elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
