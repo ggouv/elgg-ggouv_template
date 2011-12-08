@@ -121,7 +121,7 @@ function ggouv_twitter_api_create_user($twitter) {
 	$user->username = $username;
 	$user->name = $username;
 	$user->realname = $name;
-	$user->twitter = $name;
+	$user->twitter = $twitter->screen_name;
 	$user->access_id = ACCESS_PUBLIC;
 	$user->salt = generate_random_cleartext_password();
 	$user->password = generate_user_password($user, $password);

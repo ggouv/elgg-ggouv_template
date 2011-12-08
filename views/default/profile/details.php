@@ -5,7 +5,10 @@
  */
 
 $user = elgg_get_page_owner_entity();
-
+global $fb;
+$fb->info($user);
+$fb->info($user->twitter, 'twitter');
+$fb->info($user->realname, 'realname');
 $profile_fields = elgg_get_config('profile_fields');
 
 echo '<div id="profile-details" class="elgg-body pll">';
