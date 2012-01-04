@@ -210,6 +210,10 @@
 .elgg-river-comments {
 	margin: 0;
 	border-top: none;
+	font-size: 90%;
+}
+.elgg-river-comments .elgg-output {
+	font-size: 85%;
 }
 .elgg-river-comments li:first-child {
 	-webkit-border-radius: 5px 0 0;
