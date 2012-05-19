@@ -268,6 +268,7 @@
 *************************************** */
 .elgg-menu-title {
 	float: right;
+	margin-top: -7px;
 }
 
 .elgg-menu-title > li {
@@ -538,7 +539,7 @@
 	SIDEBAR EXTRAS (rss, bookmark, etc)
 *************************************** */
 .elgg-menu-extras {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 /* ***************************************

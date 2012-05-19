@@ -94,6 +94,14 @@
 }
 .elgg-layout-one-sidebar {
 }
+.elgg-layout-one-sidebar.fixed-sidebar {
+	margin-right: 25%;
+	padding-right: 30px;
+}
+.elgg-layout-one-sidebar.fixed-sidebar .elgg-sidebar {
+	position: fixed;
+	right: -15px;
+}
 .elgg-layout-one-column {
 	padding: 10px 20px;
 }
