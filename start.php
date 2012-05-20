@@ -241,7 +241,7 @@ function mentions_group_rewrite($hook, $entity_type, $returnvalue, $params) {
 
 /**
  * SEO Friendly Titles for special characters, like accents words.
- *
+ * http://core.trac.wordpress.org/browser/branches/3.3/wp-includes/formatting.php line 855
  */
 function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params) {
     $separator = "dash";
@@ -249,7 +249,7 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
 
     if ($entity_type == 'friendly:title') {
         $title = $params['title'];
-
+/*
         $title = strip_tags($title);
         $title = preg_replace("`\[.*\]`U","",$title);
         $title = preg_replace('`&(amp;)?#?[a-z0-9]+;`i','-',$title);
@@ -271,7 +271,10 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
                 $separator = '-';
         }
 
-        return trim($title, $separator);
+        return trim($title, $separator);*/
+        $title = preg_replace('/\//', '-', $title);
+        $title = preg_replace('/\s+/', '-', $title);
+       	return utf8_encode(rawurlencode($title));
     }
 
 }

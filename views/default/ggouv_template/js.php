@@ -67,8 +67,29 @@ elgg.ggouv_template.init = function() {
 		}
 	});
 	
+	//fixed-sidebar
+	if ( $('.elgg-layout').hasClass('fixed-sidebar') ) {
+		fixedSidebar = function() {
+			$('.elgg-sidebar').height($(window).height() - $('.elgg-page-header').height() - 20); // 20 = sidebar padding
+			
+			// special code for elgg-markdown_wiki page history
+			if ($('#slider').length) {
+				$('#slider').height(0);
+				var y = $('.elgg-sidebar .elgg-menu-extras').position();
+				$('#slider').height($(window).height() - $('.elgg-page-header').height() - y.top -31);
+			}
+		};
+		$(document).ready(function() {
+			fixedSidebar();
+		});
+		$(window).bind("resize", function() {
+			fixedSidebar();
+		});
+	}
+
 	// hide developers-log when empty
 	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
+	
 }
 elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
