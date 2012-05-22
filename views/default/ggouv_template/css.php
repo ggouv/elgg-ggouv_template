@@ -90,49 +90,50 @@
 }
 .elgg-menu-item-logo > a {
 	font-size:40px;
-	padding-top: 15px !important;
-	color: transparent !important;
+	padding-top: 15px;
+	color: transparent;
+	height: 33px;
 	/*font-family: "Lucida Console", monospace;
 	text-shadow: 0 0 0.02em #fff, -0.07em 0 0.03em #0f0, 0.07em 0 0.03em #f00;*/
-}
-.elgg-menu-item-logo > a > span {
-	position: absolute;
-	left: 6px;
-	cursor: pointer;
+	text-shadow: -0.07em 0 0.03em #0f0;
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 }
-.elgg-menu-item-logo .logoWhite {
-	text-shadow: 0 0 0.02em #fff;
+.elgg-menu-item-logo > a:before, .elgg-menu-item-logo > a:after {
+	position: absolute;
+	content: '∇';
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
 }
-.elgg-menu-item-logo .logoGreen {
+.elgg-menu-item-logo > a:before {
 	text-shadow:  0.07em 0 0.03em #f00;
 }
-.elgg-menu-item-logo .logoRed {
-	text-shadow: -0.07em 0 0.03em #0f0;
+.elgg-menu-item-logo > a:after {
+	left: 6px;
+	text-shadow: 0 0 0.02em #fff;
 }
-.elgg-menu-item-logo > a:hover .logoWhite {
-	transform: rotate(360deg);
-	-moz-transform: rotate(360deg);
-	-webkit-transform: rotate(360deg);
-	-o-transform: rotate(360deg);
-	-ms-transform: rotate(360deg);
+.elgg-menu-item-logo > a:hover {
+	text-shadow:   -0.07em 0 4px #0f0,
+                   -0.07em 0 7px #0f0,
+                   -0.07em 0 8px #0f0,
+                   -0.07em 0 10px #0f0,
+                   -0.07em 0 15px #0f0;
 }
-.elgg-menu-item-logo > a:hover .logoGreen {
-	transform: rotate(720deg);
-	-moz-transform: rotate(720deg);
-	-webkit-transform: rotate(720deg);
-	-o-transform: rotate(720deg);
-	-ms-transform: rotate(720deg);
+.elgg-menu-item-logo > a:hover:before {
+	text-shadow:   0.07em 0 4px #f00,
+                   0.07em 0 7px #f00,
+                   0.07em 0 8px #f00,
+                   0.07em 0 10px #f00,
+                   0.07em 0 15px #f00;
 }
-.elgg-menu-item-logo > a:hover .logoRed {
-	transform: rotate(-1080deg);
-	-moz-transform: rotate(-1080deg);
-	-webkit-transform: rotate(-1080deg);
-	-o-transform: rotate(-1080deg);
-	-ms-transform: rotate(-1080deg);
+.elgg-menu-item-logo > a:hover:after {
+	text-shadow:   0 0 1px #fff,
+                   0 0 2px #fff,
+                   0 0 3px #fff;
 }
 .ggouv-menu-item-html-char {
 	padding: 5px 0 !important;

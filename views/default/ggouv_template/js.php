@@ -15,7 +15,6 @@ elgg.ggouv_template.init = function() {
 	});
 	$('.elgg-child-menu').hover(function(){
 		var TheMenu = $(this).attr('href');
-		console.log(TheMenu);
 		$('.elgg-menu-item-'+TheMenu).addClass('hover');
 	},function(){
 		var TheMenu = $(this).attr('href');

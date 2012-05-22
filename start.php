@@ -66,7 +66,7 @@ function ggouv_custom_menu() {
 	elgg_register_menu_item('topbar', array(
 		'name' => 'logo',
 		'href' => elgg_get_site_url(),
-		'text' => "<span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span>",
+		'text' => "&nabla;",
 		'priority' => 1,
 	));
 
