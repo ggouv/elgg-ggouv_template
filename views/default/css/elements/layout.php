@@ -28,7 +28,6 @@
 	margin: 7px 0 0 50px;
 	width: 600px;
 }
-}
 .elgg-page-default .elgg-page-body > .elgg-inner {
 	width: 100%;
 	margin: 0 auto;
@@ -95,15 +94,17 @@
 .elgg-layout-one-sidebar {
 }
 .elgg-layout-one-sidebar.fixed-sidebar {
-	margin-right: 25%;
-	padding-right: 30px;
+	margin-right: 390px;
 }
 .elgg-layout-one-sidebar.fixed-sidebar .elgg-sidebar {
 	position: fixed;
-	right: -15px;
+	right: 0;
+}
+.elgg-layout-one-sidebar.fixed-sidebar .elgg-menu-extras {
+	position: absolute;
+	bottom: 0;
 }
 .elgg-layout-one-column {
-	padding: 10px 20px;
 }
 .elgg-layout-two-sidebar {
 	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/two_sidebar_background.gif) repeat-y right top;
@@ -112,8 +113,7 @@
 	position: relative;
 	padding: 20px 10px 0;
 	float: right;
-	width: 25%;
-	min-width: 210px;
+	width: 360px;
 	margin: 0 0 0 10px;
 	background-color: #EEE;
 }

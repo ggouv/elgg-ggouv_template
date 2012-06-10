@@ -342,7 +342,7 @@
 	
 	background-color: white;
 	margin: 0 0 3px;
-	padding: 2px 4px 2px 8px;
+	padding: 2px 6px;
 }
 .elgg-menu-page a:hover {
 	background-color: #0054A7;
@@ -484,7 +484,7 @@
 	
 	background-color: white;
 	margin: 3px 0 5px 0;
-	padding: 2px 4px 2px 8px;
+	padding: 2px 6px;
 	
 	transition: all 0.25s ease;
 	-webkit-transition: all 0.25s ease;

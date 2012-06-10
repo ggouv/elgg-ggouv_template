@@ -66,25 +66,38 @@ elgg.ggouv_template.init = function() {
 		}
 	});
 	
-	//fixed-sidebar
-	if ( $('.elgg-layout').hasClass('fixed-sidebar') ) {
-		fixedSidebar = function() {
-			$('.elgg-sidebar').height($(window).height() - $('.elgg-page-header').height() - 20); // 20 = sidebar padding
-			
-			// special code for elgg-markdown_wiki page history
-			if ($('#slider').length) {
-				$('#slider').height(0);
-				var y = $('.elgg-sidebar .elgg-menu-extras').position();
-				$('#slider').height($(window).height() - $('.elgg-page-header').height() - y.top -31);
+	$(document).ready(function() {
+		// fixed-sidebar
+		var fixedSidebar = function() {
+			if ( $('.elgg-layout').hasClass('fixed-sidebar') ) {
+				$('.elgg-sidebar').height($(window).height() - $('.elgg-page-header').height() - 20); // 20 = sidebar padding
+				
+				// special code for elgg-markdown_wiki page history
+				if ($('#slider').length && ($('.history-module .elgg-body').height() < $('#ownerContainer').height())) {
+					$('#slider').height(0);
+					var y = $('.elgg-sidebar .elgg-menu-extras').position();
+					if (!y) y = 0;
+					$('#slider').height($(window).height() - $('.elgg-page-header').height() - y.top -31);
+				}
 			}
 		};
-		$(document).ready(function() {
-			fixedSidebar();
-		});
+
+		// check if sidebar can be fixed
+		if ($('.elgg-sidebar').height() < ($(window).height() - $('.elgg-page-header').height() - 20)) $('.elgg-layout').addClass('fixed-sidebar');
+		if ( $('.elgg-layout').hasClass('fixed-sidebar') ) fixedSidebar();
+
 		$(window).bind("resize", function() {
+			if ($('.elgg-sidebar').height() < ($(window).height() - $('.elgg-page-header').height() - 20)) $('.elgg-layout').addClass('fixed-sidebar');
 			fixedSidebar();
+			var Elem = $('.elgg-sidebar > *:not(script)');
+			var lastElem = Elem.eq(-1).position();
+			var afterLastElem = Elem.eq(-2).position();
+			if ( lastElem.top < (afterLastElem.top + Elem.eq(-2).outerHeight(true)) ) {
+				$('.elgg-layout').removeClass('fixed-sidebar');
+			}
 		});
-	}
+
+	});
 
 	// hide developers-log when empty
 	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
