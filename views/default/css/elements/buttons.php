@@ -12,7 +12,7 @@
 
 /* Base */
 .elgg-button {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	font-family: Arial,sans-serif;
 	text-transform:uppercase;
@@ -22,7 +22,7 @@
 	border-radius: 4px;
 
 	width: auto;
-	padding: 2px 4px;
+	padding: 3px 4px 2px;
 	margin-bottom: 4px;
 	cursor: pointer;
 	outline: none;
@@ -37,7 +37,7 @@
 	-o-transition: all 0.25s ease;
 }
 a.elgg-button {
-	padding: 3px 6px;
+	padding: 3px 6px 2px;
 }
 
 /* Submit: This button should convey, "you're about to take some definitive action" */
@@ -66,9 +66,9 @@ a.elgg-button {
 .elgg-button-submit:hover {
 	border-color: #0054a7;
 	
-	-webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.40);
-	-moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.40);
-	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.40);
+	-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.80);
+	-moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.80);
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.80);
 }
 
 .elgg-button-submit:active {

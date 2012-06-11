@@ -95,7 +95,7 @@
 	height: 33px;
 	/*font-family: "Lucida Console", monospace;
 	text-shadow: 0 0 0.02em #fff, -0.07em 0 0.03em #0f0, 0.07em 0 0.03em #f00;*/
-	text-shadow: -0.07em 0 0.03em #0f0;
+	text-shadow: -0.1em 0 0.03em #0f0;
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
@@ -110,7 +110,7 @@
 	-o-transition: all 0.5s ease;
 }
 .elgg-menu-item-logo > a:before {
-	text-shadow:  0.07em 0 0.03em #f00;
+	text-shadow:  0.03em 0 0.03em #f00;
 }
 .elgg-menu-item-logo > a:after {
 	left: 6px;
@@ -205,7 +205,7 @@
 	resize: vertical;
 	height: 32px;
 	min-height: 32px;
-	padding: 7px 2px 5px 12px;
+	padding: 10px 2px 0px 12px;
 	margin: 0;
 	color: #666;
 	font: 130% Arial,Helvetica,sans-serif;
@@ -324,7 +324,7 @@
 .elgg-search input[type="text"] {
 	color: #0054A7;
 	font: 130% Arial,Helvetica,sans-serif;
-	padding: 4px 4px 2px 12px;
+	padding: 4px 4px 0px 12px;
 	background: none repeat scroll 0 0 white;
 	position: relative;
 	z-index: 1;
