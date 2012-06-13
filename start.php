@@ -18,7 +18,7 @@ function elgg_ggouv_template_init() {
 
 	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
     
-    elgg_register_library('user_ggouv', "$base/lib/user/lib.php");
+    elgg_register_library('user_ggouv', "$base/lib/users/lib.php");
 	elgg_load_library('user_ggouv');
 
 	// Register actions
@@ -30,13 +30,19 @@ function elgg_ggouv_template_init() {
 	remove_group_tool_option('activity');
 	elgg_unextend_view('groups/tool_latest', 'groups/profile/activity_module');
 	
+	// hook groups lib for metagroup, localgroup and typogroup
+	elgg_register_library('elgg:groups', "$base/lib/groups/lib.php");
+	// write permission plugin hooks
+	//elgg_register_plugin_hook_handler('permissions_check', 'object', 'ggouv_template_permission_check');
+	elgg_register_plugin_hook_handler('container_permissions_check', 'all', 'ggouv_template_permission_check');
+	
 	if (elgg_is_active_plugin('search')) {
 		//elgg_unextend_view('page/elements/header', 'search/search_box');
 		//elgg_extend_view('page/elements/topbar', 'search/search_box');
 	}
 
 	//elgg_register_plugin_hook_handler('register', 'menu:composer', 'ggouv_theme_composer_menu_handler');
-	elgg_register_plugin_hook_handler('index', 'system', 'elgg_ggouv_template_nologin_mainpage');
+	elgg_register_plugin_hook_handler('index', 'system', 'ggouv_template_nologin_mainpage');
 
 	// Want ggouv logo present, not Elgg's
 
@@ -87,7 +93,7 @@ function ggouv_custom_menu() {
 
 }
 
-function elgg_ggouv_template_nologin_mainpage() {
+function ggouv_template_nologin_mainpage() {
 	
 	if (elgg_is_logged_in()) {
 	
@@ -108,6 +114,21 @@ function elgg_ggouv_template_nologin_mainpage() {
 	}
 	
 	return true;
+}
+
+
+/**
+ * Make metagroup and typo group 'open' that users can writing to container without subscribe.
+ *
+ * @param unknown_type $hook
+ * @param unknown_type $entity_type
+ * @param unknown_type $returnvalue
+ * @param unknown_type $params
+ */
+function ggouv_template_permission_check($hook, $entity_type, $returnvalue, $params) {
+	if (isset($params['container']) && in_array($params['container']->getSubtype(), array('metagroup', 'typogroup'))) {
+		return true;
+	}
 }
 
 
