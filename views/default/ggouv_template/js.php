@@ -4,24 +4,6 @@ elgg.provide('elgg.ggouv_template');
 
 elgg.ggouv_template.init = function() {
 
-	// sub-menu
-	$('.elgg-parent-menu').hover(function(){
-		$(this).addClass('hover');
-		$('.elgg-child-menu').fadeOut(100);
-		var TheMenu = $(this).children('a').attr('href').substr(1);
-		$('.elgg-submenu-'+TheMenu).fadeIn(100);
-	},function(){
-		$(this).removeClass('hover');
-	});
-	$('.elgg-child-menu').hover(function(){
-		var TheMenu = $(this).attr('href');
-		$('.elgg-menu-item-'+TheMenu).addClass('hover');
-	},function(){
-		var TheMenu = $(this).attr('href');
-		$('.elgg-child-menu').fadeOut(100);
-		$('.elgg-menu-item-'+TheMenu).removeClass('hover');
-	});
-
 	// thewire and search input
 	$('#elgg-search-inactive').click(function(){
 		if ($('#thewire-textarea').height() > 20 ) {

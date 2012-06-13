@@ -40,11 +40,9 @@ header("Content-type: text/html; charset=UTF-8");
 	
 		<div class="elgg-page-topbar">
 			<div class="elgg-inner">
-				<?php echo elgg_view('page/elements/topbar', $vars); ?>
+				<?php echo elgg_view('page/elements/ggouv_menu', $vars); ?>
 			</div>
 		</div>
-		
-		<?php echo elgg_view('page/elements/ggouv_sub_menu'); ?>
 	
 		<div class="elgg-page-header">
 			<div class="elgg-inner">

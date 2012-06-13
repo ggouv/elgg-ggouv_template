@@ -43,15 +43,8 @@
 	position: fixed;
 	width: 40px;
 	border: none;
-	z-index: 4;
-}
-.elgg-page-topbar-shadow {
-	box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.4);
-	height: 100%;
-	position: fixed;
-	width: 40px;
-	border: none;
 	z-index: 2;
+	box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.4);
 }
 .elgg-page-topbar > .elgg-inner {
 	padding: 0;

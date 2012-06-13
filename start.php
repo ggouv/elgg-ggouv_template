@@ -52,96 +52,11 @@ function elgg_ggouv_template_init() {
 
 function ggouv_custom_menu() {
 
-	elgg_unregister_menu_item('topbar', 'elgg_logo');
-	elgg_unregister_menu_item('topbar', 'profile');
-	elgg_unregister_menu_item('topbar', 'dashboard');
-	elgg_unregister_menu_item('topbar', 'friends');
-	elgg_unregister_menu_item('topbar', 'administration');
-	elgg_unregister_menu_item('topbar', 'usersettings');
-	elgg_unregister_menu_item('topbar', 'logout');
-	
 	elgg_unregister_menu_item('footer', 'report_this');
 	elgg_unregister_menu_item('extras', 'bookmark');
 
-	elgg_register_menu_item('topbar', array(
-		'name' => 'logo',
-		'href' => elgg_get_site_url(),
-		'text' => "&nabla;",
-		'priority' => 1,
-	));
-
 	$user = elgg_get_logged_in_user_entity();
-	$class_html_char = array('ggouv-menu-item-html-char');
 	if ($user) {
-
-// profil icon for dashboard
-		$icon_url = $user->getIconURL('small');
-		$title = elgg_echo('dashboard');
-		elgg_register_menu_item('topbar', array(
-			'name' => 'dashboard',
-			'href' => elgg_get_site_url() . 'dashboard',
-			'itemClass' => array('elgg-parent-menu'),
-			'text' => "<img src=\"$icon_url\" alt=\"$user->name\" title=\"$title\" />",
-			'priority' => 100,
-		));
-
-// @ for user profile, friends, collections, search user(@todo)... sub menu at page/elements/ggouv-sub-menu.php
-		elgg_register_menu_item('topbar', array(
-			'name' => 'at',
-			'href' => '#at',
-			'itemClass' => array('ggouv-menu-item-html-char','elgg-parent-menu'),
-			'text' => '@',
-			'priority' => 200,
-		));
-
-// groups
-		elgg_register_menu_item('topbar', array(
-			'name' => 'groups',
-			'href' => '#groups',
-			'itemClass' => array('ggouv-menu-item-html-char','elgg-parent-menu'),
-			'text' => '!',
-			'priority' => 300,
-		));
-
-// topbar bottom
-		if ( $user->isAdmin() ) {
-			elgg_register_menu_item('topbar', array(
-				'name' => 'administration',
-				'href' => "admin/plugins",
-				'text' => '<span class="ggouv-icons ggouv-icon-administration"></span>',
-				'priority' => 400,
-				'section' => 'alt',
-			));
-		}
-		
-		elgg_register_menu_item('topbar', array(
-			'name' => 'usersettings',
-			'href' => "settings/user/{$user->username}",
-			'text' => '<span class="ggouv-icons ggouv-icon-settings"></span>',
-			'priority' => 500,
-			'section' => 'alt',
-		));
-
-		elgg_register_menu_item('topbar', array(
-			'name' => 'logout',
-			'href' => "action/logout",
-			'text' => '<span class="ggouv-icons ggouv-icon-logout"></span>',
-			'title' => elgg_echo('logout'),
-			'is_action' => TRUE,
-			'priority' => 1000,
-			'section' => 'alt',
-		));
-		
-		elgg_register_menu_item('topbar', array(
-			'name' => 'info',
-			'href' => "#",
-			'text' => '<span class="ggouv-icons ggouv-icon-info"></span>',
-			'title' => elgg_echo('info'),
-			'priority' => 1100,
-			'section' => 'alt',
-		));
-		
-		
 		// Extend footer with report content link
 		$href = "javascript:elgg.forward('reportedcontent/add'";
 		$href .= "+'?address='+encodeURIComponent(location.href)";
@@ -248,7 +163,7 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
     $lowercase = TRUE;
 
     if ($entity_type == 'friendly:title') {
-        $title = $params['title'];
+        $title = trim($params['title']);
 /*
         $title = strip_tags($title);
         $title = preg_replace("`\[.*\]`U","",$title);
@@ -274,7 +189,7 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
         return trim($title, $separator);*/
         $title = preg_replace('/\//', '-', $title);
         $title = preg_replace('/\s+/', '-', $title);
-       	return utf8_encode(rawurlencode($title));
+       	return rawurlencode($title);
     }
 
 }
