@@ -15,7 +15,7 @@
 }
 
 /* Info */
-.elgg-module-info > .elgg-head a {
+.elgg-module-info > .elgg-head > a {
 	background: #e4e4e4;
 	padding: 5px;
 	margin-bottom: 10px;

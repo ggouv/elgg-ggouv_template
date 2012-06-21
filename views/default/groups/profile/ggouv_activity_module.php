@@ -7,21 +7,10 @@
  * @package Groups
  */
 
-//if ($vars['entity']->activity_enable == 'no') {
-//	return true;
-//}
-
 $group = $vars['entity'];
 if (!$group) {
 	return true;
 }
-
-$all_link = elgg_view('output/url', array(
-	'href' => "groups/activity/$group->guid",
-	'text' => elgg_echo('link:view:all'),
-	'is_trusted' => true,
-));
-
 
 elgg_push_context('widgets');
 $db_prefix = elgg_get_config('dbprefix');
@@ -37,8 +26,18 @@ if (!$content) {
 	$content = '<p>' . elgg_echo('groups:activity:none') . '</p>';
 }
 
-echo elgg_view('groups/profile/module', array(
-	'title' => elgg_echo('groups:activity'),
-	'content' => $content,
-	'all_link' => $all_link,
+$rss_link = elgg_view('output/url', array(
+	'href' => "groups/activity/{$group->guid}/{$group->name}?view=rss",
+	'title' => elgg_echo('feed:activity'),
+	'text' => '<span class="elgg-icon elgg-icon-rss "></span>',
+	'is_trusted' => true,
 ));
+
+$title = elgg_echo('groups:activity');
+
+echo '<li>';
+echo elgg_view_module('info', '', $content, array(
+	'header' => "<h3>$title</h3><ul class='activity-head-list'><li>$rss_link</li></ul>",
+	'class' => 'elgg-module-group',
+));
+echo '</li>';

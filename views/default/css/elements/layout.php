@@ -20,11 +20,9 @@
 	min-width: 998px;
 }
 .elgg-page-default .elgg-page-body {
-	padding-top: 48px;
-	margin: 0 0 0 60px;
+	margin: 48px 0 0 60px;
 }
 .elgg-page-default .elgg-page-header > .elgg-inner {
-	height: 48px;
 	margin: 7px 0 0 50px;
 	width: 600px;
 }
@@ -41,6 +39,7 @@
 	background: none repeat scroll 0 0 #1F2E3D;
 	height: 100%;
 	position: fixed;
+	top: 0;
 	width: 40px;
 	border: none;
 	z-index: 2;
@@ -68,6 +67,7 @@
 /***** PAGE HEADER ******/
 .elgg-page-header {
 	position: fixed;
+	top: 0;
 	width: 100%;
 	height: 48px;
 	z-index: 1;
@@ -86,14 +86,14 @@
 }
 .elgg-layout-one-sidebar {
 }
-.elgg-layout-one-sidebar.fixed-sidebar {
+.fixed-sidebar {
 	margin-right: 390px;
 }
-.elgg-layout-one-sidebar.fixed-sidebar .elgg-sidebar {
+.fixed-sidebar .elgg-sidebar {
 	position: fixed;
 	right: 0;
 }
-.elgg-layout-one-sidebar.fixed-sidebar .elgg-menu-extras {
+.fixed-sidebar .elgg-menu-extras {
 	position: absolute;
 	bottom: 0;
 }
@@ -116,6 +116,11 @@
 	float: left;
 	width: 160px;
 	margin: 0 10px 0 0;
+}
+.elgg-sidebar-2 {
+	position: relative;
+	float: right;
+	width: 360px;
 }
 .elgg-main {
 	position: relative;

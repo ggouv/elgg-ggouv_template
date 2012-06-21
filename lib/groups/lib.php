@@ -260,13 +260,16 @@ function groups_handle_profile_page($guid) {
 
 	groups_register_profile_buttons($group);
 
+	$sidebar2 = '<ul class="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
+
 	$params = array(
 		'content' => $content,
 		'sidebar' => $sidebar,
+		'sidebar_2' => $sidebar2,
 		'title' => $group->name,
 		'filter' => '',
 	);
-	$body = elgg_view_layout('content', $params);
+	$body = elgg_view_layout('content_two_right_sidebars', $params);
 
 	echo elgg_view_page($group->name, $body);
 }
@@ -442,7 +445,7 @@ function groups_handle_requests_page($guid) {
 function groups_register_profile_buttons($group) {
 
 	$actions = array();
-global $fb; $fb->info($group->getSubtype());
+
 	// group owners
 	if ($group->canEdit()) {
 		// edit and invite

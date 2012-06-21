@@ -12,11 +12,11 @@ $group = elgg_get_page_owner_entity();
 
 $title = $vars['title'];
 
-$nb = strlen($title);
+$nb = mb_strlen($title);
 $nbMil = floor($nb/2);
-$pEspace = strrpos(substr($title, 0, $nbMil), " ");
-if (!$pEspace) $pEspace = strrpos(substr($title, $nbMil, $nb), " ") + $nbMil;
-$title = substr($title , 0 , $pEspace) . '<br/>' . substr($title , $pEspace , $nb);
+$pEspace = mb_strrpos(mb_substr($title, 0, $nbMil), " ");
+if (!$pEspace) $pEspace = strrpos(mb_substr($title, $nbMil, $nb), " ") + $nbMil;
+$title = mb_substr($title , 0 , $pEspace) . '<br/>' . mb_substr($title , $pEspace , $nb);
 
 if (!$vars['stats']) $vars['stats'] = 0;
 
