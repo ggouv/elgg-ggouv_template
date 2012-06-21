@@ -87,6 +87,48 @@ elgg.ggouv_template.init = function() {
 }
 elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
+/**
+ * Counter for input/text140
+ */
+elgg.provide('elgg.counter140');
+
+elgg.counter140.init = function() {
+	$(".elgg-input-text140").live('keydown', function() {
+		elgg.counter140.textCounter($(this), $(this).parent().find("span"), 140);
+	});
+	$(".elgg-input-text140").live('keyup', function() {
+		elgg.counter140.textCounter($(this), $(this).parent().find("span"), 140);
+	});
+};
+
+/**
+ * Update the number of characters left with every keystroke
+ *
+ * @param {Object}  input
+ * @param {Object}  status
+ * @param {integer} limit
+ * @return void
+ */
+elgg.counter140.textCounter = function(textarea, status, limit) {
+
+	var remaining_chars = limit - textarea.val().length;
+	status.html(remaining_chars);
+
+	if (remaining_chars < 0) {
+		status.css("color", "#D40D12");
+		textarea.parents('form').find('input[type=submit]').attr('disabled', 'disabled');
+		textarea.parents('form').find('input[type=submit]').addClass('elgg-state-disabled');
+	} else {
+		status.css("color", "");
+		textarea.parents('form').find('input[type=submit]').removeAttr('disabled', 'disabled');
+		textarea.parents('form').find('input[type=submit]').removeClass('elgg-state-disabled');
+	}
+};
+
+elgg.register_hook_handler('init', 'system', elgg.counter140.init);
+
+
+
 /*
 $(function() {
 	

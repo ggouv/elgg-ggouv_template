@@ -86,6 +86,7 @@
 	left: 5px;
 }
 .elgg-menu-item-logo > a:after {
+	top: 16px;
 	left: 4px;
 	text-shadow: 0 0 0.02em #fff;
 }
@@ -120,8 +121,8 @@
 	-o-transform: rotate(-10deg);
 	-ms-transform: rotate(-10deg);
 }
-.elgg-menu-item-dashboard {
-	margin-bottom: 10px !important;
+.elgg-menu-item-at > a {
+	padding-top: 25px;
 }
 .elgg-menu-item-info {
 	height: 19px !important;
@@ -234,7 +235,7 @@
 	top: 0;
 	color: #00CC00;
 	height: 32px;
-	width: 38px;
+	width: 39px;
 	background-color: transparent;
 	border: none;
 	overflow: hidden;
@@ -387,24 +388,25 @@
 }
 
 /*
- * Groups
+ * Plugin markdown-wiki
  */
-.group_activity_module {
-    float:right;
-    padding-top:3px;
-    width:32.22%;
+h2.markdown-wiki-create .elgg-button-action {
+	text-transform: none;
 }
-.groups-profile.with_activity_module {
-    float:left;
-    width:66.12%;
+
+/*
+ * Output
+ */
+.text140-characters-remaining {
+	position: relative;
 }
-#groups-tools.with_activity_module {
-	width:66.12%;
-	float:left;
+.elgg-input-text140 input {
+	padding-right: 40px;
 }
-#groups-tools.with_activity_module > li {
-	width:49%;
-}
-#groups-tools.with_activity_module > li:nth-child(2n+1) {
-    margin-right:2%;
+.text140-characters-remaining span {
+	color: #00CC00;
+	position: absolute;
+	right: 5px;
+	font-weight: bold;
+	font-size: 1.2em;
 }
