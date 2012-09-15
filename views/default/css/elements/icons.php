@@ -18,6 +18,19 @@
 	height: 16px;
 	margin: 0 2px;
 }
+.elgg-icon:before {
+	font-family: 'ggouv';
+	font-size: 40px;
+	margin-right: 5px;
+	float: left;
+	cursor: default;
+
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+
 .elgg-icon-arrow-left {
 	background-position: 0 -0px;
 }
@@ -29,9 +42,21 @@
 }
 .elgg-icon-attention:hover {
 	background-position: 0 -54px;
+	background: none;
 }
 .elgg-icon-attention {
 	background-position: 0 -72px;
+	background: none;
+}
+.elgg-icon-attention:before {
+	content: 'w';
+	color: #CCC;
+	font-size: 36px;
+	cursor: pointer;
+	margin-left: 6px;
+}
+.elgg-icon-attention:hover:before {
+	color: red;
 }
 .elgg-icon-calendar {
 	background-position: 0 -90px;
@@ -60,11 +85,40 @@
 .elgg-icon-delete-alt {
 	background-position: 0 -234px;
 }
+.elgg-icon-delete-alt:hover {
+	background-position: 0 -252px;
+	background: none;
+}
+.elgg-icon-delete-alt {
+	background-position: 0 -270px;
+	background: none;
+}
+.elgg-icon-delete-alt:before {
+	content: 'x';
+	color: #CCC;
+	font-size: 36px;
+	cursor: pointer;
+}
+.elgg-icon-delete-alt:hover:before {
+	color: red;
+}
+
 .elgg-icon-delete:hover {
 	background-position: 0 -252px;
+	background: none;
 }
 .elgg-icon-delete {
 	background-position: 0 -270px;
+	background: none;
+}
+.elgg-icon-delete:before {
+	content: 'X';
+	color: #CCC;
+	font-size: 54px;
+	cursor: pointer;
+}
+.elgg-icon-delete:hover:before {
+	color: red;
 }
 .elgg-icon-download:hover {
 	background-position: 0 -288px;
@@ -140,9 +194,30 @@
 }
 .elgg-icon-push-pin-alt:hover {
 	background-position: 0 -720px;
+	background:none;
 }
 .elgg-icon-push-pin-alt {
 	background-position: 0 -738px;
+	background:none;
+}
+.elgg-icon-push-pin-alt {
+	background-position: 0 -900px;
+	background: none;
+}
+.elgg-content .elgg-icon-push-pin-alt {
+	margin-right: 10px;
+}
+.elgg-icon-push-pin-alt:before {
+	content: 'L';
+	color: #CCC;
+	font-size: 36px;
+	cursor: pointer;
+}
+.elgg-icon-push-pin-alt:hover:before {
+	color: #4690D6;
+}
+.elgg-content .elgg-icon-push-pin-alt:hover:before {
+	color: #CCC;
 }
 .elgg-icon-push-pin {
 	background-position: 0 -738px;
@@ -173,6 +248,17 @@
 }
 .elgg-icon-rss {
 	background-position: 0 -900px;
+	background: none;
+}
+.elgg-icon-rss:before {
+	content: 'r';
+	color: #CCC;
+	font-size: 40px;
+	cursor: pointer;
+	margin-left: -3px;
+}
+.elgg-icon-rss:hover:before {
+	color: #FF9900;
 }
 .elgg-icon-search-focus {
 	background-position: 0 -918px;
@@ -233,6 +319,13 @@
 }
 .elgg-icon-tag {
 	background-position: 0 -1260px;
+	background: none;
+}
+.elgg-icon-tag:before {
+	content: 't';
+	padding: 2px 0;
+	font-size: 60px;
+	color: #CCC;
 }
 .elgg-icon-thumbs-down-alt:hover {
 	background-position: 0 -1278px;
@@ -279,6 +372,44 @@
 	background-position: 0 -1512px;
 }
 
+.elgg-icon.external {
+	background: none;
+}
+a.external:after {
+	font-family: 'ggouv';
+	content: "ê";
+	cursor: pointer;
+	display: inline-block;
+	font-size: 30px;
+	margin-left: 3px;
+	margin-top: -12px;
+	position: absolute;
+}
+
+/* ggouv */
+.elgg-menu-item-edit a, .elgg-menu-item-comment-edit a {
+	font-family: 'ggouv';
+	font-size: 0;
+	cursor: pointer;
+	margin: 0px 0 -10px 0;
+}
+.elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover {
+	text-decoration: none;
+}
+.elgg-menu-item-edit a:before, .elgg-menu-item-comment-edit a:before {
+	content: 'e';
+	font-size: 34px;
+	color: #CCC;
+	line-height: 3px;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+.elgg-menu-item-edit a:hover:before, .elgg-menu-item-comment-edit a:hover:before {
+	color: #555;
+	text-decoration: none;
+}
 
 .elgg-avatar > .elgg-icon-hover-menu {
 	display: none;
@@ -309,7 +440,7 @@
 	width: 25px;
 	height: 25px;
 	
-	/* remove the border-radius if you don't want rounded avatars in supported browsers */
+	/* remove the border-radius if you don't want rounded avatars in supported browsers 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -321,13 +452,13 @@
 	-khtml-background-size: 25px;
 	-moz-background-size: 25px;
 	-o-background-size: 25px;
-	background-size: 25px;
+	background-size: 25px;*/
 }
 .elgg-avatar-small > a > img {
 	width: 40px;
 	height: 40px;
 	
-	/* remove the border-radius if you don't want rounded avatars in supported browsers */
+	/* remove the border-radius if you don't want rounded avatars in supported browsers 
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -339,7 +470,7 @@
 	-khtml-background-size: 40px;
 	-moz-background-size: 40px;
 	-o-background-size: 40px;
-	background-size: 40px;
+	background-size: 40px;*/
 }
 .elgg-avatar-medium > a > img {
 	width: 100px;

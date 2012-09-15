@@ -1,17 +1,24 @@
+.elgg-page-default {
+	min-width: 0px;
+}
+
 .elgg-page-header .elgg-inner-nolog.main {
 	margin: 0 auto;
 	text-align: center;
+	height: 48px;
 }
 .elgg-inner-nolog.main .elgg-menu-item-logo {
-	margin: 14px auto 0;
+	margin: 0 auto;
 	float: none;
 }
 .elgg-inner-nolog.main > h1 {
 	font-size: 4em;
-	color: black;
+	color: #333;
 	text-shadow: 0 0 4px #CCCCCC;
 	padding: 0;
-	margin: 10px 0 0 0;
+	margin: 10px auto 0;
+	line-height: 1em;
+	width: 50%;
 }
 .elgg-inner-nolog.main .elgg-layout-one-column {
 	padding: 0;
@@ -24,11 +31,12 @@
     z-index:-1;
     margin: 0 0 0 -20px;
 }
-
 .elgg-output {
 	margin: 0;
 }
-
+.elgg-output p {
+	margin: 0;
+}
 .title {
 	position: fixed;
 	top: 0;
@@ -38,34 +46,123 @@
 	width: 20%;
 	line-height: 1em;
 }
-.title li {
+.title > li {
 	float: left;
 	clear: both;
+	padding: 0.5em;
+	color: #333;
 }
-.title li:hover {
+.title > li:hover {
 	cursor: pointer;
 }
 .content {
-  color: #333333;
-  float: right;
-  width: 75%;
-  margin-top:-68px;
-  font-size:1.2em;
+	color: #333333;
+	float: left;
+	width: 60%;
+	margin-top: -68px;
+	font-size: 1.2em;
+	line-height: 1.6em;
+	text-align: justify;
 }
-.content li {
-  max-height: 470px;
-  overflow: hidden;
-  width: 720px;
+.content > li {
+	overflow: hidden;
 }
-
 #cursor {
 	background-color: #4690D6;
 	position: fixed;
 	left: 0;
 	border-radius: 0 10px 10px 0;
 	
+	box-shadow: 0 -10px 10px 2px rgba(0, 0, 0, 0.1) inset;
+	
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
+}
+.accroche {
+	text-align: center;
+	color: #4690D6;
+	font-size: 2em;
+	text-shadow: 0 0 4px #CCC;
+	line-height: 1.6em;
+	white-space: pre-wrap;
+}
+.titre {
+	font-size: 2em;
+}
+.titre2 {
+	/*color: #4690D6;*/
+	font-size: 1.5em;
+}
+.elgg-output ul {
+	margin: 0;
+}
+.elgg-output ol, .slider {
+	margin: 0;
+	padding: 0 !important;
+	list-style-type: none !important;
+}
+.slidehed {
+	display: none;
+}
+.carousel-tabs {
+	margin-bottom: 20px !important;
+}
+.carousel-tabs > li {
+	display: inline;
+	font-size: 1.2em;
+	padding-bottom: 15px;
+}
+.slide .elgg-output {
+	float: left;
+}
+.carousel-tabs > li > a {
+	background-color: #CCCCCC;
+	display: inline;
+	margin-right: 10px;
+	padding: 0px 10px 1px;
+}
+.carousel-tabs > li.carousel-active-tab > a {
+	background-color: #4690D6;
+	color: white;
+}
+.slide {
+	opacity: 0;
+	float: left;
+}
+.slide.carousel-active-slide {
+	opacity: 1;
+}
+.slide img {
+	width: 50%;
+}
+
+.ribbon {
+	background-color: #E3001E;
+	background-image: -moz-linear-gradient(center top , #B7001E, #E3001E);
+	box-shadow: 0 1px 10px #000000;
+	color: white;
+	font: bold 15px Sans-Serif;
+	padding: 10px 0;
+	position: fixed;
+	right: -50px;
+	text-align: center;
+	top: 40px;
+	width: 230px;
+	z-index: 2;
+	text-shadow: 1px 1px 1px gray;
+	-webkit-transform: rotate(45deg) ;
+	-moz-transform: rotate(45deg) ;
+	-o-transform: rotate(45deg) ;
+	transform: rotate(45deg);
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+.ribbon:hover {
+	box-shadow: 0 1px 20px #000000;
 }

@@ -51,6 +51,9 @@ $release = get_version(true);
 	$ie7_url = elgg_get_simplecache_url('css', 'ie7');
 	$ie6_url = elgg_get_simplecache_url('css', 'ie6');
 ?>
+	<!--[if lte IE 8]>
+		<link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+	<![endif]-->
 	<!--[if gt IE 7]>
 		<link rel="stylesheet" type="text/css" href="<?php echo $ie_url; ?>" />
 	<![endif]-->

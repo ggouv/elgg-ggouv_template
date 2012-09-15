@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Basic Example - jquery-wysiwym</title>
+    <link type='text/css' rel='stylesheet' href='examples.css'/>
+    <link type='text/css' rel='stylesheet' href='../wysiwym/wysiwym.css'/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type='text/javascript' src='../wysiwym/wysiwym.js'></script>
+    <script type='text/javascript'>
+      $(function() {
+
+        // Sets up the Wysiwym editor given a markup language Current markup
+        // languages include: Wysiwym.Markup, Wysiwym.MediaWiki, Wysiwym.BBCode
+        // For a list of other options see the README.txt.
+        $('#mytextarea').wysiwym(Wysiwym.Markdown, {
+            helpEnabled: true,
+            helpToggle: true
+        });
+
+        // Update the Debug Text every half second
+        var prevValue = '';
+        var updateTextareaDebug = function() {
+            var newValue = $('#mytextarea').val();
+            if (newValue != prevValue) {
+                prevValue = newValue;
+                debugstr = new Wysiwym.Textarea($('#mytextarea')).toString();
+                $('#textarea-debug').text(debugstr);
+            }
+            setTimeout(updateTextareaDebug, 100);
+        }
+        updateTextareaDebug();
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <h1>Wysiwym Development Editor</h1>
+      <p>The editor on this page is using wysiwym. The library lends itself to be easily adapted
+        to other markup languages not currently implemented. If you write an extention for
+        another markup language and would like to help out with this package, I would love to
+        include it in future releases. You can download or contibute via the
+        <a href='https://bitbucket.org/mjs7231/jquery-wysiwym'>jquery-wysiwym Bitbucket repository</a>.
+      </p>
+      <p>Examples:
+        <a href='basic.markdown.html'>Markdown</a>,
+        <a href='basic.mediawiki.html'>MediaWiki</a>,
+        <a href='basic.bbcode.html'>BBCode</a>
+        (<a href='devel.markdown.html'>Devel</a>)
+      </p>
+      <textarea id='mytextarea' wrap='off'></textarea>
+    </div>
+    <div style='clear:both;'></div>
+    <pre id='textarea-debug'>Hello</pre>
+  </body>
+</html>

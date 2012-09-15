@@ -14,7 +14,7 @@
 	position: relative;
 }
 .elgg-inner-nolog .elgg-menu-item-logo {
-	margin: 14px 0 0 15px;
+	margin: 0 0 0 15px;
 	overflow: visible;
 	position: relative;
 	width: 38px;
@@ -41,8 +41,13 @@
 
 
 /* topbar icons */
-.ggouv-webfont {
+.ggouv-webfont, .gwf, .gwfb:before, .gwfa:after {
 	font-family: "ggouv";
+	font-weight: normal;
+	float: left;
+}
+.ggouv-webfont {
+	float: none;
 }
 .ggouv-webfont > a {
 	padding: 5px 0;
@@ -91,6 +96,7 @@
 	text-shadow: 0 0 0.02em #fff;
 }
 .elgg-menu-item-logo > a:hover {
+	text-decoration: none;
 	color: transparent;
 	text-shadow:   -0.1em 0 4px #0f0,
                    -0.1em 0 7px #0f0,
@@ -164,11 +170,10 @@
 .ggouv-menu-parent:hover .ggouv-menu-child {
 	display: inline;
 }
-/*.elgg-submenu-at { top: 96px }
-.elgg-submenu-groups { top: 144px }*/
 .ggouv-menu-child li {
 	border-radius: 6px;
 	padding: 4px 8px;
+	cursor: pointer;
 }
 .ggouv-menu-child li:hover {
 	background-color: #4690D6;
@@ -214,15 +219,29 @@
 	position: absolute;
 	right: -8px;
 	z-index: 7001;
+	line-height: 1em;
 	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	box-shadow: inset 0 2px 2px 0 #1F2E3D;
+}
+#thewire-header > #thewire-textarea-border {
+	background-color: #1369B8;
+	border-radius: 0 0 4px 4px;
+	box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.5);
+	height: 0px;
+	left: -4px;
+	position: absolute;
+	top: 40px;
+	width: 576px;
 }
 /* hack Chrome / Safari */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	#thewire-header > #thewire-textarea {
 		width: 565px;
 		right: -5px;
+	}
+	#thewire-header > #thewire-textarea-border {
+		width: 574px;
 	}
 }
 #thewire-header > #thewire-textarea:focus {
@@ -263,44 +282,48 @@
 	overflow: hidden;
 }
 #thewire-header #thewire-submit-button {
-	background: #FFE6E6 url(<?php echo elgg_get_site_url(); ?>mod/elgg_ggouv_template/graphics/send.png) left no-repeat;
+	background-color: #FFE6E6;
 	border: none;
-	box-shadow: none;
-	padding: 0 6px 0 20px;
-	height: 32px;
-	color:transparent;
+	color: #B40000;
+	font-size: 54px;
+	height: 47px;
+	margin: -15px 0 10px;
+	padding: 0 7px 0 20px;
+	width: 60px;
 	text-shadow: none;
 	border-radius: 0 4px 4px 0;
-	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
-	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
-	box-shadow: inset 0 2px 2px 0 #1F2E3D;
-	transition: none;
+	line-height: 66px;
+	-webkit-box-shadow: inset 0 17px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 17px 2px 0 #1F2E3D;
+	box-shadow: inset 0 17px 2px 0 #1F2E3D;
 	-webkit-transition: none;
 	-moz-transition: none;
 	-o-transition: none;
 }
-#thewire-header #thewire-submit-button {
-	background-position: 20px -58px;
-}
 #thewire-header #thewire-submit-button:hover {
-	background-position: 20px -88px;
 	background-color: #FF0000;
+	color: #222222;
+	text-shadow: 0 1px 2px #E6FFE6;
 }
 #thewire-header #thewire-submit-button.elgg-state-disabled:hover {
-	background-position: 20px -28px;
-	background-color: #FFE6E6;
+	background-color: #CCCCCC;
+	color: #555555;
+	text-shadow: 0 1px 2px gray;
+	cursor: default;
 }
 #thewire-header-inactive {
-	background: url("<?php echo elgg_get_site_url(); ?>mod/elgg_ggouv_template/graphics/send.png") no-repeat scroll 0 2px transparent;
 	height: 30px;
 	left: 648px;
 	position: absolute;
 	width: 30px;
 	cursor: pointer;
-	top: 0;
+	top: 9px;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 54px;
 }
 #thewire-header-inactive:hover {
-	background-position: 0 -28px;;
+	text-shadow: 0 0 15px white;
+	color: white;
 }
 .elgg-page-header .elgg-search {
 	top: 0;
@@ -328,37 +351,55 @@
 	position: relative;
 	z-index: 1;
 }
-.elgg-page-header .elgg-search input[type="submit"] {
-	background: #E6FFE6 url(<?php echo elgg_get_site_url(); ?>mod/elgg_ggouv_template/graphics/zoom.png) no-repeat 8px -58px;
-	color: transparent;
+.elgg-page-header .elgg-search div.search-submit {
+	border-radius: 4px 0 0 4px;
+	height: 32px;
+	left: 40px;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 50px;
+}
+.elgg-page-header .elgg-search .search-submit-button {
+	background-color: #E6FFE6;
+	border: none;
+	color: #0C8241;
+	font-size: 54px;
+	height: 47px;
+	margin: -15px 0 10px;
+	padding: 0 6px 0 3px;
+	width: 47px;
+	text-shadow: none;
+	border-radius: 4px 0 0 4px;
 	display: block;
 	left: 40px;
 	position: absolute;
 	top: 0;
-	width: 54px;
-	border-radius: 4px 0 0 4px;
-	border: none;
-	height: 32px;
-	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
-	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
-	box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	line-height: 66px;
+	-webkit-box-shadow: inset 0 17px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 17px 2px 0 #1F2E3D;
+	box-shadow: inset 0 17px 2px 0 #1F2E3D;
 }
-.elgg-page-header .elgg-search input[type="submit"]:hover {
-	background-position: 8px -88px;
+.elgg-page-header .elgg-search .search-submit-button:hover {
 	background-color: #00FF00;
+	color: #222222;
+	text-shadow: -1px 1px 2px #FF9999;
 	cursor: pointer;
 }
 #elgg-search-inactive {
-	background: url("<?php echo elgg_get_site_url(); ?>mod/elgg_ggouv_template/graphics/zoom.png") no-repeat scroll 4px 2px transparent;
 	height: 30px;
-	left: 5px;
+	left: 8px;
 	position: absolute;
 	width: 36px;
 	cursor: pointer;
-	top: 0;
+	top: 9px;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 54px;
+	z-index: -1;
 }
 #elgg-search-inactive:hover {
-	background-position: 4px -28px;
+	text-shadow: 0 0 15px white;
+	color: white;
 }
 
 
@@ -367,7 +408,7 @@
 * river
 */
 .elgg-river-layout {
-	margin-left: -20px;
+	margin: 0 0 0 -20px;
 	padding: 0px;
 }
 .deck-river-lists .column-river:first-child > ul > li {
@@ -377,22 +418,131 @@
 	padding-left: 5px;
 }
 .deck-river-lists .elgg-list-item {
-	background: #ffffff;
-	background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f6f6f6));
-	background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
-	background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
-	background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
-	background: linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(150,150,150,0.1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(150,150,150,0.1)));
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
+	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
+	background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1a969696',GradientType=0 );
 }
 
 /*
- * Plugin markdown-wiki
+ * Plugin markdown-wiki + special debate
  */
 h2.markdown-wiki-create .elgg-button-action {
 	text-transform: none;
 }
+.previewPaneWrapper .pane {
+	border-radius: 0;
+}
+.markdown-body .subject {
+	width: 100%;
+}
+.markdown-body .pro {
+	background-color: #DDFFDD;
+	border: 1px solid green;
+	float: left;
+	padding: 10px;
+	width: 48%;
+}
+.markdown-body .con {
+	background-color: #FFDDDD;
+	border: 1px solid red;
+	float: right;
+	padding: 10px;
+	width: 48%;
+}
+
+/*
+ * Plugin workflow
+ */
+#card-forms .elgg-input-checkboxes {
+	margin-top: 4px;
+}
+#card-forms .card-checklist .elgg-icon-delete {
+	margin-top: 1px;
+}
+.workflow-list .elgg-icon-workflow-list {
+	background: none;
+}
+.workflow-list .elgg-icon-workflow-list:before {
+	background: none;
+	color: #999;
+	content: "_";
+	font-size: 36px;
+	margin-left: -5px;
+	font-weight: normal;
+	-moz-transform: scaleX(0.6);
+	-webkit-transform: scaleX(0.6);
+	-o-transform: scaleX(0.6);
+	-ms-transform: scaleX(0.6);
+	transform: scaleX(0.6);
+}
+
+.workflow-list-edit-button .elgg-icon-settings-alt {
+	background: none;
+}
+.workflow-list-edit-button .elgg-icon-settings-alt:before {
+	color: #CCC;
+	content: "s";
+	font-size: 36px;
+	cursor: pointer;
+}
+.workflow-list-edit-button .elgg-icon-settings-alt:hover:before {
+	color: #4690D6;
+}
+.elgg-icon-workflow-info {
+	background: none;
+}
+.elgg-icon-workflow-info:before {
+	color: #999999;
+	content: "d";
+	font-size: 27px;
+	line-height: 12px;
+	text-indent: -1px;
+}
+.elgg-icon-workflow-speech-bubble {
+	background: none;
+	color: none;
+}
+.elgg-icon-workflow-speech-bubble:before  {
+	color: #4690D6;
+	content: "c";
+	font-size: 27px;
+	line-height: 11px;
+	text-indent: -1px;
+}
+.elgg-icon-workflow-calendar {
+	background: none;
+}
+.elgg-icon-workflow-calendar:before {
+	color: #999999;
+	content: "a";
+	font-size: 27px;
+	line-height: 10px;
+	text-indent: -1px;
+}
+.workflow-card-duedate-overdue .elgg-icon-workflow-calendar:before {
+	color: red;
+}
+.elgg-icon-workflow-checklist {
+	background: none;
+}
+.elgg-icon-workflow-checklist:before {
+	color: #999999;
+	content: "k";
+	font-size: 24px;
+	line-height: 10px;
+	text-indent: 1px;
+}
+.workflow-card-checklist-complete .elgg-icon-workflow-checklist:before {
+	color: green;
+}
+/*
+ * plugin brainstorm
+ */
+
 
 /*
  * Output
@@ -409,4 +559,80 @@ h2.markdown-wiki-create .elgg-button-action {
 	right: 5px;
 	font-weight: bold;
 	font-size: 1.2em;
+}
+/* hack Chrome / Safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.text140-characters-remaining span {
+		top: 4px;
+	}
+}
+
+
+/*
+ * xoxco tags
+ */
+div.tagsinput {
+	-moz-box-sizing: border-box;
+	border: 1px solid #CCCCCC;
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2) inset;
+	padding: 2px 5px 5px;
+	width: 100%;
+	overflow-y: auto;
+	margin-top: 2px;
+}
+div.tagsinput.focus {
+	background: none repeat scroll 0 0 #E4ECF5;
+	border: 1px solid #4690D6;
+	box-shadow: 1px 1px 2px 0 #4690D6 inset;
+	color: #333333;
+}
+div.tagsinput span.tag {
+	background-color: #4690D6;
+	border-radius: 0px;
+	color: white;
+	display: block;
+	float: left;
+	margin: 3px 5px 0 0;
+	padding: 1px 0 1px 5px;
+	text-decoration: none;
+}
+div.tagsinput span.tag a {
+	color: #4690D6;
+	height: 12px;
+	text-decoration: none;
+	top: -1px;
+	right: -3px;
+}
+div.tagsinput span.tag a:before {
+	font-size: 40px;
+}
+div.tagsinput input {
+	box-shadow: none;
+	min-width: 440px !important;
+	margin: 0;
+	border: 1px solid transparent;
+	padding: 2px 0 0;
+	background: transparent;
+	color: #000;
+	outline: 0;
+	margin: 3px 5px 0 0;
+}
+div.tagsinput div {
+	display: block;
+	float: left;
+}
+div.tagsinput .tags_clear {
+	clear: both;
+	width: 100%;
+	height: 0;
+}
+div.tagsinput .not_valid {
+	color: #90111A !important;
+}
+
+/*
+ * profile
+ */
+.profile-action-menu .elgg-icon-attention:before {
+	margin: 0 5px 0 0;
 }

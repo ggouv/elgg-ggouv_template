@@ -24,16 +24,18 @@ if ($post) {
 
 <div id="thewire-header">
 	<textarea id="thewire-textarea" name="body"></textarea>
+	<div id="thewire-textarea-border"></div>
 	<div id="thewire-characters-remaining">
 		<span>140</span>
 	</div>
 	<div class="thewire-button">
 	<?php
 		echo elgg_view('input/submit', array(
-			'value' => elgg_echo('post'),
-			'id' => 'thewire-submit-button'
+			'value' => 'S', //elgg_echo('post'),
+			'id' => 'thewire-submit-button',
+			'class' => 'gwf'
 		));
 	?>
 	</div>
 </div>
-<div id="thewire-header-inactive"></div>
+<div id="thewire-header-inactive" class='gwf'>S</div>

@@ -6,6 +6,7 @@
  */
 
 // optional 'sidebar' parameter
+
 if (isset($vars['sidebar_2'])) {
 	echo $vars['sidebar_2'];
 }

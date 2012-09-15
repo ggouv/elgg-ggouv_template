@@ -21,6 +21,37 @@ if (elgg_get_context() == 'admin') {
 	return true;
 }
 
+$ajaxified = (bool) get_input('ajaxified', false);
+if ($ajaxified) {
+	if (empty($vars['title'])) {
+		$title = elgg_get_config('sitename');
+	} else {
+		$title = $vars['title'] . ' &nabla; ' . elgg_get_config('sitename');
+	}
+	?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+		<head>
+			<title><?php echo $title; ?></title>
+		</head>
+		<body>
+			<div class="elgg-page-messages">
+				<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
+			</div>
+			<div class="elgg-page-body">
+				<div id="JStoexecute" class="hidden">
+					<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
+				</div>
+				<div class="elgg-inner">
+					<?php echo elgg_view('page/elements/body', $vars); ?>
+				</div>
+			</div>
+		</body>
+	</html>
+	<?php
+	return true;
+}
+
 // Set the content type
 header("Content-type: text/html; charset=UTF-8");
 
@@ -51,27 +82,32 @@ header("Content-type: text/html; charset=UTF-8");
 		</div>
 	
 		<div class="elgg-page-body">
+			<div id="JStoexecute" class="hidden">
+				<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
+			</div>
 			<div class="elgg-inner">
 				<?php echo elgg_view('page/elements/body', $vars); ?>
 			</div>
 		</div>
 	
 	<?php } else {
-		global $CONFIG;
 		
-		if ( elgg_get_context() == 'activity' ) forward('');
+		if ( elgg_get_context() == 'activity' ) forward(elgg_get_site_url());
 		
 		if ( elgg_get_context() == 'main' ) { 
 			$class_main = 'main';
 		} else { 
 			$class_main = '';
 		} ?>
+
+		<?php echo '<a href="' . elgg_get_site_url() . 'signup"><div class="ribbon">Essayez la béta !</div></a>'; ?>
 	
 		<div class="elgg-page-header nolog">
 			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
 				<?php 
-				echo "<div class='elgg-menu-item-logo'><a href='" . $CONFIG->url . "'><span class='logoGreen'>&nabla;</span><span class='logoRed'>&nabla;</span><span class='logoWhite'>&nabla;</span></a></div>";
-				echo '<h1><a href="' . $CONFIG->url . '">' . elgg_get_config('sitename') . '</a></h1>' . elgg_view('core/account/login_dropdown')
+				echo "<div class='elgg-menu-item-logo ggouv-webfont'><a href='" . elgg_get_site_url() . "'>&nabla;</a></div>";
+				echo '<h1><a href="' . elgg_get_site_url() . '">' . elgg_get_config('sitename') . '</a></h1>';
+				if ( elgg_get_context() != 'main' ) echo elgg_view('core/account/login_dropdown');
 				?>
 			</div>
 		</div>

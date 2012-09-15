@@ -268,12 +268,12 @@
 *************************************** */
 .elgg-menu-title {
 	float: right;
-	margin-top: -7px;
+	margin-top: -9px;
 }
 
 .elgg-menu-title > li {
 	display: inline-block;
-	margin-left: 4px;
+	margin-left: 10px;
 }
 
 /* ***************************************
@@ -311,6 +311,11 @@
 	text-align: center;
 	height: 21px;
 	color: #999;
+
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
 }
 .elgg-menu-filter > li > a:hover {
 	background: #dedede;
@@ -343,6 +348,11 @@
 	background-color: white;
 	margin: 0 0 3px;
 	padding: 2px 6px;
+	
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
 }
 .elgg-menu-page a:hover {
 	background-color: #0054A7;
@@ -367,6 +377,7 @@
 .elgg-menu-page .elgg-menu-opened:before {
 	content: "\002D";
 }
+
 
 /* ***************************************
 	HOVER MENU
@@ -457,13 +468,14 @@
 	color: #aaa;
 	line-height: 16px;
 	height: 16px;
+	vertical-align: top !important;
 }
 .elgg-menu-entity > li, .elgg-menu-annotation > li {
-	margin-left: 15px;
+	margin-left: 10px;
 }
-.elgg-menu-entity > li > a, .elgg-menu-annotation > li > a {
+/*.elgg-menu-entity > li > a, .elgg-menu-annotation > li > a {
 	color: #aaa;
-}
+}*/
 <?php // need to override .elgg-menu-hz ?>
 .elgg-menu-entity > li > a, .elgg-menu-annotation > li > a {
 	display: block;
@@ -500,6 +512,47 @@
 	background-color: #4690D6;
 	color: white;
 }
+.elgg-menu-owner-block li a:before {
+	font-family: 'ggouv';
+	font-size: 36px;
+	margin-right: 5px;
+	float: left;
+}
+.elgg-menu-owner-block li a:hover:before {
+	font-size: 48px;
+	text-shadow: 0 0 5px white;
+}
+.elgg-menu-owner-block .elgg-menu-item-activity a:before {
+	content: 'A';
+}
+.elgg-menu-owner-block .elgg-menu-item-markdown-wiki a:before {
+	content: 'W';
+}
+.elgg-menu-owner-block .elgg-menu-item-bookmarks a:before {
+	content: 'L';
+}
+.elgg-menu-owner-block .elgg-menu-item-brainstorm a:before {
+	content: 'I';
+}
+.elgg-menu-owner-block .elgg-menu-item-workflow a:before {
+	content: 'F';
+}
+.elgg-menu-owner-block .elgg-menu-item-questions a:before {
+	content: '¿';
+}
+.elgg-menu-owner-block .elgg-menu-item-discussion a:before {
+	content: '9';
+}
+.elgg-menu-owner-block .elgg-menu-item-blog a:before {
+	content: 'B';
+}
+.elgg-menu-owner-block .elgg-menu-item-etherpad a:before {
+	content: 'P';
+}
+.elgg-menu-owner-block .elgg-menu-item-thewire a:before {
+	content: 'S';
+}
+
 
 /* ***************************************
 	LONGTEXT
@@ -513,7 +566,7 @@
 *************************************** */
 .elgg-menu-river {
 	float: right;
-	margin-left: 15px;
+	margin: -2px 0 0 10px;
 	font-size: 90%;
 	color: #aaa;
 	line-height: 16px;
@@ -539,7 +592,9 @@
 	SIDEBAR EXTRAS (rss, bookmark, etc)
 *************************************** */
 .elgg-menu-extras {
-	margin-bottom: 10px;
+	margin-bottom: 7px;
+	position: absolute;
+	bottom: 0;
 }
 
 /* ***************************************

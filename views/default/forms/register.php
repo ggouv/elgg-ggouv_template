@@ -18,7 +18,7 @@ if (elgg_is_sticky_form('register')) {
 }
 
 ?>
-<div>
+<br/><div>
 	<label><?php echo elgg_echo('Choisissez un pseudo'); ?></label><br />
 	<?php
 	echo elgg_view('input/text', array(

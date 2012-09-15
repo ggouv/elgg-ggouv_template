@@ -39,7 +39,7 @@ if (!$content) {
 }
 
 echo elgg_view('groups/profile/module', array(
-	'title' => elgg_echo('brainstorm:group'),
+	'title' => elgg_echo('brainstorm:group:idea'),
 	'content' => $content,
 	'all_link' => "brainstorm/group/$group->guid/all",
 	'stats' => $count,

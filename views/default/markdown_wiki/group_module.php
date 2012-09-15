@@ -9,7 +9,6 @@
  *	Elgg-markdown_wiki group module
  **/
 
-
 $group = elgg_get_page_owner_entity();
 
 if ($group->markdown_wiki_enable == "no") {

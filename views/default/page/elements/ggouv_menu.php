@@ -7,7 +7,7 @@ $site_url = elgg_get_site_url();
 if ($user) {
 	// logo
 	echo	'<li class="elgg-menu-item-logo ggouv-webfont">' .
-				"<a href='$site_url'>∇</a>" .
+				"<a href='{$site_url}activity'>∇</a>" .
 			'</li>';
 	
 	// profil icon for dashboard
@@ -27,6 +27,10 @@ if ($user) {
 			'href' => elgg_get_site_url() . "friends/{$user->username}",
 			'text' => elgg_echo('friends')
 		), array(
+			'name' => 'friends_of',
+			'href' => elgg_get_site_url() . "friendsof/{$user->username}",
+			'text' => elgg_echo('friends:followers')
+		), array(
 			'name' => 'members',
 			'href' => elgg_get_site_url() . "members",
 			'text' => elgg_echo('members')
@@ -40,12 +44,6 @@ if ($user) {
 	echo	'<li class="elgg-menu-item-at ggouv-webfont ggouv-menu-parent scale rotate">' .
 				'<a href="#">@</a>' . $sub_menu .
 			'</li>';
-	
-			/*<ul><a href="#groups">
-					<li></li>
-					</a><li><a href="#groups"></a><a href="auie">nrst</a></li>
-				</ul></li><!-- developers:end navigation/menu/elements/item --></ul>*/
-	
 	
 	// sub menu for group
 	$sub_menus = array(array(
@@ -75,7 +73,7 @@ if ($user) {
 	$sub_menu .= '</ul></ul>';
 	
 	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
-			'<a href="#groups">¡</a>' . $sub_menu .
+			'<a href="#">!</a>' . $sub_menu .
 		'</li>';
 
 
@@ -96,7 +94,7 @@ if ($user) {
 	// user settings
 	$user_settings = elgg_view('output/url', array(
 		'href' => $site_url . "settings/user/{$user->username}",
-		'text' => 'u',
+		'text' => 'C',
 	));
 	echo '<li class="elgg-menu-item-usersettings ggouv-webfont scale">' .
 		$user_settings .
@@ -105,7 +103,7 @@ if ($user) {
 	// log out
 	$log_out = elgg_view('output/url', array(
 		'href' => "action/logout",
-		'text' => 'e',
+		'text' => 'E',
 		'is_action' => TRUE,
 	));
 	echo '<li class="elgg-menu-item-logout ggouv-webfont scale">' .

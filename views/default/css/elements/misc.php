@@ -14,6 +14,10 @@
 	color: black;
 	font-size: 1.2em;
 }
+#login-dropdown .elgg-button-dropdown.elgg-state-active:hover, #login-dropdown .elgg-button-dropdown.elgg-state-active:focus {
+	box-shadow: none;
+	text-shadow: none;
+}
 #login-dropdown .elgg-button-dropdown.elgg-state-active {
 	background-color: #CCC;
 }

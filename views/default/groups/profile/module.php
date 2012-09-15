@@ -15,7 +15,7 @@ $title = $vars['title'];
 $nb = mb_strlen($title);
 $nbMil = floor($nb/2);
 $pEspace = mb_strrpos(mb_substr($title, 0, $nbMil), " ");
-if (!$pEspace) $pEspace = strrpos(mb_substr($title, $nbMil, $nb), " ") + $nbMil;
+if (!$pEspace) $pEspace = mb_strpos($title, " ");// + $nbMil;
 $title = mb_substr($title , 0 , $pEspace) . '<br/>' . mb_substr($title , $pEspace , $nb);
 
 if (!$vars['stats']) $vars['stats'] = 0;

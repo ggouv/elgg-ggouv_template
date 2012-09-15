@@ -1,27 +1,64 @@
 <?php
 
-$page_top = elgg_get_plugin_setting('page_top_for_home', 'elgg_ggouv_template');
-$page_top_entity = get_entity($page_top);
+elgg_load_css('css.nologin.mainpage');
+elgg_load_js('js.nologin.mainpage');
+elgg_load_js('jquery.scrollTo');
+elgg_load_js('carrousel');
+elgg_load_library('markdown_wiki:markdown');
+elgg_load_library('markdown_wiki:utilities');
 
-$title[] = elgg_view('output/longtext', array('value' => $page_top_entity['title']));
-$desc[] = elgg_view('output/longtext', array('value' => $page_top_entity['description']));
+// get text
+$page_guid = elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg_ggouv_template');
+$page = get_entity($page_guid);
 
-$pages = elgg_get_entities_from_metadata(array(
-	'type' => 'object',
-	'subtype' => 'page',
-	'metadata_name' => 'parent_guid',
-	'metadata_value' => $page_top,
-));
-foreach( $pages as $page) {
-	$title[] = elgg_view('output/longtext', array('value' => $page['title']));
-	$desc[] = elgg_view('output/longtext', array('value' => $page['description']));
+if (!$page) {
+	return;
+}
+
+$annotation = $page->getAnnotations('markdown_wiki', 1, 0, 'desc');
+$value = unserialize($annotation[0]->value);
+$text = markdown_wiki_to_html($value['text']);
+
+// parse title
+$return = preg_match_all('/<h1>(.*)<\/h1>/sU', $text, $matches);
+foreach ($matches[1] as $item) {
+	$sections['title'][] = elgg_view('output/longtext', array('value' => trim($item)));
+}
+
+// parse section
+$return = preg_match_all('/<\/h1>(.*)(?:<h1>|$)/sU', $text, $matches);
+foreach ($matches[1] as $key => $item2) {
+	$sub_sections = array();
+	$return = preg_match_all('/<h2>(.*)<\/h2>/sU', $item2, $matches3);
+	foreach ($matches3[1] as $subkey => $item3) {
+		$sub_sections[$subkey]['title'] = trim($item3);
+	}
+	$return = preg_match_all('/<\/h2>(.*)(?:<h2>|$)/sU', $item2, $matches4);
+	foreach ($matches4[1] as $subkey => $item4) {
+		$sub_sections[$subkey]['text'] = elgg_view('output/markdown_wiki_text', array('value' => trim($item4)));
+	}
+	global $fb; $fb->info($sub_sections);
+	
+	$html = '';
+	if ($sub_sections) {
+		$html = "<div class='elgg-menu-owner-block slidewrap{$key}'><ul class='slider'>";
+		foreach ($sub_sections as $sub_section) {
+			$html .= '<li class="slide"><h2 class="slidehed">' . $sub_section['title'] . '</h2>' . $sub_section['text'] . '</li>';
+		}
+		$html .= "</ul></div>";
+	}
+
+	$return = preg_match('/^(.*)(?:<h2>|$)/sU', $item2, $matches2);
+	$sections['text'][] = elgg_view('output/markdown_wiki_text', array('value' => trim($matches2[1] . $html)));
 }
 
 $content = '<div class="background-nolog-main"></div><div id="cursor"></div>';
-$content .= '<ul class="title"><li class="pal">' . implode('</li><li class="pal">', $title) . '</li></ul>';
-$content .= '<ul class="content"><li>' . implode('</li><li>', $desc) . '</li></ul>';
+$content .= '<ul class="title" style="opacity: 0;"><li class="">' . implode('</li><li class="pal">', $sections['title']) . '</li></ul>';
+$content .= '<ul class="content" style="opacity: 0;"><li>' . implode('</li><li>', $sections['text']) . '</li></ul>';
 
 $params = array(
 		'content' => $content,
 );
+
 echo elgg_view_layout('one_column', $params);
+

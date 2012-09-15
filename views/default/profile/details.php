@@ -9,6 +9,7 @@ global $fb;
 $fb->info($user);
 $fb->info($user->twitter, 'twitter');
 $fb->info($user->realname, 'realname');
+$fb->info($user->location, 'location');
 $profile_fields = elgg_get_config('profile_fields');
 
 echo '<div id="profile-details" class="elgg-body pll">';

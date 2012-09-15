@@ -62,8 +62,8 @@ $allow_multiple_emails = false, $friend_guid = 0, $invitecode = '') {
 	$user = new ElggUser();
 	$user->username = $username;
 	$user->email = $email;
-	$user->name = $username;
-	$user->realname = $name;
+	$user->name = $username; // original $name. But we don't want to use name by 
+	$user->realname = $name; // added for ggouv
 	$user->access_id = ACCESS_PUBLIC;
 	$user->salt = generate_random_cleartext_password(); // Note salt generated before password!
 	$user->password = generate_user_password($user, $password);
@@ -137,3 +137,17 @@ function ggouv_twitter_api_create_user($twitter) {
 }
 
 
+
+function ggouv_get_online_users() {
+	$count = find_active_users(600, 10, 0, true);
+	$objects = find_active_users(600, 10);
+
+	if ($objects) {
+		return elgg_view_entity_list($objects, array(
+			'count' => $count,
+			'limit' => 10,
+			'split_items' => 3,
+			'size' => 'small',
+		));
+	}
+}

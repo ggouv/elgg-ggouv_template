@@ -23,12 +23,11 @@
 /* ***************************************
 	Image Block
 *************************************** */
-.elgg-image-block {
-	padding: 3px 0;
+.elgg-image-block .elgg-body {
 }
 .elgg-image-block .elgg-image {
 	float: left;
-	margin-right: 5px;
+	margin: 2px 5px 0 0;
 }
 .elgg-image-block .elgg-image-alt {
 	float: right;
@@ -39,19 +38,19 @@
 	List
 *************************************** */
 .elgg-list {
-	border-top: 1px dotted #CCCCCC;
 	margin: 5px 0;
 	clear: both;
 }
+.elgg-list > .row > li {
+	border-bottom: 1px dotted #CCCCCC;
+	padding: 5px;
+}
 .elgg-list > li {
 	border-bottom: 1px dotted #CCCCCC;
-}
-
-.elgg-item .elgg-subtext {
-	margin-bottom: 5px;
+	padding: 5px;
 }
 .elgg-item .elgg-content {
-	margin: 10px 5px;
+	margin: 10px 0px;
 }
 
 /* ***************************************
@@ -96,7 +95,11 @@
 	width: 100%;
 	border-top: 1px solid #ccc;
 }
-.elgg-table-alt td {
+.elgg-table-alt th {
+	background-color: #eee;
+	font-weight: bold;
+}
+.elgg-table-alt td, .elgg-table-alt th {
 	padding: 2px 4px 2px 4px;
 	border-bottom: 1px solid #ccc;
 }
@@ -159,11 +162,11 @@
 	margin-right: 20px;
 }
 .elgg-river-summary {
-	font-size: 90%;
+	font-size: 95%;
 	line-height: 1.2em;
 }
 .elgg-river-subject {
-	font-size: 120%;
+	font-size: 100%;
 	font-weight: bold;
 }
 .elgg-river-timestamp {
@@ -209,23 +212,22 @@
 <?php //@todo components.php ?>
 .elgg-river-comments {
 	margin: 0;
-	border-top: none;
 	font-size: 90%;
 }
 .elgg-river-comments .elgg-output {
 	font-size: 85%;
 }
-.elgg-river-comments li:first-child {
+.elgg-river-comments > .row > li:first-child {
 	-webkit-border-radius: 5px 0 0;
 	-moz-border-radius: 5px 0 0;
 	border-radius: 5px 0 0;
 }
-.elgg-river-comments li:last-child {
+.elgg-river-comments > .row > li:last-child {
 	-webkit-border-radius: 0 0 5px 5px;
 	-moz-border-radius-bottomleft: 0 0 5px 5px;
 	border-radius-bottomleft: 0 0 5px 5px;
 }
-.elgg-river-comments li {
+.elgg-river-comments > .row > li {
 	background-color: #EEE;
 	border-bottom: none;
 	padding: 4px;
@@ -293,14 +295,27 @@
 }
 .elgg-tags li {
 	display: inline;
-	margin-right: 5px;
+	margin-right: -1px;
 }
-.elgg-tags li:after {
+.elgg-tags li a {
+	color: #999999;
+	padding: 0 6px;
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
+}
+.elgg-tags li a:hover {
+	color: white;
+	background-color: #4690D6;
+	text-decoration: none;
+}
+/*.elgg-tags li:after {
 	content: ",";
 }
 .elgg-tags li:last-child:after {
 	content: "";
-}
+}*/
 .elgg-tagcloud {
 	text-align: justify;
 }
