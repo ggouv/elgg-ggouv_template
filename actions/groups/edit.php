@@ -31,8 +31,10 @@ foreach ($CONFIG->group as $shortname => $valuetype) {
 	}
 }
 
-$input['name'] = get_input('name');
-$input['name'] = html_entity_decode($input['name'], ENT_COMPAT, 'UTF-8');
+if (isset($input['name'])) {
+	$input['name'] = get_input('name');
+	$input['name'] = html_entity_decode($input['name'], ENT_COMPAT, 'UTF-8');
+}
 
 $user = elgg_get_logged_in_user_entity();
 
@@ -125,6 +127,8 @@ if ($new_group_flag) {
 	elgg_set_page_owner_guid($group->guid);
 	$group->join($user);
 	add_to_river('river/group/create', 'create', $user->guid, $group->guid, $group->access_id);
+} else {
+	add_to_river('river/group/update', 'update', $user->guid, $group->guid, $group->access_id);
 }
 
 // Now see if we have a file icon

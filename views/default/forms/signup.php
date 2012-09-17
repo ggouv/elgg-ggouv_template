@@ -24,6 +24,9 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'username',
 		'value' => $username,
+		'class' => 'elgg-autofocus required namecheckcar',
+		'minlength' => 4,
+		'maxlength' => 30
 	));
 	?>
 </div>
@@ -33,7 +36,8 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'name',
 		'value' => $name,
-		'class' => 'elgg-autofocus',
+		'class' => 'required',
+		'maxlength' => 90
 	));
 	?>
 </div>
@@ -43,6 +47,7 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'email',
 		'value' => $email,
+		'class' => 'required email',
 	));
 	?>
 </div>
@@ -52,6 +57,9 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'location',
 		'value' => $location,
+		'class' => 'required digits',
+		'minlength' => 5,
+		'maxlength' => 5
 	));
 	?>
 </div>
@@ -59,8 +67,11 @@ if (elgg_is_sticky_form('register')) {
 	<label><?php echo elgg_echo('password'); ?></label><br />
 	<?php
 	echo elgg_view('input/password', array(
+		'id' => 'password',
 		'name' => 'password',
 		'value' => $password,
+		'class' => 'required',
+		'minlength' => 6,
 	));
 	?>
 </div>
@@ -70,6 +81,9 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/password', array(
 		'name' => 'password2',
 		'value' => $password2,
+		'class' => 'required',
+		'equalTo' => '#password',
+		'minlength' => 6,
 	));
 	?>
 </div>

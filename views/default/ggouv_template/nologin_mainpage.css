@@ -90,6 +90,8 @@
 }
 .titre {
 	font-size: 2em;
+	line-height: 1em;
+	text-align: left;
 }
 .titre2 {
 	/*color: #4690D6;*/
@@ -112,16 +114,17 @@
 .carousel-tabs > li {
 	display: inline;
 	font-size: 1.2em;
-	padding-bottom: 15px;
+	margin-bottom: 5px;
 }
 .slide .elgg-output {
 	float: left;
 }
 .carousel-tabs > li > a {
 	background-color: #CCCCCC;
-	display: inline;
+	display: inline-block;
 	margin-right: 10px;
 	padding: 0px 10px 1px;
+	word-wrap: normal;
 }
 .carousel-tabs > li.carousel-active-tab > a {
 	background-color: #4690D6;
@@ -135,7 +138,9 @@
 	opacity: 1;
 }
 .slide img {
-	width: 50%;
+	width: 49%;
+	min-width: 183px;
+	padding-bottom: 10px;
 }
 
 .ribbon {
@@ -161,6 +166,24 @@
 	-ms-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+	.ribbon {
+		font-size: 13px !important;
+		right: -65px;
+		top: 30px;
+	}
+}
+@media (max-width: 768px) {
+	.ribbon {
+		font-size: 10px !important;
+		padding: 5px 0;
+		right: -78px;
+		top: 25px;
+	}
+	.elgg-page-header .elgg-inner-nolog.main {
+		height: 24px;
+	}
 }
 
 .ribbon:hover {

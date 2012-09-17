@@ -11,6 +11,8 @@ echo elgg_view_form('ggouv_template/header_input');
 // drop-down login
 echo elgg_view('core/account/login_dropdown');
 
+echo '<div id="ajaxified-loader" class="hidden"></div>';
+
 // insert site-wide navigation
 //echo elgg_view_menu('site');
 

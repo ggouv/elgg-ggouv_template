@@ -325,7 +325,7 @@
 	content: 't';
 	padding: 2px 0;
 	font-size: 60px;
-	color: #CCC;
+	color: #999;
 }
 .elgg-icon-thumbs-down-alt:hover {
 	background-position: 0 -1278px;

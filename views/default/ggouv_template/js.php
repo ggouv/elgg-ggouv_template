@@ -74,7 +74,10 @@ elgg.ggouv_template.init = function() {
 			return url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
 		};
 	
-		$(".elgg-page-body a:internal:not([href*='/admin/'],"+
+		var fragment;
+		$(".elgg-page-body a:internal:not("+
+								"[href=''],"+
+								"[href*='/admin/'],"+
 								"[href*='/ajax/'],"+
 								"[href*='/avatar/edit'],"+
 								"[href*='/action/groups/delete'],"+
@@ -93,7 +96,14 @@ elgg.ggouv_template.init = function() {
 				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
-					History.pushState(null, title, url);
+					fragment = elgg.parse_url(url, 'fragment');
+					url = url.replace('#'+fragment, '');
+
+					if (elgg.normalize_url(decodeURIComponent(window.location.href)) == url) { //same page, got to #hash
+						if (fragment) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60}); // if not that means user click a link for same page
+					} else {
+						History.pushState(null, title, url);
+					}
 				}
 				e.preventDefault();
 				return false;
@@ -103,14 +113,12 @@ elgg.ggouv_template.init = function() {
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState(),
 				url = State.url;
-			if (State) {
-				$('body').addClass('loading');
 				
+			if (State) {
 				var parsePage = function(url) {
 					elgg.get(url, {
 						data: 'ajaxified=true',
 						success: function(response, textStatus, xmlHttp) {
-						console.log(xmlHttp);
 							if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
 								var urlP = elgg.parse_url(url);
 								if (urlP.path.match('/action/comments/delete')) {
@@ -154,14 +162,16 @@ elgg.ggouv_template.init = function() {
 								
 								$(window).scrollTop(0);
 								
-								//window.history.pushState({ path: hrefTarget }, title, hrefTarget);
-								//History.pushState({ path: hrefTarget }, title, hrefTarget);
 								elgg.ggouv_template.reloadTemplateFunctions();
-								$('body').removeClass('loading');
 							}
+							if (fragment) {
+								$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
+							}
+							$('#ajaxified-loader').addClass('hidden');
 						},
 						error: function(response) {
 							console.log(response, 'error');
+							$('#ajaxified-loader').addClass('hidden');
 						}
 						/*error: function(jqXHR, textStatus, errorThrown){
 							document.location.href = url;
@@ -170,45 +180,34 @@ elgg.ggouv_template.init = function() {
 					});
 				}
 
+				$('#ajaxified-loader').removeClass('hidden');
 				parsePage(url);
 
 			}
 		});
 	}
 	
-	
-/*	$(".elgg-page-body a:not([href*='/admin/'],"+
-							"[href*='/ajax/'],"+
-							"[href*='/avatar/edit'],"+
-							"[href*='/action/groups/delete'],"+
-							"[href*='view=rss'],"+
-							"[href*='address='],"+
-							"[href*='/action/workflow/list/delete']),"+
-		" .elgg-page-topbar a:not([href*='/admin/'],"+
-								" [href*='/ajax/'],"+
-								" [href*='/logout'])"
-	).live('click', function(e) {elgg.ggouv_template.ajaxified($(this), e)});
-	
-	History.Adapter.bind(window,'statechange', function(event) {
-		// if the event has our history data on it, load the page fragment with AJAX
-		//var state = event.originalEvent.state;
-		var State = History.getState();
-		if (State) {
-			elgg.get(State.url, {
-				data: 'ajaxified=true',
-				success: function(response) {
-					$('.elgg-page-body').html( $(response).filter('.elgg-page-body').html() );
-					var title = $(response).filter('title').text();
-					$('title').html(title);
-					elgg.ggouv_template.reloadTemplateFunctions();
-				}
-			});
-		}
+	//Custom jquery validation message. Need to be called after plugin jquery validation loaded
+	jQuery.extend(jQuery.validator.messages, {
+		required: elgg.echo('forms:required'),
+		remote: elgg.echo('forms:remote'),
+		email: elgg.echo('registration:notemail'),
+		url: elgg.echo('forms:url'),
+		date: elgg.echo('forms:date'),
+		dateISO: elgg.echo('forms:dateISO'),
+		number: elgg.echo('forms:number'),
+		digits: elgg.echo('forms:digits'),
+		creditcard: "Please enter a valid credit card number.",
+		equalTo: elgg.echo('registration:passwordagainnotvalid'),
+		accept: "Please enter a value with a valid extension.",
+		maxlength: jQuery.validator.format(elgg.echo('forms:maxlength')),
+		minlength: jQuery.validator.format(elgg.echo('forms:minlength')),
+		rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+		range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+		max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+		min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
 	});
-	// when the page first loads update the history entry with the URL
-	// needed to recreate the 'first' page with AJAX
-	History.replaceState({ path: window.location.href }, '');*/
-	
+
 }
 elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
@@ -387,6 +386,124 @@ elgg.ggouv_template.ready = function() {
 		}
 	}
 	
+	// validate forms
+	jQuery.validator.addMethod("namecheckcar", function(value, element) {
+		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_-]{3,30}$/.test(value); 
+	}, elgg.echo('registration:namecheckcar'));
+	
+	$('.elgg-form-groups-edit').validate({
+		invalidHandler: function(form, validator) {
+			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+				$(this).effect("shake", {times:2, distance:10}, 100, function() {
+					$(this).animate({'margin-left': 0}, 100);
+				});
+			});
+		}
+	});
+	
+	$('.elgg-form-profile-edit').validate({
+		invalidHandler: function(form, validator) {
+			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+				$(this).effect("shake", {times:2, distance:10}, 100, function() {
+					$(this).animate({'margin-left': 0}, 100);
+				});
+			});
+		}
+	});
+	
+	$('.elgg-form-signup').validate({
+		success: "valid",
+		rules: {
+			username: {
+				remote: {
+					url: 'ajax/view/ggouv_template/ajax/form_validation',
+					type: 'POST',
+				}
+			}
+		},
+		messages: {
+			username: {
+				minlength: elgg.echo('registration:usernametooshort', [4]),
+				maxlength: elgg.echo('registration:usernametoolong', [30]),
+				remote: elgg.echo('registration:userexists'),
+			},
+			location: {
+				minlength: elgg.echo('registration:locationtooshort', [5]),
+			}
+		},
+		invalidHandler: function(form, validator) {
+			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+				$(this).effect("shake", {times:2, distance:10}, 100, function() {
+					$(this).animate({'margin-left': 0}, 100);
+				});
+			});
+		}
+	});
+
+	if ($('.elgg-form-signup').length) {
+		$('.elgg-form-signup, #map').height($(window).height() - $('.elgg-form-signup').position().top - 93);
+		$(".elgg-form-signup input[name='location']").searchlocalgroup(function(response) {
+			if (response) {
+				$('.register-map').animate({opacity: 1});
+				if (hasMarkers) map.removeLayer(villes);
+				var maxHab = 0,
+					maxNorth = -90,
+					maxSouth = 90,
+					maxEast = -180,
+					maxOuest = 180,
+					maxHabKey = 0,
+					markers = [];
+				$.each(response, function(key, value) {
+					var popupContent = $('<div>').append(
+						$('<h2>').html(value.article+' '+value.ville).after(
+							$('<a>', {href: elgg.get_site_url()+'groups/profile/'+value.cp+'/'+value.ville, style: 'font-size: 1.5em;'}).html(value.cp).after(
+								$('<h3>').html(elgg.echo('groups:localgroup:departement')+' :').after(
+									$('<a>', {href: elgg.get_site_url()+'groups/profile/'+value.dep+'/'+value.nom_dep, style: 'font-size: 1.2em;'}).html(value.dep)
+						))).clone()).remove().html();
+					markers.push(L.marker([value.lat, value.long]).bindPopup(
+					popupContent));
+					if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
+					if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
+					if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
+					if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
+					if (parseFloat(value.habitants30122008) > maxHab) {
+						maxHabKey = key;
+						maxHab = parseFloat(value.habitants30122008);
+					}
+				});
+				villes = L.layerGroup(markers);
+				map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
+				markers[maxHabKey].openPopup();
+				hasMarkers = true;
+			} else {
+				$('#searching').addClass('notfound').html(elgg.echo('ggouv:search:localgroups:notfound'));
+				$('.register-map').animate({opacity: 1});
+			}
+		});
+	}
+	/*jQuery.validator.addMethod("registerCP", function(value, element) {
+		if (value.length != 5) return false;
+		elgg.post('ajax/view/ggouv_template/ajax/get_city', {
+			dataType: 'json',
+			data: {
+				city: value,
+			},
+			beforeSend:  function() {
+				$('#map').removeClass().html('').addClass('loading');
+			},
+			success: function(response) {
+				$('#map').removeClass().html('');
+				return true; 
+			},
+			error: function() {
+				valuevalid = '"erreur avec le serveur"';
+			}
+		});
+	}, elgg.echo('registration:CPinvalid'));
+*/
+
+
+	
 	// map for local group in group profile
 	if ($('.groups-profile-map').length) {
 		var groupMap = $("#map"),
@@ -434,7 +551,7 @@ elgg.ggouv_template.ready = function() {
 				timeout = setTimeout(function() {
 					search_input = $("#search-localgroup").val();
 					if (search_input.length > 2) { // @todo check why need to do it again ?
-						elgg.post('ajax/view/groups/get_city', {
+						elgg.post('ajax/view/ggouv_template/ajax/get_city', {
 							dataType: 'json',
 							data: {
 								city: search_input,
@@ -503,6 +620,59 @@ elgg.ggouv_template.ready = function() {
 		}
 	});
 }
+
+
+$.fn.searchlocalgroup = function(mapLoaded) {
+	TheInput = this;
+	var groupMap = $("#map"),
+		zoom = 6,
+		latitude = 46.763056,
+		longitude = 2.424722,
+		cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+		cloudmade = new L.TileLayer(cloudmadeUrl, {
+			maxZoom: 12,
+			attribution: ''
+		});
+	map = new L.Map('map');
+	map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
+	
+	// live search
+	var timeout,
+		villes,
+		hasMarkers = false;
+	TheInput.keypress(function(e) {
+		if ( e.which == 13) return false;
+		var search_input = $(this).val();
+
+		if (search_input.length > 2) { // @todo when is numeric, trigger only with 5 chars
+			if (timeout) {
+				clearTimeout(timeout);
+				timeout = null;
+			}
+			
+			timeout = setTimeout(function() {
+				search_input = TheInput.val();
+				if (search_input.length > 2) { // @todo check why need to do it again ?
+					elgg.post('ajax/view/ggouv_template/ajax/get_city', {
+						dataType: 'json',
+						data: {
+							city: search_input,
+						},
+						beforeSend:  function() {
+							$('#searching').removeClass().html('').addClass('loading');
+						},
+						success: function(response) {
+							$('#searching').removeClass().html('');
+							clearTimeout(timeout);
+							if (mapLoaded) mapLoaded(response);
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
 
 /**
  * Counter for input/text140
@@ -790,6 +960,8 @@ jQuery(function($){
 		};
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
 });
+
+
 
 /*
 $(function() {

@@ -102,7 +102,7 @@ h6 { font-size: 0.8em; }
 	max-width: 530px;
 	margin-right: 10px;
 }
-.elgg-heading-basic {
+.elgg-heading-basic > p {
 	color: #0054A7;
 	font-size: 1.2em;
 	font-weight: bold;

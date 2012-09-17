@@ -401,7 +401,14 @@
 	text-shadow: 0 0 15px white;
 	color: white;
 }
-
+#ajaxified-loader {
+	background: url('http://localhost/~mama/ggouv/ggouv/mod/elgg-brainstorm/graphics/ajax-loader.gif') no-repeat scroll 0 6px transparent;
+	position: fixed;
+	right: 5px;
+	top: 46px;
+	height: 22px;
+	width: 16px;
+}
 
 
 /*
@@ -635,4 +642,27 @@ div.tagsinput .not_valid {
  */
 .profile-action-menu .elgg-icon-attention:before {
 	margin: 0 5px 0 0;
+}
+.profile-aboutme-title .elgg-widget-collapse-button {
+	color: #555;
+	font-weight: bold;
+}
+.profile-aboutme-title .elgg-widget-collapse-button:hover {
+	color: #333;
+}
+
+
+
+/*
+ * page register
+ */
+.elgg-form-login, .elgg-form-account {
+	max-width: 450px;
+}
+.register-map {
+	margin-left: 500px;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	opacity: 0;
 }

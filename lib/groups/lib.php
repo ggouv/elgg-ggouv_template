@@ -242,13 +242,13 @@ function groups_handle_edit_page($page, $guid = 0) {
 		elgg_push_breadcrumb($title);
 		$content = elgg_view('groups/edit');
 	} else {
-		$title = elgg_echo("groups:edit");
 		$group = get_entity($guid);
+		$title = elgg_echo("groups:title:edit", array($group->name));
 
 		if ($group && $group->canEdit()) {
 			elgg_set_page_owner_guid($group->getGUID());
 			elgg_push_breadcrumb($group->name, $group->getURL());
-			elgg_push_breadcrumb($title);
+			elgg_push_breadcrumb(elgg_echo("groups:edit"));
 			$content = elgg_view("groups/edit", array('entity' => $group));
 		} else {
 			$content = elgg_echo('groups:noaccess');

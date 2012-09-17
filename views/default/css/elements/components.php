@@ -298,7 +298,7 @@
 	margin-right: -1px;
 }
 .elgg-tags li a {
-	color: #999999;
+	color: #555;
 	padding: 0 6px;
 	transition: all 0.25s ease;
 	-webkit-transition: all 0.25s ease;

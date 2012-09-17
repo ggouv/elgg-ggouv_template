@@ -7,11 +7,11 @@
 
 ?>
 <h3 class='mvm'>
-	<?php echo elgg_echo('Pseudo'); ?>&nbsp;:&nbsp;<?php echo '<span style="color: #CCC;">@' . $vars['entity']->username . '</span>'; ?>
+	<?php echo elgg_echo('Pseudo'); ?>&nbsp;:&nbsp;<?php echo '<span style="color: #555;">@' . $vars['entity']->username . '</span>'; ?>
 </h3>
 <div>
 	<label><?php echo elgg_echo('Votre nom réel'); ?></label>
-	<?php echo elgg_view('input/text', array('name' => 'realname', 'value' => $vars['entity']->realname)); ?>
+	<?php echo elgg_view('input/text', array('name' => 'realname', 'value' => $vars['entity']->realname, 'class' => 'required', 'maxlength' => 90)); ?>
 </div>
 <?php
 
@@ -46,15 +46,27 @@ if (is_array($profile_fields) && count($profile_fields) > 0) {
 	<label><?php echo elgg_echo("profile:{$shortname}") ?></label>
 	<?php
 		$params = array(
-			'name' => $shortname,
-			'value' => $value,
-		);
-		echo elgg_view("input/{$valtype}", $params);
-		$params = array(
 			'name' => "accesslevel[$shortname]",
 			'value' => $access_id,
 		);
 		echo elgg_view('input/access', $params);
+		$params = array(
+			'name' => $shortname,
+			'value' => $value,
+			'class' => $class
+		);
+		if($shortname == 'location') {
+			$params['class'] = 'required digits';
+			$params['minlength'] = 5;
+			$params['maxlength'] = 5;
+		}
+		if($shortname == 'location') {
+			$params['class'] = 'required digits';
+			$params['minlength'] = 5;
+			$params['maxlength'] = 5;
+		}
+		echo elgg_view("input/{$valtype}", $params);
+		
 	?>
 </div>
 <?php

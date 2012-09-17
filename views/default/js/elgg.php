@@ -30,7 +30,7 @@ $libs = array(
 	'prototypes',
 	'hooks',
 	'security',
-	'languages',
+	//'languages',			// Hack ggouv because Elgg bug on home page when non-loggin-user, language is not defined
 	'ajax',
 	'session',
 	'pageowner',
@@ -50,6 +50,8 @@ foreach ($libs as $file) {
 include(dirname(__FILE__). '/lib/ui.js');
 echo "\n";
 include(dirname(__FILE__). '/lib/ui.widgets.js');
+echo "\n";
+include(dirname(__FILE__). '/lib/languages.js');
 echo "\n";
 
 /**

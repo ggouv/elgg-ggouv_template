@@ -46,6 +46,5 @@ echo elgg_view('groups/profile/module', array(
 	'title' => elgg_echo('etherpad:group'),
 	'content' => $content,
 	'all_link' => "etherpad/group/$group->guid/all",
-	'add_link' => $new_link,
 	'stats' => $count,
 ));

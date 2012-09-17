@@ -44,7 +44,7 @@ $allow_multiple_emails = false, $friend_guid = 0, $invitecode = '') {
 		throw new RegistrationException(elgg_echo('registration:passwordnotvalid'));
 	}
 
-	if (!validate_username($username)) {
+	if (!validate_username($username) || preg_match('/^\d/', $username) === 1) { // ggouv. Don't want username start by number
 		throw new RegistrationException(elgg_echo('registration:usernamenotvalid'));
 	}
 

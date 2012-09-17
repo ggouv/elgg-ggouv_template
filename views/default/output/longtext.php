@@ -32,8 +32,8 @@ if ($parse_urls) {
 /*$text = filter_tags($text);
 
 $text = autop($text);*/
-elgg_load_library('markdown_wiki:utilities');
-$text = markdown_wiki_to_html($text);
+elgg_load_library('markdown_wiki:markdown');
+$text = Markdown($text);
 
 $attributes = elgg_format_attributes($vars);
 

@@ -12,6 +12,8 @@
 *************************************** */
 fieldset > div {
 	margin-bottom: 15px;
+	position: relative;
+	clear: both;
 }
 fieldset > div:last-child {
 	margin-bottom: 0;
@@ -20,17 +22,34 @@ fieldset > div:last-child {
 	border-top: 1px solid #CCC;
 	padding: 10px 0;
 }
-
 label {
 	font-weight: bold;
 	color: #333;
 	font-size: 110%;
 }
+label.error {
+	background-color: transparent;
+	color: red;
+	font-size: 80%;
+	padding: 0;
+	position: absolute;
+	right: 3px;
+	bottom: -1px;
+}
+label.error.valid:after {
+	color: #51C600;
+	content: "œ";
+	font-family: 'ggouv';
+	font-size: 60px;
+	font-weight: normal;
+	position: absolute;
+	right: 5px;
+	bottom: 4px;
+}
 fieldset > div > label {
 	background-color: #DEDEDE;
 	padding: 2px 10px 3px;
 }
-
 input, textarea {
 	border: 1px solid #ccc;
 	color: #666;
@@ -43,7 +62,6 @@ input, textarea {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 input[type=text]:focus, textarea:focus {
 	border: solid 1px #4690d6;
 	-webkit-box-shadow: 1px 1px 2px 0 rgba(70, 145, 214, 0.5) inset;
@@ -51,7 +69,6 @@ input[type=text]:focus, textarea:focus {
 	background: #e4ecf5;
 	color:#333;
 }
-
 textarea {
 	height: 200px;
 }
@@ -109,9 +126,6 @@ input[type="radio"] {
 	padding-right: 10px;
 }
 
-.elgg-form-login, .elgg-form-account {
-	max-width: 450px;
-}
 
 /* ***************************************
 	FRIENDS PICKER

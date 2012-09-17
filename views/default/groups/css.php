@@ -38,10 +38,10 @@
 	margin: 0;
 }
 .groups-profile-fields .description a.elgg-widget-collapse-button {
-	color: #999;
+	color: #555;
 }
 .groups-profile-fields .description a.elgg-widget-collapse-button:hover {
-	color: #555;
+	color: #333;
 }
 .groups-profile-fields .interests {
 	padding: 0 4px 2px;

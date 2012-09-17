@@ -69,3 +69,10 @@ echo <<<HTML
 </div>
 
 HTML;
+
+echo '<div id="profile-details" class="elgg-body pll">';
+echo "<h1>{$user->realname}</h1>";
+echo "<h2 class='mtm' style='font-weight:normal;'>@{$user->username}</h2>";
+
+//echo elgg_view("profile/status", array("entity" => $user));
+echo '<div class="markdown-body mbm mhs">' . elgg_view("output/text140", array('value' => $user->briefdescription)) . '</div>';

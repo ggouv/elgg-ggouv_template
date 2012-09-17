@@ -19,18 +19,18 @@ if (isset($vars['entity'])) {
 }
 
 ?>
-<div>
-	<label><?php echo elgg_echo("groups:name"); ?></label><br />
-	<?php if (isset($vars['entity'])) {
-			echo '<span class= "mtm" style="color: #555; font-size: 2em;">' . $vars['entity']->name . '</span>';
-		} else {
-			echo elgg_view("input/text140", array(
+<?php if (!isset($vars['entity'])) {
+	echo '<div><label>' . elgg_echo("groups:name") . '</label><br />';
+			echo elgg_view("input/text", array(
 				'name' => 'name',
 				'value' => $vars['entity']->name,
+				'class' => 'elgg-autofocus required namecheckcar',
+				'minlength' => 4,
+				'maxlength' => 30
 			));
-		}
-	?>
-</div>
+			$autofocus = true;
+	echo '</div>';
+} ?>
 <div>
 	<label><?php echo elgg_echo("groups:icon"); ?></label><br />
 	<?php echo elgg_view("input/file", array('name' => 'icon')); ?>
@@ -38,18 +38,20 @@ if (isset($vars['entity'])) {
 <?php
 
 $group_profile_fields = elgg_get_config('group');
+global $fb; $fb->info($group_profile_fields);
 if ($group_profile_fields > 0) {
 	foreach ($group_profile_fields as $shortname => $valtype) {
 		$line_break = '<br />';
 		if ($valtype == 'longtext') {
 			$line_break = '';
 		}
-		echo '<div><label>';
+		echo "<div><label>";
 		echo elgg_echo("groups:{$shortname}");
 		echo "</label>$line_break";
 		echo elgg_view("input/{$valtype}", array(
 			'name' => $shortname,
 			'value' => $vars['entity']->$shortname,
+			'class' => $shortname == 'briefdescription' ? 'required' : '',
 		));
 		echo '</div>';
 	}
@@ -57,9 +59,7 @@ if ($group_profile_fields > 0) {
 ?>
 <?php if (!isset($vars['entity']) || !in_array($vars['entity']->getSubtype(), array('metagroup', 'typogroup'))) { ?> 
 <div>
-	<label>
-		<?php echo elgg_echo('groups:membership'); ?>
-	</label><br />
+	<label><?php echo elgg_echo('groups:membership'); ?></label>&nbsp;
 		<?php echo elgg_view('input/access', array(
 			'name' => 'membership',
 			'value' => $membership,
