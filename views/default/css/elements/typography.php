@@ -113,6 +113,7 @@ h6 { font-size: 0.8em; }
 	font-size: 85%;
 	line-height: 1.2em;
 	font-style: italic;
+	cursor: default;
 }
 
 .elgg-text-help {

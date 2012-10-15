@@ -158,6 +158,14 @@
 .elgg-river-item {
 	padding: 7px 0;
 }
+.elgg-river-item.elgg-image-block .elgg-body {
+	overflow: visible;
+	margin-left: 37px;
+}
+.workflow-sidebar .elgg-river-item.elgg-image-block .elgg-body {
+	overflow: hidden;
+	margin-left: auto;
+}
 .elgg-river-item .elgg-pict {
 	margin-right: 20px;
 }
@@ -174,8 +182,13 @@
 	font-size: 85%;
 	font-style: italic;
 	white-space: nowrap;
+	cursor: default;
 }
-
+.elgg-river-responses {
+	color: #999;
+	font-size: 85%;
+	white-space: nowrap;
+}
 .elgg-river-attachments,
 .elgg-river-message,
 .elgg-river-content {

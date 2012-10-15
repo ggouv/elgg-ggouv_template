@@ -202,3 +202,10 @@ a.elgg-button {
 .elgg-button.archive-button:before {
 	content: "â";
 }
+.elgg-button.add_friend:before {
+	content: "o";
+	margin-top: -1px;
+}
+.elgg-button.remove_friend:before {
+	content: "p";
+}

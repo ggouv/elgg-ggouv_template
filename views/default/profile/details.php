@@ -4,8 +4,49 @@
  * @uses $vars['entity'] The user entity
  */
 
-$user = elgg_extract('user', $vars, elgg_get_page_owner_entity());
+$user = elgg_get_page_owner_entity();
+global $fb; $fb->info($user);
 $profile_fields = elgg_get_config('profile_fields');
+
+echo '<ul class="user-stats mbm">';
+
+$followers = elgg_get_entities_from_relationship(array(
+	'relationship' => 'friend',
+	'relationship_guid' => $user->getGUID(),
+	'inverse_relationship' => true,
+	'count' => true,
+	'limit' => 0
+));
+echo '<li><div class="stats">' . $followers . '</div>' . elgg_echo('friends:followers') . '</li>';
+
+$following = elgg_get_entities_from_relationship(array(
+	'relationship' => 'friend',
+	'relationship_guid' => $user->getGUID(),
+	'inverse_relationship' => FALSE,
+	'count' => true,
+	'limit' => 0
+));
+echo '<li><div class="stats">' . $following . '</div>' . elgg_echo('friends:following') . '</li>';
+
+$messages = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'thewire',
+	'owner_guid' => $user->guid,
+	'count' => true,
+	'limit' => 0
+));
+echo '<li><div class="stats">' . $messages . '</div>' . elgg_echo('thewire') . '</li>';
+
+$ideas = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'idea',
+	'owner_guid' => $user->guid,
+	'count' => true,
+	'limit' => 0
+));
+echo '<li><div class="stats">' . $ideas . '</div>' . elgg_echo('item:object:idea') . '</li>';
+
+echo '</ul>';
 
 $even_odd = null;
 if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
@@ -26,7 +67,9 @@ if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
 				<?php
 					echo '<b>' . elgg_echo("profile:{$shortname}") .'&nbsp;: </b>';
 					if ($shortname == "twitter") {
-						echo "<a target='_blank' href='http://twitter.com/{$user->twitter}' rel='me'>{$user->twitter}</a>";
+						$twitter = elgg_get_plugin_user_setting('twitter_name', $user->guid, 'twitter_api');
+						if (!$twitter) $twitter = $user->twitter;
+						echo "<a target='_blank' href='http://twitter.com/{$twitter}' rel='me'>{$twitter}</a>";
 					} else if ($shortname == "location") {
 						echo elgg_view('output/url', array(
 							'href' => "groups/profile/{$user->$shortname}",
@@ -42,6 +85,8 @@ if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
 		}
 	}
 }
+
+echo '<div class="even"><b>' . elgg_echo("profile:time_created") . '&nbsp;: </b>' . elgg_get_friendly_time($user->time_created) . '</div>';
 
 if (!elgg_get_config('profile_custom_fields')) {
 	if ($user->isBanned()) {

@@ -13,6 +13,13 @@
 $english = array(
 
 	/**
+	 * Comment
+	 */
+	'comment:error'  =>  "Error saving comment",
+	'comment:edited' => "Comment Edited",
+	'comment:edit' =>"Edit comment",
+
+	/**
 	 * Members
 	 */
 	'members:label:newest' => 'Newest',

@@ -5,7 +5,7 @@ elgg.provide('elgg.ggouv_template');
 elgg.ggouv_template.init = function() {
 
 	// thewire and search input
-	$('#elgg-search-inactive').click(function(){
+	/*$('#elgg-search-inactive').click(function(){
 		if ($('#thewire-textarea').height() > 20 ) {
 			$('#thewire-textarea').height('20');
 			$('#thewire-textarea-border').height(0);
@@ -20,40 +20,68 @@ elgg.ggouv_template.init = function() {
 		$('.elgg-search').css('z-index','6999');
 	});
 	
-	// textarea autoResize
+	// thewire textarea
 	$('#thewire-textarea').autoResize({
 		animateDuration : 300,
 		animate: false,
+	});*/
+
+	$('#thewire-textarea').focusin(function() {
+		$('#thewire-header').addClass('extended');
+	}).focusout(function() {
+	 	if ($('#thewire-header').is(':hover')) {
+		} else {
+			$('#thewire-header').removeClass('extended');
+		}
 	});
+	$('#thewire-network .elgg-icon-delete').click(function() {
+		var net_input = $(this).parent('.net-profile').find('input'),
+			delete_icon = $(this).parent('.net-profile').find('.elgg-icon-delete');
+		if (net_input.val() === 'false') {
+			net_input.val(true);
+			delete_icon.addClass('hidden');
+		} else {
+			net_input.val(false);
+			delete_icon.removeClass('hidden');
+		}
+	});
+
+
 	
 	// thewire live post
-	$('.elgg-form-ggouv-template-header-input').submit(function() { return false; });
-	$('#thewire-submit-button').click(function(){
-		thisSubmit = this;
-		if ($.data(this, 'clicked')) { // Prevent double-click
-			return false;
+	$('#thewire-submit-button').click(function(e){
+		if ($('#thewire-textarea').val() == '') { // no text
+			elgg.system_message('thewire:blank');
+		} else if ($('#thewire-network input[value=true]').length == 0) { // no network actived
+			elgg.system_message('thewire:nonetwork');
 		} else {
-			$.data(this, 'clicked', true);
-			dataString = $(this).parents('form').serialize();
-			elgg.action('ggouv_template/header_input', {
-				data: dataString,
-				success: function(json) {
-					$.data(thisSubmit, 'clicked', false);
-					$('#thewire-textarea').val('');
-					return false;
-				},
-				error: function(){
-					$.data(thisSubmit, 'clicked', false);
-				}
-			});
+			thisSubmit = this;
+			if ($.data(this, 'clicked')) { // Prevent double-click
+				return false;
+			} else {
+				$.data(this, 'clicked', true);
+				dataString = $(this).parents('form').serialize();
+				elgg.action('ggouv_template/header_input', {
+					data: dataString,
+					success: function(json) {
+						$.data(thisSubmit, 'clicked', false);
+						$("#thewire-characters-remaining span").html('0');
+						$('#thewire-textarea').val('').parents('.elgg-form').find('input[name=parent_guid]').remove();
+						$('#thewire-header').removeClass('extended');
+						return false;
+					},
+					error: function(){
+						$.data(thisSubmit, 'clicked', false);
+					}
+				});
+			}
 		}
+		e.preventDefault();
+		return false;
 	});
 
 	// hide developers-log when empty
 	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
-
-	// compatibility for fancybox workflow
-	$('#card-forms a').live('click', function(e) {elgg.ggouv_template.ajaxified($(this), e)});
 
 	$(document).ready(function() {
 		elgg.ggouv_template.ready();
@@ -74,40 +102,41 @@ elgg.ggouv_template.init = function() {
 			return url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
 		};
 	
-		var fragment;
+		var fragment = false;
 		$(".elgg-page-body a:internal:not("+
 								"[href=''],"+
+								"[href$='#'],"+
+								"[rel=toggle],"+
+								"[rel=popup],"+
 								"[href*='/admin/'],"+
 								"[href*='/ajax/'],"+
-								"[href*='/avatar/edit'],"+
-								"[href*='/action/groups/delete'],"+
 								"[href*='view=rss'],"+
 								"[href*='address='],"+
+								"[href*='/avatar/edit'],"+
+								"[href*='/action/groups/delete'],"+
 								"[href*='/action/workflow/list/delete']),"+
 			" .elgg-page-topbar a:internal:not([href*='/admin/'],"+
 									" [href*='/ajax/'],"+
 									" [href*='/logout'])"
 		).live('click', function(e) {
 			var $this = $(this),
-				//url = $this.attr('href'), // 
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
 				title = $this.attr('title') || null;
 
 				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
-					fragment = elgg.parse_url(url, 'fragment');
+					fragment = elgg.parse_url(url, 'fragment') || false;
 					url = url.replace('#'+fragment, '');
-
-					if (elgg.normalize_url(decodeURIComponent(window.location.href)) == url) { //same page, got to #hash
-						if (fragment) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60}); // if not that means user click a link for same page
+					
+					if (fragment && elgg.normalize_url(decodeURIComponent(window.location.href)) == url) { //same page, got to #hash
+						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60}); // if not that means user click a link for same page
 					} else {
 						History.pushState(null, title, url);
 					}
 				}
 				e.preventDefault();
 				return false;
-	//	elgg.ggouv_template.ajaxified($(this), e)
 		});
 	
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
@@ -127,9 +156,13 @@ elgg.ggouv_template.init = function() {
 								} else if (urlP.path.match('/action/groups/featured')) {
 									parsePage(window.location.href);
 								} else if (urlP.path.match('/action/friends/add')) {
-									parsePage(window.location.href); // @todo make it more funny and not just reload page
+									$('a.elgg-button.add_friend').blur().removeClass('add_friend').addClass('remove_friend').text(elgg.echo('friend:remove')).attr('href', function(i, val) {
+										return elgg.get_site_url() + 'action/friends/remove?' + elgg.parse_url(val, 'query')
+									}); // @todo protect when user is on a profile page with a user popup opened
 								} else if (urlP.path.match('/action/friends/remove')) {
-									parsePage(window.location.href); // @todo make it more funny and not just reload page
+									$('a.elgg-button.remove_friend').blur().removeClass('remove_friend').addClass('add_friend').text(elgg.echo('friend:add')).attr('href', function(i, val) {
+										return elgg.get_site_url() + 'action/friends/add?' + elgg.parse_url(val, 'query')
+									}); // @todo idem
 								} else if (urlP.path.match('/action/widgets/delete')) {
 									parsePage(window.location.href); // @todo make it more funny and not just reload page
 								} else if (urlP.path.match('/action/river/delete')) {
@@ -222,86 +255,47 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.longtextMarkdown();
+	elgg.ggouv_pad.resize();
 	// editable comments
 	$('.elgg-menu-item-comment-edit a').click(function(){
 		$('#editablecomments-'+elgg.parse_url($(this).href).fragment).toggle('fast');
 	});
-}
-
-
-elgg.ggouv_template.ajaxified = function(link, e) {
-	var hrefTarget = elgg.normalize_url(decodeURIComponent(link.attr('href')));
-	if ( !e.metaKey && History.enabled && ( hrefTarget.match('^'+elgg.get_site_url()) || hrefTarget.match('^\\?') ) && link.attr('href') != '' ) { //window.history.pushState
-		var parsePage = function(hrefTarget) {
-			elgg.get(hrefTarget, {
-				data: 'ajaxified=true',
-				success: function(response, textStatus, xmlHttp) {
-					if (response.match('^{"output":')) { // when server is down > Object { readyState=0, status=0, statusText="error"}
-						var urlP = elgg.parse_url(hrefTarget);
-						if (urlP.path.match('/action/comments/delete')) {
-							var a_id = elgg.parse_str(urlP.query).annotation_id;
-							$('#item-annotation-'+a_id).css('background-color', '#FF7777').fadeOut();
-						} else if (urlP.path.match('/action/groups/featured')) {
-							parsePage(window.location.href);
-						} else if (urlP.path.match('/action/friends/add')) {
-							parsePage(window.location.href); // @todo make it more funny and not just reload page
-						} else if (urlP.path.match('/action/friends/remove')) {
-							parsePage(window.location.href); // @todo make it more funny and not just reload page
-						} else if (urlP.path.match('/action/widgets/delete')) {
-							parsePage(window.location.href); // @todo make it more funny and not just reload page
-						} else if (urlP.path.match('/action/river/delete')) {
-							var river_id = elgg.parse_str(urlP.query).id;
-							$('.item-river-'+river_id).css('background-color', '#FF7777').fadeOut();
-						} else if (urlP.path.match('/action/workflow/delete')) {
-							var board_guid = elgg.parse_str(urlP.query).guid;
-							$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
-							$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
-						} else if (xmlHttp.getResponseHeader('Redirect') != null) {
-							parsePage(xmlHttp.getResponseHeader('Redirect')); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
-						} else if (xmlHttp.status = 200) {
-							window.location.replace(hrefTarget); // in case of...
-						}
-						
-						elgg.register_error(JSON.parse(response).system_messages.error);
-						elgg.system_message(JSON.parse(response).system_messages.success);
-						
-					} else {
-						$.fancybox.close(); // close fancybox for link in it
-						var title = $(response).filter('title').text();
-						var map = { 
-							'title': title, 
-							'.elgg-page-messages': $(response).filter('.elgg-page-messages').html(),
-							//'.elgg-page-topbar': $(response).find('.elgg-page-topbar').html(),
-							'.elgg-page-body': $(response).filter('.elgg-page-body').html(),
-						}; 
-						$.each(map, function(key, value) { 
-							$(key).html(value);
-						});
-						eval($('#JStoexecute').text()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
-						$(window).scrollTop(0);
-						
-						window.history.pushState({ path: hrefTarget }, title, hrefTarget);
-						//History.pushState({ path: hrefTarget }, title, hrefTarget);
-						elgg.ggouv_template.reloadTemplateFunctions();
-					}
-				},
-				error: function(response) {
-					console.log(response, 'error');
-				}
-			});
-		}
-		if (!link.hasClass('elgg-requires-confirmation') || link.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, link)) {
-			parsePage(hrefTarget);
-		}
+	// compatibility for fancybox workflow and refresh button in bord view	
+	$('#card-forms a, .elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
+		var $this = $(this),
+			url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
+			title = $this.attr('title') || null;
+		History.pushState(null, title, url);
 		e.preventDefault();
-	}
+		return false;
+	});
 }
 
 
 elgg.ggouv_template.ready = function() {
+	eval($('#JStoexecute').text());
 	/*
 	 * Resize, scroll and sidebar
 	 */
+	
+	// Tooltip
+	$('.tooltip').tipsy({
+		live: true,
+		offset: 5,
+		fade: true,
+		delayIn: 200,
+		gravity: function() {
+			if ($(this).hasClass('nw')) return 'nw';
+			if ($(this).hasClass('n')) return 'n';
+			if ($(this).hasClass('ne')) return 'ne';
+			if ($(this).hasClass('w')) return 'w';
+			if ($(this).hasClass('e')) return 'e';
+			if ($(this).hasClass('sw')) return 'sw';
+			if ($(this).hasClass('s')) return 's';
+			if ($(this).hasClass('se')) return 'se';
+			return 'n';
+		}
+	});
 	
 	// go top button
 	$(window).scroll(function() {
@@ -386,6 +380,26 @@ elgg.ggouv_template.ready = function() {
 		}
 	}
 	
+	// editable comment
+	$('.elgg-menu-item-comment-edit a').live('click', function() {
+		$('#editablecomments-'+elgg.parse_url($(this).attr('href')).fragment).toggle();
+	});
+	$('.elgg-form-editablecomments-edit').find('input[type=submit]').live('click', function(e) {
+		var form = $(this).parents('form'),
+			annotation_id = form.find('input[name=annotation_id]').val(),
+			data = form.serialize();
+		elgg.action('editablecomments/edit', {
+			data: data,
+			success: function(json) {
+				if (json.status == '0') {
+					$('#editablecomments-edit-annotation-'+annotation_id).toggle();
+					$('#item-annotation-'+annotation_id).replaceWith($(json.output).find('li:first'));
+				}
+			}
+		});
+		e.preventDefault();
+	});
+	
 	// validate forms
 	jQuery.validator.addMethod("namecheckcar", function(value, element) {
 		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_-]{3,30}$/.test(value); 
@@ -401,7 +415,7 @@ elgg.ggouv_template.ready = function() {
 		}
 	});
 	
-	$('.elgg-form-profile-edit').validate({
+	$('.elgg-form-profile-edit, .elgg-form-user-requestnewpassword').validate({
 		invalidHandler: function(form, validator) {
 			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
 				$(this).effect("shake", {times:2, distance:10}, 100, function() {
@@ -441,10 +455,40 @@ elgg.ggouv_template.ready = function() {
 	});
 
 	if ($('.elgg-form-signup').length) {
-		$('.elgg-form-signup, #map').height($(window).height() - $('.elgg-form-signup').position().top - 93);
+		$('.elgg-form-signup, #map, .social-connect').height($(window).height() - $('.elgg-form-signup').position().top - 93);
+		$('.elgg-form-signup input').focus(function() {
+			$('.social-connect').hide();
+			$('.back-socialnetwork').show().click(function() {
+				$(this).hide();
+				$('.social-connect').show();
+			});
+			var name = $(this).attr('name');
+			if (name == 'password2') name = 'password';
+			if (name != 'location') $('.register-helper, .register-location').hide();
+			if (name == 'location' && $(this).val() != '') {
+				$('.register-location').fadeIn(300);
+			} else {
+				$('.register-helper.'+name).fadeIn(300);
+			}
+		}).blur(function() {
+			if ($(this).attr('name') != 'location') $('.register-helper, .register-location').hide();
+		});
+		$("#password").complexify({strengthScaleFactor: 0.5, minimumChars: 6 }, function (valid, complexity) {
+			if (!valid) {
+				$('#progress').css({'width':complexity + '%'}).removeClass('progressbarValid').addClass('progressbarInvalid');
+			} else {
+				$('#progress').css({'width':complexity + '%'}).removeClass('progressbarInvalid').addClass('progressbarValid');
+			}
+			$('#complexity').html(Math.round(complexity) + ' %');
+		});
 		$(".elgg-form-signup input[name='location']").searchlocalgroup(function(response) {
-			if (response) {
-				$('.register-map').animate({opacity: 1});
+			if (response == false) {
+				$('#map').css({opacity: 0});
+				$('#searching').addClass('notfound').html(elgg.echo('ggouv:search:localgroups:notfound'));
+				$('.register-location').show().animate({opacity: 1});
+			} else {
+				$('#map').css({opacity: 1});
+				$('.register-location').show().animate({opacity: 1});
 				if (hasMarkers) map.removeLayer(villes);
 				var maxHab = 0,
 					maxNorth = -90,
@@ -456,9 +500,9 @@ elgg.ggouv_template.ready = function() {
 				$.each(response, function(key, value) {
 					var popupContent = $('<div>').append(
 						$('<h2>').html(value.article+' '+value.ville).after(
-							$('<a>', {href: elgg.get_site_url()+'groups/profile/'+value.cp+'/'+value.ville, style: 'font-size: 1.5em;'}).html(value.cp).after(
-								$('<h3>').html(elgg.echo('groups:localgroup:departement')+' :').after(
-									$('<a>', {href: elgg.get_site_url()+'groups/profile/'+value.dep+'/'+value.nom_dep, style: 'font-size: 1.2em;'}).html(value.dep)
+							$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
+								$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
+									$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
 						))).clone()).remove().html();
 					markers.push(L.marker([value.lat, value.long]).bindPopup(
 					popupContent));
@@ -475,11 +519,8 @@ elgg.ggouv_template.ready = function() {
 				map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
 				markers[maxHabKey].openPopup();
 				hasMarkers = true;
-			} else {
-				$('#searching').addClass('notfound').html(elgg.echo('ggouv:search:localgroups:notfound'));
-				$('.register-map').animate({opacity: 1});
 			}
-		});
+		}, 5);
 	}
 	/*jQuery.validator.addMethod("registerCP", function(value, element) {
 		if (value.length != 5) return false;
@@ -499,8 +540,8 @@ elgg.ggouv_template.ready = function() {
 				valuevalid = '"erreur avec le serveur"';
 			}
 		});
-	}, elgg.echo('registration:CPinvalid'));
-*/
+	}, elgg.echo('registration:CPinvalid'));*/
+
 
 
 	
@@ -622,7 +663,8 @@ elgg.ggouv_template.ready = function() {
 }
 
 
-$.fn.searchlocalgroup = function(mapLoaded) {
+$.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
+	var nbrChar = nbrChar || 2;
 	TheInput = this;
 	var groupMap = $("#map"),
 		zoom = 6,
@@ -643,8 +685,7 @@ $.fn.searchlocalgroup = function(mapLoaded) {
 	TheInput.keypress(function(e) {
 		if ( e.which == 13) return false;
 		var search_input = $(this).val();
-
-		if (search_input.length > 2) { // @todo when is numeric, trigger only with 5 chars
+		if (search_input.length >= nbrChar-1) { // @todo when is numeric, trigger only with 5 chars
 			if (timeout) {
 				clearTimeout(timeout);
 				timeout = null;
@@ -652,7 +693,7 @@ $.fn.searchlocalgroup = function(mapLoaded) {
 			
 			timeout = setTimeout(function() {
 				search_input = TheInput.val();
-				if (search_input.length > 2) { // @todo check why need to do it again ?
+				if (search_input.length >= nbrChar-1) { // @todo check why need to do it again ?
 					elgg.post('ajax/view/ggouv_template/ajax/get_city', {
 						dataType: 'json',
 						data: {
@@ -668,10 +709,48 @@ $.fn.searchlocalgroup = function(mapLoaded) {
 						}
 					});
 				}
-			});
+			}, 500);
 		}
 	});
 }
+
+/**
+ * Counter for thewire area
+ */
+elgg.provide('elgg.thewire');
+
+elgg.thewire.init = function() {
+	$("#thewire-textarea").live('keydown', function() {
+		elgg.thewire.textCounter(this, $("#thewire-characters-remaining span"), 140);
+	});
+	$("#thewire-textarea").live('keyup', function() {
+		elgg.thewire.textCounter(this, $("#thewire-characters-remaining span"), 140);
+	});
+}
+
+/**
+ * Update the number of characters with every keystroke
+ *
+ * @param {Object}  textarea
+ * @param {Object}  status
+ * @param {integer} limit
+ * @return void
+ */
+elgg.thewire.textCounter = function(textarea, status, limit) {
+	var remaining_chars = $(textarea).val().length;
+	status.html(remaining_chars);
+
+	if (remaining_chars > limit) {
+		status.css("color", "#D40D12");
+		$("#thewire-submit-button").attr('disabled', 'disabled');
+		$(".thewire-button").addClass('elgg-state-disabled');
+	} else {
+		status.css("color", "");
+		$("#thewire-submit-button").removeAttr('disabled', 'disabled');
+		$(".thewire-button").removeClass('elgg-state-disabled');
+	}
+};
+elgg.register_hook_handler('init', 'system', elgg.thewire.init);
 
 
 /**
@@ -729,22 +808,51 @@ elgg.longtextMarkdown = function() {
 //var ilongtext = $('.elgg-input-longtext'), olongtext = $('#previewPane-' + ilongtext.attr('id').substr(11));
 	var ilongtext = $('.elgg-input-longtext.markdown-body'),
 		olongtext = ilongtext.parent().find('.elgg-preview-longtext');//$('.elgg-preview-longtext');
-	
-	var ResizePanes = function(texta) {
-		var previ = texta.parent().find('.elgg-preview-longtext');
-		texta.css('height', '100%');
-		previ.css('height', '100%');
-		
-		var olongtextHeight = previ.hasClass('hidden') ? 0 : previ.innerHeight(),
-			ilongtextHeight = texta.get(0).scrollHeight + 10,
-			maxHeight = Math.max(olongtextHeight, ilongtextHeight, 188); // min-height: 188px
-		if (previ.innerHeight() < maxHeight) previ.innerHeight(maxHeight);
-		texta.innerHeight(maxHeight + 10 + 2); // padding (cannot set to textarea) + border
-	};
-	
+
 	if (ilongtext) {
+		ilongtext.parent().find('.toggle-longtext').click(function() {
+			if ($(this).html() == 'e') {
+				$(this).html('y');
+				$(this).parent().find('.elgg-input-longtext').removeClass('hidden');
+				$(this).parent().find('.elgg-preview-longtext').addClass('hidden');
+			} else {
+				$(this).html('e');
+				$(this).parent().find('.elgg-input-longtext').addClass('hidden');
+				$(this).parent().find('.elgg-preview-longtext').removeClass('hidden');
+			}
+		});
+		if (ilongtext.val() == '') {
+			ilongtext.parent().find('.toggle-longtext').click();
+		}
+		var ResizePanes = function(texta) {
+			var previ = texta.parent().find('.elgg-preview-longtext');
+			texta.css('height', '100%');
+			previ.css('height', '100%');
+			
+			var olongtextHeight = previ.hasClass('hidden') ? 0 : previ.innerHeight(),
+				ilongtextHeight = texta.get(0).scrollHeight + 10,
+				maxHeight = Math.max(olongtextHeight, ilongtextHeight, 188); // min-height: 188px
+			if (previ.innerHeight() < maxHeight) previ.innerHeight(maxHeight);
+			texta.innerHeight(maxHeight + 10 + 2); // padding (cannot set to textarea) + border
+		}
+	
+	/*	ilongtext.getCaretPosition();
+		$('#textarea_simulator').html('a<span class="focus"/>');
+		var topPos = $('#textarea_simulator .focus').offset().top - $('#textarea_simulator').offset().top;
+		var placeEditor = function() {
+			var pos = ilongtext.getCaretPosition();
+			console.log(ilongtext.parent().find('.pad'));
+			ilongtext.parent().find('.pad').animate({
+				//left: this.offsetLeft + pos.left,
+				top: pos.top
+			});
+		}
+		
+		ilongtext.click(placeEditor);*/
+		
 		var converter = new Showdown.converter().makeHtml;
 		ilongtext.keyup(function() {
+			//placeEditor();
 			var preview = $(this).parent().find('.elgg-preview-longtext');
 			preview.html( converter(normalizeLineBreaks($(this).val())) );
 			ResizePanes($(this));
@@ -961,6 +1069,17 @@ jQuery(function($){
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
 });
 
+
+
+/*
+http://github.com/danpalmer/jquery.complexify.js
+This code is distributed under the WTFPL v2:
+*/
+(function($){$.fn.extend({complexify:function(options,callback){var MIN_COMPLEXITY=49;var MAX_COMPLEXITY=120;var CHARSETS=[[48,57],[65,90],[97,122],[33,47],[58,64],[91,96],[123,126],[128,255],[256,383],[384,591],[592,687],[688,767],[768,879],[880,1023],[1024,1279],[1328,1423],[1424,1535],[1536,1791],[1792,1871],[1920,1983],[2304,2431],[2432,2559],[2560,2687],[2688,2815],[2816,2943],[2944,3071],[3072,3199],[3200,3327],[3328,3455],[3456,3583],[3584,3711],[3712,3839],[3840,4095],[4096,4255],[4256,4351],
+[4352,4607],[4608,4991],[5024,5119],[5120,5759],[5760,5791],[5792,5887],[6016,6143],[6144,6319],[7680,7935],[7936,8191],[8192,8303],[8304,8351],[8352,8399],[8400,8447],[8448,8527],[8528,8591],[8592,8703],[8704,8959],[8960,9215],[9216,9279],[9280,9311],[9312,9471],[9472,9599],[9600,9631],[9632,9727],[9728,9983],[9984,10175],[10240,10495],[11904,12031],[12032,12255],[12272,12287],[12288,12351],[12352,12447],[12448,12543],[12544,12591],[12592,12687],[12688,12703],[12704,12735],[12800,13055],[13056,13311],
+[13312,19893],[19968,40959],[40960,42127],[42128,42191],[44032,55203],[55296,56191],[56192,56319],[56320,57343],[57344,63743],[63744,64255],[64256,64335],[64336,65023],[65056,65071],[65072,65103],[65104,65135],[65136,65278],[65279,65279],[65280,65519],[65520,65533]];var defaults={minimumChars:8,strengthScaleFactor:1};if($.isFunction(options)&&!callback){callback=options;options={}}options=$.extend(defaults,options);function additionalComplexityForCharset(str,charset){for(var i=str.length-1;i>=0;i--)if(charset[0]<=
+str.charCodeAt(i)&&str.charCodeAt(i)<=charset[1])return charset[1]-charset[0]+1;return 0}return this.each(function(){$(this).keyup(function(){var password=$(this).val();var complexity=0,valid=false;for(var i=CHARSETS.length-1;i>=0;i--)complexity+=additionalComplexityForCharset(password,CHARSETS[i]);complexity=Math.log(Math.pow(complexity,password.length))*(1/options.strengthScaleFactor);valid=complexity>MIN_COMPLEXITY&&password.length>=options.minimumChars;complexity=complexity/
+MAX_COMPLEXITY*100;complexity=complexity>100?100:complexity;callback.call(this,valid,complexity)})})}})})(jQuery);
 
 
 /*

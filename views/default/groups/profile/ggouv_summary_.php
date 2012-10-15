@@ -31,7 +31,7 @@ $owner = $group->getOwnerEntity();
 		<li class="members">
 			<div class="stats mls mrm"><?php echo $group->getMembers(0, 0, TRUE); ?></div>
 			<h3><?php echo elgg_echo('groups:summary:members'); ?></h3>
-			<div class="mls mtm"><?php echo elgg_echo('groups:summary:created', array(elgg_view('output/friendlytime', array('time' => $group->time_created)))); ?></div>
+			<div class="mls mtm"><?php echo elgg_echo('groups:summary:created', array(strtolower(elgg_view('output/friendlytime', array('time' => $group->time_created))))); ?></div>
 		</li>
 
 		<li>

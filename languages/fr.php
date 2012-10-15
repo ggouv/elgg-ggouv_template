@@ -352,9 +352,10 @@ $french = array(
 	'avatar:crop:fail' => "Le recadrage de l'avatar a échoué",
 	'avatar:revert:success' => "Retour à l'avatar réussi",
 	'avatar:revert:fail' => "Retour à l'avatar échoué",
+	'profile' => "Profil",
 	'profile:edit' => "Modifier mon profil",
-	'profile:aboutme' => "A propos de moi",
-	'profile:description' => "A propos de moi",
+	'profile:aboutme' => "À propos de moi",
+	'profile:description' => "À propos de moi",
 	'profile:briefdescription' => "Brève description",
 	'profile:location' => "Code postal",
 	'profile:skills' => "Compétences",
@@ -366,6 +367,7 @@ $french = array(
 	'profile:twitter' => "Twitter",
 	'profile:facebook' => "Facebook",
 	'profile:saved' => "Votre profil a été correctement enregistré.",
+	'profile:time_created' => "Inscrit",
 
 	'profile:field:text' => "Texte court",
 	'profile:field:longtext' => "Texte long",
@@ -409,7 +411,7 @@ $french = array(
 	'river:posted:generic' => "%s envoyé",
 	'riveritem:single:user' => "un utilisateur",
 	'riveritem:plural:user' => "des utilisateurs",
-	'river:ingroup' => "au groupe %s",
+	'river:ingroup' => "du groupe %s",
 	'river:none' => "Aucune activité",
 	'river:update' => "Mise à jour pour %s",
 
@@ -466,6 +468,8 @@ $french = array(
 	'settings:edit' => "Editer les paramètres",
 
 	'register' => "S'enregistrer",
+	'registration:social-connect' => "S'enregistrer ou se connecter avec",
+	'registration:back:socialnetwork' => "... ou utiliser un réseau social ",
 	'registerok' => "Vous vous êtes enregistré avec succès sur %s.",
 	'registerbad' => "Votre création de compte n'a pas fonctionné pour une raison inconnue.",
 	'registerdisabled' => "La création de compte a été désactivé par l'administrateur du site.",
@@ -473,19 +477,25 @@ $french = array(
 
 	'registration:notemail' => "Cette adresse mail n'est pas valide.",
 	'registration:userexists' => "Ce pseudo est déjà utilisé ou invalide.",
+	'registration:username' => "Votre pseudo",
+	'registration:helper:username' => "Le pseudo est le nom qui sera utilisé et visible partout.<br>C'est par ce pseudo que l'on pourra vous adresser un message en écrivant « @ » et votre pseudo.<br>Seul les caractères alphanumérique sont autorisés. Il ne peut pas contenir d'espace ni les caractères suivants : '/\*&?#%^(){}[]~?<>;|¬`@-+=\"",
+	'registration:usernamenotvalid' => "Désolé, le pseudo que vous avez entré est invalide sur ce site.",
 	'registration:usernametooshort' => "Le pseudo doit faire minimum %u caractères.",
 	'registration:usernametoolong' => "Le pseudo doit faire maximum %u caractères.",
+	'registration:invalidchars' => "Désolé, votre pseudo contient les caractères invalides suivants: %s. Tout ces caractères sont invalides: %s",
+	'registration:namecheckcar' => "Caractères alphanumériques seulement.",
+	'registration:name' => "Votre nom réel",
+	'registration:helper:name' => "Il est plutôt bien vu d'indiquer son nom réel. Toutefois, si vous souhaitez garder votre anonymat, vous avez le droit !",
 	'registration:passwordtooshort' => "Le mot de passe doit faire minimum %u caractères.",
 	'registration:dupeemail' => "Cette adresse mail est déjà utilisée.",
-	'registration:invalidchars' => "Désolé, votre nom d'utilisateur contient les caractères invalides suivants: %s. Tout ces caractères sont invalides: %s",
-	'registration:namecheckcar' => "Caractères alphanumériques seulement.",
+	'registration:helper:email' => "Utilisez votre adresse mail la plus courante, vous y recevrez un mail de confirmation.<br>Votre adresse mail ne sera jamais divulguée à des tiers ou utilisée à des fins marketing.",
 	'registration:emailnotvalid' => "Désolé, l'adresse mail que vous avez entré est invalide sur ce site.",
+	'registration:locationtooshort' => "Un code postal a 5 chiffres.",
+	'registration:localisation:text' => "Vérifiez que vous êtes bien situé.",
+	'registration:helper:location' => "Ggouv applique la philosophie «agir local, penser global», c'est pourquoi il vous est demandé votre code postal.<br>Vous allez être membre du groupe de votre commune, ce qui vous permettra de vous organiser et collaborer plus facilement avec des membres près de chez vous.",
 	'registration:passwordnotvalid' => "Désolé, le mot de passe que vous avez entré est invalide sur ce site.",
 	'registration:passwordagainnotvalid' => "Les mots de passe sont différents !",
-	'registration:usernamenotvalid' => "Désolé, le nom d'utilisateur que vous avez entré est invalide sur ce site.",
-	'registration:locationtooshort' => "Un code postal a 5 chiffres.",
-	'registration:localisation' => "Localisation",
-	'registration:localisation:text' => "Vérifier que ggouv vous a bien situé.",
+	'registration:helper:password' => "6 caractères minimum, mais pas 1 2 3 4 5 6 !<br><strong>Complexité :</strong>",
 
 	'adduser' => "Ajouter un utilisateur",
 	'adduser:ok' => "Vous avez ajouté un nouvel utilisateur avec succès.",
@@ -762,7 +772,7 @@ $french = array(
 
 	'usersettings:statistics' => "Vos statistiques",
 	'usersettings:statistics:opt:description' => "VVisualiser les statistiques des utilisateurs et des objets sur votre espace.",
-	'usersettings:statistics:opt:linktext' => "Statistiques de votre compte.",
+	'usersettings:statistics:opt:linktext' => "Statistiques de votre compte",
 
 	'usersettings:user' => "Vos paramètres",
 	'usersettings:user:opt:description' => "Ceci vous permet de contrôler vos paramètres.",
@@ -772,7 +782,7 @@ $french = array(
 	'usersettings:plugins:opt:description' => "Configurer vos paramètres (s'il y en a) pour activer vos outils.",
 	'usersettings:plugins:opt:linktext' => "Configurer vos outils",
 
-	'usersettings:plugins:description' => "Ce panneau de configuration vous permez de mettre à jour les options de vos outils installés par l'administrateur.",
+	'usersettings:plugins:description' => "Ce panneau de configuration vous permez de mettre à jour les options de vos outils.",
 	'usersettings:statistics:label:numentities' => "Vos entités",
 
 	'usersettings:statistics:yourdetails' => "Vos informations",
@@ -950,7 +960,7 @@ Une fois sur le site, nous vous conseillons fortement de changer votre mot de pa
 	'friendlytime:hours:singular' => "il y a une heure",
 	'friendlytime:days' => "Il y a %s jours",
 	'friendlytime:days:singular' => "hier",
-	'friendlytime:date_format' => "j F Y @ g:ia",
+	'friendlytime:date_format' => "%a %d %b %Y à %T",
 
 	'date:month:01' => "Janvier %s",
 	'date:month:02' => "Février %s",
@@ -1308,8 +1318,8 @@ Pour voir le profil de %s, suivez ce lien :
 	 * Menu items and titles
 	 */
 	'groups' => "Groupes",
-	'groups:owned' => "Les groupes que je posséde",
-	'groups:yours' => "Mes groupes",
+	'groups:owned' => "Les groupes que j'ai créé",
+	'groups:yours' => "Les groupes dont je suis membre",
 	'groups:user' => "Les groupes de %s",
 	'groups:all' => "Tous les groupes",
 	'groups:add' => "Créer un nouveau groupe",
@@ -1319,11 +1329,11 @@ Pour voir le profil de %s, suivez ce lien :
 	'groups:membershiprequests' => "Gérer les membres souhaitant se joindre au groupe",
 	'groups:invitations' => "Invitations du groupe",
 
-	'groups:icon' => "Icone du groupe (ne rien inscrire pour laisser inchangé)",
+	'groups:icon' => "Icone du groupe (Format carré. L'idéal est 200px x 200px)",
 	'groups:name' => "Nom du groupe",
 	'groups:username' => "Nom court du goupe (Qui s'affichera dans l'URL : en caractères alphanumériques)",
 	'groups:description' => "Description",
-	'groups:briefdescription' => "Brève description",
+	'groups:briefdescription' => "Description courte",
 	'groups:interests' => "Mots-clés",
 	'groups:website' => "Site web",
 	'groups:members' => "Membres du groupe",
@@ -1568,6 +1578,13 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
  */
 
 	/**
+	 * Comment
+	 */
+	'comment:error'  =>  "Erreur, impossible d'enregistrer le commentaire",
+	'comment:edited' => "Commentaire modifié.",
+	'comment:edit' =>"Modifier le commentaire",
+
+	/**
 	 * Members
 	 */
 	'members:label:newest' => 'Les nouveaux arrivants',
@@ -1577,6 +1594,8 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'members:searchtag' => 'Chercher un membre par compétence',
 	'members:title:searchname' => "Résultat de recherche d'un utilisateur au nom de %s",
 	'members:title:searchtag' => 'Résultat de recherche pour une compétence de %s',
+	'members:title:followers' => "Les personnes qui suivent %s",
+	'members:title:following' => "Les personnes que suit %s",
 	'friends:following' => "Abonnements",
 	'friends:title:following' => "Les personnes dont vous suivez l'activité",
 	'friends:followers' => "Abonnés",
@@ -1594,16 +1613,17 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'groups:typogroups' => "Typo-groupes",
 	'groups:localgroups' => "Groupes locaux",
 	'groups:localgroup:departement' => "Département",
+	'groups:my_local_group' => "Mon groupe local",
 
 	/**
 	 * Forms
 	 */
 	'ggouv:search:localgroups' => "Cherchez un groupe local par son code postal ou son nom :",
-	'ggouv:search:localgroups:notfound' => "Rien trouvé.",
+	'ggouv:search:localgroups:notfound' => "La commune n'a pas été trouvée.",
 	'xoxco:removing_tag' => "Enlever ce mot-clé",
 	'xoxco:input:default' => "Ajoutez des mot-clés (séparez par des virgules ou tapez Entrer)",
 	'ggouv:longtext:help' => "Syntaxe markdown accéptée :<br/>**gras**",
-	'forms:required' => "Ce champ est requis !",
+	'forms:required' => "Ce champ est obligatoire !",
 	'forms:remote' => "Ce champ n'est pas valide.",
 	'forms:url' => "Veuillez entrer une URL valide.",
 	'forms:date' => "Veuillez entrer une date valide.",

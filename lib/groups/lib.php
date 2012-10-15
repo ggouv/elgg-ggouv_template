@@ -398,6 +398,9 @@ function groups_handle_members_page($guid) {
 		'relationship_guid' => $group->guid,
 		'inverse_relationship' => true,
 		'types' => 'user',
+		'full_view' => FALSE,
+		'split_items' => 3,
+		'size' => 'small',
 		'limit' => 20,
 	));
 

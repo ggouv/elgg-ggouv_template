@@ -11,8 +11,13 @@ if (!$owner) {
 	// unknown user so send away (@todo some sort of 404 error)
 	forward();
 }
+$user_guid = elgg_get_logged_in_user_guid();
 
-$title = elgg_echo("friends:title:followers");
+if ($owner->guid == $user_guid) {
+	$title = elgg_echo("friends:title:followers");
+} else {
+	$title = elgg_echo('members:title:followers', array($owner->name));
+}
 
 elgg_push_breadcrumb(elgg_echo('friends:followers'));
 elgg_push_breadcrumb($owner->name);

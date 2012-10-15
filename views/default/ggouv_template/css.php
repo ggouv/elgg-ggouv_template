@@ -2,12 +2,12 @@
 * nolog css when non logged in user
 */
 .elgg-page-header.nolog {
-  background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
-  box-shadow: 0 5px 5px 0 white;
-  height: 48px;
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+	background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
+	box-shadow: 0 5px 5px 0 white;
+	height: 48px;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
 }
 .elgg-inner-nolog {
 	margin: 0;
@@ -32,8 +32,8 @@
 	color: inherit;
 }
 .elgg-page-default .elgg-page-body.nolog {
-    margin:0 0 0 20px;
-    padding-top:48px;
+	margin:0 0 0 20px;
+	padding-top:48px;
 }
 #login-dropdown-box {
 	position: fixed;
@@ -191,9 +191,10 @@
 }
 .ggouv-menu-child .block-title {
 	color: #CCC;
-	border-top: 2px solid #CCC;
-	border-radius: 0px;
-	margin-top: 5px;
+}
+.ggouv-menu-child .hr {
+	border-bottom: 2px solid #CCCCCC;
+	height: 30px;
 }
 .ggouv-menu-child  .block-title:hover {
 	background-color: transparent;
@@ -201,133 +202,256 @@
 
 /* the wire-search textarea */
 #thewire-header {
-	position: relative;
-	z-index: 7001;
-	margin: 0 0 0 40px;
-}
-#thewire-header > #thewire-textarea {
-	resize: vertical;
-	height: 32px;
-	min-height: 32px;
-	padding: 10px 2px 0px 12px;
-	margin: 0;
-	color: #666;
-	font: 130% Arial,Helvetica,sans-serif;
-	border-radius: 4px 0 0 4px;
-	border: none;
-	width: 568px;
-	position: absolute;
-	right: -8px;
-	z-index: 7001;
-	line-height: 1em;
+	background-color: white;
+	border-radius: 6px;
+	height: 33px;
 	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
-#thewire-header > #thewire-textarea-border {
-	background-color: #1369B8;
-	border-radius: 0 0 4px 4px;
+#thewire-textarea {
+	background-color: transparent;
+	resize: none;
+	height: 32px !important;
+	padding: 10px 2px 0px 12px !important;
+	margin: 0;
+	color: #666;
+	font: 130% Arial,Helvetica,sans-serif;
+	border: none;
+	width: 570px;
+	line-height: 1em;
+	overflow: hidden;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none; 
+}
+#thewire-textarea-border {
+	background-color: #1D76C8;
+	border-radius: 0 0 6px 6px;
 	box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.5);
 	height: 0px;
 	left: -4px;
 	position: absolute;
-	top: 40px;
-	width: 576px;
+	top: 41px;
+	width: 665px;
+	z-index: -1;
 }
-/* hack Chrome / Safari */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	#thewire-header > #thewire-textarea {
-		width: 565px;
-		right: -5px;
-	}
-	#thewire-header > #thewire-textarea-border {
-		width: 574px;
-	}
-}
-#thewire-header > #thewire-textarea:focus {
-	background-color: white;
-}
-#thewire-header > #thewire-characters-remaining {
+#thewire-characters-remaining {
 	position: absolute;
-	z-index: 7003;
-	right: -42px;
+	right: 47px;
 	top: 0;
-	color: #00CC00;
-	height: 32px;
-	width: 39px;
-	background-color: transparent;
-	border: none;
+	z-index: 7003;
 	overflow: hidden;
+	width: 40px;
 }
-#thewire-header > #thewire-characters-remaining span {
+#thewire-characters-remaining span {
+	color: #00CC00;
+	background-color: white;
+	border-radius: 0 6px 6px 0;
 	display: block;
 	font-size: 1.2em;
-	height: 14px;
-	padding: 9px 6px 9px 0;
 	margin-left: -12px;
-	border-radius: 0 4px 4px 0;
-	background-color: white;
+	padding: 9px 6px 6px 0;
+	height: 18px;
 	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
 #thewire-header > .thewire-button {
 	position: absolute;
-	z-index: 7000;
 	top: 0;
-	left: 588px;
-	height: 32px;
-	width: 60px;
-	border-radius: 0 4px 4px 0;
+	right: 0;
+	border-radius: 6px 6px 6px 6px;
+	height: 33px;
 	overflow: hidden;
-}
-#thewire-header #thewire-submit-button {
+	right: 0;
 	background-color: #FFE6E6;
-	border: none;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
+}
+#thewire-header > .thewire-button:before {
+	content: "S";
 	color: #B40000;
 	font-size: 54px;
-	height: 47px;
-	margin: -15px 0 10px;
-	padding: 0 7px 0 20px;
-	width: 60px;
-	text-shadow: none;
-	border-radius: 0 4px 4px 0;
-	line-height: 66px;
-	-webkit-box-shadow: inset 0 17px 2px 0 #1F2E3D;
-	-moz-box-shadow: inset 0 17px 2px 0 #1F2E3D;
-	box-shadow: inset 0 17px 2px 0 #1F2E3D;
-	-webkit-transition: none;
-	-moz-transition: none;
-	-o-transition: none;
-}
-#thewire-header #thewire-submit-button:hover {
-	background-color: #FF0000;
-	color: #222222;
-	text-shadow: 0 1px 2px #E6FFE6;
-}
-#thewire-header #thewire-submit-button.elgg-state-disabled:hover {
-	background-color: #CCCCCC;
-	color: #555555;
-	text-shadow: 0 1px 2px gray;
-	cursor: default;
-}
-#thewire-header-inactive {
-	height: 30px;
-	left: 648px;
-	position: absolute;
-	width: 30px;
-	cursor: pointer;
+	position: relative;
+	right: 5px;
 	top: 9px;
-	color: rgba(255, 255, 255, 0.8);
-	font-size: 54px;
+	position: absolute;
 }
-#thewire-header-inactive:hover {
-	text-shadow: 0 0 15px white;
+#thewire-header > .thewire-button:hover {
+	background-color: #FF0000;
+}
+#thewire-header > .thewire-button:hover:before {
+	color: white;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+#thewire-submit-button {
+	color: transparent;
+	height: 33px;
+	text-indent: -9999px;
+	background-color: transparent;
+	border: none;
+	width: 60px;
+}
+#thewire-header.extended {
+	height: 151px;
+}
+#thewire-header.extended #thewire-textarea {
+	height: 115px !important;
+}
+#thewire-header.extended {
+	border-radius: 6px 6px 0 0;
+}
+#thewire-header.extended #thewire-textarea {
+	width: 100%;
+	overflow-y: auto;
+}
+#thewire-header.extended #thewire-textarea-border {
+	height: 146px;
+}
+#thewire-header.extended #thewire-characters-remaining {
+	bottom: -31px;
+	left: 3px;
+	top: auto;
+}
+#thewire-header.extended #thewire-characters-remaining span {
+	background-color: transparent;
+	box-shadow: none;
+	margin-left: 5px;
+	text-align: left;
+}
+#thewire-header.extended #thewire-textarea-bottom {
+	background-color: #F4F4F4;
+	border-radius: 0 0 6px 6px;
+	bottom: -31px;
+	height: 40px;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
+}
+#thewire-header.extended .thewire-button {
+	background-color: white;
+	border: 1px solid #999999;
+	box-shadow: none;
+	height: 21px;
+	margin: 4px;
+	padding: 0 0 1px 24px;
+	top: auto;
+	bottom: -32px;
+	width: 72px;
+	-webkit-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
+}
+#thewire-header.extended > .thewire-button:before {
+	font-size: 40px;
+	left: 2px;
+	right: auto;
+	top: 2px;
+}
+#thewire-header.extended #thewire-submit-button {
+	color: #333333;
+	float: left;
+	height: 22px;
+	padding-left: 30px;
+	position: absolute;
+	right: 0;
+	text-indent: 0;
+	width: 97px;
+}
+#thewire-header.extended > .thewire-button:hover {
+	background-color: #FF3019;
+	border: 1px solid #CF0404;
 	color: white;
 }
+#thewire-header.extended > .thewire-button:hover #thewire-submit-button {
+	color: white;
+}
+#thewire-header .url-shortener {
+	border-top: 1px solid #DEDEDE;
+	margin: 0 1px;
+	padding: 4px;
+	width: 647px;
+}
+#thewire-header.extended .url-shortener {
+	display: block;
+	position: relative;
+}
+#thewire-header .url-shortener .elgg-input-text {
+	font-size: 100%;
+	padding-right: 70px;
+}
+#thewire-header .url-shortener .elgg-button {
+	font-size: 90%;
+	padding: 2px 2px 0;
+	position: absolute;
+	right: 7px;
+	top: 8px;
+}
+
+#thewire-network {
+	background-color: white;
+	border: medium none;
+	border-radius: 4px 4px 4px 4px;
+	height: 33px;
+	position: absolute;
+	right: -187px;
+	top: 0;
+	width: 180px;
+	-webkit-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
+	box-shadow: inset 0 2px 2px 0 #1F2E3D;
+}
+#thewire-network .net-profile {
+	position: relative;
+}
+#thewire-network .network {
+	background-color: white;
+	border: 1px solid #666666;
+	height: 10px;
+	left: 17px;
+	position: absolute;
+	top: -3px;
+	width: 10px;
+}
+#thewire-network .net-profile.ggouv .network {
+	background-image: url(<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/favicon.png'; ?>);
+	background-size: 10px 10px;
+}
+#thewire-network .net-profile.twitter .network {
+	background-color: #00ACED;
+	border: 1px solid #00ACED;
+	color: white;
+	font-size: 15px;
+	line-height: 10px;
+}
+#thewire-network .elgg-icon-delete {
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 15px;
+	left: -2px;
+	position: absolute;
+	text-indent: 1.5px;
+	width: 15px;
+	cursor: pointer;
+}
+#thewire-network .elgg-icon-delete:before {
+	color: red;
+}
+#thewire-network .net-profile:hover .elgg-icon-delete {
+	display: block;
+}
+
+
+/*
+ * Search
+ */
 .elgg-page-header .elgg-search {
 	top: 0;
-	left: 0;
+	right: 0;
 	position: absolute;
 	z-index: 6999;
 	height: 0;
@@ -549,6 +673,16 @@ h2.markdown-wiki-create .elgg-button-action {
 /*
  * plugin brainstorm
  */
+.brainstorm-vote-popup .blanc {
+	left: -8px;
+}
+.brainstorm-vote-popup .triangle {
+	top: 5px;
+}
+.brainstorm-vote-popup .elgg-button:hover {
+	color: white;
+	text-shadow: none;
+}
 
 
 /*
@@ -659,10 +793,82 @@ div.tagsinput .not_valid {
 .elgg-form-login, .elgg-form-account {
 	max-width: 450px;
 }
-.register-map {
+.register-helper, .register-location {
 	margin-left: 500px;
 	position: absolute;
 	top: 0;
 	width: 100%;
+	font-style: italic;
+}
+.register-helper.username {
+	top: 60px;
+}
+.register-helper.name {
+	top: 140px;
+}
+.register-helper.email {
+	top: 192px;
+}
+.register-helper.location {
+	top: 254px;
+}
+.register-location {
 	opacity: 0;
+}
+.elgg-form-signup #searching.loading {
+	right: -35px;
+	top: 20px;
+}
+.register-helper.password {
+	top: 326px;
+}
+.social-connect {
+	border-left: 2px solid #CCCCCC;
+	left: 500px;
+	padding-left: 50px;
+	position: absolute;
+	top: 10px;
+	z-index: 1;
+}
+.social-connect a {
+	clear: both;
+	float: left;
+	font-size: 30px;
+	margin: 10px;
+	padding: 20px;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #CCCCCC;
+	width: 70%;
+}
+.social-connect a:hover {
+	background-color: #F4F4F4;
+}
+.social-connect span:before {
+	float: left;
+	margin-top: 2px;
+}
+.social-connect span { /*.twitter-icon {*/
+	font-size: 68px;
+	width: 80px;
+	float: left;
+	transition: all 0.2s ease;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+}
+.social-connect a:hover span {
+	font-size: 88px;
+}
+.back-socialnetwork {
+	color: #999999;
+	float: right;
+	margin-top: -22px;
+	position: relative;
+	cursor: pointer;
+}
+.back-socialnetwork:hover {
+	color: #555;
+}
+.back-socialnetwork:after {
+	content: "►";
 }

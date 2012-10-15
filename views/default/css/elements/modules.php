@@ -43,7 +43,7 @@
 /* Popup */
 .elgg-module-popup {
 	background-color: white;
-	border: 1px solid #ccc;
+	border: 2px solid #ccc;
 	
 	z-index: 9999;
 	margin-bottom: 0;

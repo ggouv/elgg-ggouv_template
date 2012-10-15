@@ -26,7 +26,7 @@
 }
 .elgg-page-default .elgg-page-header > .elgg-inner {
 	margin: 7px 0 0 50px;
-	width: 600px;
+	width: 657px;
 }
 .elgg-page-default .elgg-page-body > .elgg-inner {
 	width: 100%;

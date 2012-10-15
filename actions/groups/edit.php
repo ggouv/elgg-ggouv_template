@@ -31,8 +31,8 @@ foreach ($CONFIG->group as $shortname => $valuetype) {
 	}
 }
 
+$input['name'] = get_input('name');
 if (isset($input['name'])) {
-	$input['name'] = get_input('name');
 	$input['name'] = html_entity_decode($input['name'], ENT_COMPAT, 'UTF-8');
 }
 

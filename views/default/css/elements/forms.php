@@ -73,7 +73,12 @@ textarea {
 	height: 200px;
 }
 
-
+.pad {
+	width: 15px;
+	height: 30px;
+	background-color: red;
+	position: absolute;
+}
 .elgg-longtext-control {
 	float: right;
 	margin-left: 14px;
@@ -89,6 +94,9 @@ textarea {
 	width: 50%;
 	resize: none;
 }
+/*.elgg-input-longtext.markdown-body {
+	margin-left: 15px;
+}*/
 .elgg-input-longtext.allWidth {
 	width: 100%;
 }
@@ -106,6 +114,29 @@ textarea {
 }
 .elgg-output-longtext.markdown-body {
 	font-size: inherit;
+}
+.description-wrapper .toggle-longtext {
+	background-color: #CCC;
+	border-radius: 4px 4px 4px 4px;
+	color: white;
+	font-size: 28px;
+	height: 18px;
+	position: absolute;
+	right: 0;
+	text-indent: 1px;
+	top: 0;
+	width: 18px;
+	cursor: pointer;
+}
+.description-wrapper .toggle-longtext:hover {
+	background-color: #555;
+}
+.previewPaneWrapper.toggle {
+	width: 100%;
+}
+.previewPaneWrapper.toggle div {
+	margin-left: 0px;
+	background-color: white;
 }
 
 

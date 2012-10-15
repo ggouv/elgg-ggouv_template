@@ -25,6 +25,9 @@ unset($vars['parse_urls']);
 $text = $vars['value'];
 unset($vars['value']);
 
+elgg_load_library('markdown_wiki:markdown');
+$text = Markdown($text);
+
 if ($parse_urls) {
 	$text = parse_urls($text);
 }
@@ -32,8 +35,7 @@ if ($parse_urls) {
 /*$text = filter_tags($text);
 
 $text = autop($text);*/
-elgg_load_library('markdown_wiki:markdown');
-$text = Markdown($text);
+
 
 $attributes = elgg_format_attributes($vars);
 

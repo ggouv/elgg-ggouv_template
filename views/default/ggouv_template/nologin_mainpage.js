@@ -2,7 +2,6 @@
 // nologin.mainpage js
 
 $(document).ready(function() {
-
 	$('.slidewrap3').carousel({
 		slider: '.slider',
 		slide: '.slide',

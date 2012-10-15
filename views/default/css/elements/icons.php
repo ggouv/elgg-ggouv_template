@@ -47,13 +47,14 @@
 .elgg-icon-attention {
 	background-position: 0 -72px;
 	background: none;
+	padding-left: 10px;
 }
 .elgg-icon-attention:before {
 	content: 'w';
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
-	margin-left: 6px;
+	text-indent: -8px;
 }
 .elgg-icon-attention:hover:before {
 	color: red;
@@ -203,6 +204,7 @@
 .elgg-icon-push-pin-alt {
 	background-position: 0 -900px;
 	background: none;
+	padding-left: 5px;
 }
 .elgg-content .elgg-icon-push-pin-alt {
 	margin-right: 10px;
@@ -212,6 +214,7 @@
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
+	text-indent: -5px;
 }
 .elgg-icon-push-pin-alt:hover:before {
 	color: #4690D6;
@@ -374,41 +377,31 @@
 
 .elgg-icon.external {
 	background: none;
+	width: 0 !important;
 }
 a.external:after {
-	font-family: 'ggouv';
 	content: "ê";
 	cursor: pointer;
-	display: inline-block;
-	font-size: 30px;
-	margin-left: 3px;
-	margin-top: -12px;
+	font-family: 'ggouv';
+	font-size: 28px;
+	line-height: 0.75;
+	margin: 0 -2px 0 2px;
 	position: absolute;
 }
 
 /* ggouv */
 .elgg-menu-item-edit a, .elgg-menu-item-comment-edit a {
-	font-family: 'ggouv';
-	font-size: 0;
-	cursor: pointer;
-	margin: 0px 0 -10px 0;
-}
-.elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover {
-	text-decoration: none;
-}
-.elgg-menu-item-edit a:before, .elgg-menu-item-comment-edit a:before {
-	content: 'e';
-	font-size: 34px;
+	font-size: 32px;
 	color: #CCC;
-	line-height: 3px;
+	margin-top: -4px;
+	text-decoration: none;
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 }
-.elgg-menu-item-edit a:hover:before, .elgg-menu-item-comment-edit a:hover:before {
+.elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover {
 	color: #555;
-	text-decoration: none;
 }
 
 .elgg-avatar > .elgg-icon-hover-menu {
@@ -425,6 +418,24 @@ a.external:after {
 	min-height: 33px;
 	min-width: 33px;
 }
+
+.twitter-icon:before {
+	content: "1";
+	cursor: pointer;
+	color: #00ACEE;
+}
+.facebook-icon:before {
+	content: "2";
+	cursor: pointer;
+	color: #3B5998;
+}
+.google-icon:before {
+	content: "3";
+	cursor: pointer;
+	color: #EA2432;
+}
+
+
 
 /* ***************************************
 	AVATAR ICONS

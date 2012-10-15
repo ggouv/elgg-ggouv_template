@@ -40,17 +40,6 @@ $owner = $group->getOwnerEntity();
 	</div>
 
 	<ul class="groups-stats float">
-		<li>
-			<h3><?php echo elgg_echo("groups:owner"); ?></h3>
-			<?php echo elgg_view_entity_icon($owner, 'small', array('class' => 'float mts mrs'));
-			echo elgg_view('output/url', array(
-				'text' => $owner->name,
-				'value' => $owner->getURL(),
-				'is_trusted' => true,
-			)); ?>
-		</li>
-		
 		<?php echo elgg_view('groups_admins_elections/list_mandats'); ?>
-
 	</ul>
 </div>

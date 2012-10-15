@@ -38,6 +38,7 @@ if ($user instanceof ElggUser) {
 	foreach ($user->getExportableValues() as $v) {
 		$user_json[$v] = $user->$v;
 	}
+	$user_json['location'] = $user->location;
 	
 	$user_json['subtype'] = $user->getSubtype();
 	$user_json['url'] = $user->getURL();

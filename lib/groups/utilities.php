@@ -1,6 +1,9 @@
 <?php
+
+//ville
+
 /**
- * Get data of a city by postal code
+ * Get all datas of a city by postal code
  *
  * @param string $group_cp The postal code's
  *
@@ -38,7 +41,26 @@ function get_data_ville_by_cp($cp) {
 
 
 /**
- * Get data of a city by name
+ * Get all datas of a city by postal code
+ *
+ * @param array $key the key to return
+ * @param string $type the type of key to match
+ * @param string $search the query search
+ * @param bool|string $maxhab true to return villes ordered by number of habitants, string to custom query
+ *
+ * @return GUID|false Depending on success
+ */
+function get_data_key_ville_by($key, $type, $search, $maxhab = '') {
+	$keys = implode(', ', $key);
+	if ($maxhab === true) $maxhab = 'ORDER BY habitants30122008 DESC';
+	$result = get_data("SELECT $keys FROM villes_data WHERE $type='$search' $maxhab");
+	if ($result) return $result;
+	return false;
+}
+
+
+/**
+ * Get all datas of a city by name
  *
  * @param string $group_cp The name of the city
  *
@@ -71,6 +93,45 @@ function get_data_ville_by_name($city) {
 		}
 	
 		$DATA_VILLE_CACHE[$city] = $result;*/
+		return $result;
+	}
+	
+	return false;
+}
+
+
+// departement
+
+/**
+ * Get all datas of a prefecture by departement code
+ *
+ * @param string $group_cp The postal code's
+ *
+ * @return GUID|false Depending on success
+ */
+function get_data_pref_by_dep($dep) {
+	global $CONFIG, $DATA_DEP_CACHE;
+	
+	$dep = sanitise_string($dep);
+	
+	if ($dep == "") {
+		return false;
+	}
+	
+/*	if (isset($DATA_DEP_CACHE[$cp])) {
+		return $DATA_DEP_CACHE[$cp];
+	}*/
+	
+	$result = get_data("SELECT * FROM villes_data
+							WHERE insee= 
+							(SELECT cheflieu FROM departements_data WHERE dep='$dep')");
+
+	if ($result) {
+	/*	if (!$DATA_DEP_CACHE) {
+			$DATA_DEP_CACHE = array();
+		}
+	
+		$DATA_DEP_CACHE[$cp] = $result;*/
 		return $result;
 	}
 	

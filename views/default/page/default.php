@@ -127,5 +127,7 @@ header("Content-type: text/html; charset=UTF-8");
 	</div>
 </div>
 <?php echo elgg_view('page/elements/foot'); ?>
+
+
 </body>
 </html>

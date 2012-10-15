@@ -14,7 +14,7 @@ if ($user) {
 	$icon_url = $user->getIconURL('small');
 	$title = elgg_echo('dashboard');
 	echo	'<li class="elgg-menu-item-dashboard">' .
-				"<a href='{$site_url}dashboard'><img src='$icon_url' alt='$user->name' title='$title' /></a>" .
+				"<a href='{$site_url}dashboard'><img class='tooltip w' src='$icon_url' alt='$user->name' title='$title' /></a>" .
 			'</li>';
 	
 	// @ for user profile, friends, collections, search user(@todo)...
@@ -24,15 +24,15 @@ if ($user) {
 			'text' => '@' . $user->username
 		), array(
 			'name' => 'friends',
-			'href' => elgg_get_site_url() . "friends/{$user->username}",
+			'href' => $site_url . "friends/{$user->username}",
 			'text' => elgg_echo('friends')
 		), array(
 			'name' => 'friends_of',
-			'href' => elgg_get_site_url() . "friendsof/{$user->username}",
+			'href' => $site_url . "friendsof/{$user->username}",
 			'text' => elgg_echo('friends:followers')
 		), array(
 			'name' => 'members',
-			'href' => elgg_get_site_url() . "members",
+			'href' => $site_url . "members",
 			'text' => elgg_echo('members')
 		)
 	);
@@ -46,36 +46,72 @@ if ($user) {
 			'</li>';
 	
 	// sub menu for group
-	$sub_menus = array(array(
-					'name' => 'groups-all',
-					'href' => $site_url . 'groups/all',
-					'text' => elgg_echo('groups:all')
-				)
-			);
-	$sub_menu = '<ul class="ggouv-menu-child"><ul class="ggouv-menu-child-shadow">';
-	foreach($sub_menus as $menu) {
-		$sub_menu .= "<li class='elgg-menu-item-{$menu[name]}'><a href='{$menu[href]}'>{$menu[text]}</a></li>";
+	$sub_menu = '<ul class="ggouv-menu-child">' .
+					'<ul class="ggouv-menu-child-shadow float">' .
+						'<ul class="hr">' .
+							'<li class="elgg-menu-item-groups-all float"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>' .
+							'<li class="elgg-menu-item-my-localgroup float mlm"><a href="' . $site_url . 'groups/profile/' . $user->location . '">' . elgg_echo('groups:my_local_group') . ' !' . $user->location . '</a></li>' .
+						'</ul>';
+	/*	$groups =  elgg_get_entities(array(
+		'type' => 'group',
+		'owner_guid' => $user->guid,
+		'limit' => 10,
+	));
+	foreach ($groups as $group) {
+		$list_groups_owner .= "<li><a href=\"{$group->getURL()}\">";
+		$list_groups_owner .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
+		$list_groups_owner .= "&nbsp;{$group->name}</a></li>";
 	}
+	$groups = elgg_get_entities_from_relationship_count(array(
+		'type' => 'group',
+		'relationship' => 'member',
+		'relationship_guid' => $user->guid,
+		'inverse_relationship' => false,
+		'limit' => 10,
+	));
+	foreach ($groups as $group) {
+		$list_groups_memberof .= "<li><a href=\"{$group->getURL()}\">";
+		$list_groups_memberof .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
+		$list_groups_memberof .= "&nbsp;{$group->name}</a></li>";
+	}*/
 	$groups = elgg_get_entities_from_relationship(array(
+			'type' => 'group',
 			'relationship' => 'member',
 			'relationship_guid' => $user->guid,
 			'inverse_relationship' => FALSE
 		));
 	foreach ($groups as $group) {
 		if ( $group->owner_guid == $user->guid ) {
-			$list_groups_owner .= "<li><a href=\"{$group->getURL()}\"><img src=\"".$group->getIconURL('tiny')."\" /> {$group->name}</a></li>";
+			$list_groups_owner .= "<li><a href=\"{$group->getURL()}\">";
+			$list_groups_owner .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
+			$list_groups_owner .= "&nbsp;{$group->name}</a></li>";
 		} else {
-			$list_groups_memberof .= "<li><a href=\"{$group->getURL()}\"><img src=\"".$group->getIconURL('tiny')."\" /> {$group->name}</a></li>";
+			$list_groups_memberof .= "<li><a href=\"{$group->getURL()}\">";
+			$list_groups_memberof .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
+			$list_groups_memberof .= "&nbsp;{$group->name}</a></li>";
 		}
 	}
-	if ($list_groups_owner) $sub_menu .= '<li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul>';
-	if ($list_groups_memberof) $sub_menu .= '<li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul>';
+	if ($list_groups_owner) $sub_menu .= '<ul class="float" style="clear:both;"><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul>';
+	if ($list_groups_memberof) $sub_menu .= '<ul class="float mlm"><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul>';
+	
 	$sub_menu .= '</ul></ul>';
 	
 	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
 			'<a href="#">!</a>' . $sub_menu .
 		'</li>';
 
+	// menu puzzle
+	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
+			'<a href="#">O</a>' .
+			'<ul class="ggouv-menu-child">' .
+				'<ul class="ggouv-menu-child-shadow">' .
+						'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
+						'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
+						'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .
+						'<li><a href="' . $site_url . 'brainstorm/owner/' . $user->username . '">' . elgg_echo('my_ideas') . '</a></li>' .
+				'</ul>' .
+			'</ul>' .
+		'</li>';
 
 	// sidebar bottom
 	echo '</ul><ul class="elgg-menu-topbar elgg-menu-topbar-alt">';
@@ -95,6 +131,8 @@ if ($user) {
 	$user_settings = elgg_view('output/url', array(
 		'href' => $site_url . "settings/user/{$user->username}",
 		'text' => 'C',
+		'class' => 'tooltip w',
+		'title' => elgg_echo('usersettings:user')
 	));
 	echo '<li class="elgg-menu-item-usersettings ggouv-webfont scale">' .
 		$user_settings .
@@ -105,6 +143,8 @@ if ($user) {
 		'href' => "action/logout",
 		'text' => 'E',
 		'is_action' => TRUE,
+		'class' => 'tooltip w',
+		'title' => elgg_echo('logout')
 	));
 	echo '<li class="elgg-menu-item-logout ggouv-webfont scale">' .
 			$log_out .

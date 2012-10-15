@@ -18,25 +18,26 @@ if (elgg_is_sticky_form('register')) {
 }
 
 ?>
+<span class="back-socialnetwork hidden"><?php echo elgg_echo('registration:back:socialnetwork'); ?></span>
 <br/><div>
-	<label><?php echo elgg_echo('Choisissez un pseudo'); ?></label><br />
+	<label><?php echo elgg_echo('registration:username'); ?></label><br />
 	<?php
 	echo elgg_view('input/text', array(
 		'name' => 'username',
 		'value' => $username,
-		'class' => 'elgg-autofocus required namecheckcar',
+		'class' => 'required namecheckcar',
 		'minlength' => 4,
 		'maxlength' => 30
 	));
 	?>
 </div>
-<div class="mtm">
-	<label><?php echo elgg_echo('Votre nom réel'); ?></label><br />
+<div>
+	<label><?php echo elgg_echo('registration:name'); ?></label><br />
 	<?php
 	echo elgg_view('input/text', array(
 		'name' => 'name',
 		'value' => $name,
-		'class' => 'required',
+		'class' => '',
 		'maxlength' => 90
 	));
 	?>
@@ -62,6 +63,7 @@ if (elgg_is_sticky_form('register')) {
 		'maxlength' => 5
 	));
 	?>
+	<span id="searching"></span>
 </div>
 <div>
 	<label><?php echo elgg_echo('password'); ?></label><br />
