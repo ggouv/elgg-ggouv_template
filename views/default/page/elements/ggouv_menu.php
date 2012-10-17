@@ -47,11 +47,7 @@ if ($user) {
 	
 	// sub menu for group
 	$sub_menu = '<ul class="ggouv-menu-child">' .
-					'<ul class="ggouv-menu-child-shadow float">' .
-						'<ul class="hr">' .
-							'<li class="elgg-menu-item-groups-all float"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>' .
-							'<li class="elgg-menu-item-my-localgroup float mlm"><a href="' . $site_url . 'groups/profile/' . $user->location . '">' . elgg_echo('groups:my_local_group') . ' !' . $user->location . '</a></li>' .
-						'</ul>';
+					'<ul class="ggouv-menu-child-shadow">';
 	/*	$groups =  elgg_get_entities(array(
 		'type' => 'group',
 		'owner_guid' => $user->guid,
@@ -83,16 +79,21 @@ if ($user) {
 	foreach ($groups as $group) {
 		if ( $group->owner_guid == $user->guid ) {
 			$list_groups_owner .= "<li><a href=\"{$group->getURL()}\">";
-			$list_groups_owner .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
-			$list_groups_owner .= "&nbsp;{$group->name}</a></li>";
+			$list_groups_owner .= elgg_view_entity_icon($group, 'tiny', array('href' => false, 'img_class' => 'prm'));
+			$list_groups_owner .= "{$group->name}</a></li>";
 		} else {
 			$list_groups_memberof .= "<li><a href=\"{$group->getURL()}\">";
-			$list_groups_memberof .= elgg_view_entity_icon($group, 'tiny', array('href' => false));
-			$list_groups_memberof .= "&nbsp;{$group->name}</a></li>";
+			$list_groups_memberof .= elgg_view_entity_icon($group, 'tiny', array('href' => false, 'img_class' => 'prm'));
+			$list_groups_memberof .= "{$group->name}</a></li>";
 		}
 	}
-	if ($list_groups_owner) $sub_menu .= '<ul class="float" style="clear:both;"><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul>';
-	if ($list_groups_memberof) $sub_menu .= '<ul class="float mlm"><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul>';
+	if ($list_groups_owner) $sub_menu .= '<ul class="phm hr"><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul>';
+	if ($list_groups_memberof) $sub_menu .= '<ul class="phm hr"><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul>';
+	
+	$sub_menu .= '<ul class="plm">' .
+					'<li class="elgg-menu-item-groups-all"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>' .
+					'<li class="elgg-menu-item-my-localgroup"><a href="' . $site_url . 'groups/profile/' . $user->location . '">' . elgg_echo('groups:my_local_group') . ' !' . $user->location . '</a></li>' .
+				'</ul>';
 	
 	$sub_menu .= '</ul></ul>';
 	
@@ -101,7 +102,7 @@ if ($user) {
 		'</li>';
 
 	// menu puzzle
-	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
+	echo '<li class="elgg-menu-item-puzzle ggouv-webfont ggouv-menu-parent scale rotate">' .
 			'<a href="#">O</a>' .
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .

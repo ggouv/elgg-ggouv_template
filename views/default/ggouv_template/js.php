@@ -460,12 +460,13 @@ elgg.ggouv_template.ready = function() {
 			$('.social-connect').hide();
 			$('.back-socialnetwork').show().click(function() {
 				$(this).hide();
+				$('.register-location').hide();
 				$('.social-connect').show();
 			});
 			var name = $(this).attr('name');
 			if (name == 'password2') name = 'password';
 			if (name != 'location') $('.register-helper, .register-location').hide();
-			if (name == 'location' && $(this).val() != '') {
+			if (name == 'location' && $(this).val().length > 4 && $(this).val() != '75000') {
 				$('.register-location').fadeIn(300);
 			} else {
 				$('.register-helper.'+name).fadeIn(300);
@@ -481,14 +482,26 @@ elgg.ggouv_template.ready = function() {
 			}
 			$('#complexity').html(Math.round(complexity) + ' %');
 		});
-		$(".elgg-form-signup input[name='location']").searchlocalgroup(function(response) {
-			if (response == false) {
+		$(".elgg-form-signup input[name='location']").keyup(function(k) {
+			if ($(".elgg-form-signup input[name='location']").val().length < 5) {
+				$('.register-location').hide();
+				$('.register-helper.location').html(elgg.echo('registration:helper:location')).show();
+			} else {
+				$('.register-location, .register-helper.location').show();
+			}
+		}).searchlocalgroup(function(response) {
+			if ($(".elgg-form-signup input[name='location']").val() == '75000') {
+				$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
+				$('.register-location').hide();
+			} else if (response == false) {
 				$('#map').css({opacity: 0});
 				$('#searching').addClass('notfound').html(elgg.echo('ggouv:search:localgroups:notfound'));
 				$('.register-location').show().animate({opacity: 1});
+				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
 			} else {
 				$('#map').css({opacity: 1});
 				$('.register-location').show().animate({opacity: 1});
+				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
 				if (hasMarkers) map.removeLayer(villes);
 				var maxHab = 0,
 					maxNorth = -90,
@@ -682,10 +695,10 @@ $.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
 	var timeout,
 		villes,
 		hasMarkers = false;
-	TheInput.keypress(function(e) {
+	TheInput.keyup(function(e) {
 		if ( e.which == 13) return false;
 		var search_input = $(this).val();
-		if (search_input.length >= nbrChar-1) { // @todo when is numeric, trigger only with 5 chars
+		if (search_input.length > nbrChar-1) { // @todo when is numeric, trigger only with 5 chars
 			if (timeout) {
 				clearTimeout(timeout);
 				timeout = null;
@@ -693,7 +706,7 @@ $.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
 			
 			timeout = setTimeout(function() {
 				search_input = TheInput.val();
-				if (search_input.length >= nbrChar-1) { // @todo check why need to do it again ?
+				if (search_input.length > nbrChar-1) { // @todo check why need to do it again ?
 					elgg.post('ajax/view/ggouv_template/ajax/get_city', {
 						dataType: 'json',
 						data: {

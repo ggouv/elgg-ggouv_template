@@ -493,6 +493,7 @@ $french = array(
 	'registration:locationtooshort' => "Un code postal a 5 chiffres.",
 	'registration:localisation:text' => "Vérifiez que vous êtes bien situé.",
 	'registration:helper:location' => "Ggouv applique la philosophie «agir local, penser global», c'est pourquoi il vous est demandé votre code postal.<br>Vous allez être membre du groupe de votre commune, ce qui vous permettra de vous organiser et collaborer plus facilement avec des membres près de chez vous.",
+	'registration:helper:location:paris' => "Paris est la seule ville à la fois commune et département en France.<br/>Les groupes locaux ont été créés par arrondissement.<br/>Indiquez le votre ! (75001, 75002...)",
 	'registration:passwordnotvalid' => "Désolé, le mot de passe que vous avez entré est invalide sur ce site.",
 	'registration:passwordagainnotvalid' => "Les mots de passe sont différents !",
 	'registration:helper:password' => "6 caractères minimum, mais pas 1 2 3 4 5 6 !<br><strong>Complexité :</strong>",
@@ -1576,6 +1577,11 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
  *	Elgg_ggouv_template English language
  *
  */
+
+	'my_wiki_pages' => "Mes pages",
+	'my_board' => "Ma board",
+	'my_pads' => "Mes pads",
+	'my_ideas' => "Mes idées",
 
 	/**
 	 * Comment

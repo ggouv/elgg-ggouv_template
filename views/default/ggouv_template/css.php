@@ -167,6 +167,9 @@
 	background-color: #1F2E3D;
 	margin: 10px 10px 10px 0;
 }
+.elgg-menu-item-groups .ggouv-menu-child-shadow {
+	display: -moz-inline-box;
+}
 .ggouv-menu-parent:hover .ggouv-menu-child {
 	display: inline;
 }
@@ -174,6 +177,10 @@
 	border-radius: 6px;
 	padding: 4px 8px;
 	cursor: pointer;
+	margin: 2px 0;
+}
+.elgg-menu-item-groups .ggouv-menu-child-shadow ul:first-child {
+	padding-left: 0;
 }
 .ggouv-menu-child li:hover {
 	background-color: #4690D6;
@@ -193,7 +200,7 @@
 	color: #CCC;
 }
 .ggouv-menu-child .hr {
-	border-bottom: 2px solid #CCCCCC;
+	border-right: 2px solid #CCCCCC;
 	height: 30px;
 }
 .ggouv-menu-child  .block-title:hover {
