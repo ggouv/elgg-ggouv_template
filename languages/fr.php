@@ -1649,7 +1649,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	 */
 	'elgg_ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
 	'elgg_ggouv_template:bot_string' => "Bot avec les droits administrateurs",
-	'elgg_ggouv_template:piwik_tracker' => "Code du trackeur de piwik",
+	'elgg_ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
 
 );
 

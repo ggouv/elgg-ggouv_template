@@ -33,11 +33,10 @@ $bot_view = elgg_view('input/text', array(
 ));
 
 $piwik_tracker_string = elgg_echo('elgg_ggouv_template:piwik_tracker');
-$piwik_tracker_view = elgg_view('input/longtext', array(
+$piwik_tracker_view = elgg_view('input/text', array(
 	'name' => 'params[piwik_tracker]',
 	'value' => $vars['entity']->piwik_tracker,
-	'class' => 'elgg-input-thin',
-	'preview' => false
+	'class' => 'elgg-input-thin'
 ));
 
 echo <<<__HTML
@@ -47,5 +46,4 @@ echo <<<__HTML
 <div><label>$bot_string</label><br />$bot_view</div>
 <br />
 <div><label>$piwik_tracker_string</label><br />$piwik_tracker_view</div>
-<div class='clearfix'></div>
 __HTML;
