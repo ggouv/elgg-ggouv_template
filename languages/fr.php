@@ -1648,8 +1648,8 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	 * Plugin settings
 	 */
 	'elgg_ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
-	'elgg_ggouv_template:markdown_wiki_page_for_translation' => "Guid de la page pour les traductions",
 	'elgg_ggouv_template:bot_string' => "Bot avec les droits administrateurs",
+	'elgg_ggouv_template:piwik_tracker' => "Code du trackeur de piwik",
 
 );
 

@@ -25,13 +25,6 @@ $markdown_wiki_page_for_home_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin',
 ));
 
-$markdown_wiki_page_for_translation_string = elgg_echo('elgg_ggouv_template:markdown_wiki_page_for_translation');
-$markdown_wiki_page_for_translation_view = elgg_view('input/text', array(
-	'name' => 'params[markdown_wiki_page_for_translation]',
-	'value' => $vars['entity']->markdown_wiki_page_for_translation,
-	'class' => 'elgg-input-thin',
-));
-
 $bot_string = elgg_echo('elgg_ggouv_template:bot_string');
 $bot_view = elgg_view('input/text', array(
 	'name' => 'params[bot]',
@@ -39,11 +32,20 @@ $bot_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin',
 ));
 
+$piwik_tracker_string = elgg_echo('elgg_ggouv_template:piwik_tracker');
+$piwik_tracker_view = elgg_view('input/longtext', array(
+	'name' => 'params[piwik_tracker]',
+	'value' => $vars['entity']->piwik_tracker,
+	'class' => 'elgg-input-thin',
+	'preview' => false
+));
+
 echo <<<__HTML
 <br />
 <div><label>$markdown_wiki_page_for_home_string</label><br />$markdown_wiki_page_for_home_view</div>
 <br />
-<div><label>$markdown_wiki_page_for_translation_string</label><br />$markdown_wiki_page_for_translation_view</div>
-<br />
 <div><label>$bot_string</label><br />$bot_view</div>
+<br />
+<div><label>$piwik_tracker_string</label><br />$piwik_tracker_view</div>
+<div class='clearfix'></div>
 __HTML;

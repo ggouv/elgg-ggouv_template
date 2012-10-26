@@ -246,6 +246,11 @@ elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
 
 elgg.ggouv_template.reloadTemplateFunctions = function() {
+	if (typeof piwikTracker.trackPageView == 'function') {
+		piwikTracker.setDocumentTitle(document.title);
+		piwikTracker.setCustomUrl(window.location.href);
+		piwikTracker.trackPageView();
+	}
 	elgg.trigger_hook('ready', 'system');
 	elgg.ui.widgets.init();
 	elgg.ggouv_template.ready();

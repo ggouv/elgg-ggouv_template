@@ -145,7 +145,7 @@ function ggouv_get_online_users() {
 	if ($objects) {
 		return elgg_view_entity_list($objects, array(
 			'count' => $count,
-			'limit' => 10,
+			'limit' => 24,
 			'split_items' => 3,
 			'size' => 'small',
 		));

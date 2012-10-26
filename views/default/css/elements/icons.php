@@ -386,7 +386,6 @@ a.external:after {
 	font-size: 28px;
 	line-height: 0.75;
 	margin: 0 -2px 0 2px;
-	position: absolute;
 }
 
 /* ggouv */
