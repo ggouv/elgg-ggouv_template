@@ -418,7 +418,7 @@ $french = array(
 	'river:widget:title' => "Activité",
 	'river:widget:description' => "Afficher les dernières activités",
 	'river:widget:type' => "Type d'activité",
-	'river:widgets:friends' => "Activité de mes amis",
+	'river:widgets:friends' => "Activité de mes abonnements",
 	'river:widgets:all' => "Toutes les activités sur le site",
 
 /**
@@ -797,7 +797,7 @@ $french = array(
  */
 	'river:all' => "Toute l'activité du site",
 	'river:mine' => "Mon activité",
-	'river:friends' => "Activité de mes amis",
+	'river:friends' => "Activité de mes abonnements",
 	'river:select' => "Afficher %s",
 	'river:comments:more' => " +%U plus",
 	'river:generic_comment' => "a commenté sur %s %s",
@@ -1564,6 +1564,60 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'groups:ecml:discussion' => "Discussions de groupe",
 	'groups:ecml:groupprofile' => "Les profils de groupe",
 
+
+/**
+ * The Wire
+ */
+
+	/**
+	 * Menu items and titles
+	 */
+	'thewire' => "Le flux",
+	'thewire:everyone' => "Tous les messages du flux",
+	'thewire:user' => "Le flux de %s",
+	'thewire:friends' => "Messages des abonnements sur le flux",
+	'thewire:reply' => "Répondre",
+	'thewire:replying' => "Répondre à %s, qui a écrit",
+	'thewire:thread' => "Flux",
+	'thewire:charleft' => "caractères restant",
+	'thewire:tags' => "Messages du flux commentés par '% s' avec",
+	'thewire:noposts' => "Pas encore de messages sur le flux",
+	'item:object:thewire' => "Messages du flux",
+	'thewire:update' => "Mise à jour",
+
+	'thewire:previous' => "Précédent",
+	'thewire:hide' => "Masquer",
+	'thewire:previous:help' => "Voir le message précédent",
+	'thewire:hide:help' => "Masquer le message précédent",
+
+	/**
+	 * The wire river
+	 */
+	'river:create:object:thewire' => "%s a envoyé %s",
+	'thewire:wire' => 'un message',
+
+	/**
+	 * Wire widget
+	 */
+	'thewire:widget:desc' => "Affichez vos derniers messages",
+	'thewire:num' => "Nombre de publications à afficher",
+	'thewire:moreposts' => "Plus de messages",
+
+	/**
+	 * Status messages
+	 */
+	'thewire:posted' => "Votre message a bien été posté dans le flux.",
+	'thewire:deleted' => "Votre message a bien été supprimé du flux.",
+	'thewire:blank' => "Désolé, vous devez d'abord écrire un message avant de l'envoyer.",
+	'thewire:notfound' => "Désolé, le message spécifié n'a pu être trouvé.",
+	'thewire:notdeleted' => "Désolé, ce message n'a pu être effacé.",
+
+	/**
+	 * Notifications
+	 */
+	'thewire:notify:subject' => "Nouveau message sur le flux",
+	'thewire:notify:reply' => "%s a répondu à %s :",
+	'thewire:notify:post' => "%s posté sur le flux :",
 
 
 

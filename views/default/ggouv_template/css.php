@@ -533,7 +533,7 @@
 	color: white;
 }
 #ajaxified-loader {
-	background: url('http://localhost/~mama/ggouv/ggouv/mod/elgg-brainstorm/graphics/ajax-loader.gif') no-repeat scroll 0 6px transparent;
+	background: url(<?php echo elgg_get_site_url() . 'mod/elgg-brainstorm/graphics/ajax-loader.gif'; ?>) no-repeat scroll 0 6px transparent;
 	position: fixed;
 	right: 5px;
 	top: 46px;
@@ -556,13 +556,13 @@
 	padding-left: 5px;
 }
 .deck-river-lists .elgg-list-item {
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(150,150,150,0.1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(150,150,150,0.1)));
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
-	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
-	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
-	background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1a969696',GradientType=0 );
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(150,150,150,0.1) 100%) white;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(150,150,150,0.1))) white;
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%) white;
+	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%) white;
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%) white;
+	background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(150,150,150,0.1) 100%) white;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1a969696',GradientType=0 ) white;
 }
 
 /*

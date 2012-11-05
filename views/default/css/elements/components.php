@@ -187,7 +187,6 @@
 .elgg-river-responses {
 	color: #999;
 	font-size: 85%;
-	white-space: nowrap;
 }
 .elgg-river-attachments,
 .elgg-river-message,
