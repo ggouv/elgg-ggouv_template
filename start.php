@@ -17,7 +17,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_js('jquery.scrollTo',"$http_base/views/default/ggouv_template/jquery.scrollTo-min.js");
 	elgg_register_js('xoxco.tags',"$http_base/vendors/xoxco_tags/jquery.tagsinput.min.js");
 	elgg_register_js('carrousel',"$http_base/vendors/carrousel.js");
-	elgg_register_js('history.js', "$http_base/vendors/history.js/scripts/bundled/html4+html5/jquery.history.js");
+	elgg_register_js('history.js', "$http_base/vendors/jquery.history.js");
 	elgg_register_js('jquery-validation', "$http_base/vendors/jquery-validation-1.9.0/jquery.validate.min.js");
 	elgg_register_js('jquery.caretposition', "$http_base/vendors/jquery.caretposition.js");
 	elgg_register_js('jquery.tipsy', "$http_base/vendors/jquery.tipsy.min.js");
