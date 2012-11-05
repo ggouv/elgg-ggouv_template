@@ -1,7 +1,7 @@
-<?php 
+<?php
 	$title = $vars["title"];
 	$message = nl2br($vars["message"]);
-	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -19,7 +19,8 @@
 		<style type="text/css">
 			body {
 				font: 80%/1.4 "Lucida Grande", Verdana, sans-serif;
-				color: #333333;				
+				color: #333333;
+				background-color: #F4F4F4;
 			}
 			
 			a {
@@ -27,21 +28,23 @@
 			}
 			
 			#notification_container {
-				padding: 20px 0;
 				width: 600px;
 				margin: 0 auto;
+				box-shadow: 2px 2px 2px gray;
+				border-radius: 8px;
+				overflow: hidden;
 			}
 		
 			#notification_header {
-				text-align: right;
-				padding: 0 0 10px;
+				background: #B6B6B6;
+				padding: 2px 0 7px 10px;
 			}
 			
 			#notification_header a {
 				text-decoration: none;
 				font-weight: bold;
-				color: #0054A7;
-				font-size: 1.5em;
+				color: #333;
+				font-size: 1.8em;
 			} 
 		
 			#notification_wrapper {
@@ -50,7 +53,7 @@
 			}
 			
 			#notification_wrapper h2 {
-				margin: 5px 0 5px 10px;
+				margin: -4px 0 5px 10px;
 				color: #0054A7;
 				font-size: 1.35em;
 				line-height: 1.2em;
@@ -62,8 +65,6 @@
 			}
 			
 			#notification_footer {
-				
-				margin: 10px 0 0;
 				background: #B6B6B6;
 				padding: 10px;
 				text-align: right;
@@ -88,8 +89,9 @@
 	
 		<div id="notification_container">
 			<div id="notification_header">
+				<img height="24px" width="24px" style="vertical-align: bottom;margin-right: 5px;" src="<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/favicon.png';?>">
 				<?php 
-					$site_url = elgg_view("output/url", array("href" => $vars["config"]->site->url, "text" => $vars["config"]->site->name));
+					$site_url = elgg_view("output/url", array("href" => elgg_get_site_url(), "text" => elgg_get_site_entity()->name));
 					echo $site_url;
 				?>
 			</div>
@@ -102,9 +104,6 @@
 			</div>
 			
 			<div id="notification_footer">
-				<a href="http://www.elgg.org/" id="notification_footer_logo">
-					<img src="<?php echo $vars["url"]; ?>_graphics/powered_by_elgg_badge_drk_bckgnd.gif" />
-				</a>
 				
 				<?php 
 					if(elgg_is_logged_in()){
