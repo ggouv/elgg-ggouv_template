@@ -64,7 +64,7 @@ if ($post) {
 				));
 				echo '<span class="network"></span>';
 			?>
-		</div>
+		</div><!--
 		<div class="net-profile float mlm twitter">
 			<span class="elgg-icon elgg-icon-delete pas hidden"></span>
 			<input type="hidden" value="true" name="network_twitter">
@@ -77,6 +77,6 @@ if ($post) {
 				));
 				echo '<span class="network gwf">1</span>';
 			?>
-		</div>
+		</div> -->
 	</div>
 </div>

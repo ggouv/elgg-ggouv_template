@@ -1582,7 +1582,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'thewire:charleft' => "caractères restant",
 	'thewire:tags' => "Messages du flux commentés par '% s' avec",
 	'thewire:noposts' => "Pas encore de messages sur le flux",
-	'item:object:thewire' => "Messages du flux",
+	'item:object:thewire' => "Messages",
 	'thewire:update' => "Mise à jour",
 
 	'thewire:previous' => "Précédent",

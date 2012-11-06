@@ -35,7 +35,7 @@ $messages = elgg_get_entities(array(
 	'count' => true,
 	'limit' => 0
 ));
-echo '<li><div class="stats">' . $messages . '</div>' . elgg_echo('thewire') . '</li>';
+echo '<li><div class="stats">' . $messages . '</div>' . elgg_echo('item:object:thewire') . '</li>';
 
 $ideas = elgg_get_entities(array(
 	'type' => 'object',
