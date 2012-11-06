@@ -30,6 +30,7 @@ $options = array(
 	'full_view' => FALSE,
 	'split_items' => 3,
 	'size' => 'small',
+	'limit' => 24
 );
 $content = elgg_list_entities_from_relationship($options);
 if (!$content) {

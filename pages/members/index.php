@@ -13,6 +13,7 @@ $options = array(
 	'full_view' => false,
 	'split_items' => 3,
 	'size' => 'small',
+	'limit' => 24
 );
 
 switch ($vars['page']) {
