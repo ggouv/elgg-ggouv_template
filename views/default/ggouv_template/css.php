@@ -168,7 +168,10 @@
 	margin: 10px 10px 10px 0;
 }
 .elgg-menu-item-groups .ggouv-menu-child-shadow {
-	display: -moz-inline-box;
+	
+}
+.elgg-menu-item-groups table ul ul {
+	height: 100%;
 }
 .ggouv-menu-parent:hover .ggouv-menu-child {
 	display: inline;

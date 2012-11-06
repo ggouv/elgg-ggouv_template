@@ -47,7 +47,7 @@ if ($user) {
 	
 	// sub menu for group
 	$sub_menu = '<ul class="ggouv-menu-child">' .
-					'<ul class="ggouv-menu-child-shadow">';
+					'<ul class="ggouv-menu-child-shadow"><table><tr>';
 	/*	$groups =  elgg_get_entities(array(
 		'type' => 'group',
 		'owner_guid' => $user->guid,
@@ -87,15 +87,15 @@ if ($user) {
 			$list_groups_memberof .= "{$group->name}</a></li>";
 		}
 	}
-	if ($list_groups_owner) $sub_menu .= '<ul class="phm hr"><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul>';
-	if ($list_groups_memberof) $sub_menu .= '<ul class="phm hr"><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul>';
+	if ($list_groups_owner) $sub_menu .= '<td class="phm hr"><ul><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul></td>';
+	if ($list_groups_memberof) $sub_menu .= '<td class="phm hr"><ul><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul></td>';
 	
-	$sub_menu .= '<ul class="plm">' .
+	$sub_menu .= '<td class="plm"><ul>' .
 					'<li class="elgg-menu-item-groups-all"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>' .
 					'<li class="elgg-menu-item-my-localgroup"><a href="' . $site_url . 'groups/profile/' . $user->location . '">' . elgg_echo('groups:my_local_group') . ' !' . $user->location . '</a></li>' .
-				'</ul>';
+				'</ul></td>';
 	
-	$sub_menu .= '</ul></ul>';
+	$sub_menu .= '</tr></table></ul></ul>';
 	
 	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
 			'<a href="#">!</a>' . $sub_menu .
