@@ -73,7 +73,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_library('user_ggouv');
 
 	// Register actions
-	elgg_register_action("ggouv_template/header_input", "$base/actions/add.php");
 	elgg_unregister_action('register');
 	elgg_register_action('signup', "$base/actions/signup.php", 'public');
 	elgg_register_action('signin', "$base/actions/signin.php", 'public');

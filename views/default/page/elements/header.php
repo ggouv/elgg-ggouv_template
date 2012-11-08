@@ -6,7 +6,7 @@
 
 // link back to main site.
 //echo elgg_view('page/elements/header_logo', $vars);
-echo elgg_view_form('ggouv_template/header_input');
+echo elgg_view_form('deck_river/wire_input');
 
 // drop-down login
 echo elgg_view('core/account/login_dropdown');
