@@ -261,10 +261,6 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.workflow.reload();
 	elgg.longtextMarkdown();
 	elgg.ggouv_pad.resize();
-	// editable comments
-	$('.elgg-menu-item-comment-edit a').click(function(){
-		$('#editablecomments-'+elgg.parse_url($(this).href).fragment).toggle('fast');
-	});
 	// compatibility for fancybox workflow and refresh button in bord view	
 	$('#card-forms a, .elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
 		var $this = $(this),
@@ -385,10 +381,6 @@ elgg.ggouv_template.ready = function() {
 		}
 	}
 	
-	// editable comment
-	$('.elgg-menu-item-comment-edit a').live('click', function() {
-		$('#editablecomments-'+elgg.parse_url($(this).attr('href')).fragment).toggle();
-	});
 	$('.elgg-form-editablecomments-edit').find('input[type=submit]').live('click', function(e) {
 		var form = $(this).parents('form'),
 			annotation_id = form.find('input[name=annotation_id]').val(),
