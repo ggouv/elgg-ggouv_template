@@ -399,8 +399,13 @@
 	font-size: 90%;
 	padding: 2px 2px 0;
 	position: absolute;
-	right: 7px;
 	top: 8px;
+}
+#thewire-header .url-shortener .elgg-button-submit {
+	right: 7px;
+}
+#thewire-header .url-shortener .elgg-button-action {
+	right: 73px;
 }
 
 #thewire-network {
