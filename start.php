@@ -154,6 +154,10 @@ function elgg_ggouv_template_init() {
 	//$CONFIG->mentions_group_match_regexp = '/[\b]?!([\p{L}\p{M}_\.0-9]+)[\b]?/iu';
 	//register_plugin_hook('output', 'page', 'mentions_user_rewrite');
 	//register_plugin_hook('output', 'page', 'mentions_group_rewrite');
+	
+	//set locale
+	$user = elgg_get_logged_in_user_entity();
+	setlocale(LC_TIME, $user->language, strtolower($user->language) . '_' . strtoupper($user->language) . '.UTF-8');
 
 }
 
