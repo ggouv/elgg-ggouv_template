@@ -96,17 +96,18 @@ header("Content-type: text/html; charset=UTF-8");
 		
 		if ( elgg_get_context() == 'main' ) { 
 			$class_main = 'main';
+			echo '<a href="' . elgg_get_site_url() . 'signup"><div class="ribbon">Essayez la béta !</div></a>';
 		} else { 
 			$class_main = '';
 		} ?>
 
-		<?php echo '<a href="' . elgg_get_site_url() . 'signup"><div class="ribbon">Essayez la béta !</div></a>'; ?>
 	
 		<div class="elgg-page-header nolog">
 			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
 				<?php 
 				echo "<div class='elgg-menu-item-logo ggouv-webfont'><a href='" . elgg_get_site_url() . "'>&nabla;</a></div>";
 				echo '<h1><a href="' . elgg_get_site_url() . '">' . elgg_get_config('sitename') . '</a></h1>';
+				echo '<div id="ajaxified-loader" class="hidden"></div>';
 				if ( elgg_get_context() != 'main' ) echo elgg_view('core/account/login_dropdown');
 				?>
 			</div>

@@ -21,6 +21,7 @@
 				font: 80%/1.4 "Lucida Grande", Verdana, sans-serif;
 				color: #333333;
 				background-color: #F4F4F4;
+				padding: 40px 0;
 			}
 			
 			a {

@@ -1050,10 +1050,10 @@ Une fois sur le site, nous vous conseillons fortement de changer votre mot de pa
 	'email:save:success' => "Votre nouvelle adresse mail a été enregistrée, vous allez recevoir un mail de confirmation.",
 	'email:save:fail' => "Votre nouvelle adresse mail n'a pas pu être enregistrée.",
 
-	'friend:newfriend:subject' => "%s vous a ajouté comme ami!",
-	'friend:newfriend:body' => "%s vous a ajouté comme ami!
+	'friend:newfriend:subject' => "%s suit votre activité sur ggouv.fr !",
+	'friend:newfriend:body' => "%s suit votre activité !
 
-Vous pouvez maintenant consulter son profil en cliquant sur le lien ci-dessous:
+Vous pouvez consulter son profil en cliquant sur le lien ci-dessous:
 
 	%s
 
@@ -1615,7 +1615,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	/**
 	 * Notifications
 	 */
-	'thewire:notify:subject' => "Nouveau message sur le flux",
+	'thewire:notify:subject' => "Nouveau message dans le flux",
 	'thewire:notify:reply' => "%s a répondu à %s :",
 	'thewire:notify:post' => "%s posté sur le flux :",
 

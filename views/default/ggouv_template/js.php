@@ -16,7 +16,7 @@ elgg.ggouv_template.init = function() {
 	* Ajaxified site
 	*/
 	parsePage = function(url) {
-		elgg.get(url, {
+		elgg.post(url, {
 			data: 'ajaxified=true',
 			success: function(response, textStatus, xmlHttp) {
 				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}

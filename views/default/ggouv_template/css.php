@@ -219,6 +219,9 @@
 	-moz-box-shadow: inset 0 2px 2px 0 #1F2E3D;
 	box-shadow: inset 0 2px 2px 0 #1F2E3D;
 }
+#thewire-header #thewire-textarea-border {
+	display: none;
+}
 #thewire-textarea {
 	background-color: transparent;
 	resize: none;
@@ -304,21 +307,18 @@
 	border: none;
 	width: 60px;
 }
-#thewire-header.extended {
-	height: 151px;
-}
 #thewire-header.extended #thewire-textarea {
 	height: 115px !important;
 }
 #thewire-header.extended {
 	border-radius: 6px 6px 0 0;
 }
+#thewire-header.extended #thewire-textarea-border {
+	display: block;
+}
 #thewire-header.extended #thewire-textarea {
 	width: 100%;
 	overflow-y: auto;
-}
-#thewire-header.extended #thewire-textarea-border {
-	height: 146px;
 }
 #thewire-header.extended #thewire-characters-remaining {
 	bottom: -31px;
@@ -381,14 +381,14 @@
 #thewire-header.extended > .thewire-button:hover #thewire-submit-button {
 	color: white;
 }
+#thewire-header.extended .options {
+	display: block;
+}
 #thewire-header .url-shortener {
 	border-top: 1px solid #DEDEDE;
 	margin: 0 1px;
 	padding: 4px;
 	width: 647px;
-}
-#thewire-header.extended .url-shortener {
-	display: block;
 	position: relative;
 }
 #thewire-header .url-shortener .elgg-input-text {
@@ -407,6 +407,25 @@
 #thewire-header .url-shortener .elgg-button-action {
 	right: 73px;
 }
+#thewire-header .responseTo {
+	background-color: #FFC;
+	color: #666;
+	margin: 0 2px;
+	padding: 2px 5px;
+	height: 18px;
+	overflow: hidden;
+}
+#thewire-header .responseTo span {
+	color: #999;
+	font-size: 85%;
+	font-style: italic;
+}
+#thewire-header .responseTo:hover {
+	background-color: #FDD;
+	color: red;
+	cursor: pointer;
+}
+
 
 #thewire-network {
 	background-color: white;
