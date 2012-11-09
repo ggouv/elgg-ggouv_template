@@ -803,6 +803,13 @@ elgg.longtextMarkdown = function() {
 elgg.register_hook_handler('init', 'system', elgg.longtextMarkdown);
 
 
+// hook for galliComments plugin
+elgg.discussionSubmit = function() {
+	$('.elgg-preview-longtext').html('');
+}
+elgg.register_hook_handler('getOptions', 'galliComments.submit', elgg.discussionSubmit);
+
+
 /**
  * Resize element for responsive layout
  *
