@@ -553,6 +553,18 @@
 	content: 'S';
 }
 
+.elgg-menu-owner-block.tiny li {
+	float: left;
+	width: 32px;
+	margin-right: 5px;
+}
+.elgg-menu-owner-block.tiny li > a {
+	font-size: 0;
+}
+.elgg-menu-owner-block.tiny li a:before {
+	font-size: 36px;
+	text-indent: -2px;
+}
 
 /* ***************************************
 	LONGTEXT

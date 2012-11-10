@@ -114,7 +114,7 @@ if ($tools) {
 		$value = $vars['entity']->$group_option_toggle_name ? $vars['entity']->$group_option_toggle_name : $group_option_default_value;
 ?>	
 <div>
-	<label style="float:left; margin-right: 5px;">
+	<label class="mrs float">
 		<?php echo $group_option->label; ?>
 	</label>
 		<?php echo elgg_view("input/radio", array(

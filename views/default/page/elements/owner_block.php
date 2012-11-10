@@ -15,9 +15,16 @@ $owner = elgg_get_page_owner_entity();
 if ($owner instanceof ElggGroup ||
 	($owner instanceof ElggUser && $owner->getGUID() != elgg_get_logged_in_user_guid())) {
 
-	$header = elgg_view_entity($owner, array('full_view' => false, 'icon_size' => 'small'));
+	$header = elgg_view_entity($owner, array(
+		'full_view' => false,
+		'icon_size' => 'small'
+	));
 
-	$body = elgg_view_menu('owner_block', array('entity' => $owner));
+	if (elgg_get_plugin_user_setting('tiny_ownerblock', elgg_get_logged_in_user_guid(), 'elgg_ggouv_template') == 'yes') $tiny = 'tiny';
+	$body = elgg_view_menu('owner_block', array(
+		'entity' => $owner,
+		'class' => "mtm $tiny"
+	));
 
 	$body .= elgg_view('page/elements/owner_block/extend', $vars);
 

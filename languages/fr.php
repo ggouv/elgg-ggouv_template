@@ -463,7 +463,7 @@ $french = array(
  * Account
  */
 	'account' => "Compte",
-	'settings' => "Votre compte",
+	'settings' => "Paramètres",
 	'tools' => "Outils",
 	'settings:edit' => "Editer les paramètres",
 
@@ -503,7 +503,7 @@ $french = array(
 	'adduser:bad' => "Le nouvel utilisateur ne peut pas être créé.",
 
 	'user:set:name' => "Nom",
-	'user:name:label' => "Votre nom à afficher",
+	'user:name:label' => "Votre nom réel",
 	'user:name:success' => "Votre nom a été changé avec succès.",
 	'user:name:fail' => "Impossible de changer votre nom. Assurez-vous que votre nom n'est pas trop long et essayez à nouveau.",
 
@@ -775,13 +775,13 @@ $french = array(
 	'usersettings:statistics:opt:description' => "VVisualiser les statistiques des utilisateurs et des objets sur votre espace.",
 	'usersettings:statistics:opt:linktext' => "Statistiques de votre compte",
 
-	'usersettings:user' => "Vos paramètres",
+	'usersettings:user' => "Paramètres",
 	'usersettings:user:opt:description' => "Ceci vous permet de contrôler vos paramètres.",
-	'usersettings:user:opt:linktext' => "Changer vos paramètres",
+	'usersettings:user:opt:linktext' => "Mon compte",
 
 	'usersettings:plugins' => "Outils",
 	'usersettings:plugins:opt:description' => "Configurer vos paramètres (s'il y en a) pour activer vos outils.",
-	'usersettings:plugins:opt:linktext' => "Configurer vos outils",
+	'usersettings:plugins:opt:linktext' => "Configurer les outils",
 
 	'usersettings:plugins:description' => "Ce panneau de configuration vous permez de mettre à jour les options de vos outils.",
 	'usersettings:statistics:label:numentities' => "Vos entités",
@@ -959,7 +959,7 @@ Une fois sur le site, nous vous conseillons fortement de changer votre mot de pa
 	'friendlytime:minutes:singular' => "il y a une minute",
 	'friendlytime:hours' => "il y a %s heures",
 	'friendlytime:hours:singular' => "il y a une heure",
-	'friendlytime:days' => "Il y a %s jours",
+	'friendlytime:days' => "il y a %s jours",
 	'friendlytime:days:singular' => "hier",
 	'friendlytime:date_format' => "%a %d %b %Y à %T",
 
@@ -1410,8 +1410,8 @@ Pour voir le profil de %s, suivez ce lien :
 	Group tools
 	*/
 	'groups:enableforum' => "Activer le module 'discussion' du groupe",
-	'groups:yes' => "oui",
-	'groups:no' => "non",
+	'groups:yes' => "Oui",
+	'groups:no' => "Non",
 	'groups:lastupdated' => "Dernière mise à jour %s par %s",
 	'groups:lastcomment' => "Dernier commentaire %s by %s",
 
@@ -1699,11 +1699,13 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'groups:error:more_five_groups' => "Vous ne pouvez pas créer plus de 5 groupes.",
 
 	/**
-	 * Plugin settings
+	 * Plugin settings and usersettings
 	 */
 	'elgg_ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
 	'elgg_ggouv_template:bot_string' => "Bot avec les droits administrateurs",
 	'elgg_ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
+	
+	'elgg_ggouv_template:tiny_ownerblock' => "Afficher seulement les icônes dans le menu des groupes",
 
 );
 
