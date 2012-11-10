@@ -604,19 +604,15 @@ h2.markdown-wiki-create .elgg-button-action {
 .markdown-body .subject {
 	width: 100%;
 }
-.markdown-body .pro {
+.pro {
 	background-color: #DDFFDD;
 	border: 1px solid green;
-	float: left;
 	padding: 10px;
-	width: 48%;
 }
-.markdown-body .con {
+.con {
 	background-color: #FFDDDD;
 	border: 1px solid red;
-	float: right;
 	padding: 10px;
-	width: 48%;
 }
 
 /*
