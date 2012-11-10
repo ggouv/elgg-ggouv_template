@@ -9,4 +9,4 @@
  * @uses $vars['value'] The text to display
  */
 
-echo mb_substr(htmlspecialchars($vars['value'], ENT_QUOTES, 'UTF-8', false), 0, 140);
+echo deck_river_wire_filter(mb_substr(htmlspecialchars($vars['value'], ENT_QUOTES, 'UTF-8', false), 0, 140));

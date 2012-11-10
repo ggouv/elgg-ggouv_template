@@ -37,7 +37,7 @@ if ($full_view) {
 		'class' => 'elgg-menu-hz float-alt',
 	));
 
-	$commentValue = Markdown($comment->value);
+	$commentValue = deck_river_wire_filter(Markdown($comment->value));
 	$comment_text = elgg_view("output/longtext", array("value" => $commentValue));
 
 	$body = <<<HTML
@@ -60,7 +60,7 @@ HTML;
 
 	$on = elgg_echo('on');
 
-	$commentValue = Markdown($comment->value);
+	$commentValue = deck_river_wire_filter(Markdown($comment->value));
 	$excerpt = elgg_get_excerpt($commentValue, 80);
 
 	$body = <<<HTML

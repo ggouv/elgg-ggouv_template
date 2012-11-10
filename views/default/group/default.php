@@ -29,7 +29,7 @@ if ($vars['full_view']) {
 	$params = array(
 		'entity' => $group,
 		'metadata' => $metadata,
-		'subtitle' => $group->briefdescription,
+		'subtitle' => deck_river_wire_filter($group->briefdescription),
 	);
 	$params = $params + $vars;
 	$list_body = elgg_view('group/elements/summary', $params);
