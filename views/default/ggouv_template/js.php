@@ -107,7 +107,8 @@ elgg.ggouv_template.init = function() {
 								"[href*='address='],"+
 								"[href*='/avatar/edit'],"+
 								"[href*='/action/groups/delete'],"+
-								"[href*='/action/workflow/list/delete']),"+
+								"[href*='/action/workflow/list/delete'],"+
+								"[href*='notifications/personal']),"+
 			" .elgg-page-topbar a:internal:not([href*='/admin/'],"+
 									" [href*='/ajax/'],"+
 									" [href*='/logout'])"
