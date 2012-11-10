@@ -843,17 +843,19 @@ function gravatar_avatar_hook($hook, $type, $url, $params) {
  * Add a menu item to the annotations
  */
 function editablecomments_annotation_menu($hook, $type, $return, $params) {
-	$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
-	$options = array(
-		'name' => 'comment-edit',
-		'text' => 'e',
-		'title' => elgg_echo('comment:edit'),
-		'class' => 'gwf tooltip s',
-		'href' => $url,
-		'rel' => 'toggle'
-	);
-	$return[] = ElggMenuItem::factory($options);
-	return $return;
+	if ($params['annotation']->canEdit()) {
+		$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
+		$options = array(
+			'name' => 'comment-edit',
+			'text' => 'e',
+			'title' => elgg_echo('comment:edit'),
+			'class' => 'gwf tooltip s',
+			'href' => $url,
+			'rel' => 'toggle'
+		);
+		$return[] = ElggMenuItem::factory($options);
+		return $return;
+	}
 }
 
 
