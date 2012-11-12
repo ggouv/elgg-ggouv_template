@@ -941,3 +941,24 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
     }
 
 }
+
+function ggouv_get_installed_translations() {
+	global $CONFIG;
+	
+	// Ensure that all possible translations are loaded
+	reload_all_translations();
+	
+	$installed = array();
+	
+	foreach ($CONFIG->translations as $k => $v) {
+		$completeness = get_language_completeness($k);
+		if (elgg_is_admin_logged_in()) {
+			if (($completeness < 100) || ($k == 'en')) { // admins see 0% for EN but we don't care about
+				$installed[$k] = elgg_echo($k, array(), $k) . " (" . $completeness . "% " . elgg_echo('complete') . ")";
+			}
+		} else if ($completeness > 70 || $k == 'en') { // want more than 70% for showing the language
+			$installed[$k] = elgg_echo($k, array(), $k);
+		}
+	}
+	return $installed;
+}
