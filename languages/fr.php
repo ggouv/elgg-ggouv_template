@@ -388,6 +388,7 @@ $french = array(
 	'profile:explainchangefields' => "Vous pouvez remplacer les champs de profil existants avec les vôtres en utilisant le formulaire ci-dessous.\n\nDonner une étiquette pour le nouveau champ du profil, par exemple, 'Certifications obtenues', puis sélectionnez le type de champ (par exemple texte, URL, adresse), et cliquez sur le bouton 'Ajouter'. Pour réordonner les champs faites glisser la poignée de l'étiquette du champ. Pour modifier un champ d'étiquette - cliquez sur le texte de l'étiquette pour le rendre éditable. A tout moment vous pouvez revenir au profil par défaut, mais vous perdrez toutes les informations déjà entrées dans des champs personnalisés des pages de profil.",
 	'profile:editdefault:success' => "Champ ajouté au profil par défaut avec succès",
 	'profile:editdefault:fail' => "Le profil par défaut n'a pas pu être sauvé",
+	'profile:notfound' => "Désolé, nous n'avons pas pu trouver le profil demandé.",
 
 /**
  * Feeds
@@ -1307,6 +1308,43 @@ Pour voir le profil de %s, suivez ce lien :
 	"zu" => "Zoulou",
 
 
+/**
+ * Elgg reported content plugin language pack
+ *
+ * @package ElggReportedContent
+ */
+	'item:object:reported_content' => "Eléments signalés",
+	'admin:utilities:reportedcontent' => "Contenu signalé ",
+	'reportedcontent' => "Contenu signalé",
+	'reportedcontent:this' => "Signaler ceci",
+	'reportedcontent:this:tooltip' => "Signaler cette page à un administrateur",
+	'reportedcontent:none' => "Il n'y a pas de contenu signalé",
+	'reportedcontent:report' => "Signaler ceci",
+	'reportedcontent:title' => "Titre de la page",
+	'reportedcontent:deleted' => "Le contenu signalé a été effacé",
+	'reportedcontent:notdeleted' => "Il a été impossible d'effacer ce signalement",
+	'reportedcontent:delete' => "L'effacer",
+	'reportedcontent:areyousure' => "Etes-vous sûr de vouloir l'effacer ?",
+	'reportedcontent:archive' => "L'archiver",
+	'reportedcontent:archived' => "Le signalement a bien été archivé",
+	'reportedcontent:visit' => "Visiter l'élément signalé",
+	'reportedcontent:by' => "Signalé par ",
+	'reportedcontent:objecttitle' => "Titre de l'objet",
+	'reportedcontent:objecturl' => "URL de l'objet",
+	'reportedcontent:reason' => "Motif du signalement",
+	'reportedcontent:description' => "Pourquoi souhaitez-vous signaler ceci ?",
+	'reportedcontent:address' => "Emplacement de l'élément",
+	'reportedcontent:success' => "Votre signalement a bien été envoyé à l'adminsitrateur du site",
+	'reportedcontent:failing' => "Votre signalement n'a pu être envoyé",
+	'reportedcontent:report' => "Signaler ceci",
+	'reportedcontent:moreinfo' => "Plus d'information",
+	'reportedcontent:instructions' => "Ce rapport sera envoyé aux administrateurs de ce site à des fins d'examen.",
+	'reportedcontent:numbertodisplay' => "Nombre de rapports à afficher",
+	'reportedcontent:widget:description' => "Afficher le contenu signalé",
+	'reportedcontent:user' => "Rapport utilisateur",
+
+	'reportedcontent:failed' => "Désolé, la tentative de signaler ce contenu a échoué.",
+	'reportedcontent:notarchived' => "Il a été impossible d'archiver ce signalement",
 
 
 /**
@@ -1566,6 +1604,14 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 
 
 /**
+ * Tag cloud English language file
+ */
+	'tagcloud:widget:title' => "Nuage de Tags",
+	'tagcloud:widget:description' => "Nuage de tags",
+	'tagcloud:widget:numtags' => "Nombre de tags à afficher",
+
+
+/**
  * The Wire
  */
 
@@ -1620,6 +1666,148 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'thewire:notify:post' => "%s posté sur le flux :",
 
 
+/**
+ * Elgg invite language file
+ *
+ * @package ElggInviteFriends
+ */
+	'friends:invite' => "Inviter du monde",
+
+	'invitefriends:registration_disabled' => "L'enregistrement des nouveaux utilisateurs a été désactivé sur ce site, vous ne pouvez pas inviter de nouveaux utilisateurs.",
+
+	'invitefriends:introduction' => "Invitez du monde à rejoindre sur le réseau ! Entrez leurs adresses mail ci-dessous (une par ligne) :",
+	'invitefriends:message' => "Ecrivez le message qu'ils reçevront avec votre invitation :",
+	'invitefriends:subject' => "Invitation à rejoindre %s",
+
+	'invitefriends:success' => "Vos contacts ont été invités.",
+	'invitefriends:invitations_sent' => "Invitation envoyé: %s. Il ya eu les problèmes suivants :",
+	'invitefriends:email_error' => "Les invitations ont été envoyées, mais l'adresse suivante comporte des erreurs: %s",
+	'invitefriends:already_members' => "Les invités suivants sont déja membres: %s",
+	'invitefriends:noemails' => "Aucune adresse email a été entrée",
+
+	'invitefriends:message:default' => "
+Salut,
+
+Viens voir http://ggouv.fr C'est un nouveau réseau totalement subversif, et enfin vraiment démocratique !",
+
+	'invitefriends:email' => "
+Vous avez été invité à rejoindre %s par %s, qui a ajouté le message suivant :
+
+%s
+
+Pour vous inscrire, cliquez sur le lien suivant :
+
+	%s
+
+",
+
+
+/**
+ * Elgg log browser plugin language pack
+ *
+ * @package ElggLogBrowser
+ */
+	'admin:utilities:logbrowser' => "Connection aux journaux",
+	'logbrowser' => "Visualiseur de journal",
+	'logbrowser:browse' => "Visualiser les journaux système",
+	'logbrowser:search' => "Affiner les résultats",
+	'logbrowser:user' => "Rechercher par nom d'utilisateur",
+	'logbrowser:starttime' => "Heure de début (par exemple 'dernier lundi', 'il y a une heure')",
+	'logbrowser:endtime' => "Heure de fin",
+
+	'logbrowser:explore' => "Explorer le journal",
+
+	'logbrowser:date' => "Date et heure",
+	'logbrowser:user:name' => "Utilisateur",
+	'logbrowser:user:guid' => "Guide de l'utilisateur",
+	'logbrowser:object' => "Type de l'objet",
+	'logbrowser:object:guid' => "Aide à propos des Objets",
+	'logbrowser:action' => "Action",
+
+
+/**
+ * Elgg log rotator language pack.
+ *
+ * @package ElggLogRotate
+ */
+	'logrotate:period' => "A quelle fréquence souhaitez-vous archiver les logs du système ?",
+
+	'logrotate:weekly' => "Une fois par semaine",
+	'logrotate:monthly' => "Une fois par mois",
+	'logrotate:yearly' => "Une fois par an",
+
+	'logrotate:logrotated' => "Rotation du log effectuée\n",
+	'logrotate:lognotrotated' => "Erreur lors de la rotation du log\n",
+
+	'logrotate:date' => "Supprimer les journaux archivés plus ancien qu'",
+
+	'logrotate:week' => "une semaine",
+	'logrotate:month' => "un mois",
+	'logrotate:year' => "une année",
+
+	'logrotate:logdeleted' => "Fichier journal supprimé (fichier log)",
+	'logrotate:lognotdeleted' => "Erreur de suppression du journal (fichier log)",
+
+
+/**
+ * Email user validation plugin language pack.
+ *
+ * @package Elgg.Core.Plugin
+ * @subpackage ElggUserValidationByEmail
+ */
+	'admin:users:unvalidated' => "Invalidées",
+	
+	'email:validate:subject' => "%s veuillez confirmer votre adresse de courriel !",
+	'email:validate:body' => "Bonjour %s,
+
+Before you can start you using %s, you must confirm your email address.
+
+Veuillez confirmer votre adresse de courriel en cliquant sur le lien suivant:
+
+%s
+
+Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre navigateur manuellement.
+
+%s
+%s
+",
+	'email:confirm:success' => "Vous avez validé votre adresse de courriel !",
+	'email:confirm:fail' => "Votre adresse de courriel n'a pu être vérifiée...",
+
+	'uservalidationbyemail:registerok' => "Pour activer votre compte, veuillez confirmer votre adresse e-mail en cliquant sur le lien qui vient de vous être envoyé (si vous ne recevez rien, veuillez vérifier votre dossier Spam).",
+	'uservalidationbyemail:login:fail' => "Votre compte n'est pas validé, par conséquent la tentative de connexion a échoué. Un autre e-mail de validation a été envoyé.",
+
+	'uservalidationbyemail:admin:no_unvalidated_users' => "Aucun utilisateurs non-validés.",
+
+	'uservalidationbyemail:admin:unvalidated' => "Invalidés",
+	'uservalidationbyemail:admin:user_created' => "%s enregistré",
+	'uservalidationbyemail:admin:resend_validation' => "Renvoyer la validation",
+	'uservalidationbyemail:admin:validate' => "Valider",
+	'uservalidationbyemail:admin:delete' => "Supprimer",
+	'uservalidationbyemail:confirm_validate_user' => "Valider %s ?",
+	'uservalidationbyemail:confirm_resend_validation' => "Renvoyer la validation e-mail à %s?",
+	'uservalidationbyemail:confirm_delete' => "Supprimer %s?",
+	'uservalidationbyemail:confirm_validate_checked' => "Valider les utilisateurs cochés ?",
+	'uservalidationbyemail:confirm_resend_validation_checked' => "Renvoyer la validation aux utilisateurs cochés ?",
+	'uservalidationbyemail:confirm_delete_checked' => "Supprimer les utilisateurs cochés ?",
+	'uservalidationbyemail:check_all' => "Tous",
+
+	'uservalidationbyemail:errors:unknown_users' => "Utilisateurs inconnus",
+	'uservalidationbyemail:errors:could_not_validate_user' => "Impossible de valider l'utilisateur.",
+	'uservalidationbyemail:errors:could_not_validate_users' => "Impossible de valider tout les utilisateurs cochés.",
+	'uservalidationbyemail:errors:could_not_delete_user' => "Impossible de supprimer l'utilisateur.",
+	'uservalidationbyemail:errors:could_not_delete_users' => "Impossible de supprimer tout les utilisateurs cochés.",
+	'uservalidationbyemail:errors:could_not_resend_validation' => "Impossible de renvoyer la demande de validation.",
+	'uservalidationbyemail:errors:could_not_resend_validations' => "Impossible de renvoyer toutes les demandes de validation aux utilisateurs cochés.",
+
+	'uservalidationbyemail:messages:validated_user' => "Utilisateur validé.",
+	'uservalidationbyemail:messages:validated_users' => "Tout les utilisateurs cochés validés.",
+	'uservalidationbyemail:messages:deleted_user' => "Utilisateur supprimé.",
+	'uservalidationbyemail:messages:deleted_users' => "Tout les utilisateurs cochés supprimé.",
+	'uservalidationbyemail:messages:resent_validation' => "Demande de validation renvoyée.",
+	'uservalidationbyemail:messages:resent_validations' => "Demandes de validation renvoyées à tout les utilisateurs cochés.",
+
+
 /*
  * Notification plugin
  */
@@ -1642,6 +1830,165 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'notifications:subscriptions:groups:description' => "Pour recevoir des notifications lorsque de nouveaux contenus sont ajoutés à un groupe auquel vous appartenez, sélectionnez-les ci-dessous, et choisissez le mode de notifications que vous souhaitez utiliser.",
 
 	'notifications:subscriptions:success' => "Vos paramètres de notifications ont bien été enregistrés.",
+
+
+/*
+ * Search plugin
+ */
+	'search:enter_term' => "Entrer un terme de recherche :",
+	'search:no_results' => "Aucun résultat.",
+	'search:matched' => "Correspondant: ",
+	'search:results' => "Résultats pour %s",
+	'search:no_query' => "Veuillez entrer une requête de recherche.",
+	'search:search_error' => "Erreur",
+
+	'search:more' => "+%s plus %s",
+
+	'search_types:tags' => "Tags",
+
+	'search_types:comments' => "Commentaires",
+	'search:comment_on' => "Commentaire sur '%s'",
+	'search:comment_by' => "par",
+	'search:unavailable_entity' => "Entité indisponible",
+
+
+/*
+ * Blog plugin
+ */
+	'blog' => "Blogs",
+	'blog:blogs' => "Blogs",
+	'blog:revisions' => "Révisions",
+	'blog:archives' => "Archives",
+	'blog:blog' => "Blog",
+	'item:object:blog' => "Blogs",
+
+	'blog:title:user_blogs' => "Blog de %s",
+	'blog:title:all_blogs' => "Tous les blogs du site",
+	'blog:title:friends' => "Blogs des contacts",
+
+	'blog:group' => "Blog de groupe",
+	'blog:enableblog' => "Activer le blog du groupe",
+	'blog:write' => "Écrivez un article",
+
+	// Editing
+	'blog:add' => "Ajouter un article",
+	'blog:edit' => "Modifier l'article",
+	'blog:excerpt' => "Extrait",
+	'blog:body' => "Corps de l'article",
+	'blog:save_status' => "Dernier enregistrement :",
+	'blog:never' => "jamais",
+
+	// Statuses
+	'blog:status' => "Statut",
+	'blog:status:draft' => "Brouillon",
+	'blog:status:published' => "Publié",
+	'blog:status:unsaved_draft' => "Brouillon non enregistré",
+
+	'blog:revision' => "Révision",
+	'blog:auto_saved_revision' => "Révision enregistrée automatiquement",
+
+	// messages
+	'blog:message:saved' => "Article enregistré.",
+	'blog:error:cannot_save' => ":Impossible d'enregistrer l'article.",
+	'blog:error:cannot_write_to_container' => "Accès insuffisant pour enregistrer l'article pour ce groupe.",
+	'blog:error:post_not_found' => "Cet article a été supprimé, est invalide, ou vous n'avez pas la permission de le voir.",
+	'blog:messages:warning:draft' => "Il y a un brouillon non enregistré pour cet article !",
+	'blog:edit_revision_notice' => "(Ancienne version)",
+	'blog:message:deleted_post' => "Article supprimé.",
+	'blog:error:cannot_delete_post' => "Impossible de supprimer l'article.",
+	'blog:none' => "Aucun article",
+	'blog:error:missing:title' => "Vous devez donner un titre à votre article !",
+	'blog:error:missing:description' => "Le corps de votre article est vide !",
+	'blog:error:cannot_edit_post' => "Cet article peut ne pas exister ou vous n'ayez pas les autorisations pour le modifier.",
+	'blog:error:revision_not_found' => "Impossible de trouvez cette révision.",
+
+	// river
+	'blog:river:create' => "Publier un article",
+	'river:commented:object:blog' => "le blog",
+
+	// widget
+	'blog:widget:description' => "Ce widget affiche vos derniers articles de blog.",
+	'blog:moreblogs' => "Plus d'articles du blog",
+	'blog:numbertodisplay' => "Nombre d'articles du blog à afficher",
+	'blog:noblogs' => "Aucun blog",
+
+
+/**
+* Bookmarks English language file
+*/
+
+	/**
+	* Menu items and titles
+	*/
+	'bookmarks' => "Signets",
+	'bookmarks:add' => "Mettre quelque chose en signet",
+	'bookmarks:edit' => "Modifier le signet",
+	'bookmarks:owner' => "Les signets de %s",
+	'bookmarks:friends' => "Signets des contacts",
+	'bookmarks:everyone' => "Tous les signets du site",
+	'bookmarks:this' => "Mettre en signet cette page",
+	'bookmarks:this:group' => "Mettre en signet dans %s",
+	'bookmarks:bookmarklet' => "Récupérer le 'bookmarklet'",
+	'bookmarks:bookmarklet:group' => "Récupérer le 'bookmarklet' du groupe",
+	'bookmarks:inbox' => "Boîte de réception des signets",
+	'bookmarks:morebookmarks' => "",
+	'bookmarks:more' => "Plus de signets",
+	'bookmarks:with' => "Partager avec",
+	'bookmarks:new' => "Un nouveau signet",
+	'bookmarks:via' => "via les signets",
+	'bookmarks:address' => "Adresse de la ressource à ajouter à vos signets",
+	'bookmarks:none' => "Aucun signets",
+	
+	'bookmarks:delete:confirm' => "Etes-vous sûr(e) de vouloir supprimer cette ressource ?",
+	
+	'bookmarks:numbertodisplay' => "Nombre de signets à afficher",
+	
+	'bookmarks:shared' => "Mis en signet",
+	'bookmarks:visit' => "Voir la ressource",
+	'bookmarks:recent' => "Signets récents",
+	
+	'bookmarks:river:created' => "%s mis en signet",
+	'bookmarks:river:annotate' => "a posté un commentaire sur ce signet",
+	'bookmarks:river:item' => "un élément",
+	'river:commented:object:bookmarks' => "un signet",
+	
+	'item:object:bookmarks' => "Eléments mis en signets",
+	
+	'bookmarks:group' => "Signets du groupe",
+	'bookmarks:enablebookmarks' => "Activer les signets du groupe",
+	'bookmarks:nogroup' => "Ce groupe n'a pas encore de signets",
+	'bookmarks:more' => "Plus de signets",
+	
+	'bookmarks:no_title' => "Pas de titre",
+	
+	/**
+	* Widget and bookmarklet
+	*/
+	'bookmarks:widget:description' => "Ce widget affiche vos derniers signets.",
+	
+	'bookmarks:bookmarklet:description' =>
+	"Le bookmarklet vous permez de partager ce que vous trouvez sur le web avec vos contact, ou pour vous-même. Pour l'utiliser, glissez simplement le boutton ci-dessous dans votre barre de liens de votre navigateur.",
+	
+	'bookmarks:bookmarklet:descriptionie' =>
+	"Si vous utilisez Internet Explorer, faites un clic droit sur le boutton et ajouter le dans vos favoris, puis votre barre de liens.",
+	
+	'bookmarks:bookmarklet:description:conclusion' =>
+	"Vous pouvez mettre en signet n'importe quelle page en cliquant sur le bookmarklet.",
+	
+	/**
+	* Status messages
+	*/
+	
+	'bookmarks:save:success' => "Votre élément a bien été mis en signet.",
+	'bookmarks:delete:success' => "Votre signet a bien été supprimé.",
+	
+	/**
+	* Error messages
+	*/
+	
+	'bookmarks:save:failed' => "Votre élément n'a pu être correctement mis en signet. Vérifiez que le titre et le lien soient correct et réessayez.",
+	'bookmarks:delete:failed' => "Votre signet n'a pu être supprimé. Merci de réessayer.",
+
 
 
 
@@ -1671,7 +2018,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	/**
 	 * Members
 	 */
-	'members:label:newest' => 'Les nouveaux arrivants',
+	'members:label:newest' => 'Nouveaux',
 	'members:label:popular' => 'Les plus suivis',
 	'members:label:online' => 'En ligne',
 	'members:searchname' => 'Chercher un membre par son nom',
