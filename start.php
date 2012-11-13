@@ -30,6 +30,7 @@ function elgg_ggouv_template_init() {
 	
 	elgg_register_ajax_view('ggouv_template/ajax/get_city');
 	elgg_register_ajax_view('ggouv_template/ajax/form_validation');
+	elgg_register_ajax_view('ggouv_template/ajax/site_info_popup');
 
 	// Want it everywhere
 	elgg_load_js('jquery.scrollTo');

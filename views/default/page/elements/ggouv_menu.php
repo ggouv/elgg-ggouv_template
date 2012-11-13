@@ -152,7 +152,7 @@ if ($user) {
 		'</li>';
 
 	// info
-	echo '<li class="elgg-menu-item-info ggouv-webfont"><a title="info" href="#">i</a></li>';
+	echo '<li class="elgg-menu-item-info ggouv-webfont">i</li>';
 
 }
 ?>

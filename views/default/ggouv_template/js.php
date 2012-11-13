@@ -109,14 +109,15 @@ elgg.ggouv_template.init = function() {
 								"[href*='/action/groups/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal']),"+
-			" .elgg-page-topbar a:internal:not([href*='/admin/'],"+
+			".elgg-page-topbar a:internal:not([href*='/admin/'],"+
 									" [href*='/ajax/'],"+
-									" [href*='/logout'])"
+									" [href*='/logout']),"+
+			"#site-info-popup a:internal"
 		).live('click', function(e) {
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
 				title = $this.attr('title') || null;
-
+console.log(title); // @todo ?
 				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
@@ -132,6 +133,10 @@ elgg.ggouv_template.init = function() {
 				e.preventDefault();
 				return false;
 		});
+		/*$('input[type=submit]').live('click', function() {
+			var url = $(this).parents('form').attr('action');
+			History.pushState(null, null, url);
+		});*/
 	
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState(),
@@ -233,6 +238,25 @@ elgg.ggouv_template.ready = function() {
 	$('#goTop').click(function() {
 		$(window).scrollTo(0, 500);
 	});
+	
+	// site-info-popup from info button in vertical menu
+	$('.elgg-menu-item-info').die().live('click', function() {
+		if (!$('#site-info-popup').length) {
+			$('.elgg-page-body').after($('<div>', {id: 'site-info-popup', class: 'row-fluid hidden'}));
+			elgg.get('ajax/view/ggouv_template/ajax/site_info_popup', {
+				success: function(response) {
+					$('#site-info-popup').html(response).toggle('slide', {direction:'down'});
+				},
+				error: function() {
+					$('#site-info-popup').remove();
+				}
+			
+			});
+		} else {
+			$('#site-info-popup').remove();
+		}
+	});
+	$('#site-info-popup .elgg-icon-delete').die().live('click', function() {$('#site-info-popup').remove()});
 	
 	// Sidebar
 	if (!$('.elgg-page-admin').length && $(window).scrollTop() + $(window).height() > $('.elgg-sidebar').height() + 48 + 10) {

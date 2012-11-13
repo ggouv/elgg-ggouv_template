@@ -49,7 +49,7 @@
 .ggouv-webfont {
 	float: none;
 }
-.ggouv-webfont > a {
+.ggouv-webfont > a, .elgg-menu-item-info {
 	padding: 5px 0;
 	font-size: 50px;
 	/*text-shadow: 1px 0px 2px #AAAAAA;*/
@@ -132,17 +132,39 @@
 }
 .elgg-menu-item-info {
 	height: 19px !important;
-}
-.elgg-menu-item-info > a {
 	border-top: 1px solid #666666;
-	padding: 0;
 	color: white;
 	font-size: 24px;
-	margin-top: 5px;
 }
-.elgg-menu-item-info > a:hover {
+.elgg-menu-item-info:hover {
 	color: white;
 	background-color: #4690D6;
+}
+
+/* 
+* site info popup
+*/
+#site-info-popup {
+	background-color: #1F2E3D;
+	bottom: 0;
+	box-shadow: 0 0 6px 4px #0A0A0A inset;
+	margin: 0 -10px -20px;
+	padding: 20px 10px 40px;
+	position: fixed;
+	width: 100%;
+	z-index: 11;
+}
+#site-info-popup .spotlight {
+	margin: 0 10%;
+}
+#site-info-popup h2 {
+	color: white;
+	text-shadow: 1px -1px 0 black;
+}
+#site-info-popup .elgg-icon-delete {
+	left: 20px;
+	position: absolute;
+	top: 10px;
 }
 
 /* 
@@ -405,7 +427,12 @@
 	right: 7px;
 }
 #thewire-header .url-shortener .elgg-button-action {
-	right: 73px;
+	right: 75px;
+}
+#thewire-header .url-shortener .elgg-icon {
+	position: absolute;
+	top: 8px;
+	right: 138px;
 }
 #thewire-header .responseTo {
 	background-color: #FFC;
