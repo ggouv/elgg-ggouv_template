@@ -1,10 +1,10 @@
 <?php
 /**
- *	Ggouv_template plugin
- *	@package elgg_ggouv_template
+ *	Elgg-ggouv_template plugin
+ *	@package elgg-ggouv_template
  *	@author Emmanuel Salomon @ManUtopiK
  *	@license GNU Affero General Public License, version 3 or late
- *	@link https://github.com/ManUtopiK/elgg_ggouv_template
+ *	@link https://github.com/ggouv/elgg-ggouv_template
  **/
 ?>
 

@@ -18,21 +18,21 @@ if (!isset($vars['entity']->bot)) {
 }
 
 
-$markdown_wiki_page_for_home_string = elgg_echo('elgg_ggouv_template:markdown_wiki_page_for_home');
+$markdown_wiki_page_for_home_string = elgg_echo('ggouv_template:markdown_wiki_page_for_home');
 $markdown_wiki_page_for_home_view = elgg_view('input/text', array(
 	'name' => 'params[markdown_wiki_page_for_home]',
 	'value' => $vars['entity']->markdown_wiki_page_for_home,
 	'class' => 'elgg-input-thin',
 ));
 
-$bot_string = elgg_echo('elgg_ggouv_template:bot_string');
+$bot_string = elgg_echo('ggouv_template:bot_string');
 $bot_view = elgg_view('input/text', array(
 	'name' => 'params[bot]',
 	'value' => $vars['entity']->bot,
 	'class' => 'elgg-input-thin',
 ));
 
-$piwik_tracker_string = elgg_echo('elgg_ggouv_template:piwik_tracker');
+$piwik_tracker_string = elgg_echo('ggouv_template:piwik_tracker');
 $piwik_tracker_view = elgg_view('input/text', array(
 	'name' => 'params[piwik_tracker]',
 	'value' => $vars['entity']->piwik_tracker,

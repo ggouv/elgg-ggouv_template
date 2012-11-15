@@ -8,9 +8,9 @@ elgg_load_library('markdown_wiki:markdown');
 elgg_load_library('markdown_wiki:utilities');
 
 // get text
-$page_guid = elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg_ggouv_template');
+$page_guid = elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg-ggouv_template');
 $page = get_entity($page_guid);
-
+global $fb; $fb->info($page);
 if (!$page) {
 	return;
 }
@@ -37,7 +37,6 @@ foreach ($matches[1] as $key => $item2) {
 	foreach ($matches4[1] as $subkey => $item4) {
 		$sub_sections[$subkey]['text'] = elgg_view('output/markdown_wiki_text', array('value' => trim($item4)));
 	}
-	global $fb; $fb->info($sub_sections);
 	
 	$html = '';
 	if ($sub_sections) {

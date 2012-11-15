@@ -1,12 +1,12 @@
 <?php
 /**
- *	Elgg_ggouv_template plugin
- *	@package elgg_ggouv_template
+ *	Elgg-ggouv_template plugin
+ *	@package elgg-ggouv_template
  *	@author Emmanuel Salomon @ManUtopiK
  *	@license GNU Affero General Public License, version 3 or late
- *	@link https://github.com/ManUtopiK/elgg_ggouv_template
+ *	@link https://github.com/ggouv/elgg-ggouv_template
  *
- *	Elgg_ggouv_template English language
+ *	Elgg-ggouv_template English language
  *
  */
 
@@ -64,9 +64,9 @@ $english = array(
 	/**
 	 * Plugin settings
 	 */
-	'elgg_ggouv_template:markdown_wiki_page_for_home' => "Guid of the home page",
-	'elgg_ggouv_template:markdown_wiki_page_for_translation' => "Guid for page translation",
-	'elgg_ggouv_template:bot_string' => "Bot with admin right",
+	'ggouv_template:markdown_wiki_page_for_home' => "Guid of the home page",
+	'ggouv_template:markdown_wiki_page_for_translation' => "Guid for page translation",
+	'ggouv_template:bot_string' => "Bot with admin right",
 	
 );
 

@@ -10,12 +10,12 @@
 
 @font-face {
 	font-family: 'ggouv';
-	src: url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.eot');
-	src: url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.eot?#iefix') format('embedded-opentype'),
-		url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.ttf') format('truetype'),
-		url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.woff') format('woff'),
-		url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.otf') format("opentype"),
-		url('<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/fonts/'; ?>ggouv-webfont.svg#ggouv-webfont') format('svg');
+	src: url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.eot');
+	src: url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.eot?#iefix') format('embedded-opentype'),
+		url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.ttf') format('truetype'),
+		url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.woff') format('woff'),
+		url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.otf') format("opentype"),
+		url('<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/fonts/'; ?>ggouv-webfont.svg#ggouv-webfont') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

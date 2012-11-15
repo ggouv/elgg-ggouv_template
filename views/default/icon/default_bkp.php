@@ -70,7 +70,7 @@ if (false) {//$entity->getSubtype() == 'localgroup') {
 	}
 	
 	if ($entity->getSubtype() == 'localgroup') {
-		$src = elgg_get_site_url() . '/mod/elgg_ggouv_template/views/default/icon/localgroupicon.php?cp=' . $entity->guid . '&size=' . $size;
+		$src = elgg_get_site_url() . '/mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $entity->guid . '&size=' . $size;
 	} else {
 		$src = $entity->getIconURL($vars['size']);
 	}

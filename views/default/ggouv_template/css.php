@@ -480,7 +480,7 @@
 	width: 10px;
 }
 #thewire-network .net-profile.ggouv .network {
-	background-image: url(<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/favicon.png'; ?>);
+	background-image: url(<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/favicon.png'; ?>);
 	background-size: 10px 10px;
 }
 #thewire-network .net-profile.twitter .network {

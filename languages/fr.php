@@ -1993,13 +1993,13 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 
 
 /**
- *	Elgg_ggouv_template plugin
- *	@package elgg_ggouv_template
+ *	Elgg-ggouv_template plugin
+ *	@package elgg-ggouv_template
  *	@author Emmanuel Salomon @ManUtopiK
  *	@license GNU Affero General Public License, version 3 or late
- *	@link https://github.com/ManUtopiK/elgg_ggouv_template
+ *	@link https://github.com/ggouv/elgg-ggouv_template
  *
- *	Elgg_ggouv_template English language
+ *	Elgg-ggouv_template English language
  *
  */
 
@@ -2072,11 +2072,11 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	/**
 	 * Plugin settings and usersettings
 	 */
-	'elgg_ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
-	'elgg_ggouv_template:bot_string' => "Bot avec les droits administrateurs",
-	'elgg_ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
+	'ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
+	'ggouv_template:bot_string' => "Bot avec les droits administrateurs",
+	'ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
 	
-	'elgg_ggouv_template:tiny_ownerblock' => "Afficher seulement les icônes dans le menu des groupes",
+	'ggouv_template:tiny_ownerblock' => "Afficher seulement les icônes dans le menu des groupes",
 
 );
 

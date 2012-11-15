@@ -4,8 +4,8 @@ elgg_unregister_event_handler('init', 'system', 'discussion_init');
 elgg_register_event_handler('init','system','elgg_ggouv_template_init');
 
 function elgg_ggouv_template_init() {
-	$base = elgg_get_plugins_path() . 'elgg_ggouv_template';
-		$http_base = '/mod/elgg_ggouv_template';
+	$base = elgg_get_plugins_path() . 'elgg-ggouv_template';
+		$http_base = '/mod/elgg-ggouv_template';
 	
 	elgg_extend_view('css/elgg','ggouv_template/css');
 	elgg_extend_view('css/elgg','ggouv_template/bootstrap-responsive');
@@ -143,7 +143,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_plugin_hook_handler('profile:fields', 'group', 'ggouv_template_groups_fields_setup');
 	
 	if (elgg_is_active_plugin('search')) {
-		//elgg_unextend_view('page/elements/header', 'search/search_box');
+		elgg_unextend_view('page/elements/header', 'search/search_box');
 		//elgg_extend_view('page/elements/topbar', 'search/search_box');
 	}
 
@@ -269,7 +269,7 @@ function ggouv_template_typo_page_handler($page) {
  * @access private
  */
 function ggouv_user_account_page_handler($page_elements, $handler) {
-	$base_dir = elgg_get_root_path() . 'mod/elgg_ggouv_template/pages/account';
+	$base_dir = elgg_get_root_path() . 'mod/elgg-ggouv_template/pages/account';
 	switch ($handler) {
 		case 'signin':
 			require_once("$base_dir/signin.php");
@@ -297,7 +297,7 @@ function ggouv_user_account_page_handler($page_elements, $handler) {
  * @return bool
  */
 function ggouv_members_page_handler($page) {
-	$base = elgg_get_root_path() . 'mod/elgg_ggouv_template/pages/members';
+	$base = elgg_get_root_path() . 'mod/elgg-ggouv_template/pages/members';
 
 	if (!isset($page[0])) {
 		$page[0] = 'newest';
@@ -326,7 +326,7 @@ function ggouv_members_page_handler($page) {
  * @access private
  */
 function ggouv_friends_page_handler($page_elements, $handler) {
-	$base = elgg_get_root_path() . 'mod/elgg_ggouv_template/pages/friends';
+	$base = elgg_get_root_path() . 'mod/elgg-ggouv_template/pages/friends';
 	elgg_set_context('friends');
 	
 	if (isset($page_elements[0]) && $user = get_user_by_username($page_elements[0])) {
@@ -741,7 +741,7 @@ function ggouv_groups_icon_url_override($hook, $type, $returnvalue, $params) {
 	}
 	
 	if ($group->getSubtype() == 'localgroup') {
-		return elgg_get_site_url() . '/mod/elgg_ggouv_template/views/default/icon/localgroupicon.php?cp=' . $entity->guid . '&size=' . $size;
+		return elgg_get_site_url() . '/mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $entity->guid . '&size=' . $size;
 	}
 
 	return "mod/groups/graphics/default{$size}.gif";

@@ -4,9 +4,9 @@
  *	@package elgg-workflow
  *	@author Emmanuel Salomon @ManUtopiK
  *	@license GNU Affero General Public License, version 3 or late
- *	@link https://github.com/ManUtopiK/elgg_ggouv_template
+ *	@link https://github.com/ggouv/elgg-ggouv_template
  *
- *	Elgg_ggouv_template localgroups ajax search
+ *	Elgg-ggouv_template localgroups ajax search
  *
  */
 $search = get_input('city', false);

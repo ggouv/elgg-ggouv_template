@@ -20,7 +20,7 @@ if ($owner instanceof ElggGroup ||
 		'icon_size' => 'small'
 	));
 
-	if (elgg_get_plugin_user_setting('tiny_ownerblock', elgg_get_logged_in_user_guid(), 'elgg_ggouv_template') == 'yes') $tiny = 'tiny';
+	if (elgg_get_plugin_user_setting('tiny_ownerblock', elgg_get_logged_in_user_guid(), 'elgg-ggouv_template') == 'yes') $tiny = 'tiny';
 	$body = elgg_view_menu('owner_block', array(
 		'entity' => $owner,
 		'class' => "mtm $tiny"

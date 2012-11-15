@@ -90,7 +90,7 @@
 	
 		<div id="notification_container">
 			<div id="notification_header">
-				<img height="24px" width="24px" style="vertical-align: bottom;margin-right: 5px;" src="<?php echo elgg_get_site_url() . 'mod/elgg_ggouv_template/graphics/favicon.png';?>">
+				<img height="24px" width="24px" style="vertical-align: bottom;margin-right: 5px;" src="<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/favicon.png';?>">
 				<?php 
 					$site_url = elgg_view("output/url", array("href" => elgg_get_site_url(), "text" => elgg_get_site_entity()->name));
 					echo $site_url;

@@ -129,7 +129,7 @@ header("Content-type: text/html; charset=UTF-8");
 </div>
 <?php echo elgg_view('page/elements/foot'); ?>
 
-<?php if ($piwik_url = elgg_get_plugin_setting('piwik_tracker', 'elgg_ggouv_template')) {
+<?php if ($piwik_url = elgg_get_plugin_setting('piwik_tracker', 'elgg-ggouv_template')) {
 	echo <<<HTML
 <!-- Piwik -->
 <script type="text/javascript">
