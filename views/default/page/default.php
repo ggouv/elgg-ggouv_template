@@ -74,10 +74,18 @@ header("Content-type: text/html; charset=UTF-8");
 				<?php echo elgg_view('page/elements/ggouv_menu', $vars); ?>
 			</div>
 		</div>
-	
-		<div class="elgg-page-header">
-			<div class="elgg-inner">
-				<?php echo elgg_view('page/elements/header', $vars); ?>
+		
+		
+		<div class="elgg-page-header-container">
+			<div class="elgg-page-header">
+				<div class="elgg-inner">
+					<?php echo elgg_view('page/elements/header', $vars); ?>
+				</div>
+			</div>
+			<div class="elgg-page-header-z">
+				<div class="elgg-inner">
+				 épeaépeaépn naréspt nrsaépenrs taép
+				</div>
 			</div>
 		</div>
 	

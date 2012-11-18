@@ -7,6 +7,16 @@ elgg.ggouv_template.init = function() {
 	// hide developers-log when empty
 	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
 
+	$('.elgg-menu-item-logo').mouseenter(function() {
+		$('.elgg-page-header-container').addClass("topside");
+	});
+	$('.elgg-page-header-container').mouseleave(function() {
+		$('.elgg-page-header-container').removeClass("topside");
+	});
+	$('.elgg-menu-item-dashboard, .elgg-layout').mouseenter(function() {
+		$('.elgg-page-header-container').removeClass("topside");
+	});
+
 	$(document).ready(function() {
 		elgg.ggouv_template.ready();
 	});
@@ -175,7 +185,7 @@ elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
 
 elgg.ggouv_template.reloadTemplateFunctions = function() {
-	$('.tipsy').remove(); // in case of
+	$('.tipsy').remove(); $('.elgg-page-header-container').removeClass("topside");// in case of
 	if (typeof piwikTracker != 'undefined' && typeof piwikTracker.trackPageView == 'function') {
 		piwikTracker.setDocumentTitle(document.title);
 		piwikTracker.setCustomUrl(window.location.href);
