@@ -136,9 +136,6 @@
 	right: 10px;
 	width: 40px;
 	cursor: pointer;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
 }
 #goTop:hover {
 	background-color: rgba(0, 0, 0, 0.5);

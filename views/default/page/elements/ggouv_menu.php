@@ -6,8 +6,8 @@ $site_url = elgg_get_site_url();
 
 if ($user) {
 	// logo
-	echo	'<li class="elgg-menu-item-logo ggouv-webfont">' .
-				"<a href='{$site_url}activity'>∇</a>" .
+	echo	'<li class="elgg-menu-item-logo gwf">' .
+				"<a class='t' href='{$site_url}activity'>∇</a>" .
 			'</li>';
 	
 	// profil icon for dashboard
@@ -41,8 +41,8 @@ if ($user) {
 		$sub_menu .= "<li class='elgg-menu-item-{$sub_menu_item[name]}'><a href='{$sub_menu_item[href]}'>{$sub_menu_item[text]}</a></li>";
 	}
 	$sub_menu .= '</ul></ul>';
-	echo	'<li class="elgg-menu-item-at ggouv-webfont ggouv-menu-parent scale rotate">' .
-				'<a href="#">@</a>' . $sub_menu .
+	echo	'<li class="elgg-menu-item-at gwf ggouv-menu-parent scale rotate">' .
+				'<a class="t" href="#">@</a>' . $sub_menu .
 			'</li>';
 	
 	// sub menu for group
@@ -97,13 +97,13 @@ if ($user) {
 	
 	$sub_menu .= '</tr></table></ul></ul>';
 	
-	echo '<li class="elgg-menu-item-groups ggouv-webfont ggouv-menu-parent scale rotate">' .
-			'<a href="#">!</a>' . $sub_menu .
+	echo '<li class="elgg-menu-item-groups gwf ggouv-menu-parent scale rotate">' .
+			'<a class="t" href="#">!</a>' . $sub_menu .
 		'</li>';
 
 	// menu puzzle
-	echo '<li class="elgg-menu-item-puzzle ggouv-webfont ggouv-menu-parent scale rotate">' .
-			'<a href="#">O</a>' .
+	echo '<li class="elgg-menu-item-puzzle gwf ggouv-menu-parent scale rotate">' .
+			'<a class="t" href="#">O</a>' .
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
 						'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
@@ -121,10 +121,25 @@ if ($user) {
 	if ( $user->isAdmin() ) {
 		$log_admin = elgg_view('output/url', array(
 			'href' => $site_url . "admin/plugins",
-			'text' => 'K',
+			'text' => 's',
+			'class' => 'tooltip w t',
+			'title' => elgg_echo('Administration')
 		));
-		echo '<li class="elgg-menu-item-admin ggouv-webfont scale">' .
+		echo '<li class="elgg-menu-item-admin gwf scale">' .
 			$log_admin .
+		'</li>';
+	}
+
+	// help
+	if ($url = elgg_get_plugin_setting('group_of_help', 'elgg-ggouv_template')) {
+		$help = elgg_view('output/url', array(
+			'href' => $url,
+			'text' => 'K',
+			'class' => 'tooltip w t',
+			'title' => elgg_echo('help')
+		));
+		echo '<li class="elgg-menu-item-help gwf scale">' .
+			$help .
 		'</li>';
 	}
 	
@@ -132,10 +147,10 @@ if ($user) {
 	$user_settings = elgg_view('output/url', array(
 		'href' => $site_url . "settings/user/{$user->username}",
 		'text' => 'C',
-		'class' => 'tooltip w',
+		'class' => 'tooltip w t',
 		'title' => elgg_echo('usersettings:user')
 	));
-	echo '<li class="elgg-menu-item-usersettings ggouv-webfont scale">' .
+	echo '<li class="elgg-menu-item-usersettings gwf scale">' .
 		$user_settings .
 	'</li>';
 	
@@ -144,15 +159,15 @@ if ($user) {
 		'href' => "action/logout",
 		'text' => 'E',
 		'is_action' => TRUE,
-		'class' => 'tooltip w',
+		'class' => 'tooltip w t',
 		'title' => elgg_echo('logout')
 	));
-	echo '<li class="elgg-menu-item-logout ggouv-webfont scale">' .
+	echo '<li class="elgg-menu-item-logout gwf scale">' .
 			$log_out .
 		'</li>';
 
 	// info
-	echo '<li class="elgg-menu-item-info ggouv-webfont">i</li>';
+	echo '<li class="elgg-menu-item-info gwf t">i</li>';
 
 }
 ?>

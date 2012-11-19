@@ -131,6 +131,7 @@
 	padding: 0;
 	margin: 0;
 	text-align: center;
+	float: none;
 }
 
 .elgg-menu-topbar > li > a:hover {

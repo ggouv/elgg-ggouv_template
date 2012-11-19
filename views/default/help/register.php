@@ -11,13 +11,13 @@
 <div class="social-connect">
 	<h2 class ="mbl"><?php echo elgg_echo('registration:social-connect'); ?></h2>
 	<a href="<?php echo elgg_get_site_url(); ?>twitter_api/forward">
-		<span class="twitter-icon gwfb"></span>Twitter
+		<span class="twitter-icon gwfb t"></span>Twitter
 	</a>
 	<a href="<?php echo elgg_get_site_url(); ?>twitter_api/forward">
-		<span class="facebook-icon gwfb"></span>Facebook
+		<span class="facebook-icon gwfb t"></span>Facebook
 	</a>
 	<a href="<?php echo elgg_get_site_url(); ?>twitter_api/forward">
-		<span class="google-icon gwfb"></span>Google
+		<span class="google-icon gwfb t"></span>Google
 	</a>
 </div>
 

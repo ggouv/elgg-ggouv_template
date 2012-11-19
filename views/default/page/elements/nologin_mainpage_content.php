@@ -51,7 +51,7 @@ foreach ($matches[1] as $key => $item2) {
 	$sections['text'][] = elgg_view('output/markdown_wiki_text', array('value' => trim($matches2[1] . $html)));
 }
 
-$content = '<div class="background-nolog-main"></div><div id="cursor"></div>';
+$content = '<div class="background-nolog-main"></div><div id="cursor" class="t"></div>';
 $content .= '<ul class="title" style="opacity: 0;"><li class="">' . implode('</li><li class="pal">', $sections['title']) . '</li></ul>';
 $content .= '<ul class="content" style="opacity: 0;"><li>' . implode('</li><li>', $sections['text']) . '</li></ul>';
 

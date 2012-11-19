@@ -72,13 +72,7 @@
 	position: fixed;
 	left: 0;
 	border-radius: 0 10px 10px 0;
-	
 	box-shadow: 0 -10px 10px 2px rgba(0, 0, 0, 0.1) inset;
-	
-	transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
 }
 .accroche {
 	text-align: center;
@@ -161,11 +155,6 @@
 	-moz-transform: rotate(45deg) ;
 	-o-transform: rotate(45deg) ;
 	transform: rotate(45deg);
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	transition: all 0.5s ease;
 }
 @media (min-width: 768px) and (max-width: 1279px) {
 	.ribbon {

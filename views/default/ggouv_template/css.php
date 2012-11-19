@@ -1,6 +1,14 @@
 /* 
 * nolog css when non logged in user
 */
+.t, .t:before, .t:after {
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+
 .elgg-page-header.nolog {
 	background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
 	box-shadow: 0 5px 5px 0 white;
@@ -41,50 +49,27 @@
 
 
 /* topbar icons */
-.ggouv-webfont, .gwf, .gwfb:before, .gwfa:after {
+.gwf, .gwfb:before, .gwfa:after {
 	font-family: "ggouv";
 	font-weight: normal;
 	float: left;
-}
-.ggouv-webfont {
-	float: none;
-}
-.ggouv-webfont > a, .elgg-menu-item-info {
-	padding: 5px 0;
-	font-size: 50px;
-	/*text-shadow: 1px 0px 2px #AAAAAA;*/
-	cursor: pointer;
-	color: white;
-	padding: 15px 0;
-	width: 40px;
-	float: left;
-	transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-}
-.ggouv-webfont:hover > a {
-	color: #4690D6;
 }
 .elgg-menu-item-logo {
 	height: 48px !important;
 	overflow: hidden;
 }
-.elgg-menu-item-logo > a {
+.elgg-menu-topbar .elgg-menu-item-logo a, .elgg-menu-item-logo a {
 	font-size: 58px;
 	padding: 16px 7px 0px;
 	color: transparent;
 	height: 32px;
 	width: 27px;
 	text-shadow: -0.1em 0 0.03em #0f0;
+	float: left;
 }
 .elgg-menu-item-logo > a:before, .elgg-menu-item-logo > a:after {
 	position: absolute;
 	content: '∇';
-	transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
 }
 .elgg-menu-item-logo > a:before {
 	text-shadow:  0.03em 0 0.03em #f00;
@@ -116,11 +101,11 @@
                    0 0 2px #fff,
                    0 0 3px #fff;
 }
-.ggouv-webfont.scale:hover > a {
+.gwf.scale:hover > a {
 	color: #4690D6;
 	font-size: 70px;
 }
-.ggouv-webfont.rotate:hover > a {
+.gwf.rotate:hover > a {
 	transform: rotate(-10deg);
 	-moz-transform: rotate(-10deg);
 	-webkit-transform: rotate(-10deg);
@@ -130,11 +115,26 @@
 .elgg-menu-item-at > a {
 	padding-top: 25px;
 }
+.elgg-menu-topbar > li > a {
+	padding: 5px 0;
+	font-size: 50px;
+	/*text-shadow: 1px 0px 2px #AAAAAA;*/
+	cursor: pointer;
+	color: white;
+	padding: 15px 0;
+	width: 40px;
+	float: left;
+}
+.elgg-menu-item-dashboard > a {
+	padding: 0 !important;
+}
 .elgg-menu-item-info {
 	height: 19px !important;
 	border-top: 1px solid #666666;
 	color: white;
 	font-size: 24px;
+	float: left !important;
+	cursor: pointer;
 }
 .elgg-menu-item-info:hover {
 	color: white;
@@ -149,7 +149,7 @@
 	bottom: 0;
 	box-shadow: 0 0 6px 4px #0A0A0A inset;
 	margin: 0 -10px -20px;
-	padding: 20px 10px 40px;
+	padding: 10px 10px 30px;
 	position: fixed;
 	width: 100%;
 	z-index: 11;
@@ -908,10 +908,6 @@ div.tagsinput .not_valid {
 	font-size: 68px;
 	width: 80px;
 	float: left;
-	transition: all 0.2s ease;
-	-webkit-transition: all 0.2s ease;
-	-moz-transition: all 0.2s ease;
-	-o-transition: all 0.2s ease;
 }
 .social-connect a:hover span {
 	font-size: 88px;
