@@ -794,8 +794,10 @@ elgg.longtextMarkdown = function() {
 			var previ = texta.parent().find('.elgg-preview-longtext').width(texta.width()-11);
 			
 			var olongtextHeight = previ.hasClass('hidden') ? 0 : previ.innerHeight(),
-				ilongtextHeight = texta.get(0).scrollHeight + 10,
+				ilongtextHeight = $.browser.mozilla ? texta.get(0).scrollHeight + 10 : texta.get(0).scrollHeight,
 				maxHeight = Math.max(olongtextHeight, ilongtextHeight, 188); // min-height: 188px
+				console.log(ilongtextHeight);
+				console.log(maxHeight);
 			if (previ.innerHeight() < maxHeight) previ.innerHeight(maxHeight);
 			texta.innerHeight(maxHeight + 10 + 2); // padding (cannot set to textarea) + border
 		}

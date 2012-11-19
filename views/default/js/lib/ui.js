@@ -40,7 +40,7 @@ elgg.ui.toggles = function(event) {
 		texta = $(target).find('.elgg-input-longtext.markdown-body');
 		
 	$(target).slideToggle('medium');
-	if (texta) $(texta).parent().find('.elgg-preview-longtext').width($(texta).width()-11);
+	if (texta) $(texta).keyup();
 };
 
 /**
