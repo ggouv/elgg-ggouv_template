@@ -619,6 +619,12 @@ elgg.ggouv_template.ready = function() {
 		if ($('#search-localgroup').length) {
 			$('#map').height(($(window).height() - $('#map').position().top) - 68);
 		}
+		var texta = $('.elgg-input-longtext.markdown-body');
+		if (texta) {
+			texta.each(function() {
+				$(this).parent().find('.elgg-preview-longtext').width($(this).width()-11);
+			});
+		}
 	});
 }
 
@@ -785,9 +791,7 @@ elgg.longtextMarkdown = function() {
 			ilongtext.parent().find('.toggle-longtext').click();
 		}
 		var ResizePanes = function(texta) {
-			var previ = texta.parent().find('.elgg-preview-longtext');
-			texta.css('height', '100%');
-			previ.css('height', '100%');
+			var previ = texta.parent().find('.elgg-preview-longtext').width(texta.width()-11);
 			
 			var olongtextHeight = previ.hasClass('hidden') ? 0 : previ.innerHeight(),
 				ilongtextHeight = texta.get(0).scrollHeight + 10,

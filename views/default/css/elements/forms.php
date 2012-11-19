@@ -93,6 +93,7 @@ textarea {
 	float: left;
 	width: 50%;
 	resize: none;
+	overflow: hidden;
 }
 /*.elgg-input-longtext.markdown-body {
 	margin-left: 15px;
@@ -111,6 +112,7 @@ textarea {
 }
 .previewPaneWrapper .elgg-preview-longtext {
 	margin-top: 1px !important;
+	display: table;
 }
 .elgg-output-longtext.markdown-body {
 	font-size: inherit;

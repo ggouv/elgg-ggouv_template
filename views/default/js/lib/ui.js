@@ -36,9 +36,11 @@ elgg.ui.toggles = function(event) {
 	event.preventDefault();
 
 	// @todo might want to switch this to elgg.getSelectorFromUrlFragment().
-	var target = $(this).toggleClass('elgg-state-active').attr('href');
-
+	var target = $(this).toggleClass('elgg-state-active').attr('href'),
+		texta = $(target).find('.elgg-input-longtext.markdown-body');
+		
 	$(target).slideToggle('medium');
+	if (texta) $(texta).parent().find('.elgg-preview-longtext').width($(texta).width()-11);
 };
 
 /**
