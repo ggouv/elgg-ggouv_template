@@ -13,6 +13,13 @@
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 }
+.aside-plus {
+	float: right !important;
+	font-size: 36px;
+}
+.aside-plus:hover {
+	text-decoration: none;
+}
 
 /* Info */
 .elgg-module-info > .elgg-head > a {

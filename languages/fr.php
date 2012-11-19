@@ -2020,6 +2020,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	/**
 	 * Members
 	 */
+	'members:all' => 'Tous les membres',
 	'members:label:newest' => 'Nouveaux',
 	'members:label:popular' => 'Les plus suivis',
 	'members:label:online' => 'En ligne',
@@ -2030,8 +2031,10 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'members:title:followers' => "Les personnes qui suivent %s",
 	'members:title:following' => "Les personnes que suit %s",
 	'friends:following' => "Abonnements",
+	'friends:my:following' => "Mes abonnements",
 	'friends:title:following' => "Les personnes dont vous suivez l'activité",
 	'friends:followers' => "Abonnés",
+	'friends:my:followers' => "Mes abonnés",
 	'friends:title:followers' => "Les personnes qui vous suivent",
 
 	/**

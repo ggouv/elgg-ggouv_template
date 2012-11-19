@@ -25,15 +25,15 @@ if ($user) {
 		), array(
 			'name' => 'friends',
 			'href' => $site_url . "friends/{$user->username}",
-			'text' => elgg_echo('friends')
+			'text' => elgg_echo('friends:my:following')
 		), array(
 			'name' => 'friends_of',
 			'href' => $site_url . "friendsof/{$user->username}",
-			'text' => elgg_echo('friends:followers')
+			'text' => elgg_echo('friends:my:followers')
 		), array(
 			'name' => 'members',
 			'href' => $site_url . "members",
-			'text' => elgg_echo('members')
+			'text' => elgg_echo('members:all')
 		)
 	);
 	$sub_menu = '<ul class="ggouv-menu-child"><ul class="ggouv-menu-child-shadow">';
@@ -90,10 +90,14 @@ if ($user) {
 	if ($list_groups_owner) $sub_menu .= '<td class="phm hr"><ul><li class="block-title">' . elgg_echo('groups:owned') . '</li><ul>' . $list_groups_owner . '</ul></ul></td>';
 	if ($list_groups_memberof) $sub_menu .= '<td class="phm hr"><ul><li class="block-title">' . elgg_echo('groups:yours') . '</li><ul>' . $list_groups_memberof . '</ul></ul></td>';
 	
-	$sub_menu .= '<td class="plm"><ul>' .
-					'<li class="elgg-menu-item-groups-all"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>' .
-					'<li class="elgg-menu-item-my-localgroup"><a href="' . $site_url . 'groups/profile/' . $user->location . '">' . elgg_echo('groups:my_local_group') . ' !' . $user->location . '</a></li>' .
-				'</ul></td>';
+	$sub_menu .= '<td class="plm"><ul>';
+	if ($user_location = $user->location) $sub_menu .= '<li class="elgg-menu-item-my-localgroup"><a href="' . $site_url . 'groups/profile/' . $user_location . '">' . 
+		elgg_echo('groups:my_local_group') . ' !' . $user_location . '</a></li>';
+	$sub_menu .= '<li class="elgg-menu-item-groups-all"><a href="' . $site_url . 'groups/all' . '">' . elgg_echo('groups:all') . '</a></li>';
+	$sub_menu .= '<li class="elgg-menu-item-groups-meta"><a href="' . $site_url . 'groups/all?filter=metagroups' . '">' . elgg_echo('groups:metagroups') . '</a></li>';
+	$sub_menu .= '<li class="elgg-menu-item-groups-meta"><a href="' . $site_url . 'groups/all?filter=typogroups' . '">' . elgg_echo('groups:typogroups') . '</a></li>';
+	$sub_menu .= '<li class="elgg-menu-item-groups-meta"><a href="' . $site_url . 'groups/all?filter=localgroups' . '">' . elgg_echo('groups:localgroups') . '</a></li>';
+	$sub_menu .= '</ul></td>';
 	
 	$sub_menu .= '</tr></table></ul></ul>';
 	
