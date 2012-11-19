@@ -243,20 +243,22 @@ elgg.ggouv_template.ready = function() {
 	$('.elgg-menu-item-info').die().live('click', function() {
 		if (!$('#site-info-popup').length) {
 			$('.elgg-page-body').after($('<div>', {id: 'site-info-popup', class: 'row-fluid hidden'}));
-			elgg.get('ajax/view/ggouv_template/ajax/site_info_popup', {
-				success: function(response) {
-					$('#site-info-popup').html(response).toggle('slide', {direction:'down'});
-				},
-				error: function() {
-					$('#site-info-popup').remove();
-				}
-			
-			});
-		} else {
-			$('#site-info-popup').remove();
 		}
+		elgg.get('ajax/view/ggouv_template/ajax/site_info_popup', {
+			success: function(response) {
+				$('#site-info-popup').html(response).toggle('slide', {direction:'down'});
+			},
+			error: function() {
+				$('#site-info-popup').remove();
+			}
+		
+		});
 	});
-	$('#site-info-popup .elgg-icon-delete').die().live('click', function() {$('#site-info-popup').remove()});
+	$('#site-info-popup .elgg-icon-delete').die().live('click', function() {
+		$('#site-info-popup').fadeOut(500, function() {
+			$(this).remove();
+		});
+	});
 	
 	// Sidebar
 	if (!$('.elgg-page-admin').length && $(window).scrollTop() + $(window).height() > $('.elgg-sidebar').height() + 48 + 10) {

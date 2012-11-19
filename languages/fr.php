@@ -1408,6 +1408,8 @@ Pour voir le profil de %s, suivez ce lien :
 	'groups:search:tags' => "Tag",
 	'groups:search:title' => "Rechercher des groupes qui contiennent le tag '% s'",
 	'groups:search:none' => "Aucun groupe correspondant n'a été trouvé",
+	'groups:search_in_group' => "Chercher dans ce groupe",
+	'groups:acl' => "Groupe : %s",
 
 	'groups:activity' => "Activité du Groupe",
 	'groups:enableactivity' => "Rendre disponible Activité de groupe",
@@ -2068,11 +2070,39 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	 * System message
 	 */
 	'groups:error:more_five_groups' => "Vous ne pouvez pas créer plus de 5 groupes.",
-
+	
+	/**
+	 * Footer
+	 */
+	'ggouv_template:about' => "A propos",
+	'ggouv_template:conditions' => "Conditions d'utilisations",
+	'ggouv_template:privacy' => "Confidentialité",
+	'ggouv_template:assembly' => "Assemblée",
+	'ggouv_template:blog' => "Blog",
+	'ggouv_template:dev:group_of_help' => "Groupe d'assistance",
+	'ggouv_template:dev:wiki_of_help' => "Pages d'aide",
+	'ggouv_template:dev:faq_of_help' => "FAQ",
+	'ggouv_template:spotlight:contact' => "Contact",
+	'ggouv_template:contact:mail' => "Mail",
+	'ggouv_template:contact:irc' => "Salon IRC",
+	'ggouv_template:spotlight:dev' => "Développement",
+	'ggouv_template:dev:repo' => "Dépôt Github",
+	'ggouv_template:dev:group_of_dev' => "Groupe des développeurs",
+	'ggouv_template:dev:ideas_of_dev' => "Suggérer une idée",
+	'ggouv_template:dev:bugs_of_dev' => "Signaler un bug",
+	'ggouv_template:spotlight:stats' => "Statistiques",
+	
+	
 	/**
 	 * Plugin settings and usersettings
 	 */
-	'ggouv_template:markdown_wiki_page_for_home' => "Guid de la page d'accueil",
+	'ggouv_template:markdown_wiki_page_for_home' => "GUID de la page d'accueil",
+	'ggouv_template:group_of_help' => "URL du groupe d'aide",
+	'ggouv_template:wiki_of_help' => "URL du wiki du groupe d'aide",
+	'ggouv_template:faq_of_help' => "URL de la faq de l'aide",
+	'ggouv_template:group_of_dev' => "URL du groupe des développeurs",
+	'ggouv_template:ideas_of_dev' => "URL du remue-méninge du groupe de développement",
+	'ggouv_template:bugs_of_dev' => "URL de la liste des bugs de la board des développeurs",
 	'ggouv_template:bot_string' => "Bot avec les droits administrateurs",
 	'ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
 	
