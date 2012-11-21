@@ -1559,8 +1559,8 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 		Forum river items
 	*/
 
-	'groups:river:create' => "a créé le groupe",
-	'groups:river:join' => "a rejoint le groupe",
+	'river:create:group:default' => "%s a créé le groupe %s",
+	'river:join:group:default' => "%s a rejoint le groupe %s",
 	'forumtopic:river:create' => "a ajouté un nouveau sujet de discussion",
 	'groups:river:reply' => "a répondu sur le sujet de discussion",
 	
@@ -1868,7 +1868,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'blog:title:all_blogs' => "Tous les blogs du site",
 	'blog:title:friends' => "Blogs des contacts",
 
-	'blog:group' => "Blog de groupe",
+	'blog:group' => "Blog du groupe",
 	'blog:enableblog' => "Activer le blog du groupe",
 	'blog:write' => "Écrivez un article",
 
@@ -1905,8 +1905,10 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'blog:error:revision_not_found' => "Impossible de trouvez cette révision.",
 
 	// river
-	'blog:river:create' => "Publier un article",
-	'river:commented:object:blog' => "le blog",
+	'river:create:object:blog' => "%s a publié l'article %s",
+	'river:ingroup:create:object:blog' => "dans le groupe %s",
+	'river:comment:object:blog' => "%s a commenté l'article %s",
+	'river:ingroup:comment:object:blog' => "dans le groupe %s",
 
 	// widget
 	'blog:widget:description' => "Ce widget affiche vos derniers articles de blog.",
@@ -2110,6 +2112,15 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
 	
 	'ggouv_template:tiny_ownerblock' => "Afficher seulement les icônes dans le menu des groupes",
+	
+	/**
+	 *	River
+	 */
+	'river:ingroup:create:object:idea' => "dans le groupe %s",
+	'river:ingroup:comment:object:idea' => "dans le groupe %s",
+	'river:ingroup:create:object:markdown_wiki' => "dans le groupe %s",
+	'river:ingroup:comment:object:candidat' => "pour le groupe %s",
+	'river:ingroup:create:object:mandat' => "pour le groupe %s",
 
 );
 
