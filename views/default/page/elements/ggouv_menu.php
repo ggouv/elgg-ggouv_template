@@ -135,7 +135,7 @@ if ($user) {
 	}
 
 	// help
-	if ($url = elgg_get_plugin_setting('group_of_help', 'elgg-ggouv_template')) {
+	if ($url = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) {
 		$help = elgg_view('output/url', array(
 			'href' => $url,
 			'text' => 'K',
