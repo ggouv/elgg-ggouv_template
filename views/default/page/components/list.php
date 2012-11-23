@@ -38,10 +38,7 @@ $item_class = 'elgg-item';
 if (isset($vars['item_class'])) {
 	$item_class = "$item_class {$vars['item_class']}";
 }
-if ($fluid) {
-	if ($split_items == 3 ) $item_class .= " span4";
-	if ($split_items == 2 ) $item_class .= " span6";
-}
+if ($fluid) $item_class .= " span" . 12/$split_items;
 
 $html = "";
 $nav = "";

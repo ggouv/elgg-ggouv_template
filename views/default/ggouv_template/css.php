@@ -631,15 +631,36 @@ h2.markdown-wiki-create .elgg-button-action {
 .markdown-body .subject {
 	width: 100%;
 }
+.pro, .con, .not {
+	border-radius: 3px;
+	padding: 5px 10px;
+	font-size: 13px;
+}
 .pro {
-	background-color: #DDFFDD;
-	border: 1px solid green;
-	padding: 10px;
+	background-color: #DFD;
+	border: 1px solid #52CB51;
 }
 .con {
-	background-color: #FFDDDD;
-	border: 1px solid red;
-	padding: 10px;
+	background-color: #FDD;
+	border: 1px solid #F66;
+}
+.not {
+	background-color: #F8F8F8;
+	border: 1px solid #CCC;
+}
+.pro > div:first-child, .con > div:first-child, .not > div:first-child {
+	margin: -5px -10px 5px;
+	padding: 2px 5px;
+	font-size: 14px;
+}
+.pro > div:first-child {
+	background-color: #9F9;
+}
+.con > div:first-child {
+	background-color: #F99;
+}
+.not > div:first-child {
+	background-color: #E0E0E0;
 }
 
 /*
