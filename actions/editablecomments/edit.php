@@ -2,7 +2,7 @@
 
 // Get the required variables
 $annotation_id = get_input("annotation_id");
-$post_comment = get_input("postComment");
+$post_comment = $input[$name] = get_markdown_input($_REQUEST['generic_comment']);
 $annotation = get_annotation($annotation_id);
 $commentOwner = $annotation->owner_guid;
 $access_id = $annotation->access_id;

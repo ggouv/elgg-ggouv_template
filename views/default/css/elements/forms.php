@@ -70,38 +70,66 @@ input[type=text]:focus, textarea:focus {
 	color:#333;
 }
 textarea {
-	height: 200px;
+	height: 188px;
+}
+/*
+*/
+/* hack Chrome / Safari *//*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.description-wrapper {
+		margin: 2px 0 15px 0;
+	}
+}
+.preview-markdown.hidden {
+	display: none;
+}
+.pane-markdown.toggle .preview-markdown {
+	margin-left: 0;
 }
 
-.pad {
-	width: 15px;
-	height: 30px;
-	background-color: red;
-	position: absolute;
+.input-markdown.allWidth {
+	width: 100%;
 }
+
+
+.description-wrapper .toggle-preview {
+	background-color: #CCC;
+	border-radius: 4px;
+	color: white;
+	font-size: 28px;
+	height: 18px;
+	position: absolute;
+	right: 0;
+	text-indent: 1px;
+	top: 0;
+	width: 18px;
+	cursor: pointer;
+}
+.description-wrapper .toggle-preview:hover {
+	background-color: #555;
+}
+*/
+/*
 .elgg-longtext-control {
 	float: right;
 	margin-left: 14px;
 	font-size: 80%;
 	cursor: pointer;
 }
-.description-wrapper {
-	width: 100%;
-	margin: 1px 0 15px 0;
-}
+
 .elgg-input-longtext {
 	float: left;
 	width: 50%;
 	resize: none;
 	overflow: hidden;
 }
-/*.elgg-input-longtext.markdown-body {
+*.elgg-input-longtext.markdown-body {
 	margin-left: 15px;
-}*/
+}*
 .elgg-input-longtext.allWidth {
 	width: 100%;
 }
-/* hack Chrome / Safari */
+* hack Chrome / Safari *
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.elgg-input-longtext {
 		margin-top: 1px;
@@ -117,22 +145,6 @@ textarea {
 .elgg-output-longtext.markdown-body {
 	font-size: inherit;
 }
-.description-wrapper .toggle-longtext {
-	background-color: #CCC;
-	border-radius: 4px 4px 4px 4px;
-	color: white;
-	font-size: 28px;
-	height: 18px;
-	position: absolute;
-	right: 0;
-	text-indent: 1px;
-	top: 0;
-	width: 18px;
-	cursor: pointer;
-}
-.description-wrapper .toggle-longtext:hover {
-	background-color: #555;
-}
 .previewPaneWrapper.toggle {
 	width: 100%;
 }
@@ -140,7 +152,7 @@ textarea {
 	margin-left: 0px;
 	background-color: white;
 }
-
+*/
 
 .elgg-input-access {
 	margin:5px 0 0 0;

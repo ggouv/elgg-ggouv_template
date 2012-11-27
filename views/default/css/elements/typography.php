@@ -63,18 +63,6 @@ code {
 	font-family: Monaco, "Courier New", Courier, monospace;
 }
 
-blockquote {
-	line-height: 1.3em;
-	padding:3px 15px;
-	margin:0px 0 15px 0;
-	background:#EBF5FF;
-	border:none;
-	
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 	color: #0054A7;

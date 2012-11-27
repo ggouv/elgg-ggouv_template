@@ -189,7 +189,6 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.markdown_wiki.reload();
 	elgg.tags.init();
 	elgg.workflow.reload();
-	elgg.longtextMarkdown();
 	elgg.ggouv_pad.resize();
 	// compatibility for fancybox workflow and refresh button in board view	
 	$('#card-forms a:not([href$="#"]), .elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
@@ -211,9 +210,12 @@ elgg.ggouv_template.ready = function() {
 	// Tooltip
 	$('.tooltip').tipsy({
 		live: true,
-		offset: 5,
+		offset: function() {
+			if ($(this).hasClass('o8')) return 8;
+			return 5;
+		},
 		fade: true,
-		delayIn: 200,
+		delayIn: 500,
 		gravity: function() {
 			if ($(this).hasClass('nw')) return 'nw';
 			if ($(this).hasClass('n')) return 'n';
@@ -619,10 +621,15 @@ elgg.ggouv_template.ready = function() {
 		if ($('#search-localgroup').length) {
 			$('#map').height(($(window).height() - $('#map').position().top) - 68);
 		}
-		var texta = $('.elgg-input-longtext.markdown-body');
+		var texta = $('.input-markdown');
 		if (texta) {
 			texta.each(function() {
-				$(this).parent().find('.elgg-preview-longtext').width($(this).width()-11);
+				var textarea = $(this),
+					fieldset = textarea.parents('fieldset'),
+					previewPane = fieldset.find('.preview-markdown'),
+					outputPane = fieldset.find('.output-markdown'),
+					syntaxPane = fieldset.find('.help-markdown');
+					elgg.markdown_wiki.resizePanes(textarea, previewPane, outputPane, syntaxPane);
 			});
 		}
 	});
@@ -767,78 +774,11 @@ elgg.counter140.textCounter = function(textarea, status, limit) {
 elgg.register_hook_handler('init', 'system', elgg.counter140.init);
 
 
-/**
- * Markdown for longtext input
- */
-elgg.longtextMarkdown = function() {
-//var ilongtext = $('.elgg-input-longtext'), olongtext = $('#previewPane-' + ilongtext.attr('id').substr(11));
-	var ilongtext = $('.elgg-input-longtext.markdown-body'),
-		olongtext = ilongtext.parent().find('.elgg-preview-longtext');//$('.elgg-preview-longtext');
-
-	if (ilongtext) {
-		ilongtext.parent().find('.toggle-longtext').click(function() {
-			if ($(this).html() == 'e') {
-				$(this).html('y');
-				$(this).parent().find('.elgg-input-longtext').removeClass('hidden');
-				$(this).parent().find('.elgg-preview-longtext').addClass('hidden');
-			} else {
-				$(this).html('e');
-				$(this).parent().find('.elgg-input-longtext').addClass('hidden');
-				$(this).parent().find('.elgg-preview-longtext').removeClass('hidden');
-			}
-		});
-		if (ilongtext.val() == '') {
-			ilongtext.parent().find('.toggle-longtext').click();
-		}
-		var ResizePanes = function(texta) {
-			var previ = texta.parent().find('.elgg-preview-longtext').width(texta.width()-11);
-			
-			var olongtextHeight = previ.hasClass('hidden') ? 0 : previ.innerHeight(),
-				ilongtextHeight = $.browser.mozilla ? texta.get(0).scrollHeight + 10 : texta.get(0).scrollHeight,
-				maxHeight = Math.max(olongtextHeight, ilongtextHeight, 188); // min-height: 188px
-				console.log(ilongtextHeight);
-				console.log(maxHeight);
-			if (previ.innerHeight() < maxHeight) previ.innerHeight(maxHeight);
-			texta.innerHeight(maxHeight + 10 + 2); // padding (cannot set to textarea) + border
-		}
-	
-	/*	ilongtext.getCaretPosition();
-		$('#textarea_simulator').html('a<span class="focus"/>');
-		var topPos = $('#textarea_simulator .focus').offset().top - $('#textarea_simulator').offset().top;
-		var placeEditor = function() {
-			var pos = ilongtext.getCaretPosition();
-			console.log(ilongtext.parent().find('.pad'));
-			ilongtext.parent().find('.pad').animate({
-				//left: this.offsetLeft + pos.left,
-				top: pos.top
-			});
-		}
-		
-		ilongtext.click(placeEditor);*/
-		
-		var converter = new Showdown.converter().makeHtml;
-		ilongtext.keyup(function() {
-			//placeEditor();
-			var preview = $(this).parent().find('.elgg-preview-longtext');
-			preview.html( converter(normalizeLineBreaks($(this).val())) );
-			ResizePanes($(this));
-		}).trigger('keyup');
-	}
-	
-	function normalizeLineBreaks(str, lineEnd) {
-		var lineEnd = lineEnd || '\n';
-		return str
-			.replace(/\r\n/g, lineEnd) // DOS
-			.replace(/\r/g, lineEnd) // Mac
-			.replace(/\n/g, lineEnd); // Unix
-	}
-};
-elgg.register_hook_handler('init', 'system', elgg.longtextMarkdown);
-
 
 // hook for galliComments plugin
-elgg.discussionSubmit = function() {
-	$('.elgg-preview-longtext').html('');
+elgg.discussionSubmit = function(e) {
+	$('.preview-markdown').html('').height(178);
+	$('.input-markdown ').height(190);
 }
 elgg.register_hook_handler('getOptions', 'galliComments.submit', elgg.discussionSubmit);
 

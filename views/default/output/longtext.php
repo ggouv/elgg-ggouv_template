@@ -19,14 +19,11 @@ if ($additional_class) {
 	$vars['class'] = $class;
 }
 
-$parse_urls = elgg_extract('parse_urls', $vars, true);
+$parse_urls = elgg_extract('parse_urls', $vars, false);
 unset($vars['parse_urls']);
 
 $text = $vars['value'];
 unset($vars['value']);
-
-elgg_load_library('markdown_wiki:markdown');
-$text = Markdown($text);
 
 if ($parse_urls) {
 	$text = parse_urls($text);
@@ -39,4 +36,4 @@ $text = autop($text);*/
 
 $attributes = elgg_format_attributes($vars);
 
-echo "<div $attributes>$text</div>";
+echo "<xmp $attributes>$text</xmp>";
