@@ -8,6 +8,13 @@
 	-ms-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 }
+.t25, .t25:before, .t25:after {
+	transition: all 0.25s ease;
+	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-ms-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
+}
 
 .elgg-page-header.nolog {
 	background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
@@ -625,9 +632,6 @@
 h2.markdown-wiki-create .elgg-button-action {
 	text-transform: none;
 }
-.previewPaneWrapper .pane {
-	border-radius: 0;
-}
 .markdown-body .subject {
 	width: 100%;
 }
@@ -661,6 +665,90 @@ h2.markdown-wiki-create .elgg-button-action {
 }
 .not > div:first-child {
 	background-color: #E0E0E0;
+}
+@media (max-width: 1199px) {
+	.pro, .con, .not {
+		margin-top: 5px;
+	}
+}
+/* Editor */
+.markdown-editor {
+	background-color: white;
+	float: right;
+	height: 18px;
+	margin: -2px 5px;
+	padding: 2px 2px 0 0;
+	position: absolute;
+	right: 1px;
+	top: 0;
+	opacity: 0;
+	font-size: 32px;
+}
+.markdown-editor.top, .markdown-editor:hover {
+	opacity: 1!important;
+}
+.markdown-editor .btn {
+	float: left;
+	width: 21px;
+}
+.markdown-editor .sep {
+	background-color: #CCCCCC;
+	float: left;
+	height: 18px;
+	width: 1px;
+}
+.markdown-editor .btn:before {
+	padding-left: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+.markdown-editor .btn:hover:before {
+	background-color: #4690D6;
+	box-shadow: 0 0 5px #666;
+	border-radius: 2px;
+	font-size: 48px;
+	margin: -5px 0;
+	padding: 5px 2px 5px 3px;
+	position: relative;
+}
+.editor-title:before {
+	content: "\F034";
+}
+.editor-bold:before {
+	content: "\E01F";
+}
+.editor-italic:before {
+	content: "\E079";
+}
+.editor-strike:before {
+	content: "\E159";
+}
+.editor-bullet:before {
+	content: "\F0CA";
+}
+.editor-numeric:before {
+	content: "\F0CB";
+}
+.editor-quote:before {
+	content: "\E10B";
+}
+.editor-code:before {
+	content: "\E032";
+}
+.editor-link:before {
+	content: "\F03F";
+}
+.editor-image:before {
+	content: "\F03E";
+}
+.editor-plus:before {
+	content: "\F03A";
+}
+.editor-zero:before {
+	content: "\F03B";
+}
+.editor-minus:before {
+	content: "\F03C";
 }
 
 /*

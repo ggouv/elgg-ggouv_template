@@ -183,13 +183,14 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	}
 	elgg.trigger_hook('ready', 'system');
 	elgg.ui.widgets.init();
-	elgg.ggouv_template.ready();
+	elgg.markdown_wiki.reload();
 	elgg.deck_river.init();
 	elgg.brainstorm.init();
-	elgg.markdown_wiki.reload();
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.ggouv_pad.resize();
+	elgg.ggouv_template.ready();
+
 	// compatibility for fancybox workflow and refresh button in board view	
 	$('#card-forms a:not([href$="#"]), .elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
 		var url = elgg.normalize_url(decodeURIComponent($(this).attr('href')));

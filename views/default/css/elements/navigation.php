@@ -553,7 +553,9 @@
 .elgg-menu-owner-block .elgg-menu-item-thewire a:before {
 	content: 'S';
 }
-
+.elgg-menu-owner-block .elgg-menu-item-answers  a:before {
+	content: 'Q';
+}
 .elgg-menu-owner-block.tiny li {
 	float: left;
 	width: 32px;

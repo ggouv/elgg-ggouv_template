@@ -2060,7 +2060,6 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv:search:localgroups:notfound' => "La commune n'a pas été trouvée.",
 	'xoxco:removing_tag' => "Enlever ce mot-clé",
 	'xoxco:input:default' => "Ajoutez des mot-clés (séparez par des virgules ou tapez Entrer)",
-	'ggouv:longtext:help' => "Syntaxe markdown accéptée :<br/>**gras**",
 	'forms:required' => "Ce champ est obligatoire !",
 	'forms:remote' => "Ce champ n'est pas valide.",
 	'forms:url' => "Veuillez entrer une URL valide.",
