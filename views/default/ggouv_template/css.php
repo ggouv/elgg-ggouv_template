@@ -674,17 +674,18 @@ h2.markdown-wiki-create .elgg-button-action {
 /* Editor */
 .markdown-editor {
 	background-color: white;
-	float: right;
-	height: 18px;
 	margin: -2px 5px;
 	padding: 2px 2px 0 0;
 	position: absolute;
-	right: 1px;
+	right: 0;
 	top: 0;
-	opacity: 0;
 	font-size: 32px;
 }
-.markdown-editor.top, .markdown-editor:hover {
+.markdown-editor.fly {
+	opacity: 0.3;
+}
+
+.markdown-editor:hover {
 	opacity: 1!important;
 }
 .markdown-editor .btn {

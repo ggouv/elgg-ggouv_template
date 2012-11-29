@@ -33,6 +33,8 @@ if ($parse_urls) {
 
 $text = autop($text);*/
 
+elgg_load_library('markdown_wiki:utilities');
+$text = markdown_wiki_parse_link_plugin_hook('', '', $text, '');
 
 $attributes = elgg_format_attributes($vars);
 

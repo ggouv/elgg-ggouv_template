@@ -329,7 +329,7 @@
 .elgg-menu-filter > .elgg-state-selected > a {
 	position: relative;
 	top: 2px;
-	background: white;
+	background: inherit;
 }
 
 /* ***************************************

@@ -38,9 +38,10 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('elgg.tinymce');
 	elgg_load_js('lightbox');
 	elgg_load_js('elgg.userpicker');
+	elgg_load_js('elgg.autocomplete');
+	elgg_load_js('jquery.ui.autocomplete.html');
 	elgg_load_js('elgg.friendspicker');
 	elgg_load_js('jquery.easing');
-	elgg_load_js('jquery.ui.autocomplete.html');
 	elgg_load_js('showdown');
 	elgg_load_js('highlight');
 	elgg_load_js('xoxco.tags');
@@ -808,7 +809,7 @@ function ggouv_election_when_candidat_added($hook, $entity_type, $returnvalue, $
 	}
 
 	elgg_load_library('groups_admins_elections:utilities');
-	$elected = gae_perform_election($mandat, $params['election_triggered_by'], true);
+	$elected = gae_perform_election($mandat, 'random', $params['election_triggered_by'], elgg_echo('river_elected_more_message:first_random'));
 
 	$user_elected = get_entity($elected->owner_guid);
 	system_message(elgg_echo('groups_admins_elections:elect:success', array($user_elected->name)));
