@@ -15,7 +15,9 @@ elgg.ggouv_template.init = function() {
 	/*
 	* Ajaxified site
 	*/
-	parsePage = function(url) {
+	parsePage = function(url, data) {
+		var fragment = data.fragment;
+		
 		elgg.post(url, {
 			data: 'ajaxified=true',
 			success: function(response, textStatus, xmlHttp) {
@@ -68,7 +70,7 @@ elgg.ggouv_template.init = function() {
 					
 					elgg.ggouv_template.reloadTemplateFunctions();
 				}
-				if (fragment) {
+				if (fragment && $('#'+fragment).length) {
 					$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 				}
 				$('#ajaxified-loader').addClass('hidden');
@@ -94,8 +96,13 @@ elgg.ggouv_template.init = function() {
 			// Check link
 			return url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
 		};
-	
-		var fragment = false;
+		
+		// prevent scroll with link finished by #
+		$(".elgg-page-body a:internal[href$='#']").live('click', function(e){
+			e.preventDefault();
+			return false;
+		});
+		
 		$(".elgg-page-body a:internal:not("+
 								"[href=''],"+
 								"[href$='#'],"+
@@ -107,6 +114,7 @@ elgg.ggouv_template.init = function() {
 								"[href*='address='],"+
 								"[href*='/avatar/edit'],"+
 								"[href*='/action/groups/delete'],"+
+								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal']),"+
 			".elgg-page-topbar a:internal:not([href*='/admin/'],"+
@@ -116,35 +124,35 @@ elgg.ggouv_template.init = function() {
 		).live('click', function(e) {
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
-				title = $this.attr('title') || null;
-console.log(title); // @todo ?
+				title = $this.attr('title') || null; // @todo ?
+
 				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
-					fragment = elgg.parse_url(url, 'fragment') || false;
-					url = url.replace('#'+fragment, '');
+					var fragment = elgg.parse_url(url, 'fragment') || false,
+						url_clean = elgg.parse_url(url, 'path'),
+						url_origin = elgg.parse_url(elgg.normalize_url(decodeURIComponent(window.location.href)), 'path');
 					
-					if (fragment && elgg.normalize_url(decodeURIComponent(window.location.href)) == url) { //same page, got to #hash
-						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60}); // if not that means user click a link for same page
+					if (fragment && url_origin == url_clean) { //same page, got to #hash
+						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
-						History.pushState(null, title, url);
+						History.pushState({fragment: fragment}, null, url.split("#")[0]);
 					}
 				}
 				e.preventDefault();
 				return false;
 		});
-		/*$('input[type=submit]').live('click', function() {
+		/*$('input[type=submit]').live('click', function() {  // ajaxify submit form ?
 			var url = $(this).parents('form').attr('action');
 			History.pushState(null, null, url);
 		});*/
 	
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
-			var State = History.getState(),
-				url = State.url;
-				
+			var State = History.getState();
+
 			if (State) {
 				$('#ajaxified-loader').removeClass('hidden');
-				parsePage(url);
+				parsePage(State.url, State.data);
 			}
 		});
 	}
@@ -183,6 +191,9 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	}
 	elgg.trigger_hook('ready', 'system');
 	elgg.ui.widgets.init();
+
+	elgg.userpicker.init();
+	elgg.autocomplete.init();
 	elgg.markdown_wiki.reload();
 	elgg.deck_river.init();
 	elgg.brainstorm.init();
@@ -198,6 +209,12 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 		parsePage(url);
 		e.preventDefault();
 		return false;
+	});
+	
+	// Reload autocomplete elgg.userpicker.userList @todo remove it for next version. Elgg 1.8.9 don't fix it
+	elgg.userpicker.userList = {};
+	$('.elgg-user-picker-list li input').each(function(i, elem) {
+		$(elgg.userpicker.userList).prop($(elem).val(), true);
 	});
 }
 

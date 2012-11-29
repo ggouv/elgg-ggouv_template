@@ -23,11 +23,11 @@ elgg.ui.widgets.init = function() {
 		stop:                 elgg.ui.widgets.move
 	});
 
-	$('.elgg-widgets-add-panel li.elgg-state-available').click(elgg.ui.widgets.add);
+	$('.elgg-widgets-add-panel li.elgg-state-available').die().live('click', elgg.ui.widgets.add);
 
-	$('a.elgg-widget-delete-button').live('click', elgg.ui.widgets.remove);
-	$('.elgg-widget-edit > form ').live('submit', elgg.ui.widgets.saveSettings);
-	$('a.elgg-widget-collapse-button').live('click', elgg.ui.widgets.collapseToggle);
+	$('a.elgg-widget-delete-button').die().live('click', elgg.ui.widgets.remove);
+	$('.elgg-widget-edit > form ').die().live('submit', elgg.ui.widgets.saveSettings);
+	$('a.elgg-widget-collapse-button').die().live('click', elgg.ui.widgets.collapseToggle);
 
 	elgg.ui.widgets.setMinHeight(".elgg-widgets");
 };
