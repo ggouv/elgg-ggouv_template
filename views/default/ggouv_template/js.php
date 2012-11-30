@@ -16,41 +16,40 @@ elgg.ggouv_template.init = function() {
 	* Ajaxified site
 	*/
 	parsePage = function(url, data) {
-		var fragment = data.fragment;
-		
+		var data = data || false,
+			fragment = data.fragment || false;
+
 		elgg.post(url, {
 			data: 'ajaxified=true',
 			success: function(response, textStatus, xmlHttp) {
 				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
-					var urlP = elgg.parse_url(url);
-					if (urlP.path.match('/action/comments/delete')) {
-						var a_id = elgg.parse_str(urlP.query).annotation_id;
-						$('#item-annotation-'+a_id).css('background-color', '#FF7777').fadeOut();
-					} else if (urlP.path.match('/action/groups/featured')) {
-						parsePage(window.location.href);
-					} else if (urlP.path.match('/action/friends/add')) {
+					var urlP = elgg.parse_url(url),
+						urlM = urlP.path;
+					
+					if (urlM.match('/action/groups/featured') || urlM.match('/action/groups/leave')) {
+						History.pushState(data, null, data.origin); //parsePage(window.location.href);
+					} else if (urlM.match('/action/comments/delete')) {
+						$('#item-annotation-'+elgg.parse_str(urlP.query).annotation_id).css('background-color', '#FF7777').fadeOut();
+					} else if (urlM.match('/action/friends/add')) {
 						$('a.elgg-button.add_friend').blur().removeClass('add_friend').addClass('remove_friend').text(elgg.echo('friend:remove')).attr('href', function(i, val) {
 							return elgg.get_site_url() + 'action/friends/remove?' + elgg.parse_url(val, 'query')
 						}); // @todo protect when user is on a profile page with a user popup opened
-					} else if (urlP.path.match('/action/friends/remove')) {
+					} else if (urlM.match('/action/friends/remove')) {
 						$('a.elgg-button.remove_friend').blur().removeClass('remove_friend').addClass('add_friend').text(elgg.echo('friend:add')).attr('href', function(i, val) {
 							return elgg.get_site_url() + 'action/friends/add?' + elgg.parse_url(val, 'query')
 						}); // @todo idem
-					} else if (urlP.path.match('/action/widgets/delete')) {
-						parsePage(window.location.href); // @todo make it more funny and not just reload page
-					} else if (urlP.path.match('/action/river/delete')) {
-						var river_id = elgg.parse_str(urlP.query).id;
-						$('.item-river-'+river_id).css('background-color', '#FF7777').fadeOut();
-					} else if (urlP.path.match('/action/workflow/delete')) {
+					} else if (urlM.match('/action/river/delete')) {
+						$('.item-river-'+elgg.parse_str(urlP.query).id).css('background-color', '#FF7777').fadeOut();
+					} else if (urlM.match('/action/workflow/delete')) {
 						var board_guid = elgg.parse_str(urlP.query).guid;
 						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
 						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
 					} else if (xmlHttp.getResponseHeader('Redirect') != null) {
-						if (urlP.path.match('/action/brainstorm/delete')) {
+						if (urlM.match('/action/brainstorm/delete')) {
 							var brainstorm_guid = elgg.parse_str(urlP.query).guid;
 							$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
 						}
-						parsePage(xmlHttp.getResponseHeader('Redirect')); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
+						History.pushState(data, null, xmlHttp.getResponseHeader('Redirect')); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
 					} else if (xmlHttp.status = 200) {
 						window.location.replace(url); // in case of...
 					}
@@ -136,7 +135,7 @@ elgg.ggouv_template.init = function() {
 					if (fragment && url_origin == url_clean) { //same page, got to #hash
 						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
-						History.pushState({fragment: fragment}, null, url.split("#")[0]);
+						History.pushState({origin: window.location.href, fragment: fragment}, null, url.split("#")[0]);
 					}
 				}
 				e.preventDefault();
