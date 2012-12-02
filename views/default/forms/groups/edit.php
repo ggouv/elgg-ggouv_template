@@ -38,7 +38,7 @@ if (isset($vars['entity'])) {
 <?php
 
 $group_profile_fields = elgg_get_config('group');
-global $fb; $fb->info($group_profile_fields);
+
 if ($group_profile_fields > 0) {
 	foreach ($group_profile_fields as $shortname => $valtype) {
 		$line_break = '<br />';

@@ -6,9 +6,12 @@
  * @uses $vars['show_add_form'] Display add form or not
  * @uses $vars['id']            Optional id for the div
  * @uses $vars['class']         Optional additional class for the div
+ * @uses $vars['order']         bool Annotation comment order. asc by default or desc. Used for live comment.
  */
 
 $show_add_form = elgg_extract('show_add_form', $vars, true);
+$order = elgg_extract('order', $vars, 'asc');
+if (!in_array($order, array('asc', 'desc'))) $order = 'asc';
 
 $id = '';
 if (isset($vars['id'])) {
@@ -36,7 +39,10 @@ if ($html) {
 }
 
 if ($show_add_form) {
-	$form_vars = array('name' => 'elgg_add_comment');
+	$form_vars = array(
+		'name' => 'elgg_add_comment',
+		'class' => $order
+	);
 	echo elgg_view_form('comments/add', $form_vars, $vars);
 }
 

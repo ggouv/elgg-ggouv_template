@@ -19,12 +19,18 @@ elgg.ggouv_template.init = function() {
 		var data = data || false,
 			fragment = data.fragment || false;
 
+		if (data.dataForm) {
+			dataPost = data.dataForm + '&ajaxified=true';
+		} else {
+			dataPost = 'ajaxified=true';
+		}
 		elgg.post(url, {
-			data: 'ajaxified=true',
+			data: dataPost,
 			success: function(response, textStatus, xmlHttp) {
 				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
 					var urlP = elgg.parse_url(url),
-						urlM = urlP.path;
+						urlM = urlP.path,
+						HTTPredirect = elgg.normalize_url(decodeURIComponent(xmlHttp.getResponseHeader('Redirect')));
 					
 					if (urlM.match('/action/groups/featured') || urlM.match('/action/groups/leave')) {
 						History.pushState(data, null, data.origin); //parsePage(window.location.href);
@@ -44,12 +50,12 @@ elgg.ggouv_template.init = function() {
 						var board_guid = elgg.parse_str(urlP.query).guid;
 						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
 						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
-					} else if (xmlHttp.getResponseHeader('Redirect') != null) {
+					} else if (HTTPredirect != null) {
 						if (urlM.match('/action/brainstorm/delete')) {
 							var brainstorm_guid = elgg.parse_str(urlP.query).guid;
 							$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
 						}
-						History.pushState(data, null, xmlHttp.getResponseHeader('Redirect')); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
+						History.pushState(data, null, HTTPredirect); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
 					} else if (xmlHttp.status = 200) {
 						window.location.replace(url); // in case of...
 					}
@@ -65,7 +71,7 @@ elgg.ggouv_template.init = function() {
 					$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
 					eval($('#JStoexecute').text()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
 					
-					$(window).scrollTop(0);
+					if (!data.noscroll) $(window).scrollTop(0);
 					
 					elgg.ggouv_template.reloadTemplateFunctions();
 				}
@@ -123,28 +129,97 @@ elgg.ggouv_template.init = function() {
 		).live('click', function(e) {
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
-				title = $this.attr('title') || null; // @todo ?
 
 				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
 					var fragment = elgg.parse_url(url, 'fragment') || false,
 						url_clean = elgg.parse_url(url, 'path'),
-						url_origin = elgg.parse_url(elgg.normalize_url(decodeURIComponent(window.location.href)), 'path');
-					
-					if (fragment && url_origin == url_clean) { //same page, got to #hash
-						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
+						url_origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
+						path_origin = elgg.parse_url(url_origin, 'path');
+
+					if (fragment && path_origin == url_clean) { //same page, got to #hash
+						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
-						History.pushState({origin: window.location.href, fragment: fragment}, null, url.split("#")[0]);
+						History.pushState({origin: url_origin, fragment: fragment}, null, url.split("#")[0]);
 					}
 				}
 				e.preventDefault();
 				return false;
 		});
-		/*$('input[type=submit]').live('click', function() {  // ajaxify submit form ?
-			var url = $(this).parents('form').attr('action');
-			History.pushState(null, null, url);
-		});*/
+		$("input[type=submit]:not("+
+						"[id='thewire-submit-button'],"+
+						"[id='workflow-edit-card-submit'],"+
+						"[class*='workflow-card-submit'],"+
+						"[id='workflow-list-submit'])"
+		).die().live('click', function(e) {  // ajaxify submit form
+			var form = $(this).parents('form'),
+				dataForm = form.serialize(),
+				replaceHighlight = function(elem, t) {
+					elem.css('background-color', '#FFFFCC')
+						.animate({backgroundColor: 'white'}, 1500)
+							.find('.elgg-output').replaceWith($('<div>', {class: 'elgg-output markdown-body'}).html(ShowdownConvert(t)));
+					elem.find('pre code').each(function(i, e) {
+						if (e.className == '') $(e).addClass('no-highlight');
+						hljs.highlightBlock(e);
+					});
+				};
+		
+			if (form.hasClass('elgg-form-editablecomments-edit')) { // Special for editable comment
+				
+				elgg.action('editablecomments/edit', {
+					data: dataForm,
+					success: function(json) {
+						var annotation_id = form.find('input[name=annotation_id]').val();
+						
+						$('#editablecomments-edit-annotation-'+annotation_id).toggle();
+						replaceHighlight($('#item-annotation-'+annotation_id), json.output);
+					}
+				});
+			
+			} else if (form.hasClass('elgg-form-comments-add')) { // Special for live comment
+			
+				elgg.action('livecomments/add', {
+					data: dataForm,
+					success: function(json) {
+						var orderBy = form.hasClass('desc') ? 'desc' : 'asc',
+							comBlock = form.parent(),
+							ul = comBlock.find('ul.elgg-list-annotation'),
+							li = $(json.output).find('li:first'),
+							txt = li.find('.elgg-output').html(),
+							liID = li.attr('id');
+						
+						if (orderBy ==  'asc') {
+							if (ul.length < 1) {
+								comBlock.prepend(json.output , $('<h3>', {id: 'comments'}).html(elgg.echo('comments')));
+							} else {
+								ul.append($(json.output).find('li:first'));
+							}
+						} else if (orderBy == 'desc') {
+							if (ul.length < 1) {
+								comBlock.prepend($('<h3>', {id: 'comments'}).html(elgg.echo('comments')), json.output);
+							} else {
+								ul.prepend(li);
+							}
+						}
+						replaceHighlight($('#'+liID), txt);
+						form.find('textarea').val('').height(190);
+						form.find('.preview-markdown').html('').height(178);
+						elgg.markdown_wiki.edit.init();
+					}
+				});
+			
+			} else { // ajaxify others forms
+		
+				var url = elgg.normalize_url(decodeURIComponent(form.attr('action'))),
+					url_origin = elgg.normalize_url(decodeURIComponent(window.location.href));
+	
+				History.pushState({origin: url_origin, dataForm: dataForm}, null, url);
+		
+			}
+			e.preventDefault();
+			return false;	
+		});
 	
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState();
@@ -349,22 +424,6 @@ elgg.ggouv_template.ready = function() {
 			$('.groups-profile-fields #groups-description').hide();
 		}
 	}
-	
-	$('.elgg-form-editablecomments-edit').find('input[type=submit]').live('click', function(e) {
-		var form = $(this).parents('form'),
-			annotation_id = form.find('input[name=annotation_id]').val(),
-			data = form.serialize();
-		elgg.action('editablecomments/edit', {
-			data: data,
-			success: function(json) {
-				if (json.status == '0') {
-					$('#editablecomments-edit-annotation-'+annotation_id).toggle();
-					$('#item-annotation-'+annotation_id).replaceWith($(json.output).find('li:first'));
-				}
-			}
-		});
-		e.preventDefault();
-	});
 	
 	// validate forms
 	jQuery.validator.addMethod("namecheckcar", function(value, element) {
@@ -790,14 +849,6 @@ elgg.counter140.textCounter = function(textarea, status, limit) {
 };
 elgg.register_hook_handler('init', 'system', elgg.counter140.init);
 
-
-
-// hook for galliComments plugin
-elgg.discussionSubmit = function(e) {
-	$('.preview-markdown').html('').height(178);
-	$('.input-markdown ').height(190);
-}
-elgg.register_hook_handler('getOptions', 'galliComments.submit', elgg.discussionSubmit);
 
 
 /**

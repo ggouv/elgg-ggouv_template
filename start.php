@@ -79,7 +79,8 @@ function elgg_ggouv_template_init() {
 	elgg_register_action('signup', "$base/actions/signup.php", 'public');
 	elgg_register_action('signin', "$base/actions/signin.php", 'public');
 	elgg_register_action('profile/edit', "$base/actions/edit.php");
-	elgg_register_action('editablecomments/edit', "$base/actions/editablecomments/edit.php");
+	elgg_register_action('editablecomments/edit', "$base/actions/comments/edit.php");
+	elgg_register_action('livecomments/add', "$base/actions/comments/add.php");
 	// Register actions for groups
 	elgg_register_action("groups/edit", "$base/actions/groups/edit.php");
 	
