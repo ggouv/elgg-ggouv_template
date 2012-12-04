@@ -196,8 +196,9 @@ a.elgg-button {
 	content: "j";
 }
 .elgg-button.refresh-button:before {
-	content: "ç";
+	content: "R";
 	margin-top: -1px;
+	text-transform: uppercase;
 }
 .elgg-button.archive-button:before {
 	content: "â";

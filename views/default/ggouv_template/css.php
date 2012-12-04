@@ -751,6 +751,22 @@ h2.markdown-wiki-create .elgg-button-action {
 .editor-minus:before {
 	content: "\F03C";
 }
+.elgg-menu-entity .elgg-menu-item-history a:before, .elgg-menu-entity .elgg-menu-item-discussion a:before {
+	content: "h";
+	font-size: 32px;
+	margin-top: -2px;
+	color: #CCC;
+}
+.elgg-menu-entity .elgg-menu-item-history a, .elgg-menu-entity .elgg-menu-item-discussion a {
+	font-size: 0;
+}
+.elgg-menu-entity .elgg-menu-item-discussion a:before {
+	content: "ç";
+}
+.elgg-menu-entity .elgg-menu-item-history a:hover:before, .elgg-menu-entity .elgg-menu-item-discussion a:hover:before {
+	color: #4690D6;
+}
+
 
 /*
  * Plugin workflow

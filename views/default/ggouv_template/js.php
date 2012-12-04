@@ -34,22 +34,6 @@ elgg.ggouv_template.init = function() {
 					
 					if (urlM.match('/action/groups/featured') || urlM.match('/action/groups/leave')) {
 						History.pushState(data, null, data.origin); //parsePage(window.location.href);
-					} else if (urlM.match('/action/comments/delete')) {
-						$('#item-annotation-'+elgg.parse_str(urlP.query).annotation_id).css('background-color', '#FF7777').fadeOut();
-					} else if (urlM.match('/action/friends/add')) {
-						$('a.elgg-button.add_friend').blur().removeClass('add_friend').addClass('remove_friend').text(elgg.echo('friend:remove')).attr('href', function(i, val) {
-							return elgg.get_site_url() + 'action/friends/remove?' + elgg.parse_url(val, 'query')
-						}); // @todo protect when user is on a profile page with a user popup opened
-					} else if (urlM.match('/action/friends/remove')) {
-						$('a.elgg-button.remove_friend').blur().removeClass('remove_friend').addClass('add_friend').text(elgg.echo('friend:add')).attr('href', function(i, val) {
-							return elgg.get_site_url() + 'action/friends/add?' + elgg.parse_url(val, 'query')
-						}); // @todo idem
-					} else if (urlM.match('/action/river/delete')) {
-						$('.item-river-'+elgg.parse_str(urlP.query).id).css('background-color', '#FF7777').fadeOut();
-					} else if (urlM.match('/action/workflow/delete')) {
-						var board_guid = elgg.parse_str(urlP.query).guid;
-						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
-						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
 					} else if (HTTPredirect != null) {
 						if (urlM.match('/action/brainstorm/delete')) {
 							var brainstorm_guid = elgg.parse_str(urlP.query).guid;
@@ -64,7 +48,6 @@ elgg.ggouv_template.init = function() {
 					elgg.system_message(JSON.parse(response).system_messages.success);
 					
 				} else {
-					$.fancybox.close(); // close fancybox for link in it
 					var title = $(response).filter('title').text();
 					$('title').html(title);
 					$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
@@ -108,6 +91,7 @@ elgg.ggouv_template.init = function() {
 			return false;
 		});
 		
+		// ajaxify links
 		$(".elgg-page-body a:internal:not("+
 								"[href=''],"+
 								"[href$='#'],"+
@@ -118,7 +102,6 @@ elgg.ggouv_template.init = function() {
 								"[href*='view=rss'],"+
 								"[href*='address='],"+
 								"[href*='/avatar/edit'],"+
-								"[href*='/action/groups/delete'],"+
 								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal']),"+
@@ -128,37 +111,87 @@ elgg.ggouv_template.init = function() {
 			"#site-info-popup a:internal"
 		).live('click', function(e) {
 			var $this = $(this),
-				url = elgg.normalize_url(decodeURIComponent($this.attr('href')));
+				url = elgg.normalize_url(decodeURIComponent($this.attr('href'))),
+				urlP = elgg.parse_url(url),
+				ExecAction = function(url, callback) {
+					elgg.action(url, {
+						success: function(json) {
+							callback();
+						}
+					});
+				};
 
-				if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
-
-				if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
-					var fragment = elgg.parse_url(url, 'fragment') || false,
-						url_clean = elgg.parse_url(url, 'path'),
+			if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
+			
+			// first, verify if there is confirmation. Continue on true.
+			if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
+			
+				// if it's an actions, do action and skip history.
+				if (url.match('/action/comments/delete')) {
+					ExecAction(url, function() {
+						$('#item-annotation-'+elgg.parse_str(urlP.query).annotation_id).css('background-color', '#FF7777').fadeOut();
+						if ($('#card-forms').length) elgg.workflow.addCommentonCard($this.parents('#card-forms').find('input[name="entity_guid"]').val(), -1);
+					});
+				} else if (url.match('/action/friends/add')) {
+					ExecAction(url, function() {
+						$('a.elgg-button.add_friend').blur().removeClass('add_friend').addClass('remove_friend').text(elgg.echo('friend:remove')).attr('href', function(i, val) {
+							return elgg.get_site_url() + 'action/friends/remove?' + elgg.parse_url(val, 'query')
+						});
+						var stats = $('.user-stats li:first-child .stats');
+						stats.html(parseInt(stats.html())+1);
+					});
+				} else if (url.match('/action/friends/remove')) {
+					ExecAction(url, function() {
+						$('a.elgg-button.remove_friend').blur().removeClass('remove_friend').addClass('add_friend').text(elgg.echo('friend:add')).attr('href', function(i, val) {
+							return elgg.get_site_url() + 'action/friends/add?' + elgg.parse_url(val, 'query')
+						});
+						var stats = $('.user-stats li:first-child .stats');
+						stats.html(parseInt(stats.html())-1);
+					});
+				} else if (url.match('/action/river/delete')) {
+					ExecAction(url, function() {
+						$('.item-river-'+elgg.parse_str(urlP.query).id).css('background-color', '#FF7777').fadeOut();
+					});
+				} else if (url.match('/action/workflow/delete')) {
+					ExecAction(url, function() {
+						var board_guid = elgg.parse_str(urlP.query).guid;
+						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
+						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
+					});
+				// it's a link
+				} else {
+				
+					var fragment = urlP.fragment || false,
+						path_url = urlP.path,
 						url_origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
 						path_origin = elgg.parse_url(url_origin, 'path');
-
-					if (fragment && path_origin == url_clean) { //same page, got to #hash
+	
+					if (fragment && path_origin == path_url) { //same page, got to #hash
 						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
 						History.pushState({origin: url_origin, fragment: fragment}, null, url.split("#")[0]);
 					}
 				}
-				e.preventDefault();
-				return false;
+			}
+			e.preventDefault();
+			return false;
 		});
+		
+		// ajaxify submit forms
 		$("input[type=submit]:not("+
+						"[id='thewire-submit-button'],"+
+						"[id='button-signin'],"+
+						"[id='button-signup'],"+
 						"[id='thewire-submit-button'],"+
 						"[id='workflow-edit-card-submit'],"+
 						"[class*='workflow-card-submit'],"+
 						"[id='workflow-list-submit'])"
-		).die().live('click', function(e) {  // ajaxify submit form
+		).die().live('click', function(e) {
 			var form = $(this).parents('form'),
 				dataForm = form.serialize(),
 				replaceHighlight = function(elem, t) {
-					elem.css('background-color', '#FFFFCC')
-						.animate({backgroundColor: 'white'}, 1500)
-							.find('.elgg-output').replaceWith($('<div>', {class: 'elgg-output markdown-body'}).html(ShowdownConvert(t)));
+					elem.effect("highlight", {}, 3000)
+						.find('.elgg-output').replaceWith($('<div>', {class: 'elgg-output markdown-body'}).html(ShowdownConvert(t)));
 					elem.find('pre code').each(function(i, e) {
 						if (e.className == '') $(e).addClass('no-highlight');
 						hljs.highlightBlock(e);
@@ -191,7 +224,7 @@ elgg.ggouv_template.init = function() {
 						
 						if (orderBy ==  'asc') {
 							if (ul.length < 1) {
-								comBlock.prepend(json.output , $('<h3>', {id: 'comments'}).html(elgg.echo('comments')));
+								comBlock.prepend($('<h3>', {id: 'comments'}).html(elgg.echo('comments')), json.output);
 							} else {
 								ul.append($(json.output).find('li:first'));
 							}
@@ -276,8 +309,8 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.ggouv_pad.resize();
 	elgg.ggouv_template.ready();
 
-	// compatibility for fancybox workflow and refresh button in board view	
-	$('#card-forms a:not([href$="#"]), .elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
+	// compatibility for refresh button in board view	
+	$('.elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
 		var url = elgg.normalize_url(decodeURIComponent($(this).attr('href')));
 		$('#ajaxified-loader').removeClass('hidden');
 		parsePage(url);

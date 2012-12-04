@@ -618,7 +618,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 			'name' => 'edit',
 			'text' => 'e',
 			'title' => elgg_echo('edit:this'),
-			'class' => 'gwf tooltip s',
+			'class' => 'gwf tooltip s t',
 			'href' => "$handler/edit/{$entity->getGUID()}",
 			'priority' => 200,
 		);
@@ -629,7 +629,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 			'name' => 'delete',
 			'text' => elgg_view_icon('delete'),
 			'title' => elgg_echo('delete:this'),
-			'class' => 'tooltip s',
+			'class' => 'tooltip s t',
 			'href' => "action/$handler/delete?guid={$entity->getGUID()}",
 			'confirm' => elgg_echo('deleteconfirm'),
 			'priority' => 300,

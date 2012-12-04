@@ -396,12 +396,9 @@ a.external:after {
 	margin-top: -4px;
 	text-decoration: none;
 	transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
 }
 .elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover {
-	color: #555;
+	color: #4690D6;
 }
 
 .elgg-avatar > .elgg-icon-hover-menu {

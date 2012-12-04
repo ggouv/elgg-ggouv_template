@@ -22,7 +22,11 @@
 
 <div class="elgg-foot">
 
-	<?php echo elgg_view('input/submit', array('value' => elgg_echo('login'), 'class' => 'elgg-button elgg-button-submit man')); ?>
+	<?php echo elgg_view('input/submit', array(
+		'value' => elgg_echo('login'),
+		'id' => 'button-signin',
+		'class' => 'elgg-button elgg-button-submit man'
+	)); ?>
 	
 	<?php 
 	if (isset($vars['returntoreferer'])) {
