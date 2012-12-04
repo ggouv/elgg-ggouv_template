@@ -101,7 +101,7 @@ foreach ($values as $name => $default) {
 			break;
 		
 		case 'description':
-			$values[$name]) = get_markdown_input($_REQUEST['description']);
+			$values[$name] = get_markdown_input($_REQUEST['description']);
 			break;
 
 		default:
@@ -112,7 +112,7 @@ foreach ($values as $name => $default) {
 
 // if preview, force status to be draft
 if ($save == false) {
-	$values['status'] = 'draft';
+	//$values['status'] = 'draft';
 }
 
 // assign values to the entity, stopping on error.
