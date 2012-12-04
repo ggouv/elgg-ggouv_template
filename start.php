@@ -36,7 +36,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('jquery.scrollTo');
 	elgg_load_js('tinymce');
 	elgg_load_js('elgg.tinymce');
-	elgg_load_js('lightbox');
 	elgg_load_js('elgg.userpicker');
 	elgg_load_js('elgg.autocomplete');
 	elgg_load_js('jquery.ui.autocomplete.html');
@@ -46,7 +45,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('highlight');
 	elgg_load_js('xoxco.tags');
 	elgg_load_js('leaflet.js');
-	elgg_load_css('lightbox');
 	elgg_load_css('leaflet');
 	elgg_load_js('history.js');
 	elgg_load_js('jquery-validation');

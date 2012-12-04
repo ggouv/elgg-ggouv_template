@@ -759,7 +759,7 @@ h2.markdown-wiki-create .elgg-button-action {
 	margin-top: 4px;
 }
 #card-forms .card-checklist .elgg-icon-delete {
-	margin-top: 1px;
+	margin-top: 1px !important;
 }
 .workflow-list .elgg-icon-workflow-list {
 	background: none;
