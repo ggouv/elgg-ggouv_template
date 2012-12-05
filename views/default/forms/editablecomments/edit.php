@@ -3,7 +3,8 @@
 echo "<div><label>" . elgg_echo('comment:edit') . "</label><br>";
 echo elgg_view('input/longtext', array(
 	'name' => 'postComment',
-	'value' => $vars['annotation']->value
+	'value' => $vars['annotation']->value,
+	'preview' => $vars['preview']
 ));
 echo elgg_view('input/submit', array(
 	'name' => 'submit',
