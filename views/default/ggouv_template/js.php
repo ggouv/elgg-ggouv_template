@@ -357,9 +357,9 @@ elgg.ggouv_template.ready = function() {
 	// go top button
 	$(window).scroll(function() {
 		if ($(window).scrollTop() > 300) {
-			$('#goTop').removeClass('hidden');
+			$('#goTop').css('bottom', 0);
 		} else {
-			$('#goTop').addClass('hidden');
+			$('#goTop').css('bottom', -50);
 		}
 	});
 	$('#goTop').click(function() {

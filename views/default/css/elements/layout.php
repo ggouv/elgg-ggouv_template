@@ -127,10 +127,10 @@
 	background-color: #EEE;
 }
 #goTop {
-	background-color: rgba(0, 0, 0, 0.1);
-	border-radius: 6px;
-	bottom: 8px;
-	box-shadow: 0 0 3px #666;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 6px 6px 0 0;
+	bottom: -50px;
+	box-shadow: 0 0 6px #666;
 	height: 40px;
 	position: fixed;
 	right: 10px;
@@ -141,7 +141,7 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 #goTop .triangle {
-	border-color: rgba(255, 255, 255, 0.8) transparent;
+	border-color: rgba(180, 180, 180, 0.8) transparent;
 	border-style: solid;
 	border-width: 0 15px 15px;
 	height: 0;
@@ -149,6 +149,9 @@
 	right: -5px;
 	top: 12px;
 	width: 0;
+}
+#goTop:hover .triangle {
+	border-color: rgba(255, 255, 255, 0.5) transparent;
 }
 .elgg-sidebar-alt {
 	position: relative;

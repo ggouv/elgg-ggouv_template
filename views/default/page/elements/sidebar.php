@@ -31,4 +31,4 @@ echo elgg_view_menu('extras', array(
 	'class' => 'elgg-menu-hz',
 ));
 
-echo '<div id="goTop" class="hidden t"><div class="triangle"></div></div>';
+echo '<div id="goTop" class="t"><div class="triangle t"></div></div>';
