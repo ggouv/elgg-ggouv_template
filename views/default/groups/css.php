@@ -124,7 +124,7 @@
 	margin: 0 10px;
 	float: left;
 	display: block;
-	min-width: 100px;
+	min-width: 110px;
 }
 .groups-profile .groups-stats li h3 > a {
 	color: #333333;

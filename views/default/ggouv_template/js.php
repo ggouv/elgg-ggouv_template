@@ -94,6 +94,7 @@ elgg.ggouv_template.init = function() {
 		// ajaxify links
 		$(".elgg-page-body a:internal:not("+
 								"[href=''],"+
+								"[href^='#'],"+
 								"[href$='#'],"+
 								"[rel=toggle],"+
 								"[rel=popup],"+
@@ -158,6 +159,7 @@ elgg.ggouv_template.init = function() {
 						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
 						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
 					});
+				
 				// it's a link
 				} else {
 				

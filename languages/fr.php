@@ -899,6 +899,7 @@ $french = array(
 
 	'by' => "par",
 	'none' => "aucun",
+	'at' => "à",
 
 	'annotations' => "Annotations",
 	'relationships' => "Relations",
