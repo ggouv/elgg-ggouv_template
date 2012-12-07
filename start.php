@@ -24,6 +24,8 @@ function elgg_ggouv_template_init() {
 	
 	elgg_unregister_js('elgg.avatar_cropper');
 	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js");
+	elgg_unregister_js('elgg.autocomplete');
+	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js");
 
 	elgg_register_css('leaflet', "$http_base/vendors/leaflet-0.4/leaflet.css");
 	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.4/leaflet.js", 'footer');
@@ -71,6 +73,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_library('group_ggouv', "$base/lib/groups/utilities.php");
 	elgg_register_library('ggouv:typo', "$base/lib/groups/typo.php");
 	elgg_load_library('user_ggouv');
+	elgg_register_library('elgg:relatedgroups', "$base/lib/groups/relatedgroups.php");
 
 	// Register actions
 	elgg_unregister_action('register');
@@ -83,6 +86,8 @@ function elgg_ggouv_template_init() {
 	elgg_register_action('blog/auto_save_revision', "$base/actions/blog/auto_save_revision.php");
 	// Register actions for groups
 	elgg_register_action("groups/edit", "$base/actions/groups/edit.php");
+	elgg_register_action("relatedgroups/add", "$base/actions/relatedgroups/add.php");
+	elgg_register_action("relatedgroups/remove", "$base/actions/relatedgroups/remove.php");
 	
 	// extend the comment view with the form
 	elgg_extend_view('annotation/generic_comment', 'editablecomments/generic_comment');
@@ -119,6 +124,8 @@ function elgg_ggouv_template_init() {
 
 	// Override groups page handler
 	elgg_register_page_handler('groups', 'ggouv_template_groups_page_handler');
+	// Register page handler for relatedgroups
+	elgg_register_page_handler('relatedgroups', 'relatedgroups_page_handler');
 	
 	// override group entity menu
 	elgg_unregister_plugin_hook_handler('register', 'menu:entity', 'groups_entity_menu_setup');
@@ -132,6 +139,9 @@ function elgg_ggouv_template_init() {
 	remove_group_tool_option('activity');
 	elgg_unextend_view('groups/tool_latest', 'groups/profile/activity_module');
 	//elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'groups_activity_owner_block_menu');
+
+	// Extending views for relatedgroups
+	elgg_extend_view('groups/sidebar/members', 'groups/sidebar/relatedgroups');
 
 	//unset($CONFIG->events[$event][$object_type]
 	// Override groups lib for metagroup, localgroup and typogroup
@@ -151,6 +161,9 @@ function elgg_ggouv_template_init() {
 
 	//elgg_register_plugin_hook_handler('register', 'menu:composer', 'ggouv_theme_composer_menu_handler');
 	elgg_register_plugin_hook_handler('index', 'system', 'ggouv_template_nologin_mainpage');
+	
+	// Register an unrelate link to entity menu (max priority to run the last)
+	elgg_register_plugin_hook_handler('register', 'menu:entity', 'relatedgroups_related_menu_setup', 9999);
 
 	// provide link on @user and !group
 	//$CONFIG->mentions_user_match_regexp = '/[\b]?@([\p{L}\p{M}_\.0-9]+)[\b]?/iu';
@@ -259,6 +272,44 @@ function ggouv_template_typo_page_handler($page) {
 
 	return true;
 }
+
+
+
+/**
+ * Dispatches related groups pages.
+ * URLs take the form of
+ *  
+ *  Group view related groups:      relatedgroups/owner/<group_guid>
+ *  Group manage related groups:    relatedgroups/edit/<group_guid>
+ *
+ * @param array $page
+ * @return NULL
+ */
+function relatedgroups_page_handler($page){
+	
+	if (!isset($page[0])) {
+		$page[0] = 'owner';
+	}
+
+	$base_dir = dirname(__FILE__) . '/pages/relatedgroups';
+	
+	switch($page[0]) {
+		case 'add':
+		case 'edit':
+			elgg_set_page_owner_guid($page[1]);
+			include "$base_dir/edit.php";
+			break;
+		case 'owner':
+			elgg_set_page_owner_guid($page[1]);
+			include "$base_dir/owner.php";
+			break;
+	}
+	
+	elgg_pop_context();
+
+	return true;
+}
+
 
 
 /**
@@ -716,6 +767,38 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 
 	return $return;
 }
+
+
+
+function relatedgroups_related_menu_setup($hook, $type, $return, $params){
+	
+	$group = elgg_get_page_owner_entity();
+	$othergroup = $params['entity'];
+	
+	if($group instanceof ElggGroup && $group->canEdit() &&
+					$othergroup instanceof ElggGroup &&
+									elgg_in_context('relatedgroups')){
+		
+		// Delete all previous links
+		$return = array();
+		
+		$url = elgg_http_add_url_query_elements('action/relatedgroups/remove', array(
+			'group' => $group->guid,
+			'othergroup' => $othergroup->guid,
+		));
+
+		$options = array(
+			'name' => 'delete',
+			'href' => $url,
+			'text' => "<span class=\"elgg-icon elgg-icon-delete\"></span>",
+			'confirm' => elgg_echo('deleteconfirm'),
+			'text_encode' => false,
+		);
+		$return[] = ElggMenuItem::factory($options);
+	}
+	return $return;
+}
+
 
 
 /**

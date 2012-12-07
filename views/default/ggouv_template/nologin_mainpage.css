@@ -1,3 +1,6 @@
+.markdown-body {
+	font-size: 100%;
+}
 .elgg-page-default {
 	min-width: 0px;
 }

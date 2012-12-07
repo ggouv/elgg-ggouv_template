@@ -201,6 +201,10 @@
 .group_activity_module .elgg-module > .elgg-body > .elgg-river {
 	overflow: auto;
 }
+.manage-relatedgroups.aside-plus {
+	color: red;
+	font-size: 28px;
+}
 
 /* typogroup */
 .groups-profile-iframe div, .groups-profile-iframe a, .groups-profile-iframe table {

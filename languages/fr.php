@@ -2053,6 +2053,20 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'groups:localgroups' => "Groupes locaux",
 	'groups:localgroup:departement' => "Département",
 	'groups:my_local_group' => "Mon groupe local",
+	
+	"relatedgroups" => 'Groupes en relation',
+	"relatedgroups:more" => 'Voir tous les groupes en relations',
+	"relatedgroups:owned" => 'Groupes en relation avec %s',
+	"relatedgroups:in_frontpage" => 'Afficher les groupes en relation sur la page du groupe',
+	"relatedgroups:manage" => 'Gérer les groupes en relations',
+	"relatedgroups:related" => 'Groupes en relations',
+	"relatedgroups:add:label" => "Écrire le nom du groupe",
+	"relatedgroups:addurl:label" => "Copier l'URL du groupe ici",
+	"relatedgroups:add:button" => 'Mettre en relation',
+	"relatedgroups:dontwork" => "Ça ne marche pas ?",
+	"relatedgroups:unrelated" => 'Défaire la relation entre les groupes',
+	"relatedgroups:nopermissons" => "Vous n'avez pas la permisson de modifier les groupes en relation",
+	"relatedgroups:add:error" => 'Il y a une erreur. Avez-vous correctement inscrit le groupe ?',
 
 	/**
 	 * Forms
