@@ -826,7 +826,7 @@ function ggouv_groups_icon_url_override($hook, $type, $returnvalue, $params) {
 	}
 	
 	if ($group->getSubtype() == 'localgroup') {
-		return elgg_get_site_url() . '/mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $entity->guid . '&size=' . $size;
+		return elgg_get_site_url() . 'mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $group->guid . '&size=' . $size;
 	}
 
 	return "mod/groups/graphics/default{$size}.gif";

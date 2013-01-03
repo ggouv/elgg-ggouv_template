@@ -137,3 +137,20 @@ function get_data_pref_by_dep($dep) {
 	
 	return false;
 }
+
+
+
+/**
+ * Change group subtype
+ *
+ * @param string $group_guid GUID of the group
+ *
+ * @return true|false Depending on success
+ */
+function ggouv_change_group_subtype($group_guid, $subtype) {
+	global $CONFIG;
+	$group_subtype = add_subtype('group', $subtype);
+	return update_data("UPDATE {$CONFIG->dbprefix}entities
+							SET subtype = '$group_subtype'
+							WHERE {$CONFIG->dbprefix}entities.guid = {$group_guid}");
+}
