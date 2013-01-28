@@ -5,7 +5,7 @@
  * @package Elgg.Core
  * @subpackage Comments
  */
-
+$view = get_input('viewType', true);
 $entity_guid = (int) get_input('entity_guid');
 $comment_text = get_markdown_input($_REQUEST['generic_comment']);
 
@@ -59,6 +59,7 @@ $options = array(
 	'annotation_name' => 'generic_comment',
 	'pagination' => false,
 	'reverse_order_by' => true,
+	'full_view' => $view,
 	'limit' => 1
 );
 echo elgg_list_annotations($options);

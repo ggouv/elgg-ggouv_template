@@ -218,15 +218,16 @@ elgg.ggouv_template.init = function() {
 					data: dataForm,
 					success: function(json) {
 						var orderBy = form.hasClass('desc') ? 'desc' : 'asc',
-							comBlock = form.parent(),
+							comBlock = form.parents('.elgg-comments'),
 							ul = comBlock.find('ul.elgg-list-annotation'),
 							li = $(json.output).find('li:first'),
 							txt = li.find('.elgg-output').html(),
 							liID = li.attr('id');
-						
+
 						if (orderBy ==  'asc') {
 							if (ul.length < 1) {
-								comBlock.prepend($('<h3>', {id: 'comments'}).html(elgg.echo('comments')), json.output);
+								comBlock.prepend(json.output);
+								if (!form.hasClass('tiny')) comBlock.prepend($('<h3>', {id: 'comments'}).html(elgg.echo('comments')));
 							} else {
 								ul.append($(json.output).find('li:first'));
 							}
@@ -308,6 +309,7 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.brainstorm.init();
 	elgg.tags.init();
 	elgg.workflow.reload();
+	elgg.answers.init();
 	elgg.ggouv_pad.resize();
 	elgg.ggouv_template.ready();
 

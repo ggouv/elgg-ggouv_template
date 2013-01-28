@@ -32,6 +32,12 @@ if (isset($vars['entity']) && elgg_is_logged_in()) {
 	</div>
 <?php
 	}
+	if (isset($vars['viewType'])) {
+		echo elgg_view('input/hidden', array(
+			'name' => 'viewType',
+			'value' => $vars['viewType']
+		));
+	}
 	
 	echo elgg_view('input/hidden', array(
 		'name' => 'entity_guid',
