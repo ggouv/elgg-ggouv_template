@@ -114,6 +114,7 @@ if ($user) {
 						'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
 						'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .
 						'<li><a href="' . $site_url . 'brainstorm/owner/' . $user->username . '">' . elgg_echo('my_ideas') . '</a></li>' .
+						'<li><a href="' . $site_url . 'answers/owner/' . $user->username . '">' . elgg_echo('answers:your') . '</a></li>' .
 				'</ul>' .
 			'</ul>' .
 		'</li>';

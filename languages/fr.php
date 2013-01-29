@@ -2138,6 +2138,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'river:ingroup:create:object:markdown_wiki' => "dans le groupe %s",
 	'river:ingroup:comment:object:candidat' => "pour le groupe %s",
 	'river:ingroup:create:object:mandat' => "pour le groupe %s",
+	'river:ingroup:create:object:question' => "au groupe %s",
 	
 	'river_elected_more_message:first_random' => "<br/><span class='elgg-subtext'>Tirage au sort lancé automatiquement pour la première élection.</span>",
 
