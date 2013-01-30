@@ -358,8 +358,19 @@ function groups_handle_activity_page($guid) {
 
 	elgg_push_breadcrumb($group->name, $group->getURL());
 	elgg_push_breadcrumb($title);
-
-	$content = '<ul class="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
+	
+	if (elgg_get_viewtype() == 'default') {
+		$content = '<ul class="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
+	} else {
+		$db_prefix = elgg_get_config('dbprefix');
+		$content = elgg_list_river(array(
+			'joins' => array("JOIN {$db_prefix}entities e ON e.guid = rv.object_guid"),
+			'wheres' => array("e.container_guid = $guid")
+		));
+		if (!$content) {
+			$content = '<p>' . elgg_echo('groups:activity:none') . '</p>';
+		}
+	}
 	
 	$params = array(
 		'content' => $content,
