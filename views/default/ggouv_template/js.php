@@ -184,7 +184,6 @@ elgg.ggouv_template.init = function() {
 						"[id='thewire-submit-button'],"+
 						"[id='button-signin'],"+
 						"[id='button-signup'],"+
-						"[id='thewire-submit-button'],"+
 						"[id='workflow-edit-card-submit'],"+
 						"[class*='workflow-card-submit'],"+
 						"[id='workflow-list-submit'])"
@@ -193,7 +192,7 @@ elgg.ggouv_template.init = function() {
 				dataForm = form.serialize(),
 				replaceHighlight = function(elem, t) {
 					elem.effect("highlight", {}, 3000)
-						.find('.elgg-output').replaceWith($('<div>', {class: 'elgg-output markdown-body'}).html(ShowdownConvert(t)));
+						.find('.elgg-output').replaceWith($('<div>', {'class': 'elgg-output markdown-body'}).html(ShowdownConvert(t)));
 					elem.find('pre code').each(function(i, e) {
 						if (e.className == '') $(e).addClass('no-highlight');
 						hljs.highlightBlock(e);
@@ -373,7 +372,7 @@ elgg.ggouv_template.ready = function() {
 	// site-info-popup from info button in vertical menu
 	$('.elgg-menu-item-info').die().live('click', function() {
 		if (!$('#site-info-popup').length) {
-			$('.elgg-page-body').after($('<div>', {id: 'site-info-popup', class: 'row-fluid hidden'}));
+			$('.elgg-page-body').after($('<div>', {id: 'site-info-popup', 'class': 'row-fluid hidden'}));
 		}
 		elgg.get('ajax/view/ggouv_template/ajax/site_info_popup', {
 			success: function(response) {
