@@ -285,6 +285,9 @@
 	z-index: 7003;
 	overflow: hidden;
 	width: 40px;
+	text-align: right;
+	font-weight: bold;
+	color: #333333;
 }
 #thewire-characters-remaining span {
 	color: #00CC00;

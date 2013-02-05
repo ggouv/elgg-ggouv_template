@@ -1625,22 +1625,17 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	 * Menu items and titles
 	 */
 	'thewire' => "Le flux",
-	'thewire:everyone' => "Tous les messages du flux",
-	'thewire:user' => "Le flux de %s",
+	'thewire:user' => "Les messages de %s",
 	'thewire:friends' => "Messages des abonnements sur le flux",
 	'thewire:reply' => "Répondre",
-	'thewire:replying' => "Répondre à %s, qui a écrit",
 	'thewire:thread' => "Flux",
 	'thewire:charleft' => "caractères restant",
-	'thewire:tags' => "Messages du flux commentés par '% s' avec",
+	'thewire:tags' => "Messages du flux avec le tag '%s' :",
 	'thewire:noposts' => "Pas encore de messages sur le flux",
 	'item:object:thewire' => "Messages",
 	'thewire:update' => "Mise à jour",
-
-	'thewire:previous' => "Précédent",
-	'thewire:hide' => "Masquer",
-	'thewire:previous:help' => "Voir le message précédent",
-	'thewire:hide:help' => "Masquer le message précédent",
+	'thewire:by' => 'Message de %s',
+	'thewire:breadcrumb:user' => "Ses messages",
 
 	/**
 	 * The wire river
@@ -1667,9 +1662,15 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	/**
 	 * Notifications
 	 */
-	'thewire:notify:subject' => "Nouveau message dans le flux",
-	'thewire:notify:reply' => "%s a répondu à %s :",
+	'thewire:notify:subject' => "%s a répondu à l'un de vos messages",
+	'thewire:notify:thismessage' => "ce message",
+	'thewire:notify:reply' => "%s a répondu %s :",
+	'thewire:notify:yourmessage' => "votre message",
+	'thewire:notify:atyourmessage' => "à %s :",
 	'thewire:notify:post' => "%s posté sur le flux :",
+	
+	'thewire:mention:subject' => "%s vous a mentionné",
+	'thewire:mention:mention' => "%s vous a mentionné dans %s :",
 
 
 /**
