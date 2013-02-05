@@ -15,6 +15,7 @@ echo '<div class="spotlight-column span3">';
 echo elgg_view('page/elements/spotlight', array(
 	'title' => elgg_get_site_entity()->name,
 	'items' => array(
+		'/?home=true' => elgg_echo('ggouv_template:home'),
 		'#about' => elgg_echo('ggouv_template:about'),
 		'#conditions' => elgg_echo('ggouv_template:conditions'),
 		'#privacy' => elgg_echo('ggouv_template:privacy'),

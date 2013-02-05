@@ -109,7 +109,7 @@ elgg.ggouv_template.init = function() {
 			".elgg-page-topbar a:internal:not([href*='/admin/'],"+
 									" [href*='/ajax/'],"+
 									" [href*='/logout']),"+
-			"#site-info-popup a:internal"
+			"#site-info-popup a:internal:not([href*='home=true'])"
 		).live('click', function(e) {
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href'))),

@@ -22,6 +22,8 @@ if (elgg_get_context() == 'admin') {
 }
 
 $ajaxified = (bool) get_input('ajaxified', false);
+$force_home = (bool) get_input('home', false);
+global $fb; $fb->info($force_home);
 if ($ajaxified) {
 	if (empty($vars['title'])) {
 		$title = elgg_get_config('sitename');
@@ -67,7 +69,7 @@ header("Content-type: text/html; charset=UTF-8");
 		<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
 	</div>
 	
-	<?php if (elgg_is_logged_in()) { ?>
+	<?php if (elgg_is_logged_in() && !$force_home) { ?>
 	
 		<div class="elgg-page-topbar">
 			<div class="elgg-inner">

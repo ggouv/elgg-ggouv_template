@@ -2097,6 +2097,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	/**
 	 * Footer
 	 */
+	'ggouv_template:home' => "Accueil",
 	'ggouv_template:about' => "A propos",
 	'ggouv_template:conditions' => "Conditions d'utilisations",
 	'ggouv_template:privacy' => "Confidentialité",

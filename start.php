@@ -519,8 +519,8 @@ function ggouv_custom_menu() {
 }
 
 function ggouv_template_nologin_mainpage() {
-	
-	if (elgg_is_logged_in()) {
+	$force_home = (bool) get_input('home', false);
+	if (elgg_is_logged_in() && !$force_home) {
 	
 		forward('activity');
 		
