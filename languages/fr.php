@@ -784,7 +784,7 @@ $french = array(
 	'usersettings:plugins:opt:description' => "Configurer vos paramètres (s'il y en a) pour activer vos outils.",
 	'usersettings:plugins:opt:linktext' => "Configurer les outils",
 
-	'usersettings:plugins:description' => "Ce panneau de configuration vous permez de mettre à jour les options de vos outils.",
+	'usersettings:plugins:description' => "Ce panneau de configuration vous permet de mettre à jour les options de vos outils.",
 	'usersettings:statistics:label:numentities' => "Vos entités",
 
 	'usersettings:statistics:yourdetails' => "Vos informations",

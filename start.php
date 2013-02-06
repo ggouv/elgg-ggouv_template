@@ -27,7 +27,6 @@ function elgg_ggouv_template_init() {
 	elgg_unregister_js('elgg.autocomplete');
 	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js");
 
-	elgg_register_css('leaflet', "$http_base/vendors/leaflet-0.4/leaflet.css");
 	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.4/leaflet.js", 'footer');
 	
 	elgg_register_ajax_view('ggouv_template/ajax/get_city');
@@ -47,7 +46,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('highlight');
 	elgg_load_js('xoxco.tags');
 	elgg_load_js('leaflet.js');
-	elgg_load_css('leaflet');
 	elgg_load_js('history.js');
 	elgg_load_js('jquery-validation');
 	elgg_load_js('jquery.caretposition');
