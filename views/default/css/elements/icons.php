@@ -224,6 +224,17 @@
 }
 .elgg-icon-push-pin {
 	background-position: 0 -738px;
+	background: none;
+}
+.elgg-icon-push-pin:before {
+	content: 'v';
+	color: #CCC;
+	font-size: 36px;
+	cursor: pointer;
+	text-indent: -5px;
+}
+.elgg-icon-push-pin:hover:before, .pinned .elgg-icon-push-pin:before {
+	color: #4690D6;
 }
 .elgg-icon-redo {
 	background-position: 0 -756px;

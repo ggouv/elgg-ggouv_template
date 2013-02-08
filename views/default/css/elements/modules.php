@@ -50,15 +50,15 @@
 /* Popup */
 .elgg-module-popup {
 	background-color: white;
-	border: 2px solid #ccc;
+	border: 1px solid #ccc;
 	
 	z-index: 9999;
 	margin-bottom: 0;
 	padding: 5px;
 	
-	-webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
 }
 .elgg-module-popup > .elgg-head {
 	margin-bottom: 5px;

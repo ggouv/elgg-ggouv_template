@@ -13,19 +13,19 @@ function elgg_ggouv_template_init() {
 	elgg_extend_view('js/elgg', 'ggouv_template/js');
 
 	elgg_register_css('css.nologin.mainpage',"$http_base/views/default/ggouv_template/nologin_mainpage.css");
-	elgg_register_js('js.nologin.mainpage',"$http_base/views/default/ggouv_template/nologin_mainpage.js");
-	elgg_register_js('jquery.scrollTo',"$http_base/vendors/jquery.scrollTo-min.js");
-	elgg_register_js('xoxco.tags',"$http_base/vendors/xoxco_tags/jquery.tagsinput.min.js");
-	elgg_register_js('carrousel',"$http_base/vendors/carrousel.js");
-	elgg_register_js('history.js', "$http_base/vendors/jquery.history.js");
-	elgg_register_js('jquery-validation', "$http_base/vendors/jquery-validation-1.9.0/jquery.validate.min.js");
-	elgg_register_js('jquery.caretposition', "$http_base/vendors/jquery.caretposition.js");
-	elgg_register_js('jquery.tipsy', "$http_base/vendors/jquery.tipsy.min.js");
+	elgg_register_js('js.nologin.mainpage',"$http_base/views/default/ggouv_template/nologin_mainpage.js", 'footer');
+	elgg_register_js('jquery.scrollTo',"$http_base/vendors/jquery.scrollTo-min.js", 'footer');
+	elgg_register_js('xoxco.tags',"$http_base/vendors/xoxco_tags/jquery.tagsinput.min.js", 'footer');
+	elgg_register_js('carrousel',"$http_base/vendors/carrousel.js", 'footer');
+	elgg_register_js('history.js', "$http_base/vendors/jquery.history.js", 'footer');
+	elgg_register_js('jquery-validation', "$http_base/vendors/jquery-validation-1.9.0/jquery.validate.min.js", 'footer');
+	elgg_register_js('jquery.caretposition', "$http_base/vendors/jquery.caretposition.js", 'footer');
+	elgg_register_js('jquery.tipsy', "$http_base/vendors/jquery.tipsy.min.js", 'footer');
 	
 	elgg_unregister_js('elgg.avatar_cropper');
-	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js");
+	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js", 'footer');
 	elgg_unregister_js('elgg.autocomplete');
-	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js");
+	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js", 'footer');
 
 	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.4/leaflet.js", 'footer');
 	

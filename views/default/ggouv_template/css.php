@@ -869,7 +869,12 @@ h2.markdown-wiki-create .elgg-button-action {
 	color: white;
 	text-shadow: none;
 }
-
+.brainstorm-vote-popup {
+	-webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+}
 
 /*
  * Output
