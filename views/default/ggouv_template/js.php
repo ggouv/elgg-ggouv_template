@@ -10,8 +10,8 @@ elgg.ggouv_template.init = function() {
 	$(document).ready(function() {
 		elgg.ggouv_template.ready();
 	});
-	
-	
+
+
 	/*
 	* Ajaxified site
 	*/
@@ -31,7 +31,7 @@ elgg.ggouv_template.init = function() {
 					var urlP = elgg.parse_url(url),
 						urlM = urlP.path,
 						HTTPredirect = elgg.normalize_url(decodeURIComponent(xmlHttp.getResponseHeader('Redirect')));
-					
+
 					if (urlM.match('/action/groups/featured') || urlM.match('/action/groups/leave')) {
 						History.pushState(data, null, data.origin); //parsePage(window.location.href);
 					} else if (HTTPredirect != null) {
@@ -43,19 +43,19 @@ elgg.ggouv_template.init = function() {
 					} else if (xmlHttp.status = 200) {
 						window.location.replace(url); // in case of...
 					}
-					
+
 					elgg.register_error(JSON.parse(response).system_messages.error);
 					elgg.system_message(JSON.parse(response).system_messages.success);
-					
+
 				} else {
 					var title = $(response).filter('title').text();
 					$('title').html(title);
 					$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
 					$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
 					eval($('#JStoexecute').text()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
-					
+
 					if (!data.noscroll) $(window).scrollTop(0);
-					
+
 					elgg.ggouv_template.reloadTemplateFunctions();
 				}
 				if (fragment && $('#'+fragment).length) {
@@ -84,13 +84,13 @@ elgg.ggouv_template.init = function() {
 			// Check link
 			return url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
 		};
-		
+
 		// prevent scroll with link finished by #
 		$(".elgg-page-body a:internal[href$='#']").live('click', function(e){
 			e.preventDefault();
 			return false;
 		});
-		
+
 		// ajaxify links
 		$(".elgg-page-body a:internal:not("+
 								"[href=''],"+
@@ -124,10 +124,10 @@ elgg.ggouv_template.init = function() {
 				};
 
 			if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
-			
+
 			// first, verify if there is confirmation. Continue on true.
 			if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {
-			
+
 				// if it's an actions, do action and skip history.
 				if (url.match('/action/comments/delete')) {
 					ExecAction(url, function() {
@@ -160,15 +160,15 @@ elgg.ggouv_template.init = function() {
 						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
 						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
 					});
-				
+
 				// it's a link
 				} else {
-				
+
 					var fragment = urlP.fragment || false,
 						path_url = urlP.path,
 						url_origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
 						path_origin = elgg.parse_url(url_origin, 'path');
-	
+
 					if (fragment && path_origin == path_url) { //same page, got to #hash
 						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
@@ -179,7 +179,7 @@ elgg.ggouv_template.init = function() {
 			e.preventDefault();
 			return false;
 		});
-		
+
 		// ajaxify submit forms
 		$("input[type=submit]:not("+
 						"[id='thewire-submit-button'],"+
@@ -187,7 +187,8 @@ elgg.ggouv_template.init = function() {
 						"[id='button-signup'],"+
 						"[id='workflow-edit-card-submit'],"+
 						"[class*='workflow-card-submit'],"+
-						"[id='workflow-list-submit'])"
+						"[id='workflow-list-submit'],"+
+						"[class*='noajaxified'])"
 		).die().live('click', function(e) {
 			var form = $(this).parents('form'),
 				dataForm = form.serialize(),
@@ -199,21 +200,21 @@ elgg.ggouv_template.init = function() {
 						hljs.highlightBlock(e);
 					});
 				};
-		
+
 			if (form.hasClass('elgg-form-editablecomments-edit')) { // Special for editable comment
-				
+
 				elgg.action('editablecomments/edit', {
 					data: dataForm,
 					success: function(json) {
 						var annotation_id = form.find('input[name=annotation_id]').val();
-						
+
 						$('#editablecomments-edit-annotation-'+annotation_id).toggle();
 						replaceHighlight($('#item-annotation-'+annotation_id), json.output);
 					}
 				});
-			
+
 			} else if (form.hasClass('elgg-form-comments-add')) { // Special for live comment
-			
+
 				elgg.action('livecomments/add', {
 					data: dataForm,
 					success: function(json) {
@@ -244,19 +245,19 @@ elgg.ggouv_template.init = function() {
 						elgg.markdown_wiki.edit.init();
 					}
 				});
-			
+
 			} else { // ajaxify others forms
-		
+
 				var url = elgg.normalize_url(decodeURIComponent(form.attr('action'))),
 					url_origin = elgg.normalize_url(decodeURIComponent(window.location.href));
-	
+
 				History.pushState({origin: url_origin, dataForm: dataForm}, null, url);
-		
+
 			}
 			e.preventDefault();
-			return false;	
+			return false;
 		});
-	
+
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState();
 
@@ -266,7 +267,7 @@ elgg.ggouv_template.init = function() {
 			}
 		});
 	}
-	
+
 	//Custom jquery validation message. Need to be called after plugin jquery validation loaded
 	jQuery.extend(jQuery.validator.messages, {
 		required: elgg.echo('forms:required'),
@@ -313,7 +314,7 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 	elgg.ggouv_pad.resize();
 	elgg.ggouv_template.ready();
 
-	// compatibility for refresh button in board view	
+	// compatibility for refresh button in board view
 	$('.elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
 		var url = elgg.normalize_url(decodeURIComponent($(this).attr('href')));
 		$('#ajaxified-loader').removeClass('hidden');
@@ -321,7 +322,7 @@ elgg.ggouv_template.reloadTemplateFunctions = function() {
 		e.preventDefault();
 		return false;
 	});
-	
+
 	// Reload autocomplete elgg.userpicker.userList @todo remove it for next version. Elgg 1.8.9 don't fix it
 	elgg.userpicker.userList = {};
 	$('.elgg-user-picker-list li input').each(function(i, elem) {
@@ -335,7 +336,7 @@ elgg.ggouv_template.ready = function() {
 	/*
 	 * Resize, scroll and sidebar
 	 */
-	
+
 	// Tooltip
 	$('.tooltip').tipsy({
 		live: true,
@@ -344,6 +345,7 @@ elgg.ggouv_template.ready = function() {
 			return 5;
 		},
 		fade: true,
+		html: true,
 		delayIn: 500,
 		gravity: function() {
 			if ($(this).hasClass('nw')) return 'nw';
@@ -357,7 +359,7 @@ elgg.ggouv_template.ready = function() {
 			return 'n';
 		}
 	});
-	
+
 	// go top button
 	$(window).scroll(function() {
 		if ($(window).scrollTop() > 300) {
@@ -369,7 +371,7 @@ elgg.ggouv_template.ready = function() {
 	$('#goTop').click(function() {
 		$(window).scrollTo(0, 500);
 	});
-	
+
 	// site-info-popup from info button in vertical menu
 	$('.elgg-menu-item-info').die().live('click', function() {
 		if (!$('#site-info-popup').length) {
@@ -382,7 +384,7 @@ elgg.ggouv_template.ready = function() {
 			error: function() {
 				$('#site-info-popup').remove();
 			}
-		
+
 		});
 	});
 	$('#site-info-popup .elgg-icon-delete').die().live('click', function() {
@@ -390,7 +392,7 @@ elgg.ggouv_template.ready = function() {
 			$(this).remove();
 		});
 	});
-	
+
 	// Sidebar
 	if (!$('.elgg-page-admin').length && $(window).scrollTop() + $(window).height() > $('.elgg-sidebar').height() + 48 + 10) {
 		$('.elgg-sidebar').css({'position': 'fixed', 'bottom': 0});
@@ -461,12 +463,12 @@ elgg.ggouv_template.ready = function() {
 			$('.groups-profile-fields #groups-description').hide();
 		}
 	}
-	
+
 	// validate forms
 	jQuery.validator.addMethod("namecheckcar", function(value, element) {
-		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_-]{3,30}$/.test(value); 
+		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_-]{3,30}$/.test(value);
 	}, elgg.echo('registration:namecheckcar'));
-	
+
 	$('.elgg-form-groups-edit').validate({
 		invalidHandler: function(form, validator) {
 			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
@@ -476,7 +478,7 @@ elgg.ggouv_template.ready = function() {
 			});
 		}
 	});
-	
+
 	$('.elgg-form-profile-edit, .elgg-form-user-requestnewpassword').validate({
 		invalidHandler: function(form, validator) {
 			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
@@ -486,7 +488,7 @@ elgg.ggouv_template.ready = function() {
 			});
 		}
 	});
-	
+
 	$('.elgg-form-signup').validate({
 		success: "valid",
 		rules: {
@@ -609,7 +611,7 @@ elgg.ggouv_template.ready = function() {
 			},
 			success: function(response) {
 				$('#map').removeClass().html('');
-				return true; 
+				return true;
 			},
 			error: function() {
 				valuevalid = '"erreur avec le serveur"';
@@ -619,7 +621,7 @@ elgg.ggouv_template.ready = function() {
 
 
 
-	
+
 	// map for local group in group profile
 	if ($('.groups-profile-map').length) {
 		var groupMap = $("#map"),
@@ -634,7 +636,7 @@ elgg.ggouv_template.ready = function() {
 		map = new L.Map('map');
 		map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade); //map.setView([51.505, -0.09], 12);
 	}
-	
+
 	// map for local group in groups search
 	if ($('#search-localgroup').length) {
 		$('#map').height($(window).height() - $('#map').position().top - 68);
@@ -649,7 +651,7 @@ elgg.ggouv_template.ready = function() {
 			});
 		map = new L.Map('map');
 		map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
-		
+
 		// live search
 		var timeout,
 			villes,
@@ -663,7 +665,7 @@ elgg.ggouv_template.ready = function() {
 					clearTimeout(timeout);
 					timeout = null;
 				}
-				
+
 				timeout = setTimeout(function() {
 					search_input = $("#search-localgroup").val();
 					if (search_input.length > 2) { // @todo check why need to do it again ?
@@ -696,7 +698,7 @@ elgg.ggouv_template.ready = function() {
 											))).clone()).remove().html();
 										markers.push(L.marker([value.lat, value.long]).bindPopup(
 										//'<h2>'+value.article+' '+value.ville+'</h2><a href="'+elgg.get_site_url()+'groups/profile/'+value.cp+'/'+value.ville+'">'+ value.cp + '</a>'));
-										
+
 										popupContent));
 										if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
 										if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
@@ -763,7 +765,7 @@ $.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
 		});
 	map = new L.Map('map');
 	map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
-	
+
 	// live search
 	var timeout,
 		villes,
@@ -776,7 +778,7 @@ $.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
 				clearTimeout(timeout);
 				timeout = null;
 			}
-			
+
 			timeout = setTimeout(function() {
 				search_input = TheInput.val();
 				if (search_input.length > nbrChar-1) { // @todo check why need to do it again ?
@@ -908,7 +910,7 @@ elgg.register_hook_handler('init', 'system', elgg.counter140.init);
 		}, options);
 		return this.each(function() {
 			var $this = $(this);
-			var container = based || $this; 
+			var container = based || $this;
 			// Resizer() resizes items based on the object width divided by the compressor
 			var resizer = function() {
 				var newCSS = Math.max(Math.min(container.width()/(compressor), parseFloat(settings.maxSize)), parseFloat(settings.minSize)) + settings.modificator;
@@ -916,7 +918,7 @@ elgg.register_hook_handler('init', 'system', elgg.counter140.init);
 				// Execute callback if any
 				if (callback) callback();
 			};
-			
+
 			// Call once to set
 			resizer();
 			// Call on resize. Opera debounces their resize by default
