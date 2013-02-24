@@ -24,7 +24,7 @@
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
+
 	padding: 2px 6px;
 	color: #4690d6;
 	border: 1px solid #4690d6;
@@ -59,7 +59,7 @@
 	border-bottom: 0;
 	background: #eee;
 	margin: 0 0 0 10px;
-	
+
 	-webkit-border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
@@ -292,11 +292,11 @@
 	border-bottom: 0;
 	background: #eee;
 	margin: 0 0 0 10px;
-	
+
 	-webkit-border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
-	
+
 	transition: all 0.25s ease;
 	-webkit-transition: all 0.25s ease;
 	-moz-transition: all 0.25s ease;
@@ -341,15 +341,15 @@
 
 .elgg-menu-page a {
 	display: block;
-	
+
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
-	
+
 	background-color: white;
 	margin: 0 0 3px;
 	padding: 2px 6px;
-	
+
 	transition: all 0.25s ease;
 	-webkit-transition: all 0.25s ease;
 	-moz-transition: all 0.25s ease;
@@ -392,7 +392,7 @@
 	border: solid 1px;
 	border-color: #E5E5E5 #999 #999 #E5E5E5;
 	background-color: #FFF;
-	
+
 	-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
 	-moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
 	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.50);
@@ -490,15 +490,15 @@
 *************************************** */
 .elgg-menu-owner-block li a {
 	display: block;
-	
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	
+
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+
 	background-color: white;
-	margin: 3px 0 5px 0;
-	padding: 2px 6px;
-	
+	margin-bottom: 4px;
+	padding: 4px 6px;
+
 	transition: all 0.25s ease;
 	-webkit-transition: all 0.25s ease;
 	-moz-transition: all 0.25s ease;

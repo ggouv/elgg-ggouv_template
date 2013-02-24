@@ -94,21 +94,24 @@
 
 /* Featured */
 .elgg-module-featured {
-	border: 1px solid #4690D6;
+	background-color: #D9EDF7;
+	border: 1px solid #BCE8F1;
+	color: #3A87AD;
+	padding: 5px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 }
 .elgg-module-featured > .elgg-head {
-	padding: 5px;
-	background-color: #4690D6;
+	padding: 5px 5px 0px;
 }
 .elgg-module-featured > .elgg-head * {
-	color: white;
+	color: #555;
 }
 .elgg-module-featured > .elgg-body {
-	padding: 10px;
+	padding: 5px;
 }
 
 /* ***************************************

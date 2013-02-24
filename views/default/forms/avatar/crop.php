@@ -36,7 +36,7 @@ foreach ($coords as $coord) {
 
 echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid));
 
-echo elgg_view('input/submit', array('value' => elgg_echo('avatar:create'), 'class' => 'elgg-button elgg-button-submit noajaxified'));
+echo elgg_view('input/submit', array('value' => elgg_echo('avatar:edit'), 'class' => 'elgg-button elgg-button-submit noajaxified'));
 
 ?>
 </div>

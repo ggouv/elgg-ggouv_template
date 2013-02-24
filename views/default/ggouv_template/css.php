@@ -1,3 +1,246 @@
+/*
+ * Home page
+ */
+
+.elgg-page-default {
+	min-width: 0px;
+}
+.homepage .elgg-page-body, .homepage .elgg-main {
+	margin-left: 0 !important;
+}
+.homepage .elgg-layout-one-column {
+	margin-right: 0;
+}
+.homepage .elgg-body {
+	overflow: visible;
+}
+.signup {
+	border: 30px solid white;
+	border-radius: 130px;
+	font-weight: bold;
+	margin: 0px auto -120px;
+	position: relative;
+	width: 180px;
+}
+.signup a {
+	color: white;
+	background: #4690D6;
+	display: table-cell;
+	border-radius: 100px;
+	height: 180px;
+	font-size: 1.4em;
+	line-height: 1.7em;
+	padding-left: 20px;
+	vertical-align: middle;
+	width: 160px;
+}
+.signup a:after {
+	color: white;
+	content: "ï";
+	font-size: 5em;
+	position: absolute;
+	right: 0;
+	top: 75px;
+}
+.signup a:hover {
+	text-decoration: none;
+	background: #0054A7;
+}
+.homepage h2 {
+	font-size: 2.8em;
+	color: #333;
+	margin-bottom: 30px;
+}
+.homepage .titre {
+	color: #999;
+	font-size: 1.7em;
+	font-weight: bold;
+	line-height: 1em;
+	font-style: italic;
+}
+.homepage .not, .homepage .pro {
+	color: #333333;
+	/*float: left;*/
+	font-size: 1.4em;
+	background: transparent;
+	border: none;
+	/*width: 100%;*/
+}
+@media (max-width: 1199px) {
+	.homepage .not, .homepage .pro {
+		clear: both;
+	}
+	.homepage .markdown-body {
+		font-size: 10px;
+	}
+}
+.homepage .markdown-body img {
+	max-width: 400px;
+	min-width: 220px;
+}
+.homepage .red {
+	color: #FF3D3D;
+}
+
+#section1 .span4 div {
+	background: #EEEEEE;
+	height: 450px;
+	margin: 70px 10px -20px;
+	padding: 20px;
+}
+#welcome {
+	font-size: 3em;
+	font-weight: bold;
+	padding: 40px 0 20px;
+	text-shadow: 0 -1px 0 #666666;
+}
+#welcome span {
+	color: #1F2E3D;
+	font-size: 1.1em;
+}
+.accroche {
+	font-size: 1.8em;
+	line-height: 1.4em;
+	color: #0054A7;/*#4690D6;*/
+	font-weight: bold;
+	text-align: justify;
+	clear: both;
+}
+.summary {
+	color: #666;
+	font-size: 1.5em;
+	line-height: 1.5em;
+	background: rgba(0, 0, 0, 0.02);
+	padding: 40px;
+}
+.summary:before, .summary:after {
+	color: #EEEEEE;
+	content: "\E10B";
+	font-size: 7em;
+	position: relative;
+	z-index: -1;
+	margin: -30px -45px;
+}
+.summary:after {
+	content: "\E10B";
+	margin: 0;
+	float: right;
+	margin: 33px -45px;
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.questions {
+	color: #666666;
+	font-size: 1.5em;
+	line-height: 1.8em;
+	margin-top: 50px;
+}
+.questions:before {
+	color: #E9E9E9;
+	content: "ï";
+	font-size: 7em;
+	margin: 40px 20px 110px 0;
+}
+.questions .q2 {
+	color: #4690D6;
+	font-size: 1.2em;
+}
+.questions .q3 {
+	color: #0054A7;
+	font-size: 1.5em;
+}
+
+.width80 {
+	width: 80%;
+	margin: 0 auto !important;
+}
+#section2 {
+	background: #e4ecf5;
+	padding-top: 130px;
+	float: left;
+}
+#section2 .not > div, .markdown-body h2 {
+	background: transparent;
+	color: #4690D6;
+	font-size:2em;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 1em;
+}
+#section2 p, #section3 p {
+	font-size: 1.2em;
+}
+#section2 li {
+	color: #4690D6;
+	font-size: 1.1em;
+	list-style: none outside none;
+	padding: 10px 0 10px 70px;
+	position: relative;
+}
+#section2 li .gwf {
+	color: #0054A7;
+	font-size: 6em;
+	left: -20px;
+	position: absolute;
+	top: -28px;
+}
+#section2 li strong {
+	color: #0054A7;
+}
+
+#section3 {
+	clear: both;
+	padding: 50px 0;
+	width: 100%;
+}
+#section3 .markdown-body h2 {
+	border: medium none;
+	margin-bottom: -10px;
+	padding-top: 30px;
+	clear: both;
+}
+#section3 .markdown-body h2 + div {
+	color: #999;
+	font-size: 1.7em;
+	line-height: 1em;
+	font-style: italic;
+}
+#section3 .not > div:first-child, #section3 .pro > div:first-child {
+	background: transparent;
+	color: #0054A7;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding-bottom: 10px;
+	position: relative;
+}
+#section3 .not > div:first-child {
+	margin-left: 30px;
+}
+#section3 .span6 div > .gwf {
+	color: #999999;
+	font-size: 3em;
+	left: -40px;
+	position: absolute;
+	top: -28px;
+}
+#section3 .text {
+	display: table;
+	min-width: 220px;
+}
+p + p + .row-fluid {
+	padding-top: 20px;
+}
+
+#footer-home {
+	background: none repeat scroll 0 0 #EEEEEE;
+	height: 100px;
+	margin-bottom: -20px;
+	padding: 150px 0;
+}
+
 /* 
 * nolog css when non logged in user
 */
@@ -17,7 +260,7 @@
 }
 
 .elgg-page-header.nolog {
-	background: url("http://localhost/~mama/ggouv/ggouv/_graphics/header_shadow.png") repeat-x scroll left bottom #1F2E3D;
+	background: #1F2E3D;
 	box-shadow: 0 5px 5px 0 white;
 	height: 48px;
 	position: fixed;

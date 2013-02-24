@@ -1,73 +1,66 @@
 <?php
 
-elgg_load_css('css.nologin.mainpage');
-elgg_load_js('js.nologin.mainpage');
-elgg_load_js('jquery.scrollTo');
-elgg_load_js('carrousel');
 elgg_load_library('markdown_wiki:utilities');
 
-// get text
+// get page
 $page_guid = elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg-ggouv_template');
 $page = get_entity($page_guid);
 if (!$page) {
 	return;
 }
 
+// parse page
 $annotation = $page->getAnnotations('markdown_wiki', 1, 0, 'desc');
 $value = unserialize($annotation[0]->value);
 $text = $value['text'];
+$sections = array();
 
-// parse title
-$return = preg_match_all('/^# (.*)/m', $text, $matches);
-foreach ($matches[1] as $item) {
-	$sections['title'][] = elgg_view('output/longtext', array('value' => trim($item)));
-}
-$text = preg_replace('/^# (.*)/m', '%%%', $text);
+$text = preg_replace('/^# /m', '%%%', $text); // use %%% as a marker to delimit section with only one # (title)
+$text = explode('%%%', $text);
+unset($text[0]); // delete content before first title1. Used to add notes.
 
-// parse section
-//$return = preg_match_all('/%%%# .*\n(.*)(?:@@@|$)/sU', $text, $matches);
-$matches = explode('%%%', $text);
-unset($matches[0]);
+foreach ($text as $key => $section) {
+	// parse title 1
+	$sections[$key]['title'] = strtok($section, "\n");
 
-foreach ($matches as $key => $item2) {
-	//$item2 = preg_replace('/^# (.*)/m', '', $item2);
-	//global $fb; $fb->info($item2);
-	$sub_sections = array();
-	$return = preg_match_all('/^## (.*)/m', $item2, $matches3);
-	foreach ($matches3[1] as $subkey => $item3) {
-		$sub_sections[$subkey]['title'] = trim($item3);
-	}
-	$matches4 = preg_replace('/^## (.*)/m', '%%%', $item2);
-	$matches4 = explode('%%%', $matches4);
-	unset($matches4[0]);
-	$matches4 = array_values($matches4);
-
-	//$return = preg_match_all('/## .*\n(.*)(?:## |$)/sU', $item2, $matches4);
-	foreach ($matches4 as $subkey => $item4) {
-		$sub_sections[$subkey]['text'] = elgg_view('output/longtext', array('value' => trim($item4)));
-	}
-
-	$html = '';
-	if ($sub_sections) {
-		$html = "<div class='elgg-menu-owner-block slidewrap{$key}'><ul class='slider'>";
-		foreach ($sub_sections as $sub_section) {
-			$html .= '<li class="slide"><h2 class="slidehed">' . $sub_section['title'] . '</h2>' . $sub_section['text'] . '</li>';
-		}
-		$html .= "</ul></div>";
-		$sections['text'][] = $html;
-	} else {
-	//$return = preg_match('/^(.*)(?:##|$)/sU', $item2, $matches2);
-	$sections['text'][] = elgg_view('output/longtext', array('value' => trim($item2)));
-	}
+	// parse text
+	$sections[$key]['text'] = substr($section, strpos($section, "\n")+1);
 }
 
-$content = '<div class="background-nolog-main"></div><div id="cursor" class="t"></div>';
-$content .= '<ul class="title" style="opacity: 0;"><li class="">' . implode('</li><li class="pal">', $sections['title']) . '</li></ul>';
-$content .= '<ul class="content" style="opacity: 0;"><li>' . implode('</li><li>', $sections['text']) . '</li></ul>';
+// display page
+$content = '<div id="section1" class="width80"><div class="row-fluid"><div class="span8">' .
+	elgg_view('output/longtext', array(
+		'value' => trim($sections[1]['text']),
+		'class' => ''
+	)) . '</div>';
 
-$params = array(
-		'content' => $content,
-);
+$content .= '<div class="span4 visible-desktop"><div>A faire. Un slideshow avec la photo de personnalité qui ont dit des phrases percutantes correspondant à la thématique de ggouv : démocratie, incompétence et inertie des politiques, le changement qu apporte internet, notre façon de travailler ensemble...<br/>On pourrait même imaginer que ce slideshow soit créer à partir de quelques propositions faites dans un remue-méniges, et dans lequel chacun pourrait voter pour les citations qui lui plaisent le mieux...</div></div></div></div>';
 
-echo elgg_view_layout('one_column', $params);
+$content .= '<div class="signup"><a class="gwfa" href="' . elgg_get_site_url() . 'signup">' . elgg_echo('ggouv:register:contamined') . '</a></div>';
 
+$content .= '<div id="section2"><div class="pal width80"><div class="row-fluid"><div class="span8 pvl mvm"><h2>' . $sections[2]['title'] . '</h2>' .
+	elgg_view('output/longtext', array(
+		'value' => trim($sections[2]['text']),
+		'class' => ''
+	)) . '</div>';
+
+$content .= '<div class="span4 visible-desktop"><div>A faire. Il faudrait faire un groupe qui serait la raison d être (les objectifs globaux) de ggouv. Ce que veulent les «gitoyens».<br/>Lors de la première inscription, une tâche demandant d aller dépenser ses 10 pointes de votes dans ce groupe serait assignée. On pourrait mettre ici les idées les plus votées de ce remue-méniges. A voir.</div></div></div></div></div>';
+
+$content .= '<div id="section3"><div class="pal width80"><h2 class="pbl">' . $sections[3]['title'] . '</h2>' .
+	elgg_view('output/longtext', array(
+		'value' => trim($sections[3]['text']),
+		'class' => ''
+	)) . '<ul>';
+/*foreach ($sections[3]['subsections'] as $section3) {
+	$content .= '<li class="pal"><h3>' . $section3['title'] . '</h3>' . elgg_view('output/longtext', array(
+		'value' => '### ' . $section3['title'] . trim($section3['text']),
+		'class' => ''
+	)) . '</li>';
+}*/
+$content .='</ul></div></div>';
+
+$content .= '<div class="signup"><a class="gwfa" href="' . elgg_get_site_url() . 'signup">' . elgg_echo('ggouv:register:wannaplay') . '</a></div>';
+
+$content .='<div id="footer-home"><div class="row-fluid pal width80">A faire. Le footer...</div></div>';
+
+echo $content;

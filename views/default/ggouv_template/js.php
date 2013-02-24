@@ -294,6 +294,7 @@ elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
 
 elgg.ggouv_template.reloadTemplateFunctions = function() {
+	$('body').removeClass('homepage');
 	$('.tipsy').remove(); // in case of
 	if (typeof piwikTracker != 'undefined' && typeof piwikTracker.trackPageView == 'function') {
 		piwikTracker.setDocumentTitle(document.title);

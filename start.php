@@ -6,14 +6,12 @@ elgg_register_event_handler('init','system','elgg_ggouv_template_init');
 function elgg_ggouv_template_init() {
 	$base = elgg_get_plugins_path() . 'elgg-ggouv_template';
 		$http_base = '/mod/elgg-ggouv_template';
-	
+
 	elgg_extend_view('css/elgg','ggouv_template/css');
 	elgg_extend_view('css/elgg','ggouv_template/bootstrap-responsive');
 	elgg_extend_view('css/elgg','ggouv_template/tipsy');
 	elgg_extend_view('js/elgg', 'ggouv_template/js');
 
-	elgg_register_css('css.nologin.mainpage',"$http_base/views/default/ggouv_template/nologin_mainpage.css");
-	elgg_register_js('js.nologin.mainpage',"$http_base/views/default/ggouv_template/nologin_mainpage.js", 'footer');
 	elgg_register_js('jquery.scrollTo',"$http_base/vendors/jquery.scrollTo-min.js", 'footer');
 	elgg_register_js('xoxco.tags',"$http_base/vendors/xoxco_tags/jquery.tagsinput.min.js", 'footer');
 	elgg_register_js('carrousel',"$http_base/vendors/carrousel.js", 'footer');
@@ -21,14 +19,14 @@ function elgg_ggouv_template_init() {
 	elgg_register_js('jquery-validation', "$http_base/vendors/jquery-validation-1.9.0/jquery.validate.min.js", 'footer');
 	elgg_register_js('jquery.caretposition', "$http_base/vendors/jquery.caretposition.js", 'footer');
 	elgg_register_js('jquery.tipsy', "$http_base/vendors/jquery.tipsy.min.js", 'footer');
-	
+
 	elgg_unregister_js('elgg.avatar_cropper');
 	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js", 'footer');
 	elgg_unregister_js('elgg.autocomplete');
 	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js", 'footer');
 
 	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.4/leaflet.js", 'footer');
-	
+
 	elgg_register_ajax_view('ggouv_template/ajax/get_city');
 	elgg_register_ajax_view('ggouv_template/ajax/form_validation');
 	elgg_register_ajax_view('ggouv_template/ajax/site_info_popup');
@@ -50,7 +48,7 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('jquery-validation');
 	elgg_load_js('jquery.caretposition');
 	elgg_load_js('jquery.tipsy');
-	
+
 	// Hook to change menu
 	elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_menu');
 	elgg_unregister_plugin_hook_handler('output:before', 'layout', 'elgg_views_add_rss_link');
@@ -86,7 +84,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_action("groups/edit", "$base/actions/groups/edit.php");
 	elgg_register_action("relatedgroups/add", "$base/actions/relatedgroups/add.php");
 	elgg_register_action("relatedgroups/remove", "$base/actions/relatedgroups/remove.php");
-	
+
 	// extend the comment view with the form
 	elgg_extend_view('annotation/generic_comment', 'editablecomments/generic_comment');
 
@@ -94,7 +92,7 @@ function elgg_ggouv_template_init() {
 
 	// typo and debate
 	elgg_register_page_handler('typo', 'ggouv_template_typo_page_handler');
-	
+
 	// Override members page handler
 	elgg_unregister_page_handler('members', 'members_page_handler');
 	elgg_register_page_handler('members', 'ggouv_members_page_handler');
@@ -102,19 +100,19 @@ function elgg_ggouv_template_init() {
 	elgg_register_page_handler('friends', 'ggouv_friends_page_handler');
 	elgg_unregister_page_handler('friendsof', 'friends_page_handler');
 	elgg_register_page_handler('friendsof', 'ggouv_friends_page_handler');
-	
+
 	// Override register page handler to change case register by signup
 	elgg_unregister_page_handler('register');
 	elgg_register_page_handler('signup', 'ggouv_user_account_page_handler');
 	elgg_unregister_page_handler('twitter_api', 'twitter_api_pagehandler');
 	elgg_register_page_handler('twitter_api', 'ggouv_twitter_api_pagehandler');
-	
+
 	// Override user settings
 	elgg_unregister_plugin_hook_handler('usersettings:save', 'user', 'users_settings_save');
 	elgg_register_plugin_hook_handler('usersettings:save', 'user', 'ggouv_users_settings_save');
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', 'ggouv_profile_defaults');
 	elgg_register_plugin_hook_handler('entity:icon:url', 'user', 'gravatar_avatar_hook', 900);
-	
+
 	// hook for election
 	elgg_register_plugin_hook_handler('election', 'bycandidat', 'ggouv_election_when_candidat_added');
 
@@ -124,11 +122,11 @@ function elgg_ggouv_template_init() {
 	elgg_register_page_handler('groups', 'ggouv_template_groups_page_handler');
 	// Register page handler for relatedgroups
 	elgg_register_page_handler('relatedgroups', 'relatedgroups_page_handler');
-	
+
 	// override group entity menu
 	elgg_unregister_plugin_hook_handler('register', 'menu:entity', 'groups_entity_menu_setup');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'ggouv_groups_entity_menu_setup');
-	
+
 	// override group icon
 	elgg_unregister_plugin_hook_handler('entity:icon:url', 'group', 'groups_icon_url_override');
 	elgg_register_plugin_hook_handler('entity:icon:url', 'group', 'ggouv_groups_icon_url_override');
@@ -148,10 +146,10 @@ function elgg_ggouv_template_init() {
 	elgg_register_plugin_hook_handler('permissions_check', 'object', 'ggouv_template_permission_check');
 	elgg_register_plugin_hook_handler('container_permissions_check', 'all', 'ggouv_template_container_permission_check');
 	//elgg_register_plugin_hook_handler('access:collections:read', 'user', 'ggouv_template_permission_check');
-	
+
 	// Override groups profile fields
 	elgg_register_plugin_hook_handler('profile:fields', 'group', 'ggouv_template_groups_fields_setup');
-	
+
 	if (elgg_is_active_plugin('search')) {
 		elgg_unextend_view('page/elements/header', 'search/search_box');
 		//elgg_extend_view('page/elements/topbar', 'search/search_box');
@@ -159,7 +157,7 @@ function elgg_ggouv_template_init() {
 
 	//elgg_register_plugin_hook_handler('register', 'menu:composer', 'ggouv_theme_composer_menu_handler');
 	elgg_register_plugin_hook_handler('index', 'system', 'ggouv_template_nologin_mainpage');
-	
+
 	// Register an unrelate link to entity menu (max priority to run the last)
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'relatedgroups_related_menu_setup', 9999);
 
@@ -168,7 +166,7 @@ function elgg_ggouv_template_init() {
 	//$CONFIG->mentions_group_match_regexp = '/[\b]?!([\p{L}\p{M}_\.0-9]+)[\b]?/iu';
 	//register_plugin_hook('output', 'page', 'mentions_user_rewrite');
 	//register_plugin_hook('output', 'page', 'mentions_group_rewrite');
-	
+
 	//set locale
 	$user = elgg_get_logged_in_user_entity();
 	setlocale(LC_TIME, $user->language, strtolower($user->language) . '_' . strtoupper($user->language) . '.UTF-8');
@@ -276,7 +274,7 @@ function ggouv_template_typo_page_handler($page) {
 /**
  * Dispatches related groups pages.
  * URLs take the form of
- *  
+ *
  *  Group view related groups:      relatedgroups/owner/<group_guid>
  *  Group manage related groups:    relatedgroups/edit/<group_guid>
  *
@@ -284,13 +282,13 @@ function ggouv_template_typo_page_handler($page) {
  * @return NULL
  */
 function relatedgroups_page_handler($page){
-	
+
 	if (!isset($page[0])) {
 		$page[0] = 'owner';
 	}
 
 	$base_dir = dirname(__FILE__) . '/pages/relatedgroups';
-	
+
 	switch($page[0]) {
 		case 'add':
 		case 'edit':
@@ -302,7 +300,7 @@ function relatedgroups_page_handler($page){
 			include "$base_dir/owner.php";
 			break;
 	}
-	
+
 	elgg_pop_context();
 
 	return true;
@@ -379,7 +377,7 @@ function ggouv_members_page_handler($page) {
 function ggouv_friends_page_handler($page_elements, $handler) {
 	$base = elgg_get_root_path() . 'mod/elgg-ggouv_template/pages/friends';
 	elgg_set_context('friends');
-	
+
 	if (isset($page_elements[0]) && $user = get_user_by_username($page_elements[0])) {
 		elgg_set_page_owner_guid($user->getGUID());
 	}
@@ -411,8 +409,8 @@ function ggouv_twitter_api_pagehandler($page) {
 	if (!isset($page[0])) {
 		return false;
 	}
-	
-	
+
+
 	elgg_load_library('twitter_api');
 
 	switch ($page[0]) {
@@ -488,7 +486,7 @@ function ggouv_custom_menu() {
 		$href = "javascript:elgg.forward('reportedcontent/add'";
 		$href .= "+'?address='+encodeURIComponent(location.href)";
 		$href .= "+'&title='+encodeURIComponent(document.title));";
-		
+
 		elgg_register_menu_item('extras', array(
 			'name' => 'report_this',
 			'href' => $href,
@@ -497,11 +495,11 @@ function ggouv_custom_menu() {
 			'text' => elgg_view_icon('attention'),
 			'priority' => 300,
 		));
-		
+
 		if ( elgg_is_active_plugin('bookmarks') ) {
 			$user_guid = $user->guid;
 			$address = urlencode(current_page_url());
-	
+
 			elgg_register_menu_item('extras', array(
 				'name' => 'bookmark',
 				'text' => elgg_view_icon('push-pin-alt'),
@@ -519,19 +517,19 @@ function ggouv_custom_menu() {
 function ggouv_template_nologin_mainpage() {
 	$force_home = (bool) get_input('home', false);
 	if (elgg_is_logged_in() && !$force_home) {
-	
+
 		forward('activity');
-		
+
 	} else {
-		
+
 		$params = array(
 				'content' => elgg_view('page/elements/nologin_mainpage_content')
 		);
 		$body = elgg_view_layout('one_column', $params);
 		echo elgg_view_page(null, $body);
-	
+
 	}
-	
+
 	return true;
 }
 
@@ -567,7 +565,7 @@ function ggouv_users_settings_save() {
 
 /**
  * Set a user's display realname. Replace Elgg user name default.
- * 
+ *
  * @return bool
  * @since 1.8.0
  * @access private
@@ -647,7 +645,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 	if (elgg_in_context('widgets')) {
 		return $return;
 	}
-	
+
 	$entity = $params['entity'];
 	$handler = elgg_extract('handler', $params, false);
 
@@ -662,7 +660,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 		);
 		$return[] = ElggMenuItem::factory($options);
 	}
-	
+
 	if ($entity->canEdit() && $handler) {
 		// edit link
 		$options = array(
@@ -769,17 +767,17 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 
 
 function relatedgroups_related_menu_setup($hook, $type, $return, $params){
-	
+
 	$group = elgg_get_page_owner_entity();
 	$othergroup = $params['entity'];
-	
+
 	if($group instanceof ElggGroup && $group->canEdit() &&
 					$othergroup instanceof ElggGroup &&
 									elgg_in_context('relatedgroups')){
-		
+
 		// Delete all previous links
 		$return = array();
-		
+
 		$url = elgg_http_add_url_query_elements('action/relatedgroups/remove', array(
 			'group' => $group->guid,
 			'othergroup' => $othergroup->guid,
@@ -822,7 +820,7 @@ function ggouv_groups_icon_url_override($hook, $type, $returnvalue, $params) {
 		// return thumbnail
 		return "groupicon/$group->guid/$size/$icontime.jpg";
 	}
-	
+
 	if ($group->getSubtype() == 'localgroup') {
 		return elgg_get_site_url() . 'mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $group->guid . '&size=' . $size;
 	}
@@ -866,13 +864,13 @@ function ggouv_election_when_candidat_added($hook, $entity_type, $returnvalue, $
 		register_error(elgg_echo('groups_admins_elections:elect:fail'));
 		return;
 	}
-	
+
 	$group = get_entity($mandat->container_guid);
 	if (!$group) {
 		register_error(elgg_echo('groups_admins_elections:elect:fail'));
 		return;
 	}
-	
+
 	if (!in_array($group->getSubtype(), array('metagroup', 'typogroup', 'localgroup'))) {
 		return;
 	}
@@ -895,7 +893,7 @@ function ggouv_election_when_candidat_added($hook, $entity_type, $returnvalue, $
 
 	$user_elected = get_entity($elected->owner_guid);
 	system_message(elgg_echo('groups_admins_elections:elect:success', array($user_elected->name)));
-	
+
 	$user_trigger_election = get_entity($params['election_triggered_by']);
 	add_to_river('river/object/elected/create','create', $user_trigger_election->guid, $elected->guid);
 }
@@ -905,7 +903,7 @@ function ggouv_election_when_candidat_added($hook, $entity_type, $returnvalue, $
 * This hooks into the getIcon API and returns a gravatar icon
 */
 function gravatar_avatar_hook($hook, $type, $url, $params) {
-	
+
 	// check if user already has an icon
 	if (!$params['entity']->icontime) {
 		$icon_sizes = elgg_get_config('icon_sizes');
@@ -913,10 +911,10 @@ function gravatar_avatar_hook($hook, $type, $url, $params) {
 		if (!in_array($size, array_keys($icon_sizes))) {
 			$size = 'small';
 		}
-		
+
 		// avatars must be square
 		$size = $icon_sizes[$size]['w'];
-		
+
 		$hash = md5($params['entity']->email);
 		return "https://secure.gravatar.com/avatar/$hash.jpg?r=pg&d=identicon&s=$size";
 	}
@@ -1028,12 +1026,12 @@ function seo_friendly_url_plugin_hook($hook, $entity_type, $returnvalue, $params
 
 function ggouv_get_installed_translations() {
 	global $CONFIG;
-	
+
 	// Ensure that all possible translations are loaded
 	reload_all_translations();
-	
+
 	$installed = array();
-	
+
 	foreach ($CONFIG->translations as $k => $v) {
 		$completeness = get_language_completeness($k);
 		if (elgg_is_admin_logged_in()) {

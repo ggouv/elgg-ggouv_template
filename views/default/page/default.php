@@ -13,17 +13,17 @@
 
 // backward compatability support for plugins that are not using the new approach
 // of routing through admin. See reportedcontent plugin for a simple example.
-if (elgg_get_context() == 'admin') {
+/*if (elgg_get_context() == 'admin') {
 	elgg_deprecated_notice("admin plugins should route through 'admin'.", 1.8);
 	elgg_admin_add_plugin_settings_menu();
 	elgg_unregister_css('elgg');
 	echo elgg_view('page/admin', $vars);
 	return true;
-}
+}*/
 
 $ajaxified = (bool) get_input('ajaxified', false);
 $force_home = (bool) get_input('home', false);
-global $fb; $fb->info($force_home);
+
 if ($ajaxified) {
 	if (empty($vars['title'])) {
 		$title = elgg_get_config('sitename');
@@ -42,11 +42,13 @@ if ($ajaxified) {
 			</div>
 			<div class="elgg-page-body">
 				<div id="JStoexecute" class="hidden">
+					<?php if (elgg_get_context() == 'main') {echo "$('body').addClass('homepage'); ";} ?>
 					<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
 				</div>
 				<div class="elgg-inner">
 					<?php echo elgg_view('page/elements/body', $vars); ?>
 				</div>
+				<?php if (!elgg_is_logged_in()) echo elgg_view('core/account/login_dropdown'); ?>
 			</div>
 		</body>
 	</html>
@@ -63,66 +65,50 @@ header("Content-type: text/html; charset=UTF-8");
 <head>
 <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
-<body>
+<body <?php if (elgg_get_context() == 'main') {echo 'class="homepage"';} ?>>
 <div class="elgg-page elgg-page-default">
 	<div class="elgg-page-messages">
 		<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
 	</div>
-	
-	<?php if (elgg_is_logged_in() && !$force_home) { ?>
-	
+
+	<?php if (elgg_is_logged_in()) { ?>
+
 		<div class="elgg-page-topbar">
 			<div class="elgg-inner">
 				<?php echo elgg_view('page/elements/ggouv_menu', $vars); ?>
 			</div>
 		</div>
-	
+
 		<div class="elgg-page-header">
 			<div class="elgg-inner">
 				<?php echo elgg_view('page/elements/header', $vars); ?>
 			</div>
 		</div>
-	
-		<div class="elgg-page-body">
-			<div id="JStoexecute" class="hidden">
-				<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
-			</div>
-			<div class="elgg-inner">
-				<?php echo elgg_view('page/elements/body', $vars); ?>
-			</div>
-		</div>
-	
-	<?php } else {
-		
-		if ( elgg_get_context() == 'activity' ) forward(elgg_get_site_url());
-		
-		if ( elgg_get_context() == 'main' ) { 
-			$class_main = 'main';
-			echo '<a href="' . elgg_get_site_url() . 'signup"><div class="ribbon t">Essayez la béta !</div></a>';
-		} else { 
-			$class_main = '';
-		} ?>
 
-	
+	<?php } else { ?>
+
 		<div class="elgg-page-header nolog">
-			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
-				<?php 
-				echo "<div class='elgg-menu-item-logo gwf'><a class='t' href='" . elgg_get_site_url() . "'>&nabla;</a></div>";
-				echo '<h1><a href="' . elgg_get_site_url() . '">' . elgg_get_config('sitename') . '</a></h1>';
-				echo '<div id="ajaxified-loader" class="hidden"></div>';
-				if ( elgg_get_context() != 'main' ) echo elgg_view('core/account/login_dropdown');
+			<div class="elgg-inner-nolog">
+				<?php
+					echo "<div class='elgg-menu-item-logo gwf'><a class='t' href='" . elgg_get_site_url() . "'>&nabla;</a></div>";
+					echo '<h1><a href="' . elgg_get_site_url() . '">' . elgg_get_config('sitename') . '</a></h1>';
+					echo '<div id="ajaxified-loader" class="hidden"></div>';
 				?>
 			</div>
 		</div>
-		
-		<div class="elgg-page-body nolog">
-			<div class="elgg-inner-nolog <?php echo $class_main; ?>">
-				<?php echo elgg_view('page/elements/body', $vars); ?>
-			</div>
-		</div>
-	
+
 	<?php } ?>
-	
+
+	<div class="elgg-page-body<?php if (!elgg_is_logged_in()) echo ' nolog'; ?>">
+		<div id="JStoexecute" class="hidden">
+			<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
+		</div>
+		<div class="elgg-inner">
+			<?php echo elgg_view('page/elements/body', $vars); ?>
+		</div>
+		<?php if (!elgg_is_logged_in()) echo elgg_view('core/account/login_dropdown'); ?>
+	</div>
+
 	<div class="elgg-page-footer">
 		<div class="elgg-inner">
 			<?php // echo elgg_view('page/elements/footer', $vars); ?>

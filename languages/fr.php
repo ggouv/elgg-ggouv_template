@@ -41,7 +41,7 @@ $french = array(
 	'actionloggedout' => "Désolé, vous ne pouvez pas effectuer cette action sans être connecté.",
 	'actionunauthorized' => "Vous n'êtes pas autorisé à effectuer cette action",
 
-	'InstallationException:SiteNotInstalled' => "Impossible de traiter cette requête. 
+	'InstallationException:SiteNotInstalled' => "Impossible de traiter cette requête.
   Ce site n'est pas configuré ou la base de données est en panne.",
 	'InstallationException:MissingLibrary' => "Impossible de charger %s",
 	'InstallationException:CannotLoadSettings' => "Elgg n'a pas pu charger le fichier de paramètres. Il n'existe pas ou il y a un problème de d'autorisations.",
@@ -336,7 +336,6 @@ $french = array(
 	'friendspicker:chararray' => "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
 	'avatar' => "Avatar",
-	'avatar:create' => "Créez votre avatar",
 	'avatar:edit' => "Modifier mon avatar",
 	'avatar:preview' => "Extrait",
 	'avatar:upload' => "Envoyer un nouvel avatar",
@@ -405,7 +404,8 @@ $french = array(
  * River
  */
 	'river' => "River",
-	'river:relationship:friend' => "est maintenant ami avec",
+	'river:friend:user:default' => "s'est abonné à",
+	'river:relationship:friend' => "s'est abonné à",
 	'river:update:user:avatar' => "%s a un nouvel avatar",
 	'river:update:user:profile' => "%s ont mis à jour leurs profils",
 	'river:noaccess' => "Vous n'avez pas la permission de voir cet élément.",
@@ -1027,7 +1027,7 @@ Une fois sur le site, nous vous conseillons fortement de changer votre mot de pa
 	'upgrade:core' => "Votre installation de Elgg a été mise à jour",
 	'upgrade:unable_to_upgrade' => "Impossible de mettre à jour.",
 	'upgrade:unable_to_upgrade_info' =>
-		"Cette installation ne peut pas être mise à jour, car des fichiers de l'ancienne version 
+		"Cette installation ne peut pas être mise à jour, car des fichiers de l'ancienne version
 		ont été détectés dans le répertoire du noyau d'Elgg (core). Ces fichiers ont été jugés obsolètes et doivent être
 		retirés pour permettre à cette nouvelle version d'Elgg de fonctionner correctement. Si vous n'avez pas apporté de changements au noyau d'Elgg, vous pouvez
 		simplement supprimer le répertoire noyau (core) et le remplacer par celui du dernier
@@ -1543,7 +1543,7 @@ Vous avez été invité(e) à rejoindre le groupe '%s' cliquez sur le lien ci-de
 
 	'groups:welcome:subject' => "Bienvenue dans le groupe %s !",
 	'groups:welcome:body' => "Bonjour %s!
-		
+
 Vous êtes maintenant membre du groupe '%s' ! Cliquez le lien ci-dessous pour commencer à participer !
 
 %s",
@@ -1567,7 +1567,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'river:join:group:default' => "%s a rejoint le groupe %s",
 	'forumtopic:river:create' => "a ajouté un nouveau sujet de discussion",
 	'groups:river:reply' => "a répondu sur le sujet de discussion",
-	
+
 	'groups:nowidgets' => "Aucun widget n'ont été défini pour ce groupe.",
 
 
@@ -1668,7 +1668,7 @@ ou cliquez le lien ci-dessous pour confirmer son adhésion :
 	'thewire:notify:yourmessage' => "votre message",
 	'thewire:notify:atyourmessage' => "à %s :",
 	'thewire:notify:post' => "%s posté sur le flux :",
-	
+
 	'thewire:mention:subject' => "%s vous a mentionné",
 	'thewire:mention:mention' => "%s vous a mentionné dans %s :",
 
@@ -1763,7 +1763,7 @@ Pour vous inscrire, cliquez sur le lien suivant :
  * @subpackage ElggUserValidationByEmail
  */
 	'admin:users:unvalidated' => "Invalidées",
-	
+
 	'email:validate:subject' => "%s veuillez confirmer votre adresse de courriel !",
 	'email:validate:body' => "Bonjour %s,
 
@@ -1947,54 +1947,54 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'bookmarks:via' => "via les signets",
 	'bookmarks:address' => "Adresse de la ressource à ajouter à vos signets",
 	'bookmarks:none' => "Aucun signets",
-	
+
 	'bookmarks:delete:confirm' => "Etes-vous sûr(e) de vouloir supprimer cette ressource ?",
-	
+
 	'bookmarks:numbertodisplay' => "Nombre de signets à afficher",
-	
+
 	'bookmarks:shared' => "Mis en signet",
 	'bookmarks:visit' => "Voir la ressource",
 	'bookmarks:recent' => "Signets récents",
-	
+
 	'bookmarks:river:created' => "%s mis en signet",
 	'bookmarks:river:annotate' => "a posté un commentaire sur ce signet",
 	'bookmarks:river:item' => "un élément",
 	'river:commented:object:bookmarks' => "un signet",
-	
+
 	'item:object:bookmarks' => "Eléments mis en signets",
-	
+
 	'bookmarks:group' => "Signets du groupe",
 	'bookmarks:enablebookmarks' => "Activer les signets du groupe",
 	'bookmarks:nogroup' => "Ce groupe n'a pas encore de signets",
 	'bookmarks:more' => "Plus de signets",
-	
+
 	'bookmarks:no_title' => "Pas de titre",
-	
+
 	/**
 	* Widget and bookmarklet
 	*/
 	'bookmarks:widget:description' => "Ce widget affiche vos derniers signets.",
-	
+
 	'bookmarks:bookmarklet:description' =>
 	"Le bookmarklet vous permez de partager ce que vous trouvez sur le web avec vos contact, ou pour vous-même. Pour l'utiliser, glissez simplement le boutton ci-dessous dans votre barre de liens de votre navigateur.",
-	
+
 	'bookmarks:bookmarklet:descriptionie' =>
 	"Si vous utilisez Internet Explorer, faites un clic droit sur le boutton et ajouter le dans vos favoris, puis votre barre de liens.",
-	
+
 	'bookmarks:bookmarklet:description:conclusion' =>
 	"Vous pouvez mettre en signet n'importe quelle page en cliquant sur le bookmarklet.",
-	
+
 	/**
 	* Status messages
 	*/
-	
+
 	'bookmarks:save:success' => "Votre élément a bien été mis en signet.",
 	'bookmarks:delete:success' => "Votre signet a bien été supprimé.",
-	
+
 	/**
 	* Error messages
 	*/
-	
+
 	'bookmarks:save:failed' => "Votre élément n'a pu être correctement mis en signet. Vérifiez que le titre et le lien soient correct et réessayez.",
 	'bookmarks:delete:failed' => "Votre signet n'a pu être supprimé. Merci de réessayer.",
 
@@ -2012,6 +2012,15 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
  *
  */
 
+	/**
+	 * Home
+	 */
+	'ggouv:register:contamined' => "&nbsp;&nbsp;&nbsp;&nbsp;Je suis<br>contaminé.<br>Je veux<br>&nbsp;&nbsp;&nbsp;&nbsp;participer !",
+	'ggouv:register:wannaplay' => "&nbsp;&nbsp;&nbsp;&nbsp;Tout ça<br>me plait.<br>Je veux<br>&nbsp;&nbsp;&nbsp;&nbsp;jouer !",
+
+	/**
+	 * topbar
+	 */
 	'my_wiki_pages' => "Mes pages",
 	'my_board' => "Ma board",
 	'my_pads' => "Mes pads",
@@ -2057,7 +2066,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'groups:localgroups' => "Groupes locaux",
 	'groups:localgroup:departement' => "Département",
 	'groups:my_local_group' => "Mon groupe local",
-	
+
 	"relatedgroups" => 'Groupes en relation',
 	"relatedgroups:more" => 'Voir tous les groupes en relations',
 	"relatedgroups:owned" => 'Groupes en relation avec %s',
@@ -2088,12 +2097,12 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'forms:digits' => "Entrez seulement des chiffres !",
 	'forms:minlength' => "Entrez au moins {0} caractères !",
 	'forms:maxlength' => "Entrez {0} caractères maximum !",
-	
+
 	/**
 	 * System message
 	 */
 	'groups:error:more_five_groups' => "Vous ne pouvez pas créer plus de 5 groupes.",
-	
+
 	/**
 	 * Footer
 	 */
@@ -2115,8 +2124,8 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv_template:dev:ideas_of_dev' => "Suggérer une idée",
 	'ggouv_template:dev:bugs_of_dev' => "Signaler un bug",
 	'ggouv_template:spotlight:stats' => "Statistiques",
-	
-	
+
+
 	/**
 	 * Plugin settings and usersettings
 	 */
@@ -2129,9 +2138,9 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv_template:bugs_of_dev' => "URL de la liste des bugs de la board des développeurs",
 	'ggouv_template:bot_string' => "Bot avec les droits administrateurs",
 	'ggouv_template:piwik_tracker' => "Adresse du trackeur de piwik (sans http://)",
-	
+
 	'ggouv_template:tiny_ownerblock' => "Afficher seulement les icônes dans le menu des groupes",
-	
+
 	/**
 	 *	River
 	 */
@@ -2141,7 +2150,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'river:ingroup:comment:object:candidat' => "pour le groupe %s",
 	'river:ingroup:create:object:mandat' => "pour le groupe %s",
 	'river:ingroup:create:object:question' => "au groupe %s",
-	
+
 	'river_elected_more_message:first_random' => "<br/><span class='elgg-subtext'>Tirage au sort lancé automatiquement pour la première élection.</span>",
 
 );
