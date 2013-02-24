@@ -61,6 +61,6 @@ $content .='</ul></div></div>';
 
 $content .= '<div class="signup"><a class="gwfa" href="' . elgg_get_site_url() . 'signup">' . elgg_echo('ggouv:register:wannaplay') . '</a></div>';
 
-$content .='<div id="footer-home"><div class="row-fluid pal width80">A faire. Le footer...</div></div>';
+$content .='<div id="footer-home"><div class="row-fluid"><div class=" pal width80">A faire. Le footer...</div></div></div>';
 
 echo $content;

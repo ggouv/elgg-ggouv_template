@@ -124,7 +124,7 @@
 .summary:after {
 	content: "\E10B";
 	margin: 0;
-	float: right;
+	float: right !important;
 	margin: 33px -45px;
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
