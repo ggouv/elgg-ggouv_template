@@ -246,6 +246,18 @@ elgg.ggouv_template.init = function() {
 					}
 				});
 
+			} else if (form.hasClass('elgg-form-answers-answer-edit')) { // Special for edit answer
+				elgg.action('answers/answer/edit', {
+					data: dataForm,
+					success: function(response) {
+						if (response.status == 0) {
+							var answer_guid = form.find('input[name=answer_guid]').val(),
+								answer_text = form.find('textarea[name=answer_text]').val();
+							replaceHighlight($('#elgg-object-'+answer_guid+' .answer-output'), answer_text);
+							$('#elgg-object-'+answer_guid+' .elgg-menu-item-edit a').click();
+						}
+					}
+				});
 			} else { // ajaxify others forms
 
 				var url = elgg.normalize_url(decodeURIComponent(form.attr('action'))),
