@@ -404,8 +404,8 @@ $french = array(
  * River
  */
 	'river' => "River",
-	'river:friend:user:default' => "s'est abonné à",
-	'river:relationship:friend' => "s'est abonné à",
+	'river:friend:user:default' => "%s s'est abonné à %s",
+	'river:relationship:friend' => "%s s'est abonné à %s",
 	'river:update:user:avatar' => "%s a un nouvel avatar",
 	'river:update:user:profile' => "%s ont mis à jour leurs profils",
 	'river:noaccess' => "Vous n'avez pas la permission de voir cet élément.",
