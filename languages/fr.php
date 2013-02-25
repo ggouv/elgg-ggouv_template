@@ -2019,6 +2019,11 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv:register:wannaplay' => "&nbsp;&nbsp;&nbsp;&nbsp;Tout ça<br>me plait.<br>Je veux<br>&nbsp;&nbsp;&nbsp;&nbsp;jouer !",
 
 	/**
+	 * Sidebar
+	 */
+	'back:to:top' => "Remonter en haut",
+
+	/**
 	 * topbar
 	 */
 	'my_wiki_pages' => "Mes pages",

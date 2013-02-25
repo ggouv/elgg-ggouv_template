@@ -438,6 +438,7 @@ elgg.ggouv_template.ready = function() {
 				}
 			});
 		}
+		$('#goTop').removeClass('hidden');
 	}
 
 	// Group activity

@@ -127,31 +127,21 @@
 	background-color: #EEE;
 }
 #goTop {
-	background-color: rgba(255, 255, 255, 0.1);
+	background: #4690D6;
 	border-radius: 6px 6px 0 0;
 	bottom: -50px;
-	box-shadow: 0 0 6px #666;
-	height: 40px;
-	position: fixed;
-	right: 10px;
-	width: 40px;
+	box-shadow: 0 0 6px #666666;
+	color: white;
 	cursor: pointer;
+	font-size: 4em;
+	height: 28px;
+	padding: 10px 0 0 7px;
+	position: absolute;
+	right: 30px;
+	width: 40px;
 }
 #goTop:hover {
-	background-color: rgba(0, 0, 0, 0.5);
-}
-#goTop .triangle {
-	border-color: rgba(180, 180, 180, 0.8) transparent;
-	border-style: solid;
-	border-width: 0 15px 15px;
-	height: 0;
-	position: relative;
-	right: -5px;
-	top: 12px;
-	width: 0;
-}
-#goTop:hover .triangle {
-	border-color: rgba(255, 255, 255, 0.5) transparent;
+	background: #0054A7;
 }
 .elgg-sidebar-alt {
 	position: relative;
