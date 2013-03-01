@@ -92,7 +92,7 @@ elgg.ggouv_template.init = function() {
 		});
 
 		// ajaxify links
-		$(".elgg-page-body a:internal:not("+
+		$("a:internal:not("+
 								"[href=''],"+
 								"[href^='#'],"+
 								"[href$='#'],"+
@@ -105,13 +105,11 @@ elgg.ggouv_template.init = function() {
 								"[href*='/avatar/edit'],"+
 								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
-								"[href*='notifications/personal']),"+
-			".elgg-page-topbar a:internal:not([href*='/admin/'],"+
-									" [href*='/ajax/'],"+
-									" [href*='/logout']),"+
-			"#site-info-popup a:internal:not([href*='home=true']),"+
-			".deck-popup.pinned a:internal:not([href^='#'])"
+								"[href*='notifications/personal'],"+
+								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
+			if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
+
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent($this.attr('href'))),
 				urlP = elgg.parse_url(url),
@@ -122,8 +120,6 @@ elgg.ggouv_template.init = function() {
 						}
 					});
 				};
-
-			if ( e.which == 2 || e.metaKey ) { return true; } // Continue as normal for cmd clicks etc
 
 			// first, verify if there is confirmation. Continue on true.
 			if (!$this.hasClass('elgg-requires-confirmation') || $this.hasClass('elgg-requires-confirmation') && elgg.ui.requiresConfirmation(e, $this)) {

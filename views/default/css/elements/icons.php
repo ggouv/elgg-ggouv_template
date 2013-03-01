@@ -233,8 +233,11 @@
 	cursor: pointer;
 	text-indent: -5px;
 }
-.elgg-icon-push-pin:hover:before, .pinned .elgg-icon-push-pin:before {
+.elgg-icon-push-pin:hover:before{
 	color: #4690D6;
+}
+.pinned .elgg-icon-push-pin:before {
+	color: #00CC00;
 }
 .elgg-icon-redo {
 	background-position: 0 -756px;

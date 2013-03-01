@@ -37,7 +37,7 @@ p:last-child {
 pre, code {
 	font-family: Monaco, "Courier New", Courier, monospace;
 	font-size: 12px;
-	
+
 	background:#EBF5FF;
 	color:#000000;
 	overflow:auto;
@@ -46,7 +46,7 @@ pre, code {
 
 	white-space: pre-wrap;
 	word-wrap: break-word; /* IE 5.5-7 */
-	
+
 }
 
 pre {
@@ -108,6 +108,11 @@ h6 { font-size: 0.8em; }
 	display: block;
 	font-size: 85%;
 	font-style: italic;
+}
+.tipsy .elgg-text-help {
+	line-height: 1.2em;
+	padding-bottom: 3px;
+	color: #DDD;
 }
 
 .elgg-quiet {
