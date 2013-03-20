@@ -17,11 +17,11 @@
 	width: 16px;
 	height: 16px;
 	margin: 0 2px;
+	font-family: 'ggouv';
 }
 .elgg-icon:before {
 	font-family: 'ggouv';
 	font-size: 40px;
-	margin-right: 5px;
 	float: left;
 	cursor: default;
 
@@ -31,12 +31,77 @@
 	-o-transition: all 0.5s ease;
 }
 
-.elgg-icon-arrow-left {
-	background-position: 0 -0px;
+.elgg-icon-arrow-left:before {
+	background: none;
+	content: 'î';
+	color: #CCC;
 }
-.elgg-icon-arrow-right {
-	background-position: 0 -18px;
+.elgg-icon-arrow-right:before {
+	background: none;
+	content: 'ï';
+	color: #CCC;
 }
+
+.elgg-icon-response, .elgg-icon-share, .elgg-icon-hover-menu, .elgg-icon-response-all {
+	color: #CCC;
+	font-size: 40px;
+	margin: 0;
+}
+.elgg-icon-response:hover, .elgg-icon-share:hover, .elgg-icon-hover-menu:hover, {
+	color: #555;
+}
+.elgg-icon-response:before {
+	content: "<";
+}
+.elgg-menu-item-response-all .elgg-icon-response:before {
+	content: "≤";
+}
+
+.elgg-icon-share:before {
+	content: "^";
+}
+
+.elgg-icon-hover-menu:before {
+	content: "+";
+	padding-left: 3px;
+}
+
+.elgg-menu-item-delete .elgg-icon-delete:before {
+	padding-left: 5px;
+}
+.elgg-icon-speech-bubble-alt:before {
+	content: "c";
+	color: #999;
+	font-size: 24px;
+}
+
+.elgg-icon-settings-alt:before {
+	color: #CCC;
+	content: "s";
+	font-size: 36px;
+	cursor: pointer;
+}
+.elgg-icon-settings-alt:hover:before {
+	color: #4690D6;
+}
+
+.elgg-icon-refresh:before {
+	content: "R";
+}
+
+.elgg-icon-retweet-sub:before {
+	content: "^";
+	color: #999;
+	font-size: 32px;
+}
+
+
+
+
+
+
+
+
 .elgg-icon-arrow-two-head {
 	background-position: 0 -36px;
 }
@@ -461,12 +526,12 @@ a.external:after {
 .elgg-avatar-tiny > a > img {
 	width: 25px;
 	height: 25px;
-	
-	/* remove the border-radius if you don't want rounded avatars in supported browsers 
+
+	/* remove the border-radius if you don't want rounded avatars in supported browsers
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	
+
 	-moz-background-clip:  border;
 	background-clip:  border;
 
@@ -479,12 +544,12 @@ a.external:after {
 .elgg-avatar-small > a > img {
 	width: 40px;
 	height: 40px;
-	
-	/* remove the border-radius if you don't want rounded avatars in supported browsers 
+
+	/* remove the border-radius if you don't want rounded avatars in supported browsers
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	
+
 	-moz-background-clip:  border;
 	background-clip:  border;
 

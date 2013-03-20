@@ -1,12 +1,12 @@
 <?php
 /**
  * Elgg Groups css
- * 
+ *
  * @package groups
  */
 
 ?>
-/* 
+/*
  * localgroup icon
  */
 .group-info-popup {
@@ -75,7 +75,7 @@
 }
 
 
-/* 
+/*
  * group profile
  */
 .groups-profile-icon {
@@ -90,8 +90,8 @@
 	clear: both;
 	display: inline-block;
 	width: 100%;
-	height: 66px;
-	
+	/*height: 66px;*/
+
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -99,11 +99,11 @@
 .groups-profile-fields .odd,
 .groups-profile-fields .even {
 	background: #f4f4f4;
-	
+
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
+
 	padding: 2px 4px;
 	margin-bottom: 7px;
 }
@@ -147,7 +147,7 @@
 	line-height:0.9em;
 	float: left;
 	color: #333;
-}	
+}
 #groups-tools > li {
 	width: 49.5%;
 	min-height: 200px;
@@ -163,18 +163,21 @@
 .groups-latest-reply {
 	float: right;
 }
-.group_activity_module {
+#group_activity_module {
 	position: fixed;
-	width: 360px;
+	max-width: 360px;
 }
-.group_activity_module .elgg-river {
+#group_activity_module .column-header {
+	display: none;
+}
+#group_activity_module .elgg-river {
 	border-top: 1px solid #CCC;
 }
-.elgg-layout-one-sidebar .group_activity_module {
+.elgg-layout-one-sidebar #group_activity_module {
 	position: relative;
 	width: 100%;
 }
-.group_activity_module .elgg-head {
+#group_activity_module .elgg-head {
 	background: none repeat scroll 0 0 #E4E4E4;
 	border-radius: 3px 3px 3px 3px;
 	display: block;
@@ -182,10 +185,10 @@
 	margin-bottom: 10px;
 	padding: 6px 5px 4px;
 }
-.group_activity_module .elgg-module-info > .elgg-head:hover * {
+#group_activity_module .elgg-module-info > .elgg-head:hover * {
 	color: #333 !important;
 }
-.group_activity_module .elgg-head h3:before {
+#group_activity_module .elgg-head h3:before {
 	content: 'A';
 	font-size: 50px;
 	font-family: 'ggouv';
@@ -198,7 +201,7 @@
 	right: 5px;
 	top: 7px;
 }
-.group_activity_module .elgg-module > .elgg-body > .elgg-river {
+#group_activity_module .elgg-river {
 	overflow: auto;
 }
 .manage-relatedgroups.aside-plus {
@@ -207,7 +210,7 @@
 }
 
 /* typogroup */
-.groups-profile-iframe div, .groups-profile-iframe a, .groups-profile-iframe table {
+.groups-profile-iframe div, .groups-profile-iframe a {
 	width: 400px;
 	height: 200px;
 }
@@ -216,23 +219,21 @@
 	z-index: 1;
 	text-decoration: none;
 	color: transparent;
+	line-height: 200px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 .groups-profile-iframe a:hover {
 	background-color: rgba(255, 255, 255, 0.8);
 	color: #333;
 }
-.groups-profile-iframe td {
-	font-weight: bold;
-	font-size: 1.2em;
-	text-align: center;
-	vertical-align: middle;
-}
 .groups-profile-iframe iframe {
-	-moz-transform: scale(0.4, 0.4); 
-	-webkit-transform: scale(0.4, 0.4); 
+	-moz-transform: scale(0.4, 0.4);
+	-webkit-transform: scale(0.4, 0.4);
 	-o-transform: scale(0.4, 0.4);
 	-ms-transform: scale(0.4, 0.4);
-	transform: scale(0.4, 0.4); 
+	transform: scale(0.4, 0.4);
 	-moz-transform-origin: top left;
 	-webkit-transform-origin: top left;
 	-o-transform-origin: top left;

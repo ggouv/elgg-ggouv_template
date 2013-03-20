@@ -52,7 +52,7 @@
 	float: right;
 }
 
-.link {
+.link, .link:before, .link:after {
 	cursor: pointer;
 }
 

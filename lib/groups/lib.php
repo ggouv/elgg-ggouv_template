@@ -95,7 +95,7 @@ function groups_handle_all_page() {
 	}
 
 	$filter = elgg_view('groups/group_sort_menu', array('selected' => $selected_tab));
-	
+
 	$sidebar = elgg_view('groups/sidebar/find');
 	$sidebar .= elgg_view('groups/sidebar/featured');
 
@@ -222,7 +222,7 @@ function groups_handle_mine_page() {
  */
 function groups_handle_edit_page($page, $guid = 0) {
 	gatekeeper();
-	
+
 	if ($page == 'add') {
 		$user_guid = elgg_get_logged_in_user_guid();
 		$nbr_groups = elgg_get_entities(array(
@@ -236,7 +236,7 @@ function groups_handle_edit_page($page, $guid = 0) {
 			register_error(elgg_echo('groups:error:more_five_groups'));
 			forward(REFERER);
 		}
-	
+
 		elgg_set_page_owner_guid($user_guid);
 		$title = elgg_echo('groups:add');
 		elgg_push_breadcrumb($title);
@@ -254,7 +254,7 @@ function groups_handle_edit_page($page, $guid = 0) {
 			$content = elgg_echo('groups:noaccess');
 		}
 	}
-	
+
 	$params = array(
 		'content' => $content,
 		'title' => $title,
@@ -318,7 +318,7 @@ function groups_handle_profile_page($guid) {
 		if (!in_array($group->getSubtype(), array('metagroup', 'typogroup'))) {
 			$sidebar .= elgg_view('groups/sidebar/members', array('entity' => $group));
 		}
-		$sidebar2 = '<ul class="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
+		$sidebar2 = '<ul id="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
 	} else {
 		$sidebar = '';
 		//$sidebar2 = '';
@@ -358,9 +358,9 @@ function groups_handle_activity_page($guid) {
 
 	elgg_push_breadcrumb($group->name, $group->getURL());
 	elgg_push_breadcrumb($title);
-	
+
 	if (elgg_get_viewtype() == 'default') {
-		$content = '<ul class="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
+		$content = '<ul id="group_activity_module">' . elgg_view('groups/profile/ggouv_activity_module', array('entity' => $group)) . '</ul>';
 	} else {
 		$db_prefix = elgg_get_config('dbprefix');
 		$content = elgg_list_river(array(
@@ -371,7 +371,7 @@ function groups_handle_activity_page($guid) {
 			$content = '<p>' . elgg_echo('groups:activity:none') . '</p>';
 		}
 	}
-	
+
 	$params = array(
 		'content' => $content,
 		'title' => $title,
@@ -465,7 +465,7 @@ function groups_handle_invite_page($guid) {
 
 /**
  * Manage requests to join a group
- * 
+ *
  * @param int $guid Group entity GUID
  */
 function groups_handle_requests_page($guid) {
@@ -481,7 +481,7 @@ function groups_handle_requests_page($guid) {
 	if ($group && $group->canEdit()) {
 		elgg_push_breadcrumb($group->name, $group->getURL());
 		elgg_push_breadcrumb($title);
-		
+
 		$requests = elgg_get_entities_from_relationship(array(
 			'type' => 'user',
 			'relationship' => 'membership_request',

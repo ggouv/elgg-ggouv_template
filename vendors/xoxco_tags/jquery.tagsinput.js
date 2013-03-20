@@ -101,7 +101,7 @@
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
-                            class : 'elgg-icon elgg-icon-delete',
+                            'class' : 'elgg-icon elgg-icon-delete',
                         }).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })

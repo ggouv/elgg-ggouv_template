@@ -579,14 +579,6 @@
 /* ***************************************
 	RIVER
 *************************************** */
-.elgg-menu-river {
-	float: right;
-	margin: -2px -5px 0 0;
-	font-size: 90%;
-	color: #aaa;
-	line-height: 16px;
-	height: 16px;
-}
 .elgg-menu-river > li {
 	display: inline-block;
 	margin-left: 5px;

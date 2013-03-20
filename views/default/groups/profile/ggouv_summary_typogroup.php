@@ -19,16 +19,13 @@ $owner = $group->getOwnerEntity();
 <div class="groups-profile clearfix elgg-image-block <?php echo $vars['class'] ?>">
 	<div class="elgg-image">
 		<div class="groups-profile-iframe">
-			<?php echo '<a href="' . $group->typolink . '" target="_blank" rel="nofollow">'; ?>
-				<table>
-					<tr>
-						<td>
-							<?php echo $group->typolink; ?>
-							<span class="elgg-icon external"></span>
-						</td>
-					</tr>
-				</table>
-			</a>
+				<?php echo elgg_view('output/url', array(
+						'text' => $group->typolink,
+						'value' => $group->typolink,
+						'class' => 'external',
+						'rel' => 'nofollow'
+					));
+				?>
 			<div>
 				<?php echo '<iframe width="1000" height="500" class="" alt="' . $group->typolink . '" src="' . $group->typolink . '" scrolling="no">'; ?></iframe>
 			</div>
