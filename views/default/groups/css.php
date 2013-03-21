@@ -85,7 +85,7 @@
 	margin: 0 10px 10px 0;
 }
 .groups-stats {
-	background: #EEE;
+	background: #F4F4F4;
 	padding: 5px 0;
 	clear: both;
 	display: inline-block;

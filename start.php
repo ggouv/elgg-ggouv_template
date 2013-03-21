@@ -1,7 +1,7 @@
 <?php
 
 elgg_unregister_event_handler('init', 'system', 'discussion_init');
-elgg_register_event_handler('init','system','elgg_ggouv_template_init');
+elgg_register_event_handler('init','system','elgg_ggouv_template_init', 999); // 999 to be sure template is loaded as last
 
 function elgg_ggouv_template_init() {
 	$base = elgg_get_plugins_path() . 'elgg-ggouv_template';
@@ -160,6 +160,9 @@ function elgg_ggouv_template_init() {
 
 	// Register an unrelate link to entity menu (max priority to run the last)
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'relatedgroups_related_menu_setup', 9999);
+
+	// Unregister this plugin hook was created to delete like menu item in river. We don't use like plugin.
+	elgg_unregister_plugin_hook_handler('register', 'menu:river', 'answers_river_menu_setup');
 
 	// provide link on @user and !group
 	//$CONFIG->mentions_user_match_regexp = '/[\b]?@([\p{L}\p{M}_\.0-9]+)[\b]?/iu';

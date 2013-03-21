@@ -58,7 +58,7 @@
 	line-height: 1em;
 	font-style: italic;
 }
-.homepage .not, .homepage .pro {
+.homepage .color0, .homepage .pro {
 	color: #333333;
 	/*float: left;*/
 	font-size: 1.4em;
@@ -67,7 +67,7 @@
 	/*width: 100%;*/
 }
 @media (max-width: 1199px) {
-	.homepage .not, .homepage .pro {
+	.homepage .color0, .homepage .pro {
 		clear: both;
 	}
 	.homepage .markdown-body {
@@ -106,14 +106,14 @@
 	text-align: justify;
 	clear: both;
 }
-.summary {
+.homepage .summary {
 	color: #666;
 	font-size: 1.5em;
 	line-height: 1.5em;
 	background: rgba(0, 0, 0, 0.02);
 	padding: 40px;
 }
-.summary:before, .summary:after {
+.homepage .summary:before, .summary:after {
 	color: #EEEEEE;
 	content: "\E10B";
 	font-size: 7em;
@@ -121,7 +121,7 @@
 	z-index: -1;
 	margin: -30px -45px;
 }
-.summary:after {
+.homepage .summary:after {
 	content: "\E10B";
 	margin: 0;
 	float: right !important;
@@ -132,23 +132,23 @@
 	-ms-transform: rotate(180deg);
 	transform: rotate(180deg);
 }
-.questions {
+.homepage .questions {
 	color: #666666;
 	font-size: 1.5em;
 	line-height: 1.8em;
 	margin-top: 50px;
 }
-.questions:before {
+.homepage .questions:before {
 	color: #E9E9E9;
 	content: "ï";
 	font-size: 7em;
 	margin: 40px 20px 110px 0;
 }
-.questions .q2 {
+.homepage .questions .q2 {
 	color: #4690D6;
 	font-size: 1.2em;
 }
-.questions .q3 {
+.homepage .questions .q3 {
 	color: #0054A7;
 	font-size: 1.5em;
 }
@@ -162,7 +162,7 @@
 	padding-top: 130px;
 	float: left;
 }
-#section2 .not > div, .markdown-body h2 {
+#section2 .color0 > div, .markdown-body h2 {
 	background: transparent;
 	color: #4690D6;
 	font-size:2em;
@@ -208,7 +208,7 @@
 	line-height: 1em;
 	font-style: italic;
 }
-#section3 .not > div:first-child, #section3 .pro > div:first-child {
+#section3 .color0 > div:first-child, #section3 .pro > div:first-child {
 	background: transparent;
 	color: #0054A7;
 	font-size: 1.1em;
@@ -216,7 +216,7 @@
 	padding-bottom: 10px;
 	position: relative;
 }
-#section3 .not > div:first-child {
+#section3 .color0 > div:first-child {
 	margin-left: 30px;
 }
 #section3 .span6 div > .gwf {
@@ -230,7 +230,7 @@
 	display: table;
 	min-width: 220px;
 }
-p + p + .row-fluid {
+.homepage p + p + .row-fluid {
 	padding-top: 20px;
 }
 
@@ -564,10 +564,10 @@ p + p + .row-fluid {
 	margin: 0 0 0 -20px;
 	padding: 0px;
 }
-.deck-river-lists .column-river:first-child > ul > li {
+#deck-river-lists .column-river:first-child > ul > li {
 	padding-left: 10px;
 }
-.deck-river-listsdeck-river-lists .column-river:first-child > ul.column-header > li {
+#deck-river-lists .column-river:first-child > ul.column-header > li {
 	padding-left: 5px;
 }
 .elgg-river .elgg-list-item {
@@ -579,6 +579,29 @@ p + p + .row-fluid {
 	background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(200, 200, 200,0.1) 100%) white;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1a969696',GradientType=0 ) white;
 }
+.column-header:before {
+	color: #CCCCCC;
+	font-size: 2.8em;
+	height: 30px;
+	padding: 6px;
+	text-shadow: -1px 1px 0 white;
+}
+.column-header[data-network="elgg"]:before {
+	content: "∇";
+	font-size: 3em;
+	font-weight: bold;
+	padding: 7px;
+}
+.column-header[data-network="twitter"]:before {
+	content: "1";
+}
+.column-header[data-network="facebook"]:before {
+	content: "2";
+}
+.elgg-river-item .elgg-icon-arrow-right {
+	margin: 5px;
+	padding-right: 10px;
+}
 
 /*
  * Plugin markdown-wiki + special debate
@@ -588,42 +611,6 @@ h2.markdown-wiki-create .elgg-button-action {
 }
 .markdown-body .subject {
 	width: 100%;
-}
-.pro, .con, .not {
-	border-radius: 3px;
-	padding: 5px 10px;
-	font-size: 13px;
-}
-.pro {
-	background-color: #DFD;
-	border: 1px solid #52CB51;
-}
-.con {
-	background-color: #FDD;
-	border: 1px solid #F66;
-}
-.not {
-	background-color: #F8F8F8;
-	border: 1px solid #CCC;
-}
-.pro > div:first-child, .con > div:first-child, .not > div:first-child {
-	margin: -5px -10px 5px;
-	padding: 2px 5px;
-	font-size: 14px;
-}
-.pro > div:first-child {
-	background-color: #9F9;
-}
-.con > div:first-child {
-	background-color: #F99;
-}
-.not > div:first-child {
-	background-color: #E0E0E0;
-}
-@media (max-width: 1199px) {
-	.pro, .con, .not {
-		margin-top: 5px;
-	}
 }
 /* Editor */
 .markdown-editor {
@@ -748,18 +735,6 @@ h2.markdown-wiki-create .elgg-button-action {
 	transform: scaleX(0.6);
 }
 
-.workflow-list-edit-button .elgg-icon-settings-alt {
-	background: none;
-}
-.workflow-list-edit-button .elgg-icon-settings-alt:before {
-	color: #CCC;
-	content: "s";
-	font-size: 36px;
-	cursor: pointer;
-}
-.workflow-list-edit-button .elgg-icon-settings-alt:hover:before {
-	color: #4690D6;
-}
 .elgg-icon-workflow-info {
 	background: none;
 }
