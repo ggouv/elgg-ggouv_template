@@ -1040,10 +1040,10 @@ div.tagsinput .not_valid {
 .leaflet-control-zoom a{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;width:19px;height:19px;}
 .leaflet-control-zoom a:hover{background-color:#fff;}
 .leaflet-touch .leaflet-control-zoom a{width:27px;height:27px;}
-.leaflet-control-zoom-in{background-image:url(images/zoom-in.png);margin-bottom:5px;}
-.leaflet-control-zoom-out{background-image:url(images/zoom-out.png);}
+.leaflet-control-zoom-in{background-image:url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/vendors/leaflet-0.4/images/zoom-in.png);margin-bottom:5px;}
+.leaflet-control-zoom-out{background-image:url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/vendors/leaflet-0.4/images/zoom-out.png);}
 .leaflet-control-layers{box-shadow:0 1px 7px #999;background:#f8f8f9;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;}
-.leaflet-control-layers a{background-image:url(images/layers.png);width:36px;height:36px;}
+.leaflet-control-layers a{background-image:url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/vendors/leaflet-0.4/images/layers.png);width:36px;height:36px;}
 .leaflet-touch .leaflet-control-layers a{width:44px;height:44px;}
 .leaflet-control-layers .leaflet-control-layers-list,
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none;}
