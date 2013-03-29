@@ -110,6 +110,7 @@ if ($user) {
 			'<a class="t" href="#">O</a>' .
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
+						'<li><a href="' . $site_url . 'blog/owner/' . $user->username . '">' . elgg_echo('my_blog') . '</a></li>' .
 						'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
 						'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
 						'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .

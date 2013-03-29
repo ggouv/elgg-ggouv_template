@@ -65,6 +65,26 @@ elgg.ggouv_template.init = function() {
 				$(this).remove();
 			});
 		});
+
+		// rotate header
+		$('.rotator .arrows div').live('click', function() {
+			var header = $('#elgg-page-header-container'),
+				q = $(this).hasClass('up') ? -1 : 1,
+				degree = header.data('rotation') + q * 120;/*
+				count = Number(header.attr('class').replace('side', ''))+q;
+
+			if (count == 4) count = 1;
+			if (count == 0) count = 3;
+			header.attr('class', 'side'+count);*/
+
+			header.css({
+				'-webkit-transform': 'rotateX(' + degree + 'deg)',
+				'-moz-transform': 'rotateX(' + degree + 'deg)',
+				'-ms-transform': 'rotateX(' + degree + 'deg)',
+				'-o-transform': 'rotateX(' + degree + 'deg)',
+				'transform': 'rotateX(' + degree + 'deg)'
+			}).data('rotation', degree);
+		});
 	});
 
 

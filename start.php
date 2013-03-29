@@ -88,6 +88,9 @@ function elgg_ggouv_template_init() {
 	// extend the comment view with the form
 	elgg_extend_view('annotation/generic_comment', 'editablecomments/generic_comment');
 
+	// unextend search view
+	elgg_unextend_view('page/elements/header', 'search/header');
+
 //~/Sites/ggouv/ggouv/engine/lib/user_settings.php
 
 	// typo and debate
@@ -825,7 +828,8 @@ function ggouv_groups_icon_url_override($hook, $type, $returnvalue, $params) {
 	}
 
 	if ($group->getSubtype() == 'localgroup') {
-		return elgg_get_site_url() . 'mod/elgg-ggouv_template/views/default/icon/localgroupicon.php?cp=' . $group->guid . '&size=' . $size;
+		if ($size != 'large') $size = 'small';
+		return elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/localgroups_avatars/'. $size . '/' . $group->getGUID() . '.jpg';
 	}
 
 	return "mod/groups/graphics/default{$size}.gif";

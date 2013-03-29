@@ -1,18 +1,29 @@
 <?php
 /**
  * Elgg Search css
- * 
+ *
  */
 ?>
 
 /**********************************
 Search plugin
 ***********************************/
-.elgg-search-header {
-	bottom: 5px;
-	height: 23px;
-	position: absolute;
-	right: 0;
+.elgg-search .search-input {
+	margin-top: -1px !important;
+}
+.elgg-search .search-button {
+	background: #9F9 !important;
+}
+.elgg-search .search-button:before {
+	color: #007700 !important;
+	content: "T" !important;
+}
+.elgg-search .search-button:hover {
+	background-color: #0F0 !important;
+}
+.elgg-search .search-button:hover:before {
+	color: white !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 

@@ -37,9 +37,13 @@ $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 
 <form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url(); ?>search" method="get">
 	<fieldset>
-		<input type="text" class="search-input" size="21" name="q" value="<?php echo elgg_echo('search'); ?>" onblur="if (this.value=='') { this.value='<?php echo elgg_echo('search'); ?>' }" onfocus="if (this.value=='<?php echo elgg_echo('search'); ?>') { this.value='' };" />
+		<div id="search-input">
+			<input type="text" class="search-input" size="21" name="q" value="<?php echo elgg_echo('search'); ?>" onblur="if (this.value=='') { this.value='<?php echo elgg_echo('search'); ?>' }" onfocus="if (this.value=='<?php echo elgg_echo('search'); ?>') { this.value='' };" />
+		</div>
+		<div class="reverse-border">
+			<span></span>
+		</div>
+		<div class="search-button gwfb"><input type="submit" value="<?php echo elgg_echo('search:go'); ?>" class="elgg-button elgg-button-submit" /></div>
 		<input type="hidden" name="search_type" value="all" />
-		<div class="search-submit"><input type="submit" value="T" class="search-submit-button gwf" /></div>
-		<div id="elgg-search-inactive" class="gwf">T</div>
 	</fieldset>
 </form>

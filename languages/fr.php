@@ -2030,6 +2030,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'my_board' => "Ma board",
 	'my_pads' => "Mes pads",
 	'my_ideas' => "Mes idées",
+	'my_blog' => "Mon blog",
 
 	/**
 	 * Comment

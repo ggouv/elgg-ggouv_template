@@ -79,9 +79,29 @@ header("Content-type: text/html; charset=UTF-8");
 			</div>
 		</div>
 
-		<div class="elgg-page-header">
-			<div class="elgg-inner">
-				<?php echo elgg_view('page/elements/header', $vars); ?>
+		<div class="elgg-header-wrapper">
+			<div class="rotator">
+				<div class="arrows">
+					<div class="up gwf center link t">í</div>
+					<div class="down gwf center link t">ì</div>
+				</div>
+			</div>
+			<div id="elgg-page-header-container" data-rotation="0">
+				<div class="elgg-page-header">
+					<div class="elgg-inner">
+						<?php echo elgg_view('page/elements/header', $vars); ?>
+					</div>
+				</div>
+				<div class="elgg-page-header-2">
+					<div class="elgg-inner">
+						<?php echo elgg_view('search/header', $vars); ?>
+					</div>
+				</div>
+				<div class="elgg-page-header-3">
+					<div class="elgg-inner">
+						COORDINATION
+					</div>
+				</div>
 			</div>
 		</div>
 
