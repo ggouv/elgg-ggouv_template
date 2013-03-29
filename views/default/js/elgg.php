@@ -30,7 +30,7 @@ $libs = array(
 	'prototypes',
 	'hooks',
 	'security',
-	//'languages',			// Hack ggouv because Elgg bug on home page when non-loggin-user, language is not defined
+	'languages',
 	'ajax',
 	'session',
 	'pageowner',
@@ -51,8 +51,6 @@ include(dirname(__FILE__). '/lib/ui.js');
 echo "\n";
 include(dirname(__FILE__). '/lib/ui.widgets.js');
 echo "\n";
-include(dirname(__FILE__). '/lib/languages.js');
-echo "\n";
 
 /**
  * Set some values that are cacheable
@@ -64,6 +62,7 @@ elgg.release = '<?php echo get_version(true); ?>';
 elgg.config.wwwroot = '<?php echo elgg_get_site_url(); ?>';
 elgg.security.interval = 5 * 60 * 1000; <?php //@todo make this configurable ?>
 elgg.config.domReady = false;
+elgg.config.language = '<?php echo isset($CONFIG->language) ? $CONFIG->language : 'en'; ?>';
 elgg.config.languageReady = false;
 
 //After the DOM is ready
