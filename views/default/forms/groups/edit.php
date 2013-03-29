@@ -1,44 +1,40 @@
 <?php
 /**
  * Group edit form
- * 
+ *
  * @package ElggGroups
  */
 
-// new groups default to open membership
+// only extract these elements.
+$name = $membership = $vis = $entity = null;
+extract($vars, EXTR_IF_EXISTS);
+
 if (isset($vars['entity'])) {
-	$membership = $vars['entity']->membership;
-	$access = $vars['entity']->access_id;
-	if ($access != ACCESS_PUBLIC && $access != ACCESS_LOGGED_IN) {
-		// group only - this is done to handle access not created when group is created
-		$access = ACCESS_PRIVATE;
-	}
+	$entity = $vars['entity'];
+	$owner_guid = $vars['entity']->owner_guid;
 } else {
-	$membership = ACCESS_PUBLIC;
-	$access = ACCESS_PUBLIC;
+	$entity = false;
 }
 
-?>
-<?php if (!isset($vars['entity'])) {
-	echo '<div><label>' . elgg_echo("groups:name") . '</label><br />';
-			echo elgg_view("input/text", array(
-				'name' => 'name',
-				'value' => $vars['entity']->name,
-				'class' => 'elgg-autofocus required namecheckcar',
-				'minlength' => 4,
-				'maxlength' => 30
-			));
-			$autofocus = true;
-	echo '</div>';
-} ?>
-<div>
-	<label><?php echo elgg_echo("groups:icon"); ?></label><br />
-	<?php echo elgg_view("input/file", array('name' => 'icon')); ?>
-</div>
-<?php
+if (!$entity || !in_array($entity->getSubtype(), array('typogroup'))) { ?>
+	<div>
+		<label><?php echo elgg_echo("groups:name"); ?></label><br />
+		<?php echo elgg_view("input/text", array(
+			'name' => 'name',
+			'value' => $name,
+			'class' => 'elgg-autofocus required namecheckcar',
+			'minlength' => 4,
+			'maxlength' => 30
+		));
+		?>
+	</div>
+	<div>
+		<label><?php echo elgg_echo("groups:icon"); ?></label><br />
+		<?php echo elgg_view("input/file", array('name' => 'icon')); ?>
+	</div>
+<?php }
 
 $group_profile_fields = elgg_get_config('group');
-
 if ($group_profile_fields > 0) {
 	foreach ($group_profile_fields as $shortname => $valtype) {
 		$line_break = '<br />';
@@ -57,7 +53,7 @@ if ($group_profile_fields > 0) {
 	}
 }
 ?>
-<?php if (!isset($vars['entity']) || !in_array($vars['entity']->getSubtype(), array('metagroup', 'typogroup'))) { ?> 
+<?php if (!$entity || !in_array($entity->getSubtype(), array('metagroup', 'typogroup'))) { ?>
 <div>
 	<label><?php echo elgg_echo('groups:membership'); ?></label>&nbsp;
 		<?php echo elgg_view('input/access', array(
@@ -71,14 +67,10 @@ if ($group_profile_fields > 0) {
 		?>
 </div>
 <?php } ?>
-	
+
 <?php
 
 if (elgg_get_plugin_setting('hidden_groups', 'groups') == 'yes') {
-	$this_owner = $vars['entity']->owner_guid;
-	if (!$this_owner) {
-		$this_owner = elgg_get_logged_in_user_guid();
-	}
 	$access_options = array(
 		ACCESS_PRIVATE => elgg_echo('groups:access:group'),
 		ACCESS_LOGGED_IN => elgg_echo("LOGGED_IN"),
@@ -91,28 +83,62 @@ if (elgg_get_plugin_setting('hidden_groups', 'groups') == 'yes') {
 			<?php echo elgg_echo('groups:visibility'); ?><br />
 			<?php echo elgg_view('input/access', array(
 				'name' => 'vis',
-				'value' =>  $access,
+				'value' => $vis,
 				'options_values' => $access_options,
 			));
 			?>
 	</label>
 </div>
 
-<?php 	
+<?php
 }
+
+// new in elgg 1.8.14 // Need to be thinked with elgg-group-admins-elections
+/*if ($entity && ($owner_guid == elgg_get_logged_in_user_guid() || elgg_is_admin_logged_in())) {
+	$members = array();
+
+	$options = array(
+		'relationship' => 'member',
+		'relationship_guid' => $vars['entity']->getGUID(),
+		'inverse_relationship' => true,
+		'type' => 'user',
+		'limit' => 0,
+	);
+
+	$batch = new ElggBatch('elgg_get_entities_from_relationship', $options);
+	foreach ($batch as $member) {
+		$members[$member->guid] = "$member->name (@$member->username)";
+	}
+?>
+
+<div>
+	<label>
+			<?php echo elgg_echo('groups:owner'); ?><br />
+			<?php echo elgg_view('input/dropdown', array(
+				'name' => 'owner_guid',
+				'value' =>  $owner_guid,
+				'options_values' => $members,
+				'class' => 'groups-owner-input',
+			));
+			?>
+	</label>
+	<?php
+	if ($owner_guid == elgg_get_logged_in_user_guid()) {
+		echo '<span class="elgg-text-help">' . elgg_echo('groups:owner:warning') . '</span>';
+	}
+	?>
+</div>
+
+<?php
+}*/
 
 $tools = elgg_get_config('group_tool_options');
 if ($tools) {
 	usort($tools, create_function('$a,$b', 'return strcmp($a->label,$b->label);'));
 	foreach ($tools as $group_option) {
 		$group_option_toggle_name = $group_option->name . "_enable";
-		if ($group_option->default_on) {
-			$group_option_default_value = 'yes';
-		} else {
-			$group_option_default_value = 'no';
-		}
-		$value = $vars['entity']->$group_option_toggle_name ? $vars['entity']->$group_option_toggle_name : $group_option_default_value;
-?>	
+		$value = elgg_extract($group_option_toggle_name, $vars);
+?>
 <div>
 	<label class="mrs float">
 		<?php echo $group_option->label; ?>
@@ -135,17 +161,17 @@ if ($tools) {
 <div class="elgg-foot">
 <?php
 
-if (isset($vars['entity'])) {
+if ($entity) {
 	echo elgg_view('input/hidden', array(
 		'name' => 'group_guid',
-		'value' => $vars['entity']->getGUID(),
+		'value' => $entity->getGUID(),
 	));
 }
 
 echo elgg_view('input/submit', array('value' => elgg_echo('save')));
 
 if (isset($vars['entity'])) {
-	$delete_url = 'action/groups/delete?guid=' . $vars['entity']->getGUID();
+	$delete_url = 'action/groups/delete?guid=' . $entity->getGUID();
 	echo elgg_view('output/confirmlink', array(
 		'text' => elgg_echo('groups:delete'),
 		'href' => $delete_url,
