@@ -103,16 +103,17 @@ elgg.ggouv_template.init = function() {
 		elgg.post(url, {
 			data: dataPost,
 			success: function(response, textStatus, xmlHttp) {
-				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
-					var urlP = elgg.parse_url(url),
-						urlM = urlP.path,
-						HTTPredirect = elgg.normalize_url(decodeURIComponent(xmlHttp.getResponseHeader('Redirect')));
+				var urlParsed = elgg.parse_url(url),
+					urlPath = urlParsed.path;
 
-					if (urlM.match('/action/groups/featured') || urlM.match('/action/groups/leave')) {
+				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
+					var HTTPredirect = elgg.normalize_url(decodeURIComponent(xmlHttp.getResponseHeader('Redirect')));
+
+					if (urlPath.match('/action/groups/featured') || urlPath.match('/action/groups/leave')) {
 						History.pushState(data, null, data.origin); //parsePage(window.location.href);
 					} else if (HTTPredirect != null) {
-						if (urlM.match('/action/brainstorm/delete')) {
-							var brainstorm_guid = elgg.parse_str(urlP.query).guid;
+						if (urlPath.match('/action/brainstorm/delete')) {
+							var brainstorm_guid = elgg.parse_str(urlParsed.query).guid;
 							$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
 						}
 						History.pushState(data, null, HTTPredirect); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
@@ -124,16 +125,52 @@ elgg.ggouv_template.init = function() {
 					elgg.system_message(JSON.parse(response).system_messages.success);
 
 				} else {
-					var title = $(response).filter('title').text();
-					$('title').html(title);
-					$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
-					$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
-					eval($('#JStoexecute').text()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
+					var orignParsed = elgg.parse_url(data.origin),
+						urlOffset = !elgg.isUndefined(urlParsed.query) ? urlParsed.query.match(/offset=(\d+)/) : false;
+
+					eval($('#JStoexecute').html()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
+					$('title').html($(response).filter('title').text());
+
+					if (urlOffset && orignParsed.path == urlPath) { // same url. Only query offset change, we just slide page body.
+						var numOrigin = elgg.isUndefined(orignParsed.query) ? 0 : parseInt(orignParsed.query.match(/offset=(\d+)/)[1]),
+							numDest = parseInt(urlOffset[1]);
+
+						$('.elgg-main .elgg-pagination').html($(response).find('.elgg-main .elgg-pagination').html());
+						if (numOrigin < numDest) {
+							var u = $('.elgg-main .elgg-list'),
+								slideWidth = u.outerWidth(true),
+								v = $(response).find('.elgg-main .elgg-list').clone().css({
+									position: 'absolute',
+									top: u.position().top,
+									left: slideWidth
+								});
+							u.after(v).add(v).animate({left: '-='+slideWidth+'px'}, function() {
+								u.remove();
+								v.removeAttr('style');
+							});
+						} else {
+							var u = $('.elgg-main .elgg-list'),
+								slideWidth = u.outerWidth(true),
+								v = $(response).find('.elgg-main .elgg-list').clone().css({
+									position: 'absolute',
+									top: u.position().top,
+									right: slideWidth
+								});
+							u.after(v).add(v).animate({right: '-='+slideWidth+'px'}, function() {
+								u.remove();
+								v.removeAttr('style');
+							});
+						}
+					} else {
+						$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
+						$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
+					}
 
 					if (!data.noscroll) $(window).scrollTop(0);
 
 					elgg.ggouv_template.reloadJsFunctions();
 				}
+
 				if (fragment && $('#'+fragment).length) {
 					$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 				}
@@ -190,7 +227,7 @@ elgg.ggouv_template.init = function() {
 
 			var $this = $(this),
 				url = elgg.normalize_url(decodeURIComponent(href)),
-				urlP = elgg.parse_url(url),
+				urlParsed = elgg.parse_url(url),
 				ExecAction = function(url, callback) {
 					elgg.action(url, {
 						success: function(json) {
@@ -205,51 +242,70 @@ elgg.ggouv_template.init = function() {
 				// if it's an actions, do action and skip history.
 				if (url.match('/action/comments/delete')) {
 					ExecAction(url, function() {
-						$('#item-annotation-'+elgg.parse_str(urlP.query).annotation_id).css('background-color', '#FF7777').fadeOut();
+						$('#item-annotation-'+elgg.parse_str(urlParsed.query).annotation_id).css('background-color', '#FF7777').fadeOut();
 						if ($('#card-forms').length) elgg.workflow.addCommentonCard($this.closest('#card-forms').find('input[name="entity_guid"]').val(), -1);
 					});
 				} else if (url.match('/action/friends/add')) {
 					ExecAction(url, function() {
-						$('a.elgg-button.add_friend').blur().removeClass('add_friend').addClass('remove_friend').text(elgg.echo('friend:remove')).attr('href', function(i, val) {
-							return elgg.get_site_url() + 'action/friends/remove?' + elgg.parse_url(val, 'query')
-						});
-						var stats = $('.user-stats li:first-child .stats');
+						var query = elgg.parse_url(url, 'query'),
+							friend = query.match(/friend=\d+/)[0],
+							stats = $('.user-stats li:first-child .stats');
+
+						$('a.tooltip.add_friend[href*="'+friend+'"]').html('p');
+						$('a.elgg-button.add_friend[href*="'+friend+'"]').html(elgg.echo('friend:remove'));
+						$('a.add_friend[href*="'+friend+'"]')
+							.blur()
+							.removeClass('add_friend')
+							.addClass('remove_friend')
+							.attr({
+								href: elgg.get_site_url() + 'action/friends/remove?' + query,
+								title: elgg.echo('friend:remove')
+							});
 						stats.html(parseInt(stats.html())+1);
 					});
 				} else if (url.match('/action/friends/remove')) {
 					ExecAction(url, function() {
-						$('a.elgg-button.remove_friend').blur().removeClass('remove_friend').addClass('add_friend').text(elgg.echo('friend:add')).attr('href', function(i, val) {
-							return elgg.get_site_url() + 'action/friends/add?' + elgg.parse_url(val, 'query')
-						});
-						var stats = $('.user-stats li:first-child .stats');
+						var query = elgg.parse_url(url, 'query'),
+							friend = query.match(/friend=\d+/)[0],
+							stats = $('.user-stats li:first-child .stats');
+
+						$('a.tooltip.remove_friend[href*="'+friend+'"]').html('o');
+						$('a.elgg-button.remove_friend[href*="'+friend+'"]').html(elgg.echo('friend:add'));
+						$('a.remove_friend[href*="'+friend+'"]')
+							.blur()
+							.removeClass('remove_friend')
+							.addClass('add_friend')
+							.attr({
+								href: elgg.get_site_url() + 'action/friends/add?' + query,
+								title: elgg.echo('friend:add')
+							});
 						stats.html(parseInt(stats.html())-1);
 					});
 				} else if (url.match('/action/river/delete')) {
 					ExecAction(url, function() {
-						$('.item-river-'+elgg.parse_str(urlP.query).id).css('background-color', '#FF7777').fadeOut();
+						$('.item-river-'+elgg.parse_str(urlParsed.query).id).css('background-color', '#FF7777').fadeOut();
 					});
 				} else if (url.match('/action/workflow/delete')) {
 					ExecAction(url, function() {
-						var board_guid = elgg.parse_str(urlP.query).guid;
+						var board_guid = elgg.parse_str(urlParsed.query).guid;
 						$('#elgg-object-'+board_guid).css('background-color', '#FF7777').fadeOut();
 						$('.workflow-sidebar .elgg-list-item.board-'+board_guid).css('background-color', '#FF7777').fadeOut();
 					});
 				} else if (url.match('/action/deck_river/network/delete')) {
 					ExecAction(url, function() {
-						var network_guid = elgg.parse_str(urlP.query).guid;
+						var network_guid = elgg.parse_str(urlParsed.query).guid;
 						$('#elgg-object-'+network_guid).css('background-color', '#FF7777').fadeOut();
 						$('#thewire-network .net-profile input[value="'+network_guid+'"]').closest('.net-profile').remove();
 					});
 
 				// it's a link
 				} else {
-
-					var fragment = urlP.fragment || false,
-						path_url = urlP.path,
+					var fragment = urlParsed.fragment || false,
+						path_url = urlParsed.path,
 						url_origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
 						path_origin = elgg.parse_url(url_origin, 'path');
 
-					if (fragment && path_origin == path_url) { //same page, got to #hash
+					if (fragment && path_origin == path_url) { //same page, go to #hash
 						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
 						History.pushState({origin: url_origin, fragment: fragment}, null, url.split("#")[0]);
@@ -426,7 +482,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 
 
 elgg.ggouv_template.reload = function() {
-	eval($('#JStoexecute').text());
+	eval($('#JStoexecute').html()); // @todo added for homepage but cause call twice with history js. Need to be removed...
 	/*
 	 * Resize, scroll and sidebar
 	 */

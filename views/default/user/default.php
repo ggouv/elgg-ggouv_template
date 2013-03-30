@@ -8,7 +8,6 @@
 
 $entity = $vars['entity'];
 $size = elgg_extract('size', $vars, 'tiny');
-
 $icon = elgg_view_entity_icon($entity, $size, $vars);
 
 // Simple XFN
@@ -42,6 +41,27 @@ if (elgg_get_context() == 'gallery') {
 			'metadata' => $metadata,
 		);
 	} else {
+
+		if (elgg_is_logged_in() && $entity->getGUID() != elgg_get_logged_in_user_guid()) {
+			$metadata .= '<ul class="elgg-menu profile-action-menu inlist">';
+			if ($entity->isFriend()) {
+				$metadata .= elgg_view('output/url', array(
+					'href' => elgg_add_action_tokens_to_url("action/friends/remove?friend={$entity->guid}"),
+					'text' => 'p',
+					'title' => elgg_echo('friend:remove'),
+					'class' => 'tooltip s gwf t remove_friend'
+				));
+			} else {
+				$metadata .= elgg_view('output/url', array(
+					'href' => elgg_add_action_tokens_to_url("action/friends/add?friend={$entity->guid}"),
+					'text' => 'o',
+					'title' => elgg_echo('friend:add'),
+					'class' => 'tooltip s gwf t add_friend'
+				));
+			}
+			$metadata .= '</ul>';
+		}
+
 		$params = array(
 			'entity' => $entity,
 			'title' => $title,

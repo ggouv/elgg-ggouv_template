@@ -41,13 +41,13 @@ if ($ajaxified) {
 				<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
 			</div>
 			<div class="elgg-page-body">
-				<div id="JStoexecute" class="hidden">
-					<?php if (elgg_get_context() == 'main') {echo "$('body').addClass('homepage'); ";} ?>
-					<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
-				</div>
 				<div class="elgg-inner">
 					<?php echo elgg_view('page/elements/body', $vars); ?>
 				</div>
+				<script type="text/html" id="JStoexecute">
+					<?php if (elgg_get_context() == 'main') {echo "$('body').addClass('homepage'); ";} ?>
+					<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
+				</script>
 				<?php if (!elgg_is_logged_in()) echo elgg_view('core/account/login_dropdown'); ?>
 			</div>
 		</body>

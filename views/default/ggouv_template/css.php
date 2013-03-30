@@ -813,7 +813,17 @@ div.tagsinput .not_valid {
 .profile-aboutme-title .elgg-widget-collapse-button:hover {
 	color: #333;
 }
-
+.profile-action-menu.inlist {
+	float: right;
+}
+.inlist .add_friend, .inlist .remove_friend {
+	font-size: 24px;
+	color: #CCC;
+}
+.inlist .add_friend:hover, .inlist .remove_friend:hover {
+	text-decoration: none;
+	color: #4690D6;
+}
 
 
 /*

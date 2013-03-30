@@ -18,7 +18,7 @@
 	text-transform:uppercase;
 	color: white;
 	background-color: white;
-	
+
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -28,11 +28,11 @@
 	margin-bottom: 4px;
 	cursor: pointer;
 	outline: none;
-	
+
 	-webkit-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
 	box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.1);
-	
+
 	transition: background-color 0.25s ease, border 0.25s ease, color 0.25s ease;
 	-webkit-transition: background-color 0.25s ease, border 0.25s ease, color 0.25s ease;
 	-moz-transition: background-color 0.25s ease, border 0.25s ease, color 0.25s ease;
@@ -47,7 +47,7 @@
 	color: white;
 	text-decoration: none;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-	
+
 	-webkit-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
@@ -125,15 +125,15 @@ a.elgg-button {
 	margin-left:0;
 	color: white;
 	border:1px solid #71B9F7;
-	
+
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
 	border-radius:4px;
-	
+
 	-webkit-box-shadow: 0 0 0;
 	-moz-box-shadow: 0 0 0;
 	box-shadow: 0 0 0;
-	
+
 	/*background-image:url(<?php echo elgg_get_site_url(); ?>_graphics/elgg_sprites.png);
 	background-position:-150px -51px;
 	background-repeat:no-repeat;*/
@@ -154,7 +154,7 @@ a.elgg-button {
 	outline: none;
 	color: #333;
 	border:1px solid #ccc;
-	
+
 	-webkit-border-radius:4px 4px 0 0;
 	-moz-border-radius:4px 4px 0 0;
 	border-radius:4px 4px 0 0;
@@ -180,7 +180,7 @@ a.elgg-button {
 }
 .elgg-button.gwfb:before {
 	font-size: 32px;
-	margin: -2px 4px 0px 0px;
+	margin: -2px 4px 0 0 ;
 	text-transform: lowercase;
 }
 .elgg-button.edit-button:before {
@@ -205,7 +205,6 @@ a.elgg-button {
 }
 .elgg-button.add_friend:before {
 	content: "o";
-	margin-top: -1px;
 }
 .elgg-button.remove_friend:before {
 	content: "p";
