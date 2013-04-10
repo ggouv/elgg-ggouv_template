@@ -19,9 +19,9 @@ $content = elgg_list_entities_from_annotation_calculation(array(
 	'container_guid' => $group->guid,
 	'annotation_names' => 'point',
 	'order_by' => 'annotation_calculation desc',
-	'full_view' => 'no_vote',
+	'full_view' => 'module',
 	'item_class' => 'elgg-item-idea pts pbs',
-	'list_class' => 'group-idea-list',
+	'list_class' => 'module-idea-list',
 	'limit' => 6,
 	'pagination' => false
 ));

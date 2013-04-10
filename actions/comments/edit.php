@@ -3,7 +3,7 @@
 // Get the required variables
 $annotation_id = get_input("annotation_id");
 $post_comment = get_markdown_input($_REQUEST['postComment']);
-$annotation = get_annotation($annotation_id);
+$annotation = elgg_get_annotation_from_id($annotation_id);
 $commentOwner = $annotation->owner_guid;
 $access_id = $annotation->access_id;
 

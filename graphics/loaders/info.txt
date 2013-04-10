@@ -1,0 +1,8 @@
+Loaders generated with http://loadinggif.com/
+Gif number : #10
+Colors :
+	dark-blue : #0054A7
+	blue : #4690D6
+	gray : #333
+	gray foreground : #EEE
+	white : #FFF

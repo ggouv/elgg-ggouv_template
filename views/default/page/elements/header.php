@@ -11,8 +11,6 @@ echo elgg_view_form('deck_river/wire_input');
 // drop-down login
 echo elgg_view('core/account/login_dropdown');
 
-echo '<div id="ajaxified-loader" class="hidden"></div>';
-
 // insert site-wide navigation
 //echo elgg_view_menu('site');
 

@@ -32,7 +32,6 @@ if (!$content) {
 	$content = '<p>' . elgg_echo('blog:none') . '</p>';
 }
 
-
 echo elgg_view('groups/profile/module', array(
 	'title' => elgg_echo('blog:group'),
 	'content' => $content,

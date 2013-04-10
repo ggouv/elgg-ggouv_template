@@ -256,7 +256,7 @@
 	z-index: 0;
 }
 #searching.loading {
-	background: url("http://localhost/~mama/ggouv/ggouv//mod/elgg-brainstorm/graphics/ajax-loader.gif") no-repeat scroll 0 6px transparent;
+	background: url(<?php echo elgg_get_site_url(); ?>mod/elgg-brainstorm/graphics/ajax-loader.gif) no-repeat scroll 0 6px transparent;
 	height: 28px;
 	padding-left: 20px;
 	position: absolute;
