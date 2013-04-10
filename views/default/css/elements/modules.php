@@ -70,7 +70,7 @@
 /* Dropdown */
 .elgg-module-dropdown {
 	background-color:white;
-	border:5px solid #CCC;
+	border:5px solid #4690D6;
 
 	-webkit-border-radius: 5px 0 5px 5px;
 	-moz-border-radius: 5px 0 5px 5px;

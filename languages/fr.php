@@ -2017,6 +2017,8 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	 */
 	'ggouv:register:contamined' => "&nbsp;&nbsp;&nbsp;&nbsp;Je suis<br>contaminé.<br>Je veux<br>&nbsp;&nbsp;&nbsp;&nbsp;participer !",
 	'ggouv:register:wannaplay' => "&nbsp;&nbsp;&nbsp;&nbsp;Tout ça<br>me plait.<br>Je veux<br>&nbsp;&nbsp;&nbsp;&nbsp;jouer !",
+	'ggouv:home:objectives' => "Ce que veulent les gitoyens",
+	'ggouv:share' => "Partager",
 
 	/**
 	 * Sidebar

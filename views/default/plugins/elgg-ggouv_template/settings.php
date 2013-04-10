@@ -7,7 +7,7 @@
 
 
 
-
+// home
 $markdown_wiki_page_for_home_string = elgg_echo('ggouv_template:markdown_wiki_page_for_home');
 $markdown_wiki_page_for_home_view = elgg_view('input/text', array(
 	'name' => 'params[markdown_wiki_page_for_home]',
@@ -15,6 +15,29 @@ $markdown_wiki_page_for_home_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin',
 ));
 
+$blog_of_site_string = elgg_echo('ggouv_template:blog_of_site');
+$blog_of_site_view = elgg_view('input/text', array(
+	'name' => 'params[blog_of_site]',
+	'value' => $vars['entity']->blog_of_site,
+	'class' => 'elgg-input-thin',
+));
+
+$slideshow_home_string = elgg_echo('ggouv_template:slideshow_home');
+$slideshow_home_view = elgg_view('input/text', array(
+	'name' => 'params[slideshow_home]',
+	'value' => $vars['entity']->slideshow_home,
+	'class' => 'elgg-input-thin',
+));
+
+$objectives_home_string = elgg_echo('ggouv_template:objectives_home');
+$objectives_home_view = elgg_view('input/text', array(
+	'name' => 'params[objectives_home]',
+	'value' => $vars['entity']->objectives_home,
+	'class' => 'elgg-input-thin',
+));
+
+
+//help
 $group_of_help_string = elgg_echo('ggouv_template:group_of_help');
 $group_of_help_view = elgg_view('input/text', array(
 	'name' => 'params[group_of_help]',
@@ -76,6 +99,14 @@ $piwik_tracker_view = elgg_view('input/text', array(
 echo <<<__HTML
 <br />
 <div><label>$markdown_wiki_page_for_home_string</label><br />$markdown_wiki_page_for_home_view</div>
+<br />
+<div><label>$blog_of_site_string</label><br />$blog_of_site_view</div>
+<br />
+<div><label>$slideshow_home_string</label><br />$slideshow_home_view</div>
+<br />
+<div><label>$objectives_home_string</label><br />$objectives_home_view</div>
+<br />
+<hr>
 <br />
 <div><label>$group_of_help_string</label><br />$group_of_help_view</div>
 <br />

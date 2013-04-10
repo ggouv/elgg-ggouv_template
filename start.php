@@ -19,6 +19,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_js('jquery-validation', "$http_base/vendors/jquery-validation-1.9.0/jquery.validate.min.js", 'footer');
 	elgg_register_js('jquery.caretposition', "$http_base/vendors/jquery.caretposition.js", 'footer');
 	elgg_register_js('jquery.tipsy', "$http_base/vendors/jquery.tipsy.min.js", 'footer');
+	elgg_register_js('responsiveslides', "$http_base/vendors/ResponsiveSlides.js/responsiveslides.min.js", 'footer');
 
 	elgg_unregister_js('elgg.avatar_cropper');
 	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js", 'footer');
@@ -33,12 +34,10 @@ function elgg_ggouv_template_init() {
 
 	// Want it everywhere
 	elgg_load_js('jquery.scrollTo');
-	elgg_load_js('tinymce');
-	elgg_load_js('elgg.tinymce');
 	elgg_load_js('elgg.userpicker');
+	elgg_load_js('elgg.friendspicker');
 	elgg_load_js('elgg.autocomplete');
 	elgg_load_js('jquery.ui.autocomplete.html');
-	elgg_load_js('elgg.friendspicker');
 	elgg_load_js('jquery.easing');
 	elgg_load_js('showdown');
 	elgg_load_js('highlight');
@@ -48,6 +47,7 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('jquery-validation');
 	elgg_load_js('jquery.caretposition');
 	elgg_load_js('jquery.tipsy');
+	elgg_load_js('responsiveslides');
 
 	// Hook to change menu
 	elgg_register_event_handler('pagesetup', 'system', 'ggouv_custom_menu');

@@ -9,9 +9,15 @@
 }
 
 #login-dropdown .elgg-button-dropdown {
-	background-color: white;
+	background: white;
 	border: medium none;
 	color: black;
+	font-size: 1.2em;
+}
+#login-dropdown .elgg-button-dropdown:hover {
+	background: #4690D6;
+	border: medium none;
+	color: white;
 	font-size: 1.2em;
 }
 #login-dropdown .elgg-button-dropdown.elgg-state-active:hover, #login-dropdown .elgg-button-dropdown.elgg-state-active:focus {
@@ -19,7 +25,8 @@
 	text-shadow: none;
 }
 #login-dropdown .elgg-button-dropdown.elgg-state-active {
-	background-color: #CCC;
+	background: #4690D6;
+	color: white;
 }
 
 /* ***************************************
@@ -55,7 +62,7 @@
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 	
-	background: none repeat scroll 0 0 #4690D6;
+	background: #4690D6;
 	color: white;
 	cursor: pointer;
 	font-size: 1.2em;

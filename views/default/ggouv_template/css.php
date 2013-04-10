@@ -21,6 +21,7 @@
 	margin: 0px auto -120px;
 	position: relative;
 	width: 180px;
+	clear: both;
 }
 .signup a {
 	color: white;
@@ -58,35 +59,70 @@
 	line-height: 1em;
 	font-style: italic;
 }
-.homepage .color0, .homepage .pro {
+.homepage .color0 {
 	color: #333333;
-	/*float: left;*/
 	font-size: 1.4em;
 	background: transparent;
 	border: none;
-	/*width: 100%;*/
-}
-@media (max-width: 1199px) {
-	.homepage .color0, .homepage .pro {
-		clear: both;
-	}
-	.homepage .markdown-body {
-		font-size: 10px;
-	}
-}
-.homepage .markdown-body img {
-	max-width: 400px;
-	min-width: 220px;
+	width: 100%;
 }
 .homepage .red {
 	color: #FF3D3D;
 }
 
-#section1 .span4 div {
-	background: #EEEEEE;
-	height: 450px;
-	margin: 70px 10px -20px;
-	padding: 20px;
+#section1 .span4 > div {
+	background: #F9F9F9;
+	max-height: 680px;
+	margin: 60px 10px -20px;
+	position: relative;
+	-webkit-box-shadow: 0 0 5px 0 #999;
+	box-shadow: 0 0 5px 0 #999;
+}
+#slideshow .caption, #section1 .rslides_nav span {
+	background: rgba(255, 255, 255, 0.6);
+	bottom: 0;
+	color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+}
+#slideshow p {
+	font-size: 1.3em;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 1.2em;
+}
+#slideshow .caption span {
+	font-size: 1.2em;
+	border-right: 1px solid #666;
+}
+#section1 .rslides_nav {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 50%;
+	z-index: 100;
+}
+#section1 .rslides_nav span {
+	opacity: 0;
+	border-radius: 0 40px 40px 0;
+	font-family: 'ggouv';
+	font-size: 4em;
+	height: 80px;
+	line-height: 80px;
+	margin: 0 -5px;
+	text-align: center;
+	bottom: 50%;
+	width: 40px;
+}
+#section1 .rslides_nav:hover span {
+	opacity: 1;
+	text-decoration: none;
+}
+#section1 .rslides_nav.next {
+	right: 0;
+}
+#section1 .rslides_nav.next span {
+	right: 0;
+	border-radius: 40px 0 0 40px;
 }
 #welcome {
 	font-size: 3em;
@@ -111,26 +147,37 @@
 	font-size: 1.5em;
 	line-height: 1.5em;
 	background: rgba(0, 0, 0, 0.02);
-	padding: 40px;
+	padding: 50px 40px;
 }
-.homepage .summary:before, .summary:after {
-	color: #EEEEEE;
+.homepage .summary:before, .homepage .summary:after, #slideshow p:before, #slideshow p:after {
+	color: #DDD;
 	content: "\E10B";
 	font-size: 7em;
 	position: relative;
-	z-index: -1;
-	margin: -30px -45px;
+	margin: -40px -45px;
 }
-.homepage .summary:after {
+.homepage .summary:after, #slideshow p:after {
 	content: "\E10B";
-	margin: 0;
 	float: right !important;
-	margin: 33px -45px;
+	display: inline-block;
+	margin: 40px -45px;
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
 	-ms-transform: rotate(180deg);
 	transform: rotate(180deg);
+}
+#slideshow p:before, #slideshow p:after {
+	color: inherit;
+	font-family: 'ggouv';
+	float: none !important;
+	font-size: 2em;
+	font-weight: normal;
+	margin: 0 5px 0 -3px;
+}
+#slideshow p:after {
+	margin: 0 0 -8px 5px;
+	vertical-align: bottom;
 }
 .homepage .questions {
 	color: #666666;
@@ -152,17 +199,34 @@
 	color: #0054A7;
 	font-size: 1.5em;
 }
+.homepage .elgg-page-body a[href*="/wiki/"] {
+	background: #E4ECF5;
+	padding: 0 7px;
+	border-radius: 5px;
+	float: left;
+	margin-top: 10px;
+	font-size: 16px;
+}
+.homepage .elgg-page-body a[href*="/wiki/"]:before {
+	font-family: "ggouv";
+	content: "ï";
+	padding-right: 3px;
+}
+.homepage .elgg-page-body a[href*="/wiki/"]:hover {
+	background: #4690D6;
+	color: white;
+	text-decoration: none;
+}
 
 .width80 {
 	width: 80%;
 	margin: 0 auto !important;
 }
 #section2 {
-	background: #e4ecf5;
+	background: #E4ECF5;
 	padding-top: 130px;
-	float: left;
 }
-#section2 .color0 > div, .markdown-body h2 {
+#section3 .markdown-body h2 {
 	background: transparent;
 	color: #4690D6;
 	font-size:2em;
@@ -173,7 +237,7 @@
 #section2 p, #section3 p {
 	font-size: 1.2em;
 }
-#section2 li {
+#section2 .span8 li {
 	color: #4690D6;
 	font-size: 1.1em;
 	list-style: none outside none;
@@ -190,16 +254,29 @@
 #section2 li strong {
 	color: #0054A7;
 }
+#section2 .span4 {
+	background: white;
+	border-radius: 20px;
+}
+#section2 .elgg-item-idea {
+	border: none;
+	display: table;
+	width: 100%;
+}
+#section2 .idea-left-column {
+	margin: 0;
+}
+#section2 .elgg-subtext {
+	display: none;
+}
 
 #section3 {
-	clear: both;
 	padding: 50px 0;
-	width: 100%;
 }
 #section3 .markdown-body h2 {
 	border: medium none;
 	margin-bottom: -10px;
-	padding-top: 30px;
+	padding-top: 20px;
 	clear: both;
 }
 #section3 .markdown-body h2 + div {
@@ -208,29 +285,41 @@
 	line-height: 1em;
 	font-style: italic;
 }
-#section3 .color0 > div:first-child, #section3 .pro > div:first-child {
-	background: transparent;
-	color: #0054A7;
-	font-size: 1.1em;
-	font-weight: bold;
+#section3 .type0 .header {
+	border-bottom: 1px solid #DDD;
+	color: #555;
+	margin: 10px 0 15px;
 	padding-bottom: 10px;
-	position: relative;
+	clear: both;
 }
-#section3 .color0 > div:first-child {
-	margin-left: 30px;
+#section3 .header.gwfb:before {
+	margin-top: -23px;
 }
-#section3 .span6 div > .gwf {
-	color: #999999;
-	font-size: 3em;
-	left: -40px;
-	position: absolute;
-	top: -28px;
-}
-#section3 .text {
+#section3 .content {
 	display: table;
 	min-width: 220px;
+	font-size: 0.9em;
 }
-.homepage p + p + .row-fluid {
+#section3 .markdown-body img {
+	-webkit-box-shadow: 0 0 5px 0 #999;
+	box-shadow: 0 0 5px 0 #999;
+}
+#section3 .markdown-body .type1 {
+	padding: 20px 0;
+	font-size: 1.2em;
+}
+#section3 .markdown-body .type1:first-child {
+	text-align: right;
+}
+#section3 .markdown-body .type0 img {
+	clear: both;
+	float: left;
+	margin: 24px 20px 20px 0;
+	max-width: 400px;
+	min-width: 220px;
+	width: 100%;
+}
+#section3 p + p + .row-fluid {
 	padding-top: 20px;
 }
 
@@ -240,21 +329,77 @@
 	margin-bottom: -20px;
 	padding: 150px 0;
 }
+@media (max-width: 1599px) {
+	.homepage .markdown-body {
+		font-size: 10px;
+	}
+	.homepage a[href*="/wiki/"] {
+		font-size: 13px;
+	}
+	#section3 .header.gwfb:before {
+		margin-top: -19px;
+	}
+	#slideshow .caption {
+		font-size: 0.85em;
+	}
+}
+@media (max-width: 1199px) {
+	#section1 .span4 > div {
+		height: 300px;
+		margin: 60px 90px 40px;
+		overflow: hidden;
+	}
+	#slideshow img {
+		width: 50%;
+	}
+	#slideshow .caption {
+		width: 50%;
+		float: left;
+		position: relative;
+		background: #F9F9F9;
+		font-size: 1em;
+	}
+	#section1 .rslides_nav {
+		width: 25%;
+	}
+	#section1 .rslides_nav span {
+		bottom: 110px;
+	}
+	#section1 .rslides_nav.next {
+		right: 50%;
+	}
+	#section2 .color0 {
+		float: left;
+		width: 50%;
+	}
+	#section2 .group-idea-list {
+		-webkit-columns: 2 20px;
+		-moz-columns: 2 20px;
+		columns: 2 20px;
+	}
+	#section3 .markdown-body .type1:first-child {
+		float: left;
+		padding-top: 0;
+		text-align: left;
+	}
+}
 
 /* 
 * nolog css when non logged in user
 */
 .elgg-page-header.nolog {
 	background: #1F2E3D;
+	-webkit-box-shadow: 0 5px 5px 0 white;
 	box-shadow: 0 5px 5px 0 white;
-	height: 48px;
+	height: 46px;
 	position: fixed;
 	width: 100%;
-	z-index: 1;
+	z-index: 9;
 }
 .elgg-inner-nolog {
 	margin: 0;
 	position: relative;
+	padding-right: 160px;
 }
 .elgg-inner-nolog .elgg-menu-item-logo {
 	margin: 0 0 0 15px;
@@ -267,19 +412,87 @@
 	font-size: 2em;
 	color: white;
 	text-shadow: 0 0 4px #999;
-	padding: 13px;
-	margin: 0 60px;
+	padding: 11px;
 }
 .elgg-inner-nolog > h1 a {
 	text-decoration: none;
 	color: inherit;
 }
+.header-pages {
+	border-left: 1px solid #666;
+	height: 38px;
+	margin: 3px 4px 4px 20px;
+}
+.header-page a {
+	font-size: 1.6em;
+	color: #EEE;
+	border-radius: 4px;
+}
+.header-page a:hover {
+	text-decoration: none;
+	background: #4690D6;
+}
+.elgg-inner-nolog ul.float-alt {
+	padding: 10px 18px 10px 0;
+	border-right: 1px solid #666;
+	margin: 3px 20px 4px;
+	height: 18px;
+	position: relative;
+}
+.elgg-inner-nolog .fbbutton, .elgg-inner-nolog .twitter-share-button {
+	float: right;
+	width: 100px;
+}
+.elgg-inner-nolog #___plusone_0 {
+	width: 100px !important;
+	margin: -2px 0 !important;
+}
+.elgg-inner-nolog .float-alt:hover .visible-desktop {
+	display: block !important;
+}
 .elgg-page-default .elgg-page-body.nolog {
 	margin:0 0 0 20px;
 	padding-top:48px;
 }
+.elgg-page-default .shareButtons {
+	color: #EEE;
+	font-size: 1.3em;
+	margin-top: -2px;
+	padding: 3px 6px;
+	border-radius: 4px;
+}
+.elgg-page-default .shareButtons:before {
+	content: "r";
+	font-size: 2em;
+	padding-right: 5px;
+}
+.elgg-page-default .float-alt:hover .shareButtons {
+	background: #4690D6;
+}
 #login-dropdown-box {
 	position: fixed;
+}
+@media (max-width: 979px) {
+	.elgg-inner-nolog .float-alt:hover .visible-desktop {
+		background: white;
+		border-radius: 5px 0 5px 5px;
+		display: block !important;
+		padding: 10px 8px 5px;
+		position: absolute;
+		right: 18px;
+		top: 29px;
+		width: 120px;
+		border: 5px solid #4690D6;
+		z-index: -1;
+		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.45);
+	}
+	.elgg-inner-nolog .float-alt .visible-desktop > * {
+		float: left;
+		padding-bottom: 8px;
+	}
+	.elgg-inner-nolog #___plusone_0 {
+		margin: 1px 0 0 !important;
+	}
 }
 
 
@@ -335,6 +548,16 @@
 	text-shadow:   0 0 1px #fff,
                    0 0 2px #fff,
                    0 0 3px #fff;
+}
+.ajaxLoading .elgg-menu-item-logo {
+	background: url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/graphics/loaders/loader_white_black.gif) no-repeat scroll 5px 8px transparent;
+}
+.ajaxLoading .elgg-menu-item-logo a {
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-o-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0);
 }
 .gwf.scale:hover > a {
 	color: #4690D6;
@@ -1011,3 +1234,38 @@ div.tagsinput .not_valid {
 .leaflet-popup-content-wrapper, .leaflet-popup-tip{background:white;box-shadow:0 3px 10px #888;-moz-box-shadow:0 3px 10px #888;-webkit-box-shadow:0 3px 14px #999;}
 .leaflet-popup-content-wrapper{-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;}
 .leaflet-popup-content{font:12px/1.4 "Helvetica Neue", Arial, Helvetica, sans-serif;}
+
+
+/*! http://responsiveslides.com v1.53 by @viljamis */
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }

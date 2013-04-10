@@ -30,5 +30,3 @@ echo elgg_view_menu('extras', array(
 	'sort_by' => 'priority',
 	'class' => 'elgg-menu-hz',
 ));
-
-echo '<div id="goTop" class="t gwf tooltip e hidden" title="' . elgg_echo('back:to:top') . '">í</div>';

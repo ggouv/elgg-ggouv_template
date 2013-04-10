@@ -33,6 +33,11 @@ elgg.ggouv_template.init = function() {
 			}
 		});
 
+		// ggouv logo
+		$('.elgg-menu-item-logo').live('click', function() {
+			$(this).children('a').click();
+		});
+
 		// goTop button
 		$(window).scroll(function() {
 			if ($(window).scrollTop() > 300) {
@@ -66,7 +71,7 @@ elgg.ggouv_template.init = function() {
 			});
 		});
 
-		// rotate header
+		// 3D rotate header
 		$('.rotator .arrows div').live('click', function() {
 			var header = $('#elgg-page-header-container'),
 				q = $(this).hasClass('up') ? -1 : 1,
@@ -88,9 +93,12 @@ elgg.ggouv_template.init = function() {
 	});
 
 
-	/*
-	* Ajaxified site
-	*/
+	/**
+	 * Ajaxified website. Get page called by link or submit form.
+	 * @param  {[type]} url
+	 * @param  {[type]} data
+	 * @return {[type]}
+	 */
 	parsePage = function(url, data) {
 		var data = data || false,
 			fragment = data.fragment || false;
@@ -161,9 +169,22 @@ elgg.ggouv_template.init = function() {
 								v.removeAttr('style');
 							});
 						}
+
 					} else {
+
+						// stash deck river before change elgg-page-body
+						if ($('body').hasClass('fixed-deck') && !$('#stash').length) {
+							var drl = $('#deck-river-lists');
+							drl.data('scrollBkp', drl.scrollLeft());
+							$.each(drl.find('.elgg-river'), function(i, e) {
+								$(e).data('scrollBkp', e.scrollTop);
+							});
+							$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
+						}
+
 						$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
 						$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
+
 					}
 
 					if (!data.noscroll) $(window).scrollTop(0);
@@ -174,11 +195,11 @@ elgg.ggouv_template.init = function() {
 				if (fragment && $('#'+fragment).length) {
 					$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 				}
-				$('#ajaxified-loader').addClass('hidden');
+				$('body').removeClass('ajaxLoading');
 			},
 			error: function(response) {
 				console.log(response, 'error');
-				$('#ajaxified-loader').addClass('hidden');
+				$('body').removeClass('ajaxLoading');
 			}
 			/*error: function(jqXHR, textStatus, errorThrown){
 				document.location.href = url;
@@ -410,7 +431,20 @@ elgg.ggouv_template.init = function() {
 			var State = History.getState();
 
 			if (State) {
-				$('#ajaxified-loader').removeClass('hidden');
+				if (State.url.match(/\/activity/) && $('#stash').length) {
+					$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
+					$('#stash').remove();
+					$('body').attr('class', 'fixed-deck');
+					var drl = $('#deck-river-lists');
+					drl.scrollLeft(drl.data('scrollBkp'));
+					$.each(drl.find('.elgg-river'), function(i, e) {
+						$(e).scrollTop($(e).data('scrollBkp'));
+					});
+					return true;
+				}
+
+				$('body').addClass('ajaxLoading');
+
 				parsePage(State.url, State.data);
 			}
 		});
@@ -442,8 +476,7 @@ elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
 
 elgg.ggouv_template.reloadJsFunctions = function() {
-	$('body').removeClass('homepage');
-	$('.tipsy').remove(); // in case of
+	$('.tipsy').remove(); // in case of because sometimes tooltip stick
 
 	if (typeof piwikTracker != 'undefined' && typeof piwikTracker.trackPageView == 'function') {
 		piwikTracker.setDocumentTitle(document.title);
@@ -467,7 +500,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	// compatibility for refresh button in board view
 	$('.elgg-menu-item-refresh-board .elgg-button').die().live('click', function(e) {
 		var url = elgg.normalize_url(decodeURIComponent($(this).attr('href')));
-		$('#ajaxified-loader').removeClass('hidden');
+		$('body').addClass('ajaxLoading');
 		parsePage(url);
 		e.preventDefault();
 		return false;
@@ -482,7 +515,20 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 
 
 elgg.ggouv_template.reload = function() {
-	eval($('#JStoexecute').html()); // @todo added for homepage but cause call twice with history js. Need to be removed...
+
+	if ($('#section1').length) { // this is homepage
+		$('body').addClass('homepage');
+		$("#slideshow").removeClass('hidden').responsiveSlides({ // hidden class to prevent ugly effect
+			nav: true,
+			timeout: 20000, // 20 seconds
+			pause: true,
+			prevText: '<span class="t">î</span>',
+			nextText: '<span class="t">ï</span>'
+		});
+	} else {
+		$('body').removeClass('homepage');
+	}
+
 	/*
 	 * Resize, scroll and sidebar
 	 */

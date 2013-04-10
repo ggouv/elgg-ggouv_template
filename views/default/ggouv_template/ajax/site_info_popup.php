@@ -12,6 +12,7 @@ echo '<div class="spotlight clearfloat row">';
 
 echo '<div class="spotlight-column span3">';
 
+if (!$url_blog = elgg_get_plugin_setting('blog_of_site', 'elgg-ggouv_template')) $url_blog = '#blog';
 echo elgg_view('page/elements/spotlight', array(
 	'title' => elgg_get_site_entity()->name,
 	'items' => array(
@@ -20,7 +21,7 @@ echo elgg_view('page/elements/spotlight', array(
 		'#conditions' => elgg_echo('ggouv_template:conditions'),
 		'#privacy' => elgg_echo('ggouv_template:privacy'),
 		'#assembly' => elgg_echo('ggouv_template:assembly'),
-		'#blog' => elgg_echo('ggouv_template:blog'),
+		$url_blog => elgg_echo('ggouv_template:blog'),
 	),
 ));
 

@@ -27,24 +27,70 @@ foreach ($text as $key => $section) {
 	$sections[$key]['text'] = substr($section, strpos($section, "\n")+1);
 }
 
-// display page
-$content = '<div id="section1" class="width80"><div class="row-fluid"><div class="span8">' .
-	elgg_view('output/longtext', array(
-		'value' => trim($sections[1]['text']),
-		'class' => ''
-	)) . '</div>';
+// section 1
+$content = '<div id="section1" class="width80"><div class="row-fluid">';
 
-$content .= '<div class="span4 visible-desktop"><div>A faire. Un slideshow avec la photo de personnalité qui ont dit des phrases percutantes correspondant à la thématique de ggouv : démocratie, incompétence et inertie des politiques, le changement qu apporte internet, notre façon de travailler ensemble...<br/>On pourrait même imaginer que ce slideshow soit créer à partir de quelques propositions faites dans un remue-méniges, et dans lequel chacun pourrait voter pour les citations qui lui plaisent le mieux...</div></div></div></div>';
+	$content .= '<div class="span8">' .
+		elgg_view('output/longtext', array(
+			'value' => trim($sections[1]['text']),
+			'class' => ''
+		)) . '</div>';
+
+	// slideshow
+	$content .= '<div class="span4 visible-desktop"><div><ul id="slideshow" class="hidden">';
+	$slideshow_guid = elgg_get_plugin_setting('slideshow_home', 'elgg-ggouv_template');
+	if ($slideshow_guid) {
+		elgg_load_library('answers:utilities');
+		$slides = answers_get_sorted_question_answers(get_entity($slideshow_guid));
+		foreach ($slides as $key => $slide) {
+			$desc = $your_array = explode(PHP_EOL, $slide->description);
+			preg_match('/\!\[(.*)\]\((.*)\)/', $desc[0], $img);
+			preg_match('/### (.*)/', $desc[1], $quote);
+			preg_match('/([^|]*)\|(.*)/', $desc[2], $author);
+			if ($img[1] && $img[2] && $quote[1] && $author[1] && $author[2] ) {
+				$content .= '<li><img src="' . $img[2] . '" alt="' . $img[1] . '" />';
+				$content .= '<div class="caption"><div class="pam"><p>' . $quote[1] . '</p><span class="prm">' . trim($author[1]) . '</span>' . $author[2] . '</div></div></li>';
+			}
+		}
+	}
+
+	$content .= '</ul></div></div>';
+
+$content .= '</div></div>';
+
 
 $content .= '<div class="signup"><a class="gwfa" href="' . elgg_get_site_url() . 'signup">' . elgg_echo('ggouv:register:contamined') . '</a></div>';
 
-$content .= '<div id="section2"><div class="pal width80"><div class="row-fluid"><div class="span8 pvl mvm"><h2>' . $sections[2]['title'] . '</h2>' .
+
+// section 2
+$content .= '<div id="section2"><div class="pal width80">';
+
+$content .= '<div class="row-fluid"><div class="span8 pvl mvm"><h2>' . $sections[2]['title'] . '</h2>' .
 	elgg_view('output/longtext', array(
 		'value' => trim($sections[2]['text']),
 		'class' => ''
 	)) . '</div>';
 
-$content .= '<div class="span4 visible-desktop"><div>A faire. Il faudrait faire un groupe qui serait la raison d être (les objectifs globaux) de ggouv. Ce que veulent les «gitoyens».<br/>Lors de la première inscription, une tâche demandant d aller dépenser ses 10 pointes de votes dans ce groupe serait assignée. On pourrait mettre ici les idées les plus votées de ce remue-méniges. A voir.</div></div></div></div></div>';
+	// objectives_home
+	$objectives_guid = elgg_get_plugin_setting('objectives_home', 'elgg-ggouv_template');
+	if ($objectives_guid) {
+		$content .= '<div class="span4 visible-desktop mtl ptl phl pbm"><h1>' . elgg_echo('ggouv:home:objectives') . '</h1>';
+		$content .= elgg_list_entities_from_annotation_calculation(array(
+			'type' => 'object',
+			'subtype' => 'idea',
+			'container_guid' => $objectives_guid,
+			'annotation_names' => 'point',
+			'order_by' => 'annotation_calculation desc',
+			'full_view' => 'module',
+			'item_class' => 'elgg-item-idea',
+			'list_class' => 'module-idea-list ptl',
+			'limit' => 20,
+			'pagination' => false
+		));
+		$content .= '</div>';
+	}
+
+$content .= '</div></div></div>';
 
 $content .= '<div id="section3"><div class="pal width80"><h2 class="pbl">' . $sections[3]['title'] . '</h2>' .
 	elgg_view('output/longtext', array(

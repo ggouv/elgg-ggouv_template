@@ -490,7 +490,7 @@ a.external:after {
 }
 
 .elgg-ajax-loader {
-	background: white url(<?php echo elgg_get_site_url(); ?>_graphics/ajax_loader_bw.gif) no-repeat center center;
+	background: white url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/graphics/loaders/loader_gray_white.gif) no-repeat center center;
 	min-height: 33px;
 	min-width: 33px;
 }

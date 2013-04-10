@@ -86,7 +86,7 @@
 	background: #4189CB;
 	float: left;
 	height: 48px;
-	width: 78px;
+	width: 72px;
 	z-index: 1;
 	overflow: hidden;
 	-webkit-transform: translateZ(0px);
@@ -106,13 +106,14 @@
 	height: 20px;
 	line-height: 20px;
 	padding: 2px 0;
-	width: 40px;
+	width: 34px;
+	overflow: hidden;
 }
 .rotator .arrows div:hover {
 	font-size: 36px;
 }
 #elgg-page-header-container {
-	margin-left: 78px;
+	margin-left: 72px;
 	height: 48px;
 	-webkit-transform-origin: 0 center -13.8465px;
 	-moz-transform-origin: 0 center -13.8465px;
@@ -228,20 +229,21 @@
 	background-color: #EEE;
 }
 #goTop {
+	position: fixed;
+	right: 30px;
+	bottom: -50px;
+}
+#goTop div {
 	background: #4690D6;
 	border-radius: 6px 6px 0 0;
-	bottom: -50px;
 	box-shadow: 0 0 6px #666666;
 	color: white;
 	cursor: pointer;
 	font-size: 4em;
 	height: 28px;
-	padding: 10px 0 0 7px;
-	position: absolute;
-	right: 30px;
-	width: 40px;
+	padding: 10px 7px 0;
 }
-#goTop:hover {
+#goTop div:hover {
 	background: #0054A7;
 }
 .elgg-sidebar-alt {

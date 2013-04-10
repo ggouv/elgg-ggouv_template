@@ -99,9 +99,12 @@
 	display: inline-block;
 }
 .elgg-breadcrumbs > li:after {
-	content: "\003E";
-	padding: 0 4px;
+	content: "ï";
+	font-family: "ggouv";
+	font-size: 16px;
 	font-weight: normal;
+	padding: 0 4px;
+	vertical-align: middle;
 }
 .elgg-breadcrumbs > li > a {
 	display: inline-block;

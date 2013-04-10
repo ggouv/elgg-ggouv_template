@@ -24,7 +24,7 @@
 	border-radius: 4px;
 
 	width: auto;
-	padding: 3px 4px 2px;
+	padding: 3px 6px 2px;
 	margin-bottom: 4px;
 	cursor: pointer;
 	outline: none;
@@ -43,7 +43,7 @@
 	-moz-box-shadow: none;
 	box-shadow: none;
 }
-.elgg-button:hover, .elgg-button:focus {
+.elgg-button:hover {/*, .elgg-button:focus {*/
 	color: white;
 	text-decoration: none;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
@@ -51,9 +51,6 @@
 	-webkit-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
-}
-a.elgg-button {
-	padding: 3px 6px 1px;
 }
 
 /* Submit: This button should convey, "you're about to take some definitive action" */
@@ -117,22 +114,17 @@ a.elgg-button {
 }
 
 .elgg-button-dropdown {
-	padding:3px 6px;
-	text-decoration:none;
-	display:block;
-	font-weight:bold;
-	position:relative;
-	margin-left:0;
-	color: white;
-	border:1px solid #71B9F7;
+	text-decoration: none;
+	color: #333;
+	border: 1px solid #999;
 
-	-webkit-border-radius:4px;
+	/*-webkit-border-radius:4px;
 	-moz-border-radius:4px;
 	border-radius:4px;
 
 	-webkit-box-shadow: 0 0 0;
 	-moz-box-shadow: 0 0 0;
-	box-shadow: 0 0 0;
+	box-shadow: 0 0 0;*/
 
 	/*background-image:url(<?php echo elgg_get_site_url(); ?>_graphics/elgg_sprites.png);
 	background-position:-150px -51px;
@@ -140,8 +132,13 @@ a.elgg-button {
 }
 
 .elgg-button-dropdown:after {
-	content: " \25BC ";
-	font-size: smaller;
+	content: "ì";
+	padding-left: 5px;
+	font-family: "ggouv";
+	font-size: 1.2em;
+	font-weight: normal;
+	text-transform: none;
+	vertical-align: sub;
 }
 
 .elgg-button-dropdown:hover {
