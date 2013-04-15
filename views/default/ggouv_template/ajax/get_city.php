@@ -12,8 +12,6 @@
 $search = get_input('city', false);
 
 if ($search) {
-	elgg_load_library('group_ggouv');
-
 	if (is_numeric($search)) {
 		echo json_encode(get_data_ville_by_cp($search));
 	} else {

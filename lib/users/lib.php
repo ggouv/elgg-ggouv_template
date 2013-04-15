@@ -23,11 +23,12 @@ $allow_multiple_emails = false, $friend_guid = 0, $invitecode = '') {
 	$username = trim($username);
 	$name = trim(strip_tags($name));
 	$email = trim($email);
+	$name = trim($name);
 
 	// A little sanity checking
 	if (empty($username)
 	|| empty($password)
-	|| empty($name)
+	// || empty($name) We authorize anonymous !
 	|| empty($email)) {
 		return false;
 	}

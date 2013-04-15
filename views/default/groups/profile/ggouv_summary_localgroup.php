@@ -15,7 +15,6 @@ if (!isset($vars['entity']) || !$vars['entity']) {
 $group = $vars['entity'];
 $owner = $group->getOwnerEntity();
 if (in_array($group->getSubtype(), array('localgroup'))) {
-	elgg_load_library('group_ggouv');
 	if ($group->guid < 100) {
 		$data_ville = get_data_pref_by_dep($group->guid);
 		$zoom = $group->map_zoom ? $group->map_zoom : 9;

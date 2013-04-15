@@ -438,6 +438,7 @@
 	margin: 3px 20px 4px;
 	height: 18px;
 	position: relative;
+	width: 30%;
 }
 .elgg-inner-nolog .fbbutton, .elgg-inner-nolog .twitter-share-button {
 	float: right;
@@ -446,6 +447,7 @@
 .elgg-inner-nolog #___plusone_0 {
 	width: 100px !important;
 	margin: -2px 0 !important;
+	float: right !important;
 }
 .elgg-inner-nolog .float-alt:hover .visible-desktop {
 	display: block !important;
@@ -737,6 +739,25 @@
 	margin: 5px;
 	padding-right: 10px;
 }
+.elgg-river table span.gwf {
+	float: none;
+	font-size: 10em;
+	color: #EEE;
+}
+
+
+/*
+ * Comments
+ */
+#comments {
+	border-bottom: 1px solid #DDD;
+}
+#comments:before {
+	color: #666666;
+	content: "C";
+	font-size: 2em;
+	padding-right: 5px;
+}
 
 /*
  * Plugin markdown-wiki + special debate
@@ -917,6 +938,9 @@ h2.markdown-wiki-create .elgg-button-action {
 .workflow-card-checklist-complete .elgg-icon-workflow-checklist:before {
 	color: green;
 }
+
+
+
 /*
  * plugin brainstorm
  */
@@ -935,6 +959,13 @@ h2.markdown-wiki-create .elgg-button-action {
 	-moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 4px;
+}
+
+/*
+ * plugin bookmarks
+ */
+.favicon {
+	vertical-align: text-top;
 }
 
 /*
