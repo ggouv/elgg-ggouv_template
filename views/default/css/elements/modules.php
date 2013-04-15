@@ -114,6 +114,11 @@
 	padding: 5px;
 }
 
+.elgg-heading-basic {
+	background-color: #F4F4F4;
+	border-radius: 4px;
+}
+
 /* ***************************************
 	Widgets
 *************************************** */

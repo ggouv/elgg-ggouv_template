@@ -400,14 +400,17 @@
 	background-position: 0 -1242px;
 }
 .elgg-icon-tag {
-	background-position: 0 -1260px;
-	background: none;
+	width: 12px;
 }
 .elgg-icon-tag:before {
 	content: 't';
 	padding: 2px 0;
 	font-size: 60px;
 	color: #999;
+	overflow: hidden;
+}
+.elgg-tags .elgg-icon-tag:before {
+	font-size: 48px;
 }
 .elgg-icon-thumbs-down-alt:hover {
 	background-position: 0 -1278px;

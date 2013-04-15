@@ -49,7 +49,7 @@ $content = '<div id="section1" class="width80"><div class="row-fluid">';
 			preg_match('/([^|]*)\|(.*)/', $desc[2], $author);
 			if ($img[1] && $img[2] && $quote[1] && $author[1] && $author[2] ) {
 				$content .= '<li><img src="' . $img[2] . '" alt="' . $img[1] . '" />';
-				$content .= '<div class="caption"><div class="pam"><p>' . $quote[1] . '</p><span class="prm">' . trim($author[1]) . '</span>' . $author[2] . '</div></div></li>';
+				$content .= '<div class="caption"><div class="pam"><p>' . $quote[1] . '</p><span class="prm mrs">' . trim($author[1]) . '</span>' . $author[2] . '</div></div></li>';
 			}
 		}
 	}

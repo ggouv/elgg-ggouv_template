@@ -173,13 +173,16 @@ elgg.ggouv_template.init = function() {
 					} else {
 
 						// stash deck river before change elgg-page-body
-						if ($('body').hasClass('fixed-deck') && !$('#stash').length) {
+						if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(/\/activity/)) {
+							$('.elgg-menu-item-logo a').attr('href', data.origin);
 							var drl = $('#deck-river-lists');
 							drl.data('scrollBkp', drl.scrollLeft());
 							$.each(drl.find('.elgg-river'), function(i, e) {
 								$(e).data('scrollBkp', e.scrollTop);
 							});
 							$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
+						} else if (url.match(/\/activity/)) {
+							$('.elgg-menu-item-logo a').attr('href', elgg.get_site_url() + 'activity');
 						}
 
 						$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
@@ -305,6 +308,10 @@ elgg.ggouv_template.init = function() {
 				} else if (url.match('/action/river/delete')) {
 					ExecAction(url, function() {
 						$('.item-river-'+elgg.parse_str(urlParsed.query).id).css('background-color', '#FF7777').fadeOut();
+					});
+				} else if (url.match('/action/message/delete')) {
+					ExecAction(url, function() {
+						$('.elgg-list-item[data-object_guid="'+elgg.parse_str(urlParsed.query).guid+'"]').css('background-color', '#FF7777').fadeOut();
 					});
 				} else if (url.match('/action/workflow/delete')) {
 					ExecAction(url, function() {

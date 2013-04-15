@@ -289,6 +289,11 @@
 	margin-top: 15px;
 }
 
+.brief-comment {
+	font-size: 0.95em;
+	color: #333;
+}
+
 /* ***************************************
 	Image-related
 *************************************** */
@@ -307,27 +312,13 @@
 }
 .elgg-tags li {
 	display: inline;
-	margin-right: -1px;
 }
-.elgg-tags li a {
+.elgg-tag a {
 	color: #555;
-	padding: 0 6px;
-	transition: all 0.25s ease;
-	-webkit-transition: all 0.25s ease;
-	-moz-transition: all 0.25s ease;
-	-o-transition: all 0.25s ease;
+	padding: 0 5px;
 }
-.elgg-tags li a:hover {
+.elgg-tag a:hover {
 	color: white;
 	background-color: #4690D6;
 	text-decoration: none;
-}
-/*.elgg-tags li:after {
-	content: ",";
-}
-.elgg-tags li:last-child:after {
-	content: "";
-}*/
-.elgg-tagcloud {
-	text-align: justify;
 }
