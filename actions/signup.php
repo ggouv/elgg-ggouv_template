@@ -14,7 +14,7 @@ $password = get_input('password');
 $password2 = get_input('password2');
 $email = get_input('email');
 $name = get_input('name');
-$location = get_input('location');
+$location = get_input('location', false);
 $friend_guid = (int) get_input('friend_guid', 0);
 $invitecode = get_input('invitecode');
 
@@ -28,13 +28,13 @@ if (elgg_get_config('allow_registration')) {
 			throw new RegistrationException(elgg_echo('RegistrationException:PasswordMismatch'));
 		}
 
-		$guid = ggouv_register_user($username, $password, $name, $email, false, $friend_guid, $invitecode);
+		$user_guid = ggouv_register_user($username, $password, $name, $email, false, $friend_guid, $invitecode);
 
-		if ($guid) {
+		if ($user_guid) {
 			elgg_clear_sticky_form('register');
-			
-			$new_user = get_entity($guid);
-			$new_user->set('location', $location); 
+
+			$new_user = get_entity($user_guid);
+
 			// allow plugins to respond to self registration
 			// note: To catch all new users, even those created by an admin,
 			// register for the create, user event instead.
@@ -53,6 +53,11 @@ if (elgg_get_config('allow_registration')) {
 				// throw a RegistrationException, but that is very odd
 				// for the plugin hooks system.
 				throw new RegistrationException(elgg_echo('registerbad'));
+			}
+
+			// add location and columns in deck
+			if ($location) {
+				$new_user->set('location', $location);
 			}
 
 			system_message(elgg_echo("registerok", array(elgg_get_site_entity()->name)));

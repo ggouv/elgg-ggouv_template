@@ -58,7 +58,7 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'location',
 		'value' => $location,
-		'class' => 'required digits',
+		'class' => 'digits',
 		'minlength' => 5,
 		'maxlength' => 5
 	));
