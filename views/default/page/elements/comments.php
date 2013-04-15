@@ -9,7 +9,7 @@
  * @uses $vars['order']         bool Annotation comment order. asc by default or desc. Used for live comment.
  */
 
-$preview = elgg_extract('preview', $vars);
+$preview = elgg_extract('preview', $vars, '');
 $show_add_form = elgg_extract('show_add_form', $vars, true);
 $order = elgg_extract('order', $vars, 'asc');
 if (!in_array($order, array('asc', 'desc'))) $order = 'asc';
@@ -35,8 +35,9 @@ $options = array(
 	'preview' => $preview
 );
 $html = elgg_list_annotations($options);
+
 if ($html) {
-	echo '<h3 id="comments">' . elgg_echo('comments') . '</h3>';
+	echo '<h3 id="comments" class="gwfb pbs ' . $preview . '">' . elgg_echo('comments') . '</h3>';
 	echo $html;
 }
 

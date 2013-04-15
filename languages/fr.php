@@ -907,8 +907,11 @@ $french = array(
 	'annotations' => "Annotations",
 	'relationships' => "Relations",
 	'metadata' => "Métadonnées",
-	'tagcloud' => "Nuage de mots-clés",
-	'tagcloud:allsitetags' => "Tous les mots-clés du site",
+
+	'tagcloud:cloud' => "Nuage de mots-clés",
+	'tagcloud:list' => "Liste de mots-clés",
+	'tagcloud:allsitetags' => "Tous les mots-clés",
+	'tagtitle' => "%s %s avec ce tag",
 
 	'on' => "Actif",
 	'off' => "Inactif",
@@ -1155,8 +1158,8 @@ Pour voir le profil de %s, suivez ce lien :
 /**
  * Tag labels
  */
-	'tag_names:tags' => "Tags",
-	'tags:site_cloud' => "Nuage de tag du site",
+	'tag_names:tags' => "Mots-clés",
+	'tags:site_cloud' => "Nuage de mots-clés du site",
 
 /**
  * Javascript
@@ -1922,83 +1925,6 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'blog:noblogs' => "Aucun blog",
 
 
-/**
-* Bookmarks English language file
-*/
-
-	/**
-	* Menu items and titles
-	*/
-	'bookmarks' => "Signets",
-	'bookmarks:add' => "Mettre quelque chose en signet",
-	'bookmarks:edit' => "Modifier le signet",
-	'bookmarks:owner' => "Les signets de %s",
-	'bookmarks:friends' => "Signets des contacts",
-	'bookmarks:everyone' => "Tous les signets du site",
-	'bookmarks:this' => "Mettre en signet cette page",
-	'bookmarks:this:group' => "Mettre en signet dans %s",
-	'bookmarks:bookmarklet' => "Récupérer le 'bookmarklet'",
-	'bookmarks:bookmarklet:group' => "Récupérer le 'bookmarklet' du groupe",
-	'bookmarks:inbox' => "Boîte de réception des signets",
-	'bookmarks:morebookmarks' => "",
-	'bookmarks:more' => "Plus de signets",
-	'bookmarks:with' => "Partager avec",
-	'bookmarks:new' => "Un nouveau signet",
-	'bookmarks:via' => "via les signets",
-	'bookmarks:address' => "Adresse de la ressource à ajouter à vos signets",
-	'bookmarks:none' => "Aucun signets",
-
-	'bookmarks:delete:confirm' => "Etes-vous sûr(e) de vouloir supprimer cette ressource ?",
-
-	'bookmarks:numbertodisplay' => "Nombre de signets à afficher",
-
-	'bookmarks:shared' => "Mis en signet",
-	'bookmarks:visit' => "Voir la ressource",
-	'bookmarks:recent' => "Signets récents",
-
-	'bookmarks:river:created' => "%s mis en signet",
-	'bookmarks:river:annotate' => "a posté un commentaire sur ce signet",
-	'bookmarks:river:item' => "un élément",
-	'river:commented:object:bookmarks' => "un signet",
-
-	'item:object:bookmarks' => "Eléments mis en signets",
-
-	'bookmarks:group' => "Signets du groupe",
-	'bookmarks:enablebookmarks' => "Activer les signets du groupe",
-	'bookmarks:nogroup' => "Ce groupe n'a pas encore de signets",
-	'bookmarks:more' => "Plus de signets",
-
-	'bookmarks:no_title' => "Pas de titre",
-
-	/**
-	* Widget and bookmarklet
-	*/
-	'bookmarks:widget:description' => "Ce widget affiche vos derniers signets.",
-
-	'bookmarks:bookmarklet:description' =>
-	"Le bookmarklet vous permez de partager ce que vous trouvez sur le web avec vos contact, ou pour vous-même. Pour l'utiliser, glissez simplement le boutton ci-dessous dans votre barre de liens de votre navigateur.",
-
-	'bookmarks:bookmarklet:descriptionie' =>
-	"Si vous utilisez Internet Explorer, faites un clic droit sur le boutton et ajouter le dans vos favoris, puis votre barre de liens.",
-
-	'bookmarks:bookmarklet:description:conclusion' =>
-	"Vous pouvez mettre en signet n'importe quelle page en cliquant sur le bookmarklet.",
-
-	/**
-	* Status messages
-	*/
-
-	'bookmarks:save:success' => "Votre élément a bien été mis en signet.",
-	'bookmarks:delete:success' => "Votre signet a bien été supprimé.",
-
-	/**
-	* Error messages
-	*/
-
-	'bookmarks:save:failed' => "Votre élément n'a pu être correctement mis en signet. Vérifiez que le titre et le lien soient correct et réessayez.",
-	'bookmarks:delete:failed' => "Votre signet n'a pu être supprimé. Merci de réessayer.",
-
-
 
 
 /**
@@ -2158,8 +2084,25 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'river:ingroup:comment:object:candidat' => "pour le groupe %s",
 	'river:ingroup:create:object:mandat' => "pour le groupe %s",
 	'river:ingroup:create:object:question' => "au groupe %s",
+	'river:ingroup:create:object:bookmarks' => "dans le groupe %s",
 
 	'river_elected_more_message:first_random' => "<br/><span class='elgg-subtext'>Tirage au sort lancé automatiquement pour la première élection.</span>",
+
+	/*
+	 * Other plugins
+	 */
+	'bookmarks:wiki_of_this_site' => "Page wiki sur %s",
+
+	/*
+	 * First login automaticly created list and cards
+	 */
+	'deck_river:signup:list' => "À faire",
+	'deck_river:signup:card:title:0' => "Lire l'aide",
+	'deck_river:signup:card:description:0' => "L'aide se trouve [ici](%s).  \nSi vous êtes perdu, vous pouvez demander de l'aide à tout moment en écrivant dans le lanceur de message (dans le bandeau bleu horizontal en haut) votre question en mentionnant le groupe !aide. Exemple :  \n> !aide Comment s'inscrire à un groupe ?\n\nQuelqu'un vous répondra dès qu'il aura vu votre question.\n\nVous pouvez aussi [chercher](%s) si votre question n'a pas déjà été posée...",
+	'deck_river:signup:card:title:1' => "Compléter mon profil",
+	'deck_river:signup:card:description:1' => "On a envie d'en savoir un peu plus sur vous !  \nPar soucis de transparence, et si vous voulez que l'on s'intéresse à vous, il est plutôt conseillé de compléter [votre profil](%s).\n\nVous pouvez modifier votre profil [ici](%s).",
+	'deck_river:signup:card:title:2' => "Voter pour les grands objectifs",
+	'deck_river:signup:card:description:2' => "Vous êtes maintenant un «gitoyen» !  \nAfin de déterminer les grands objectifs du réseau, vous pouvez [voter pour les idées](%s) dont vous souhaitez que l'on s'organise pour essayer de les concrétiser ensemble."
 
 );
 

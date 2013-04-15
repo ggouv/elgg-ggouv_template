@@ -69,6 +69,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_library('group_ggouv', "$base/lib/groups/utilities.php");
 	elgg_register_library('ggouv:typo', "$base/lib/groups/typo.php");
 	elgg_load_library('user_ggouv');
+	elgg_load_library('group_ggouv');
 	elgg_register_library('elgg:relatedgroups', "$base/lib/groups/relatedgroups.php");
 
 	// Register actions
@@ -109,6 +110,10 @@ function elgg_ggouv_template_init() {
 	elgg_register_page_handler('signup', 'ggouv_user_account_page_handler');
 	elgg_unregister_page_handler('twitter_api', 'twitter_api_pagehandler');
 	elgg_register_page_handler('twitter_api', 'ggouv_twitter_api_pagehandler');
+
+	// override all site tags page handler
+	elgg_unregister_page_handler('tags');
+	elgg_register_page_handler('tags', 'ggouv_tagcloud_page_handler');
 
 	// Override user settings
 	elgg_unregister_plugin_hook_handler('usersettings:save', 'user', 'users_settings_save');
@@ -177,6 +182,7 @@ function elgg_ggouv_template_init() {
 	$user = elgg_get_logged_in_user_entity();
 	setlocale(LC_TIME, $user->language, strtolower($user->language) . '_' . strtoupper($user->language) . '.UTF-8');
 
+	elgg_register_event_handler('login', 'user', 'ggouv_login_user_event');
 }
 
 
@@ -447,6 +453,33 @@ function ggouv_twitter_api_pagehandler($page) {
 		default:
 			return false;
 	}
+	return true;
+}
+
+
+/**
+ * Page hander for tags
+ *
+ * @param array $page Page array
+ *
+ * @return bool
+ * @access private
+ */
+function ggouv_tagcloud_page_handler($page) {
+
+	$title = elgg_view_title(elgg_echo('tags:site_cloud'));
+	$options = array(
+		'threshold' => 0,
+		'limit' => 300,
+		'tag_name' => 'tags',
+	);
+	$body = elgg_view_layout('content', array(
+		'filter' => '',
+		'title' => $title,
+		'content' => elgg_view_tagcloud($options)
+	));
+
+	echo elgg_view_page(elgg_echo('tags:site_cloud'), $body);
 	return true;
 }
 
@@ -932,18 +965,23 @@ function gravatar_avatar_hook($hook, $type, $url, $params) {
  * Add a menu item to the annotations
  */
 function editablecomments_annotation_menu($hook, $type, $return, $params) {
-	if ($params['annotation']->canEdit()) {
-		$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
-		$options = array(
-			'name' => 'comment-edit',
-			'text' => 'e',
-			'title' => elgg_echo('comment:edit'),
-			'class' => 'gwf tooltip s',
-			'href' => $url,
-			'rel' => 'toggle'
-		);
-		$return[] = ElggMenuItem::factory($options);
-		return $return;
+	if ($params['annotation']->name == 'generic_comment') {
+
+
+		if ($params['annotation']->canEdit()) {
+			$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
+			$options = array(
+				'name' => 'comment-edit',
+				'text' => 'e',
+				'title' => elgg_echo('comment:edit'),
+				'class' => 'gwf tooltip s',
+				'href' => $url,
+				'rel' => 'toggle',
+				'priority' => 90
+			);
+			$return[] = ElggMenuItem::factory($options);
+			return $return;
+		}
 	}
 }
 
@@ -1051,3 +1089,98 @@ function ggouv_get_installed_translations() {
 	}
 	return $installed;
 }
+
+
+function ggouv_login_user_event($event, $type, $user) {
+	$user_guid = $user->getGUID();
+
+	// not first or second login
+	if ($user->prev_last_login != 0) {
+		//$user->last_annonce_view;
+
+	} else if($user->last_login != 0) { // second login
+
+	} else { // first login
+
+		// add user to his local group and add columns of this group
+		if ($user->location && $group = get_entity($user->location)) {
+			// join user to the group
+			$group->join($user);
+
+			// add column in deck
+			// get columns user settings. It's first login, so settins doesn't exist. We create it.
+			$set = str_replace("&gt;", ">", elgg_get_plugin_setting('default_columns', 'elgg-deck_river'));
+			if (!$set) $set = elgg_echo('deck_river:settings:default_column:default');
+			eval("\$defaults = $set;");
+			// define new column for department group
+			$dep = get_entity(get_dep_from_group_guid($user->location));
+			$defaults['local']['column-1'] = array(
+				'group' => $dep->getGUID(),
+				'title' => $dep->name,
+				'subtitle' => 'river:group_activity',
+				'type' => 'group',
+				'network' => 'elgg'
+			);
+			$defaults['local']['column-2'] = array(
+				'group' => $dep->getGUID(),
+				'title' => '!' . $dep->name,
+				'subtitle' => 'river:group_mentions',
+				'type' => 'group_mention',
+				'network' => 'elgg'
+			);
+			// define new column for city group
+			$defaults['local']['column-3'] = array(
+				'group' => $user->location,
+				'title' => $group->name,
+				'subtitle' => 'river:group_activity',
+				'type' => 'group',
+				'network' => 'elgg'
+			);
+			// define new column for group mentions
+			$defaults['local']['column-4'] = array(
+				'group' => $user->location,
+				'title' => '!' . $group->name,
+				'subtitle' => 'river:group_mentions',
+				'type' => 'group_mention',
+				'network' => 'elgg'
+			);
+			// set settings
+			set_private_setting($user_guid, 'deck_river_settings', serialize($defaults));
+		}
+
+		// create user board
+		elgg_load_library('workflow:utilities');
+		$board = workflow_get_user_board($user_guid);
+		// create list 'À faire'
+		$list = new ElggObject;
+		$list->subtype = 'workflow_list';
+		$list->container_guid = $user_guid;
+		$list->board_guid = $board->getGUID();
+		$list->title = elgg_echo('deck_river:signup:list');
+		$list->access_id = $board->access_id;
+		$list->order = 0;
+		$list->save();
+		// create cards
+		$site_url = elgg_get_site_url();
+		$strings = array(
+			'0' => array(elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template'), elgg_get_plugin_setting('faq_of_help', 'elgg-ggouv_template')),
+			'1' => array($site_url . 'profile/' . $user->username, $site_url . 'profile/' . $user->username . '/edit'),
+			'2' => array($site_url . 'brainstorm/group/' . elgg_get_plugin_setting('objectives_home', 'elgg-ggouv_template') . '/top')
+		);
+		for ($i=0; $i < 3; $i++) {
+			$card = new ElggObject;
+			$card->subtype = 'workflow_card';
+			$card->container_guid = $user_guid;
+			$card->board_guid = $board->getGUID();
+			$card->list_guid = $list->getGUID();
+			$card->title = elgg_echo('deck_river:signup:card:title:' . $i);
+			$card->description = elgg_echo('deck_river:signup:card:description:' . $i, $strings[$i]);
+			$card->access_id = $list->access_id;
+			$card->order = $i;
+			$card->save();
+			add_entity_relationship($card->getGUID(), 'assignedto', $user_guid);
+		}
+	}
+
+}
+

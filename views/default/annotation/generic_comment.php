@@ -56,12 +56,12 @@ HTML;
 		'sort_by' => 'priority',
 		'class' => 'elgg-menu-hz float-alt',
 	));
-	
+
 	$comment_text = elgg_view('output/longtext', array(
 		'value' => $comment->value,
 		'class' => 'man'
 	));
-	
+
 	$body = <<<HTML
 $comment_text — $commenter_link
 <span class="elgg-subtext">
@@ -74,13 +74,17 @@ HTML;
 } else {
 	// brief view
 
-	$excerpt = elgg_get_excerpt($comment->value, 80);
+	$excerpt = elgg_get_excerpt($comment->value, 140);
+	$by = elgg_echo('by');
 	$in = elgg_echo('in');
-	
+
 	$body = <<<HTML
 <span class="elgg-subtext">
-	$commenter_link $in $entity_link $friendlytime : $excerpt
+	$by $commenter_link $in $entity_link $friendlytime
 </span>
+<div class="brief-comment pts">
+	$excerpt
+</div>
 HTML;
 
 	echo elgg_view_image_block($commenter_icon, $body);
