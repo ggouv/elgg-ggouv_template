@@ -11,7 +11,7 @@
  * @uses $vars['class']
  */
 
-$class = 'elgg-output elgg-output-longtext markdown-body hidden';
+$class = 'elgg-output elgg-output-longtext markdown-body';
 $additional_class = elgg_extract('class', $vars, '');
 if ($additional_class) {
 	$vars['class'] = "$class $additional_class";
@@ -33,9 +33,8 @@ if ($parse_urls) {
 
 $text = autop($text);*/
 
-elgg_load_library('markdown_wiki:utilities');
-$text = markdown_wiki_parse_link_plugin_hook('', '', $text, '');
+$text = markdown_wiki_parse_link($text);
 
 $attributes = elgg_format_attributes($vars);
 
-echo "<xmp $attributes>$text</xmp>";
+echo "<script type=\"text/html\" $attributes>$text</script>";
