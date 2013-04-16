@@ -384,7 +384,7 @@
 	}
 }
 
-/* 
+/*
 * nolog css when non logged in user
 */
 .elgg-page-header.nolog {
@@ -601,7 +601,7 @@
 	background-color: #4690D6;
 }
 
-/* 
+/*
 * site info popup
 */
 #site-info-popup {
@@ -627,7 +627,7 @@
 	top: 10px;
 }
 
-/* 
+/*
 * topbar sub-menu
 */
 .ggouv-menu-parent {
@@ -650,7 +650,7 @@
 	margin: 10px 10px 10px 0;
 }
 .elgg-menu-item-groups .ggouv-menu-child-shadow {
-	
+
 }
 .elgg-menu-item-groups table ul ul {
 	height: 100%;
@@ -1081,86 +1081,111 @@ div.tagsinput .not_valid {
 
 
 /*
- * page register
+ * super popup
  */
-.elgg-form-login, .elgg-form-account {
-	max-width: 450px;
+body, #super-popup {
+	-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%;
+	-o-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
 }
-.register-helper, .register-location {
-	margin-left: 500px;
+.super-popup-active body {
+	height: 100%;
+	position: fixed;
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	transform: scale(0.9);
+}
+.super-popup-active body:before, .super-popup-active body:after, .super-popup-active .elgg-page:before {
+	background: white;
+	content: " ";
+	height: 150%;
 	position: absolute;
-	top: 0;
 	width: 100%;
-	font-style: italic;
+	z-index: 1000;
 }
-.register-helper.username {
-	top: 60px;
+.super-popup-active body:before {
+	top: -150%;
 }
-.register-helper.name {
-	top: 140px;
+.super-popup-active body:after {
+	bottom: -150%;
 }
-.register-helper.email {
-	top: 192px;
+.super-popup-active .elgg-page:before {
+	left: -100%;
+	top: -10%;
 }
-.register-helper.location {
-	top: 254px;
+.super-popup-active .elgg-page {
+	-webkit-filter: blur(2px);
+	-moz-filter: blur(2px);
+	-ms-filter: blur(2px);
+	-o-filter: blur(2px);
+	filter: blur(2px);
+	height: 100%;
+	overflow: hidden;
 }
-.register-location {
-	opacity: 0;
+.super-popup-active #overlay {
+	box-shadow: 0 0 600px 200px white inset;
+	height: 102%;
+	left: -1%;
+	position: fixed;
+	top: -1%;
+	width: 102%;
+	z-index: 9999;
 }
-.elgg-form-signup #searching.loading {
-	right: -35px;
-	top: 20px;
+.super-popup-active #goTop div {
+	display: none;
 }
-.register-helper.password {
-	top: 326px;
+#super-popup {
+	display: none;
+	background: white;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
+	min-height: 120px;
+	max-height: 460px;
+	left: 50%;
+	margin: -250px -320px;
+	padding: 20px 20px 7px;
+	position: fixed;
+	top: 50%;
+	width: 600px;
+	z-index: 9999;
+	-webkit-transform: scale(0.6);
+	-moz-transform: scale(0.6);
+	-ms-transform: scale(0.6);
+	-o-transform: scale(0.6);
+	transform: scale(0.6);
 }
-.social-connect {
-	border-left: 2px solid #CCCCCC;
-	left: 500px;
-	padding-left: 50px;
+#super-popup.tiny {
+	height: 200px;
+	margin: -160px -220px;
+	width: 400px;
+}
+.super-popup-active #super-popup {
+	display: block;
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2);
+}
+#super-popup .elgg-body {
+	min-height: 80px;
+}
+#super-popup .elgg-footer {
+	margin-right: -10px;
+}
+#super-popup .elgg-icon-delete-alt {
 	position: absolute;
 	top: 10px;
-	z-index: 1;
+	right: 10px;
 }
-.social-connect a {
-	clear: both;
-	float: left;
-	font-size: 30px;
-	margin: 10px;
-	padding: 20px;
-	text-decoration: none;
-	text-shadow: 1px 1px 1px #CCCCCC;
-	width: 70%;
+#super-popup .elgg-icon-delete-alt:before {
+	font-size: 48px;
 }
-.social-connect a:hover {
-	background-color: #F4F4F4;
-}
-.social-connect span:before {
-	float: left;
-	margin-top: 2px;
-}
-.social-connect span { /*.twitter-icon {*/
-	font-size: 68px;
-	width: 80px;
-	float: left;
-}
-.social-connect a:hover span {
-	font-size: 88px;
-}
-.back-socialnetwork {
-	color: #999999;
-	float: right;
-	margin-top: -22px;
-	position: relative;
-	cursor: pointer;
-}
-.back-socialnetwork:hover {
-	color: #555;
-}
-.back-socialnetwork:after {
-	content: "►";
-}
+
 
 
 /* leaflet */

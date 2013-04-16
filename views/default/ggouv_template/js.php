@@ -114,91 +114,103 @@ elgg.ggouv_template.init = function() {
 				var urlParsed = elgg.parse_url(url),
 					urlPath = urlParsed.path;
 
-				if (response.match('^{"output":')) { // This is for action ! note: when server is down > Object { readyState=0, status=0, statusText="error"}
-					var HTTPredirect = elgg.normalize_url(decodeURIComponent(xmlHttp.getResponseHeader('Redirect')));
+				try {
+					var jsonResponse = $.parseJSON(response);
 
-					if (urlPath.match('/action/groups/featured') || urlPath.match('/action/groups/leave')) {
-						History.pushState(data, null, data.origin); //parsePage(window.location.href);
-					} else if (HTTPredirect != null) {
-						if (urlPath.match('/action/brainstorm/delete')) {
-							var brainstorm_guid = elgg.parse_str(urlParsed.query).guid;
-							$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
+					eval(jsonResponse.js_code); // execute javascript from ggouv_execute_js. It's include hack to reload js/initialize_elgg forked from page/elements/reinitialize_elgg
+					elgg.register_error(jsonResponse.system_messages.error);
+					elgg.system_message(jsonResponse.system_messages.success);
+
+					if (jsonResponse.forward_url) {
+						/* This is an action !
+						 * If it's not an action, response doesn't got a forward_url
+						 * note: when server is down > Object { readyState=0, status=0, statusText="error"}
+						*/
+							forward_url = elgg.normalize_url(decodeURIComponent(jsonResponse.forward_url));
+
+						if (urlPath.match('/action/groups/featured') || urlPath.match('/action/groups/leave')) {
+							History.pushState(data, null, data.origin);
+						} else if (forward_url != null) {
+							if (urlPath.match('/action/brainstorm/delete')) {
+								var brainstorm_guid = elgg.parse_str(urlParsed.query).guid;
+								$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
+							}
+							History.pushState(data, null, forward_url); // catch forward(). See ggouv_ajax_forward_hook
+						} else if (xmlHttp.status = 200) {
+							window.location.replace(url); // in case of...
 						}
-						History.pushState(data, null, HTTPredirect); // catch forward() from > header('Redirect': ... see ggouv_template_forward_hook
-					} else if (xmlHttp.status = 200) {
-						window.location.replace(url); // in case of...
-					}
 
-					elgg.register_error(JSON.parse(response).system_messages.error);
-					elgg.system_message(JSON.parse(response).system_messages.success);
+					} else { // So this is a page
 
-				} else {
-					var orignParsed = elgg.parse_url(data.origin),
-						urlOffset = !elgg.isUndefined(urlParsed.query) ? urlParsed.query.match(/offset=(\d+)/) : false;
+						var respBody = $(jsonResponse.body),
+							orignParsed = elgg.parse_url(data.origin),
+							urlOffset = !elgg.isUndefined(urlParsed.query) ? urlParsed.query.match(/offset=(\d+)/) : false;
 
-					eval($('#JStoexecute').html()); // hack to reload js/initialize_elgg forked in page/elements/reinitialize_elgg
-					$('title').html($(response).filter('title').text());
+						$('title').html(jsonResponse.title);
 
-					if (urlOffset && orignParsed.path == urlPath) { // same url. Only query offset change, we just slide page body.
-						var numOrigin = elgg.isUndefined(orignParsed.query) ? 0 : parseInt(orignParsed.query.match(/offset=(\d+)/)[1]),
-							numDest = parseInt(urlOffset[1]);
+						if (urlOffset && orignParsed.path == urlPath) { // same url. Only query offset change, we just slide page body.
+							var numOrigin = elgg.isUndefined(orignParsed.query) ? 0 : parseInt(orignParsed.query.match(/offset=(\d+)/)[1]),
+								numDest = parseInt(urlOffset[1]);
 
-						$('.elgg-page-body .elgg-main .elgg-pagination').html($(response).find('.elgg-main .elgg-pagination').html());
-						if (numOrigin < numDest) {
-							var u = $('.elgg-page-body .elgg-main .elgg-list'),
-								slideWidth = u.outerWidth(true),
-								v = $(response).find('.elgg-main .elgg-list').clone().css({
-									position: 'absolute',
-									top: u.position().top,
-									left: slideWidth
+							$('.elgg-page-body .elgg-main .elgg-pagination').html(respBody.find('.elgg-main .elgg-pagination').html());
+							if (numOrigin < numDest) {
+								var u = $('.elgg-page-body .elgg-main .elgg-list'),
+									slideWidth = u.outerWidth(true),
+									v = respBody.find('.elgg-main .elgg-list').clone().css({
+										position: 'absolute',
+										top: u.position().top,
+										left: slideWidth
+									});
+								u.after(v).add(v).animate({left: '-='+slideWidth+'px'}, function() {
+									u.remove();
+									v.removeAttr('style');
 								});
-							u.after(v).add(v).animate({left: '-='+slideWidth+'px'}, function() {
-								u.remove();
-								v.removeAttr('style');
-							});
+							} else {
+								var u = $('.elgg-page-body .elgg-main .elgg-list'),
+									slideWidth = u.outerWidth(true),
+									v = respBody.find('.elgg-main .elgg-list').clone().css({
+										position: 'absolute',
+										top: u.position().top,
+										right: slideWidth
+									});
+								u.after(v).add(v).animate({right: '-='+slideWidth+'px'}, function() {
+									u.remove();
+									v.removeAttr('style');
+								});
+							}
+
 						} else {
-							var u = $('.elgg-page-body .elgg-main .elgg-list'),
-								slideWidth = u.outerWidth(true),
-								v = $(response).find('.elgg-main .elgg-list').clone().css({
-									position: 'absolute',
-									top: u.position().top,
-									right: slideWidth
+
+							// stash deck river before change elgg-page-body
+							if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(/\/activity/)) {
+								$('.elgg-menu-item-logo a').attr('href', data.origin);
+								var drl = $('#deck-river-lists');
+								drl.data('scrollBkp', drl.scrollLeft()); // store horizontal deck scroll
+								$.each(drl.find('.elgg-river'), function(i, e) {
+									$(e).data('scrollBkp', e.scrollTop); // store all columns scroll
 								});
-							u.after(v).add(v).animate({right: '-='+slideWidth+'px'}, function() {
-								u.remove();
-								v.removeAttr('style');
-							});
+								$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
+							} else if (url.match(/\/activity/)) {
+								$('.elgg-menu-item-logo a').attr('href', elgg.get_site_url() + 'activity');
+							}
+
+							$('.elgg-page-body').html(respBody);
+
 						}
 
-					} else {
+						if (!data.noscroll) $(window).scrollTop(0);
 
-						// stash deck river before change elgg-page-body
-						if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(/\/activity/)) {
-							$('.elgg-menu-item-logo a').attr('href', data.origin);
-							var drl = $('#deck-river-lists');
-							drl.data('scrollBkp', drl.scrollLeft());
-							$.each(drl.find('.elgg-river'), function(i, e) {
-								$(e).data('scrollBkp', e.scrollTop);
-							});
-							$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
-						} else if (url.match(/\/activity/)) {
-							$('.elgg-menu-item-logo a').attr('href', elgg.get_site_url() + 'activity');
-						}
-
-						$('.elgg-page-messages').html($(response).filter('.elgg-page-messages').html());
-						$('.elgg-page-body').html($(response).filter('.elgg-page-body').html());
-
+						elgg.ggouv_template.reloadJsFunctions();
 					}
 
-					if (!data.noscroll) $(window).scrollTop(0);
+					if (fragment && $('#'+fragment).length) {
+						$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
+					}
+					$('body').removeClass('ajaxLoading');
 
-					elgg.ggouv_template.reloadJsFunctions();
+				} catch (err) { // So this is a page
+					console.log(err);
 				}
-
-				if (fragment && $('#'+fragment).length) {
-					$(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
-				}
-				$('body').removeClass('ajaxLoading');
 			},
 			error: function(response) {
 				console.log(response, 'error');
@@ -348,7 +360,7 @@ elgg.ggouv_template.init = function() {
 		$("input[type=submit]:not("+
 						"[id='thewire-submit-button'],"+
 						"[id='button-signin'],"+
-						"[id='button-signup'],"+
+						//"[id='button-signup'],"+
 						"[id='workflow-edit-card-submit'],"+
 						"[class*='workflow-card-submit'],"+
 						"[id='workflow-list-submit'],"+
@@ -392,7 +404,7 @@ elgg.ggouv_template.init = function() {
 						if (orderBy ==  'asc') {
 							if (ul.length < 1) {
 								comBlock.prepend(json.output);
-								if (!form.hasClass('tiny')) comBlock.prepend($('<h3>', {id: 'comments'}).html(elgg.echo('comments')));
+								if (!form.hasClass('tiny')) comBlock.prepend($('<h3>', {id: 'comments', 'class': 'gwfb pbs'}).html(elgg.echo('comments')));
 							} else {
 								ul.append($(json.output).find('li:first'));
 							}
@@ -439,6 +451,7 @@ elgg.ggouv_template.init = function() {
 
 			if (State) {
 				if (State.url.match(/\/activity/) && $('#stash').length) {
+					console.log('ststt');
 					$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
 					$('#stash').remove();
 					$('body').attr('class', 'fixed-deck');
@@ -498,6 +511,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	elgg.markdown_wiki.reload();
 	elgg.deck_river.init();
 	elgg.brainstorm.init();
+	elgg.bookmarks.init();
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.answers.init();
@@ -1085,6 +1099,211 @@ elgg.tags.init = function() {
 elgg.register_hook_handler('init', 'system', elgg.tags.init);
 
 
+//override confirm
+/*(function() {
+  var proxied = window.confirm;
+  window.confirm = function() {
+    // do something here
+    return proxied.apply(this, arguments);
+  };
+})();*/
+
+/**
+ * Override javascript confirm() and wrap it into a jQuery-UI Dialog box
+ *
+ * @depends $.getOrCreateDialog
+ *
+ * @param { String } the alert message
+ * @param { String/Object } the confirm callback
+ * @param { Object } jQuery Dialog box options
+ */
+/*function confirm(message, callback, options) {
+	var defaults = {
+		modal : true,
+		resizable : false,
+		buttons : {
+			Ok: function() {
+				$(this).dialog('close');
+				return (typeof callback == 'string') ?
+					window.location.href = callback :
+					callback();
+			},Cancel: function() {
+				$(this).dialog('close');
+				return false;
+			}
+		},
+		show : 'fade',
+		hide : 'fade',
+		minHeight : 50,
+		dialogClass : 'modal-shadow'
+	}
+
+	$confirm = $.getOrCreateDialog('confirm');
+	// set message
+	$("p", $confirm).html(message);
+	// init dialog
+	$confirm.dialog($.extend({}, defaults, options));
+}
+
+
+ggouv_confirm2 = function(msg) {
+
+	var proxied = window.confirm;
+	window.confirm = function() {
+		var $this = this;
+		console.log(arguments);
+		ggouv_super_popup(arguments[0], 'tiny', function() {
+			console.log($this);
+			return proxied.apply($this, arguments);
+		});
+	};
+	return confirm(msg);
+};
+
+/*
+window.confirm = function (msg) {
+	//ggouv_confirm(msg, 'tiny');
+	$dialog_alert.html(msg).dialog('open');
+};*
+$dialog_confirm = $('<div></div>').dialog({
+            resizable: false,
+            height: 100,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                "Ok - Configurable": function () {
+                    $(this).dialog("close");
+                    return window.alert.apply(this);
+                },
+                "Cancel - Configurable": function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+        });
+
+ggouv_confirm = function (msg, size) {
+	//ggouv_super_popup(msg, 'tiny');
+	$( "#super-popup").html(msg).dialog({
+            resizable: false,
+            height:140,
+            modal: true,
+            //autoOpen: false,
+            buttons: {
+                "Yes": function()
+                {
+                    $(this).dialog( "close" );
+                    return true;
+                },
+                "No": function()
+                {
+                    $( this ).dialog( "close" );
+                    return false;
+                }
+            }
+        });
+};*/
+
+/**
+ * Display modal popup with overlay
+ * @param  array options {
+ *                            title: null,
+ *                            body: null,
+ *                            cancel: false,
+ *                       }
+ */
+ggouv_super_popup = function(options) {
+	var superPopupTemplate = Mustache.compile($('#super-popup-template').html()),
+		superPopup = $('#super-popup'),
+		deactivate = function() {
+			$('html').removeClass('super-popup-active');
+			$('#super-popup').remove();
+		},
+		options = $.extend({
+					size: null,
+					title: null,
+					close: true,
+					body: null,
+					ok: 'OK',
+					okCallback: function(){deactivate();},
+					cancel: false
+				}, options
+		);
+
+	if (options.cancel === true) options.cancel = elgg.echo('cancel');
+
+	$('.elgg-page').prepend(superPopupTemplate(options));
+	$('#super-popup').find('.elgg-icon-delete-alt, .elgg-button-cancel').click(function() {
+		deactivate();
+	});
+	$('#super-popup').find('.elgg-button-submit').click(function() {
+		options.okCallback();
+	});
+
+	$('html').addClass('super-popup-active');
+	$(window).keyup(function(e) {
+		if( e.keyCode === 27 ) {
+			deactivate();
+		}
+	});
+}
+/*
+(function($){
+
+	window.confirm = function(params){
+
+		if($('#confirmOverlay').length){
+			// A confirm is already shown on the page:
+			return false;
+		}
+
+		var buttonHTML = '';
+		$.each(params.buttons,function(name,obj){
+
+			// Generating the markup for the buttons:
+
+			buttonHTML += '<a href="#" class="button '+obj['class']+'">'+name+'<span></span></a>';
+
+			if(!obj.action){
+				obj.action = function(){};
+			}
+		});
+
+		var markup = [
+			'<div id="confirmOverlay">',
+			'<div id="confirmBox">',
+			'<h1>',params.title,'</h1>',
+			'<p>',params.message,'</p>',
+			'<div id="confirmButtons">',
+			buttonHTML,
+			'</div></div></div>'
+		].join('');
+
+		$(markup).hide().appendTo('body').fadeIn();
+
+		var buttons = $('#confirmBox .button'),
+			i = 0;
+
+		$.each(params.buttons,function(name,obj){
+			buttons.eq(i++).click(function(){
+
+				// Calling the action attribute when a
+				// click occurs, and hiding the confirm.
+
+				obj.action();
+				$.confirm.hide();
+				return false;
+			});
+		});
+	}
+
+	window.confirm.hide = function(){
+		$('#confirmOverlay').fadeOut(function(){
+			$(this).remove();
+		});
+	}
+
+})(jQuery);*/
 
 /* French initialisation for the jQuery UI date picker plugin. */
 /* Written by Keith Wood (kbwood{at}iinet.com.au) and Stéphane Nahmani (sholby@sholby.net). */

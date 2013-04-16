@@ -24,6 +24,8 @@
 	border-radius: 4px;
 
 	width: auto;
+	min-width: 30px;
+	text-align: center;
 	padding: 3px 6px 2px;
 	margin-bottom: 4px;
 	cursor: pointer;

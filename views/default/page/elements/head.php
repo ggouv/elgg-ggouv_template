@@ -68,6 +68,11 @@ $release = get_version(true);
 <?php } ?>
 
 <script type="text/javascript">
+	<?php
+		foreach (ggouv_execute_js() as $value) {
+			echo $value;
+		}
+	?>
 	<?php echo elgg_view('js/initialize_elgg'); ?>
 </script>
 

@@ -11,48 +11,38 @@
  * @uses $vars['sysmessages'] A 2d array of various message registers, passed from system_messages()
  */
 
-// backward compatability support for plugins that are not using the new approach
-// of routing through admin. See reportedcontent plugin for a simple example.
-/*if (elgg_get_context() == 'admin') {
-	elgg_deprecated_notice("admin plugins should route through 'admin'.", 1.8);
-	elgg_admin_add_plugin_settings_menu();
-	elgg_unregister_css('elgg');
-	echo elgg_view('page/admin', $vars);
-	return true;
-}*/
 
 $ajaxified = (bool) get_input('ajaxified', false);
 $force_home = (bool) get_input('home', false);
+$lang = get_current_language();
+
+$params['body'] = '<div class="elgg-inner">' . elgg_view('page/elements/body', $vars) . '</div>';
+if (!elgg_is_logged_in()) $params['body'] .= elgg_view('core/account/login_dropdown');
 
 if ($ajaxified) {
 	if (empty($vars['title'])) {
-		$title = elgg_get_config('sitename');
+		$params['title'] = elgg_get_config('sitename');
 	} else {
-		$title = $vars['title'] . ' &nabla; ' . elgg_get_config('sitename');
+		$params['title'] = $vars['title'] . ' &nabla; ' . elgg_get_config('sitename');
 	}
-	?>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-		<head>
-			<title><?php echo $title; ?></title>
-		</head>
-		<body>
-			<div class="elgg-page-messages">
-				<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
-			</div>
-			<div class="elgg-page-body">
-				<div class="elgg-inner">
-					<?php echo elgg_view('page/elements/body', $vars); ?>
-				</div>
-				<script type="text/html" id="JStoexecute">
-					<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
-				</script>
-				<?php if (!elgg_is_logged_in()) echo elgg_view('core/account/login_dropdown'); ?>
-			</div>
-		</body>
-	</html>
-	<?php
-	return true;
+
+	if ($vars['sysmessages']) {
+		$params['system_messages'] = $vars['sysmessages'];
+	} else {
+		$params['system_messages'] = array(
+			'error' => array(),
+			'success' => array()
+		);
+	}
+
+	ggouv_execute_js(elgg_view('page/elements/reinitialize_elgg'));
+	$code = '';
+	foreach (ggouv_execute_js() as $code) {
+		$params['js_code'] .= $code;
+	}
+
+	echo json_encode($params);
+	exit;
 }
 
 // Set the content type
@@ -60,15 +50,21 @@ header("Content-type: text/html; charset=UTF-8");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
+
 <head>
-<?php echo elgg_view('page/elements/head', $vars); ?>
+	<?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
-<body<?php if (elgg_get_context() == 'main') {echo ' class="homepage"';} ?>>
+
+<body class="<?php if (elgg_get_context() == 'main') {echo 'homepage t25';} else {echo 't25';} ?>">
+
+<div id="overlay"></div>
+
 <div class="elgg-page elgg-page-default">
 	<div class="elgg-page-messages">
 		<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
 	</div>
+
 
 	<?php if (elgg_is_logged_in()) { ?>
 
@@ -110,39 +106,7 @@ header("Content-type: text/html; charset=UTF-8");
 		<div class="elgg-page-header nolog">
 			<div class="elgg-inner-nolog">
 				<?php
-					echo "<div class='elgg-menu-item-logo gwf'><a class='t' href='" . elgg_get_site_url() . "'>&nabla;</a></div>";
-					echo '<h1 class="float mls"><a href="' . elgg_get_site_url() . '">' . elgg_get_config('sitename') . '</a></h1>';
-					if ($url_blog = elgg_get_plugin_setting('blog_of_site', 'elgg-ggouv_template')) $url['Blog'] = $url_blog;
-					if ($url){
-						echo '<ul class="header-pages float">';
-						foreach ($url as $key => $value) {
-							echo '<ul class="header-page mhl"><a href="' . $value . '" class="pam float">' . $key . '</a></ul>';
-						}
-						echo '</ul>';
-					}
-					echo '<ul class="float-alt">';
-					echo '<span class="shareButtons hidden-desktop gwfb link float-alt">' . elgg_echo('ggouv:share') . '</span><div class="visible-desktop">';
-					echo '<div class="fbbutton"><div id="fb-root"></div>';
-					echo '<div class="fb-like" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false" data-font="verdana"></div></div>';
-					echo '<script>(function(d, s, id) {
-						  var js, fjs = d.getElementsByTagName(s)[0];
-						  if (d.getElementById(id)) return;
-						  js = d.createElement(s); js.id = id;
-						  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
-						  fjs.parentNode.insertBefore(js, fjs);
-						}(document, "script", "facebook-jssdk"));</script>';
-					echo '<a href="https://twitter.com/share" class="twitter-share-button" data-text="Un réseau social politique" data-lang="fr" data-hashtags="ggouv">Tweeter</a>';
-					echo '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
-					echo '<div class="g-plusone"></div>';
-					echo '<script type="text/javascript">
-					  window.___gcfg = {lang: "fr"};
-					  (function() {
-					    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
-					    po.src = "https://apis.google.com/js/plusone.js";
-					    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
-					  })();
-					</script>';
-					echo '</div></ul>';
+					echo elgg_view('page/elements/nologin_mainpage_header');
 				?>
 			</div>
 		</div>
@@ -150,23 +114,13 @@ header("Content-type: text/html; charset=UTF-8");
 	<?php } ?>
 
 	<div class="elgg-page-body<?php if (!elgg_is_logged_in()) echo ' nolog'; ?>">
-		<div id="JStoexecute" class="hidden">
-			<?php echo elgg_view('page/elements/reinitialize_elgg'); ?>
-		</div>
-		<div class="elgg-inner">
-			<?php echo elgg_view('page/elements/body', $vars); ?>
-		</div>
-		<?php if (!elgg_is_logged_in()) echo elgg_view('core/account/login_dropdown'); ?>
+		<?php echo $params['body']; ?>
 	</div>
 
-	<div id="goTop" class="t"><div class="gwf tooltip e" title="<?php echo elgg_echo('back:to:top'); ?>">í</div></div>
-
-	<div class="elgg-page-footer">
-		<div class="elgg-inner">
-			<?php // echo elgg_view('page/elements/footer', $vars); ?>
-		</div>
-	</div>
 </div>
+
+<div id="goTop" class="t"><div class="gwf tooltip e" title="<?php echo elgg_echo('back:to:top'); ?>">í</div></div>
+
 <?php echo elgg_view('page/elements/foot'); ?>
 
 <?php if ($piwik_url = elgg_get_plugin_setting('piwik_tracker', 'elgg-ggouv_template')) {

@@ -11,6 +11,7 @@ function elgg_ggouv_template_init() {
 	elgg_extend_view('css/elgg','ggouv_template/bootstrap-responsive');
 	elgg_extend_view('css/elgg','ggouv_template/tipsy');
 	elgg_extend_view('js/elgg', 'ggouv_template/js');
+	elgg_extend_view('page/elements/foot', 'ggouv_template/templates_mustache', 498);
 
 	elgg_register_js('jquery.scrollTo',"$http_base/vendors/jquery.scrollTo-min.js", 'footer');
 	elgg_register_js('xoxco.tags',"$http_base/vendors/xoxco_tags/jquery.tagsinput.min.js", 'footer');
@@ -58,7 +59,8 @@ function elgg_ggouv_template_init() {
 	elgg_register_plugin_hook_handler('register', 'menu:annotation', 'editablecomments_annotation_menu');
 
 	// hook for function forward to send redirect instead of location when ajax request
-	elgg_register_plugin_hook_handler('forward', 'system', 'ggouv_template_forward_hook');
+	elgg_unregister_plugin_hook_handler('forward', 'all', 'ajax_forward_hook');
+	elgg_register_plugin_hook_handler('forward', 'all', 'ggouv_ajax_forward_hook');
 
 	//title ?
 	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
@@ -573,13 +575,88 @@ function ggouv_template_nologin_mainpage() {
 }
 
 
+
 /**
- * Catch forward.
+ * Catch calls to forward() in ajax request and force an exit.
+ *
+ * Forces response is json of the following form:
+ * <pre>
+ * {
+ *     "current_url": "the.url.we/were/coming/from",
+ *     "forward_url": "the.url.we/were/going/to",
+ *     "system_messages": {
+ *         "messages": ["msg1", "msg2", ...],
+ *         "errors": ["err1", "err2", ...]
+ *     },
+ *     "status": -1 //or 0 for success if there are no error messages present
+ * }
+ * </pre>
+ * where "system_messages" is all message registers at the point of forwarding
+ *
+ * @param string $hook
+ * @param string $type
+ * @param string $reason
+ * @param array $params
+ * @return void
+ * @access private
  */
-function ggouv_template_forward_hook($hook, $reason, $returnvalue, $params) {
-	header('Redirect: ' . $params['forward_url']);
-	return $returnvalue;
+function ggouv_ajax_forward_hook($hook, $type, $reason, $params) {
+	if (elgg_is_xhr()) {
+		// always pass the full structure to avoid boilerplate JS code.
+		$params = array(
+			'output' => '',
+			'status' => 0,
+			'system_messages' => array(
+				'error' => array(),
+				'success' => array()
+			),
+			'forward_url' => $params['forward_url'], // FULL AJAX
+		);
+
+		//grab any data echo'd in the action
+		$output = ob_get_clean();
+
+		//Avoid double-encoding in case data is json
+		$json = json_decode($output);
+		if (isset($json)) {
+			$params['output'] = $json;
+		} else {
+			$params['output'] = $output;
+		}
+
+		//Grab any system messages so we can inject them via ajax too
+		$system_messages = system_messages(NULL, "");
+
+		if (isset($system_messages['success'])) {
+			$params['system_messages']['success'] = $system_messages['success'];
+		}
+
+		if (isset($system_messages['error'])) {
+			$params['system_messages']['error'] = $system_messages['error'];
+			$params['status'] = -1;
+		}
+
+		// Added for ggouv. Add code to be executed as javascript
+		$code = '';
+		foreach (ggouv_execute_js() as $code) {
+			$params['js_code'] .= $code;
+		}
+
+		// Check the requester can accept JSON responses, if not fall back to
+		// returning JSON in a plain-text response.  Some libraries request
+		// JSON in an invisible iframe which they then read from the iframe,
+		// however some browsers will not accept the JSON MIME type.
+		if (stripos($_SERVER['HTTP_ACCEPT'], 'application/json') === FALSE) {
+			header("Content-type: text/plain");
+		} else {
+			header("Content-type: application/json");
+		}
+
+		echo json_encode($params);
+		exit;
+	}
 }
+
 
 
 /**
@@ -1102,6 +1179,12 @@ function ggouv_login_user_event($event, $type, $user) {
 
 	} else { // first login
 
+		// show welcome super-popup
+		ggouv_super_popup(array(
+			'title' => elgg_echo('signup:welcomemessage:title'),
+			'body' => deck_river_wire_filter(elgg_echo('signup:welcomemessage:body'))
+		));
+
 		// add user to his local group and add columns of this group
 		if ($user->location && $group = get_entity($user->location)) {
 			// join user to the group
@@ -1183,4 +1266,54 @@ function ggouv_login_user_event($event, $type, $user) {
 	}
 
 }
+
+/**
+ * Store some javascript code to be executed when page change in full ajax.
+ * @param  Array/String      $code      Some javascript code to be executed
+ * @param  Boolean           $count     If true, return number of items
+ * @return Boolean/Array                Return true when code is stored / A call with no var (ggouv_execute_js()) return an array of stored items, and clear this array.
+ */
+function ggouv_execute_js($code = null, $count = false) {
+	if (!isset($_SESSION['js_code'])) {
+		$_SESSION['js_code'] = array();
+	}
+
+	if (!$count) {
+		if (!empty($code) && is_array($code)) {
+			$_SESSION['js_code'] = array_merge($_SESSION['js_code'], $code);
+			return true;
+		} else if (!empty($code) && is_string($code)) {
+			$_SESSION['js_code'][] = $code;
+			return true;
+		} else if (is_null($code)) {
+			$returnarray = $_SESSION['js_code'];
+			$_SESSION['js_code'] = array(); // clear variable fo this session
+			return $returnarray;
+		}
+	} else {
+		return count($_SESSION['js_code']);
+	}
+	return false;
+}
+
+
+/**
+ * Show a super popup
+ * @param  [type] $params params of js function
+ */
+function ggouv_super_popup($params) {
+	$params = json_encode($params);
+	$script = <<<TEXT
+$(document).ready(function() {
+	ggouv_super_popup($params);
+});
+TEXT;
+
+	ggouv_execute_js($script);
+}
+
+
+
+
+
 

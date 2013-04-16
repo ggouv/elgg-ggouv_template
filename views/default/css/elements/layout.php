@@ -36,9 +36,6 @@
 	width: 100%;
 	margin: 0 auto;
 }
-.elgg-page-default .elgg-page-footer > .elgg-inner {
-	display: none;
-}
 
 /***** TOPBAR ******/
 .elgg-page-topbar {
@@ -272,15 +269,4 @@
 	padding-bottom: 3px;
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 10px;
-}
-
-/***** PAGE FOOTER ******/
-.elgg-page-footer {
-	position: relative;
-}
-.elgg-page-footer {
-	color: #999;
-}
-.elgg-page-footer a:hover {
-	color: #666;
 }

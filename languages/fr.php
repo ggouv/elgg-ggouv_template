@@ -1784,7 +1784,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'email:confirm:success' => "Vous avez validé votre adresse de courriel !",
 	'email:confirm:fail' => "Votre adresse de courriel n'a pu être vérifiée...",
 
-	'uservalidationbyemail:registerok' => "Pour activer votre compte, veuillez confirmer votre adresse e-mail en cliquant sur le lien qui vient de vous être envoyé (si vous ne recevez rien, veuillez vérifier votre dossier Spam).",
+	'uservalidationbyemail:registerok' => "Pour activer votre compte, veuillez confirmer votre adresse e-mail en cliquant sur le lien qui vient de vous être envoyé (si vous ne recevez rien, veuillez vérifier votre dossier Spam).<br/>Merci de vous être inscrit !",
 	'uservalidationbyemail:login:fail' => "Votre compte n'est pas validé, par conséquent la tentative de connexion a échoué. Un autre e-mail de validation a été envoyé.",
 
 	'uservalidationbyemail:admin:no_unvalidated_users' => "Aucun utilisateurs non-validés.",
@@ -2094,8 +2094,14 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'bookmarks:wiki_of_this_site' => "Page wiki sur %s",
 
 	/*
-	 * First login automaticly created list and cards
+	 * First login welcome message + automaticly created list and cards
 	 */
+	'signup:welcomemessage:title' => "Bienvenue sur Ggouv !",
+	'signup:welcomemessage:body' => "Bravo, vous êtes maintenant un gitoyen.<br/>
+	La plateforme viens juste d'ouvrir. C'est encore en béta et des corrections et ajustements seront en cours. Si vous trouvez un bug, quelque chose mal fait ou à arranger, informez l'équipe des développeurs (!dev).<br/>
+	Merci de ne pas communiquer à n'importe qui son existence. Vous serez tenu au courant du lancement officiel (début Mai).<br/>
+	Amusez-vous bien !
+	",
 	'deck_river:signup:list' => "À faire",
 	'deck_river:signup:card:title:0' => "Lire l'aide",
 	'deck_river:signup:card:description:0' => "L'aide se trouve [ici](%s).  \nSi vous êtes perdu, vous pouvez demander de l'aide à tout moment en écrivant dans le lanceur de message (dans le bandeau bleu horizontal en haut) votre question en mentionnant le groupe !aide. Exemple :  \n> !aide Comment s'inscrire à un groupe ?\n\nQuelqu'un vous répondra dès qu'il aura vu votre question.\n\nVous pouvez aussi [chercher](%s) si votre question n'a pas déjà été posée...",
