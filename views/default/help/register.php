@@ -37,7 +37,7 @@
 	<span><?php echo elgg_echo('registration:localisation:text'); ?></span>
 	<div id="map" class="mtm"></div>
 </div>
-<div class="register-helper password hidden">
+<div class="register-helper password hidden pam">
 	<?php echo elgg_echo('registration:helper:password'); ?>
 	<div id="complexity" class="mvs">0 %</div>
 	<div id="progressbar">
@@ -47,11 +47,92 @@
 
 
 <style type="text/css">
+	.elgg-form-login, .elgg-form-account {
+		max-width: 450px;
+	}
+	.register-helper, .register-location {
+		margin-left: 500px;
+		position: absolute;
+		top: 15px;
+		width: 100%;
+		font-style: italic;
+	}
+	.register-helper.username {
+		top: 60px;
+	}
+	.register-helper.name {
+		top: 140px;
+	}
+	.register-helper.email {
+		top: 192px;
+	}
+	.register-helper.location {
+		top: 254px;
+	}
+	.register-location {
+		opacity: 0;
+	}
+	.elgg-form-signup #searching.loading {
+		right: -35px;
+		top: 20px;
+	}
+	.register-helper.password {
+		background: white;
+		border-radius: 0 10px 10px 0;
+		top: 316px;
+		width: 280px;
+	}
+	.social-connect {
+		border-left: 2px solid #CCCCCC;
+		left: 500px;
+		padding-left: 50px;
+		position: absolute;
+		top: 10px;
+		z-index: 1;
+	}
+	.social-connect a {
+		clear: both;
+		float: left;
+		font-size: 30px;
+		margin: 10px;
+		padding: 20px;
+		text-decoration: none;
+		text-shadow: 1px 1px 1px #CCCCCC;
+		width: 70%;
+	}
+	.social-connect a:hover {
+		background-color: #F4F4F4;
+	}
+	.social-connect span:before {
+		float: left;
+		margin-top: 2px;
+	}
+	.social-connect span { /*.twitter-icon {*/
+		font-size: 68px;
+		width: 80px;
+		float: left;
+	}
+	.social-connect a:hover span {
+		font-size: 88px;
+	}
+	.back-socialnetwork {
+		color: #999999;
+		float: right;
+		margin-top: -22px;
+		position: relative;
+		cursor: pointer;
+	}
+	.back-socialnetwork:hover {
+		color: #555;
+	}
+	.back-socialnetwork:after {
+		content: "►";
+	}
 	#progressbar {
 		display: block;
 		height: 18px;
 		overflow: hidden;
-		width: 400px;
+		width: 280px;
 	}
 	#progress {
 		display:block;

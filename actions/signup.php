@@ -60,7 +60,11 @@ if (elgg_get_config('allow_registration')) {
 				$new_user->set('location', $location);
 			}
 
-			system_message(elgg_echo("registerok", array(elgg_get_site_entity()->name)));
+			system_messages(); // clean messages
+			ggouv_super_popup(array(
+				'title' => elgg_echo("registerok", array(elgg_get_site_entity()->name)),
+				'body' => elgg_echo('uservalidationbyemail:registerok')
+			));
 
 			// if exception thrown, this probably means there is a validation
 			// plugin that has disabled the user
