@@ -1101,7 +1101,7 @@ Si vous avez demandé ce changement veuillez cliquer sur le lien ci-dessous, sin
 
 	'riveraction:annotation:generic_comment' => "%s a écrit un commentaire sur %s",
 
-	'generic_comments:add' => "Ajouter un commentaire",
+	'generic_comments:add' => "Commenter",
 	'generic_comments:post' => "Poster un commentaire",
 	'generic_comments:text' => "Commentaire",
 	'generic_comments:latest' => "Derniers commentaires",

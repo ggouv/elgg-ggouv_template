@@ -42,7 +42,7 @@ if ($user) {
 	}
 	$sub_menu .= '</ul></ul>';
 	echo	'<li class="elgg-menu-item-at gwf ggouv-menu-parent scale rotate">' .
-				'<a class="t" href="#">@</a>' . $sub_menu .
+				'<a class="t" href="#">m</a>' . $sub_menu .
 			'</li>';
 
 	// sub menu for group
@@ -107,7 +107,7 @@ if ($user) {
 
 	// menu puzzle
 	echo '<li class="elgg-menu-item-puzzle gwf ggouv-menu-parent scale rotate">' .
-			'<a class="t" href="#">O</a>' .
+			'<a class="t" href="#">&#44044;</a>' . // unicode AC0C
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
 						'<li><a href="' . $site_url . 'blog/owner/' . $user->username . '">' . elgg_echo('my_blog') . '</a></li>' .
@@ -127,9 +127,19 @@ if ($user) {
 	if ( $user->isAdmin() ) {
 		$log_admin = elgg_view('output/url', array(
 			'href' => $site_url . "admin/plugins",
-			'text' => 's',
+			'text' => '&#44042;', // unicode AC0A
 			'class' => 'tooltip w t',
 			'title' => elgg_echo('Administration')
+		));
+		echo '<li class="elgg-menu-item-admin gwf scale">' .
+			$log_admin .
+		'</li>';
+		$log_admin = elgg_view('output/url', array(
+			'href' => '#',
+			'onclick' => 'elgg.console.showConsole();',
+			'text' => '_', // unicode AC0A
+			'class' => 'tooltip w t',
+			'title' => elgg_echo('Console')
 		));
 		echo '<li class="elgg-menu-item-admin gwf scale">' .
 			$log_admin .
@@ -140,7 +150,7 @@ if ($user) {
 	if ($url = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) {
 		$help = elgg_view('output/url', array(
 			'href' => $url,
-			'text' => 'K',
+			'text' => 'H',
 			'class' => 'tooltip w t',
 			'title' => elgg_echo('help')
 		));
@@ -152,7 +162,7 @@ if ($user) {
 	// user settings
 	$user_settings = elgg_view('output/url', array(
 		'href' => $site_url . "settings/user/{$user->username}",
-		'text' => 'C',
+		'text' => '&#44043;', // unicode AC0B
 		'class' => 'tooltip w t',
 		'title' => elgg_echo('usersettings:user')
 	));
@@ -163,7 +173,7 @@ if ($user) {
 	// log out
 	$log_out = elgg_view('output/url', array(
 		'href' => "action/logout",
-		'text' => 'E',
+		'text' => '&#44047;', // unicode ACOF
 		'is_action' => TRUE,
 		'class' => 'tooltip w t',
 		'title' => elgg_echo('logout')
@@ -173,7 +183,7 @@ if ($user) {
 		'</li>';
 
 	// info
-	echo '<li class="elgg-menu-item-info gwf t">i</li>';
+	echo '<li class="elgg-menu-item-info gwf t">ï</li>';
 
 }
 ?>

@@ -84,7 +84,6 @@ textarea {
 	height: 18px;
 	position: absolute;
 	right: 3px;
-	text-indent: 1px;
 	top: 24px;
 	width: 18px;
 	cursor: pointer;
@@ -302,19 +301,20 @@ input[type="radio"] {
 	color: #4690D6;
 }
 .elgg-user-picker .elgg-userpicker-remove {
+	color:transparent;
+}
+.elgg-user-picker .elgg-userpicker-remove:before {
 	font-family: 'ggouv';
 	color: #CCCCCC;
-	content: "X";
-	cursor: pointer;
+	content: "\2715";
 	font-size: 54px;
-	text-decoration: none;
 
 	transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 }
-.elgg-user-picker .elgg-userpicker-remove:hover {
+.elgg-user-picker .elgg-userpicker-remove:hover:before {
 	color: red;
 }
 

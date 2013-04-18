@@ -134,7 +134,7 @@
 }
 
 .elgg-button-dropdown:after {
-	content: "ì";
+	content: "\2193";
 	padding-left: 5px;
 	font-family: "ggouv";
 	font-size: 1.2em;
@@ -171,7 +171,7 @@
 	font-weight: normal;
 	margin-right: 4px;
 	float: left;
-	content: "X";
+	content: "\0078";
 	color: #ff3019;
 }
 .elgg-button-delete:hover:before {
@@ -183,28 +183,30 @@
 	text-transform: lowercase;
 }
 .elgg-button.edit-button:before {
-	content: "ë";
+	content: "\270D";
 }
 .elgg-button.invit-button:before {
-	content: "m";
-}
-.elgg-button.leave-button:before {
-	content: "l";
-}
-.elgg-button.join-button:before {
-	content: "j";
-}
-.elgg-button.refresh-button:before {
-	content: "R";
-	margin-top: -1px;
+	content: "M";
 	text-transform: uppercase;
 }
+.elgg-button.leave-button:before {
+	content: "\FFF3";
+}
+.elgg-button.join-button:before {
+	content: "\AC02";
+}
+.elgg-button.refresh-button:before {
+	content: "\AC0D";
+	margin-top: 0;
+	font-size: 36px;
+}
 .elgg-button.archive-button:before {
-	content: "â";
+	content: "\AC09";
+	margin-top: -1px;
 }
 .elgg-button.add_friend:before {
-	content: "o";
+	content: "\AC00";
 }
 .elgg-button.remove_friend:before {
-	content: "p";
+	content: "\AC01";
 }

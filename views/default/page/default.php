@@ -77,8 +77,8 @@ header("Content-type: text/html; charset=UTF-8");
 		<div class="elgg-header-wrapper">
 			<div class="rotator">
 				<div class="arrows">
-					<div class="up gwf center link t">í</div>
-					<div class="down gwf center link t">ì</div>
+					<div class="up gwf center link t">&uarr;</div>
+					<div class="down gwf center link t">&darr;</div>
 				</div>
 			</div>
 			<div id="elgg-page-header-container" data-rotation="0">
@@ -119,7 +119,7 @@ header("Content-type: text/html; charset=UTF-8");
 
 </div>
 
-<div id="goTop" class="t"><div class="gwf tooltip e" title="<?php echo elgg_echo('back:to:top'); ?>">í</div></div>
+<div id="goTop" class="t"><div class="gwf tooltip e" title="<?php echo elgg_echo('back:to:top'); ?>">&uarr;</div></div>
 
 <?php echo elgg_view('page/elements/foot'); ?>
 

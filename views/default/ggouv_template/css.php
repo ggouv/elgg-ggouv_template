@@ -37,7 +37,7 @@
 }
 .signup a:after {
 	color: white;
-	content: "ï";
+	content: "\2192";
 	font-size: 5em;
 	position: absolute;
 	right: 0;
@@ -151,13 +151,13 @@
 }
 .homepage .summary:before, .homepage .summary:after, #slideshow p:before, #slideshow p:after {
 	color: #DDD;
-	content: "\E10B";
+	content: "\0065";
 	font-size: 7em;
 	position: relative;
 	margin: -40px -45px;
 }
 .homepage .summary:after, #slideshow p:after {
-	content: "\E10B";
+	content: "\0065";
 	float: right !important;
 	display: inline-block;
 	margin: 40px -45px;
@@ -187,7 +187,7 @@
 }
 .homepage .questions:before {
 	color: #E9E9E9;
-	content: "ï";
+	content: "\2192";
 	font-size: 7em;
 	margin: 40px 20px 110px 0;
 }
@@ -209,7 +209,7 @@
 }
 .homepage .elgg-page-body a[href*="/wiki/"]:before {
 	font-family: "ggouv";
-	content: "ï";
+	content: "\2192";
 	padding-right: 3px;
 }
 .homepage .elgg-page-body a[href*="/wiki/"]:hover {
@@ -464,7 +464,7 @@
 	border-radius: 4px;
 }
 .elgg-page-default .shareButtons:before {
-	content: "r";
+	content: "\0072";
 	font-size: 2em;
 	padding-right: 5px;
 }
@@ -730,10 +730,10 @@
 	padding: 7px;
 }
 .column-header[data-network="twitter"]:before {
-	content: "1";
+	content: "\0054";
 }
 .column-header[data-network="facebook"]:before {
-	content: "2";
+	content: "\0046";
 }
 .elgg-river-item .elgg-icon-arrow-right {
 	margin: 5px;
@@ -753,9 +753,9 @@
 	border-bottom: 1px solid #DDD;
 }
 #comments:before {
-	color: #666666;
+	color: #CCC;
 	content: "C";
-	font-size: 2em;
+	font-size: 2.2em;
 	padding-right: 5px;
 }
 
@@ -779,24 +779,25 @@ h2.markdown-wiki-create .elgg-button-action {
 	font-size: 32px;
 }
 .markdown-editor.fly {
-	opacity: 0.3;
+	opacity: 0.8;
 }
-
 .markdown-editor:hover {
-	opacity: 1!important;
+	opacity: 1 !important;
 }
 .markdown-editor .btn {
 	float: left;
 	width: 21px;
 }
 .markdown-editor .sep {
-	background-color: #CCCCCC;
+	margin: -2px -4px 0 6px;
 	float: left;
-	height: 18px;
-	width: 1px;
+	font-size: 16px;
+	color: #999;
+}
+.markdown-editor > div:last-child {
+	padding-right: 5px;
 }
 .markdown-editor .btn:before {
-	padding-left: 5px;
 	cursor: pointer;
 	text-align: center;
 }
@@ -806,7 +807,7 @@ h2.markdown-wiki-create .elgg-button-action {
 	border-radius: 2px;
 	font-size: 48px;
 	margin: -5px 0;
-	padding: 5px 2px 5px 3px;
+	padding: 5px 0;
 	position: relative;
 }
 .editor-title:before {
@@ -828,37 +829,31 @@ h2.markdown-wiki-create .elgg-button-action {
 	content: "\F0CB";
 }
 .editor-quote:before {
-	content: "\E10B";
+	content: "\0065";
 }
 .editor-code:before {
 	content: "\E032";
 }
 .editor-link:before {
-	content: "\F03F";
+	content: "U";
 }
 .editor-image:before {
-	content: "\F03E";
-}
-.editor-plus:before {
-	content: "\F03A";
+	content: "\0070";
 }
 .editor-zero:before {
 	content: "\F03B";
 }
-.editor-minus:before {
-	content: "\F03C";
-}
 .elgg-menu-entity .elgg-menu-item-history a:before, .elgg-menu-entity .elgg-menu-item-discussion a:before {
-	content: "h";
+	content: "\007A";
 	font-size: 32px;
-	margin-top: -2px;
+	margin: 0 2px;
 	color: #CCC;
 }
 .elgg-menu-entity .elgg-menu-item-history a, .elgg-menu-entity .elgg-menu-item-discussion a {
 	font-size: 0;
 }
 .elgg-menu-entity .elgg-menu-item-discussion a:before {
-	content: "ç";
+	content: "\006B";
 }
 .elgg-menu-entity .elgg-menu-item-history a:hover:before, .elgg-menu-entity .elgg-menu-item-discussion a:hover:before {
 	color: #4690D6;
@@ -880,7 +875,7 @@ h2.markdown-wiki-create .elgg-button-action {
 .workflow-list .elgg-icon-workflow-list:before {
 	background: none;
 	color: #999;
-	content: "_";
+	content: "\AC06";
 	font-size: 36px;
 	margin-left: -5px;
 	font-weight: normal;
@@ -891,49 +886,35 @@ h2.markdown-wiki-create .elgg-button-action {
 	transform: scaleX(0.6);
 }
 
-.elgg-icon-workflow-info {
-	background: none;
-}
 .elgg-icon-workflow-info:before {
 	color: #999999;
-	content: "d";
+	content: "\0069";
 	font-size: 27px;
-	line-height: 12px;
-	text-indent: -1px;
 }
-.elgg-icon-workflow-speech-bubble {
-	background: none;
-	color: none;
+.workflow-card-info .elgg-icon {
+	margin: -8px 7px 0 -3px;
 }
 .elgg-icon-workflow-speech-bubble:before  {
 	color: #4690D6;
-	content: "c";
-	font-size: 27px;
-	line-height: 11px;
-	text-indent: -1px;
+	content: "\0043";
+	font-size: 28px;
 }
-.elgg-icon-workflow-calendar {
-	background: none;
-}
+
 .elgg-icon-workflow-calendar:before {
 	color: #999999;
-	content: "a";
+	content: "\0064";
 	font-size: 27px;
-	line-height: 10px;
-	text-indent: -1px;
 }
 .workflow-card-duedate-overdue .elgg-icon-workflow-calendar:before {
 	color: red;
 }
-.elgg-icon-workflow-checklist {
-	background: none;
+.workflow-card-info .elgg-icon-workflow-checklist {
+	margin: -8px 4px 0 -1px;
 }
-.elgg-icon-workflow-checklist:before {
+.workflow-card-info .elgg-icon-workflow-checklist:before {
 	color: #999999;
-	content: "k";
+	content: "\AC08";
 	font-size: 24px;
-	line-height: 10px;
-	text-indent: 1px;
 }
 .workflow-card-checklist-complete .elgg-icon-workflow-checklist:before {
 	color: green;
@@ -959,6 +940,18 @@ h2.markdown-wiki-create .elgg-button-action {
 	-moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 4px;
+}
+
+
+/*
+ * plugin Answers...
+ */
+.question-view .elgg-comments {
+	margin-top: 5px;
+	border: none !important;
+}
+.question-view .elgg-comments:before {
+	display: none;
 }
 
 /*
@@ -1071,7 +1064,7 @@ div.tagsinput .not_valid {
 	float: right;
 }
 .inlist .add_friend, .inlist .remove_friend {
-	font-size: 24px;
+	font-size: 30px;
 	color: #CCC;
 }
 .inlist .add_friend:hover, .inlist .remove_friend:hover {

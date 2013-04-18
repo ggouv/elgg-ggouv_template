@@ -771,6 +771,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 		$options = array(
 			'name' => 'access',
 			'text' => $access,
+			'item_class' => 'prm',
 			'href' => false,
 			'priority' => 100,
 		);
@@ -781,7 +782,7 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 		// edit link
 		$options = array(
 			'name' => 'edit',
-			'text' => 'e',
+			'text' => '&#9998;', // unicode 270E
 			'title' => elgg_echo('edit:this'),
 			'class' => 'gwf tooltip s t',
 			'href' => "$handler/edit/{$entity->getGUID()}",
@@ -840,6 +841,7 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 	$options = array(
 		'name' => 'membership',
 		'text' => $mem,
+		'item_class' => 'prs',
 		'href' => false,
 		'priority' => 100,
 	);
@@ -852,6 +854,7 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 		$options = array(
 			'name' => 'members',
 			'text' => $num_members . ' ' . $members_string,
+			'item_class' => 'phs',
 			'href' => false,
 			'priority' => 200,
 		);
@@ -870,6 +873,7 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 		$options = array(
 			'name' => 'feature',
 			'text' => $wording,
+			'item_class' => 'pls',
 			'href' => $url,
 			'priority' => 300,
 			'is_action' => true
@@ -1049,7 +1053,7 @@ function editablecomments_annotation_menu($hook, $type, $return, $params) {
 			$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
 			$options = array(
 				'name' => 'comment-edit',
-				'text' => 'e',
+				'text' => '&#9998;', // unicode 270E
 				'title' => elgg_echo('comment:edit'),
 				'class' => 'gwf tooltip s',
 				'href' => $url,

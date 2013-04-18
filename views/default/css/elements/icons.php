@@ -33,12 +33,12 @@
 
 .elgg-icon-arrow-left:before {
 	background: none;
-	content: 'î';
+	content: "\2190";
 	color: #CCC;
 }
 .elgg-icon-arrow-right:before {
 	background: none;
-	content: 'ï';
+	content: "\2192";
 	color: #CCC;
 }
 
@@ -51,18 +51,18 @@
 	color: #555;
 }
 .elgg-icon-response:before {
-	content: "<";
+	content: "\003C";
 }
 .elgg-menu-item-response-all .elgg-icon-response:before {
-	content: "≤";
+	content: "\2264";
 }
 
 .elgg-icon-share:before {
-	content: "^";
+	content: "\2194";
 }
 
 .elgg-icon-hover-menu:before {
-	content: "+";
+	content: "\002B";
 	padding-left: 3px;
 }
 
@@ -70,14 +70,14 @@
 	padding-left: 5px;
 }
 .elgg-icon-speech-bubble-alt:before {
-	content: "c";
+	content: "\0043";
 	color: #999;
 	font-size: 24px;
 }
 
 .elgg-icon-settings-alt:before {
 	color: #CCC;
-	content: "s";
+	content: "\AC0A";
 	font-size: 36px;
 	cursor: pointer;
 }
@@ -86,11 +86,11 @@
 }
 
 .elgg-icon-refresh:before {
-	content: "R";
+	content: "\AC0D";
 }
 
 .elgg-icon-retweet-sub:before {
-	content: "^";
+	content: "\2194";
 	color: #999;
 	font-size: 32px;
 }
@@ -115,7 +115,7 @@
 	padding-left: 10px;
 }
 .elgg-icon-attention:before {
-	content: 'w';
+	content: "\0061";
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
@@ -160,7 +160,7 @@
 	background: none;
 }
 .elgg-icon-delete-alt:before {
-	content: 'x';
+	content: "\0078";
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
@@ -178,10 +178,11 @@
 	background: none;
 }
 .elgg-icon-delete:before {
-	content: 'X';
+	content: "\2715";
 	color: #CCC;
 	font-size: 54px;
 	cursor: pointer;
+	overflow: hidden;
 }
 .elgg-icon-delete:hover:before {
 	color: red;
@@ -275,7 +276,7 @@
 	margin-right: 10px;
 }
 .elgg-icon-push-pin-alt:before {
-	content: 'L';
+	content: "\006A";
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
@@ -292,7 +293,7 @@
 	background: none;
 }
 .elgg-icon-push-pin:before {
-	content: 'v';
+	content: '\006A';
 	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
@@ -333,7 +334,7 @@
 	background: none;
 }
 .elgg-icon-rss:before {
-	content: 'r';
+	content: "\0052";
 	color: #CCC;
 	font-size: 40px;
 	cursor: pointer;
@@ -403,7 +404,7 @@
 	width: 12px;
 }
 .elgg-icon-tag:before {
-	content: 't';
+	content: "\AC05";
 	padding: 2px 0;
 	font-size: 60px;
 	color: #999;
@@ -462,7 +463,7 @@
 	width: 0 !important;
 }
 a.external:after {
-	content: "ê";
+	content: "\FFF4";
 	cursor: pointer;
 	font-family: 'ggouv';
 	font-size: 28px;
@@ -475,7 +476,7 @@ a.external:after {
 .elgg-menu-item-edit a, .elgg-menu-item-comment-edit a {
 	font-size: 32px;
 	color: #CCC;
-	margin-top: -4px;
+	margin-top: -2px;
 	text-decoration: none;
 	transition: all 0.5s ease;
 }
@@ -499,17 +500,17 @@ a.external:after {
 }
 
 .twitter-icon:before {
-	content: "1";
+	content: "\0054";
 	cursor: pointer;
 	color: #00ACEE;
 }
 .facebook-icon:before {
-	content: "2";
+	content: "\0046";
 	cursor: pointer;
 	color: #3B5998;
 }
 .google-icon:before {
-	content: "3";
+	content: "\0047";
 	cursor: pointer;
 	color: #EA2432;
 }

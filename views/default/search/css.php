@@ -16,7 +16,7 @@ Search plugin
 }
 .elgg-search .search-button:before {
 	color: #007700 !important;
-	content: "T" !important;
+	content: "L" !important;
 }
 .elgg-search .search-button:hover {
 	background-color: #0F0 !important;

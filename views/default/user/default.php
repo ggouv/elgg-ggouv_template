@@ -43,23 +43,23 @@ if (elgg_get_context() == 'gallery') {
 	} else {
 
 		if (elgg_is_logged_in() && $entity->getGUID() != elgg_get_logged_in_user_guid()) {
-			$metadata .= '<ul class="elgg-menu profile-action-menu inlist">';
+			$metadata2 = '<ul class="elgg-menu profile-action-menu inlist mlm">';
 			if ($entity->isFriend()) {
-				$metadata .= elgg_view('output/url', array(
+				$metadata2 .= elgg_view('output/url', array(
 					'href' => elgg_add_action_tokens_to_url("action/friends/remove?friend={$entity->guid}"),
-					'text' => 'p',
+					'text' => '&#44033;', // unicode /AC01
 					'title' => elgg_echo('friend:remove'),
 					'class' => 'tooltip s gwf t remove_friend'
 				));
 			} else {
-				$metadata .= elgg_view('output/url', array(
+				$metadata2 .= elgg_view('output/url', array(
 					'href' => elgg_add_action_tokens_to_url("action/friends/add?friend={$entity->guid}"),
-					'text' => 'o',
+					'text' => '&#44032;', // unicode /AC00
 					'title' => elgg_echo('friend:add'),
 					'class' => 'tooltip s gwf t add_friend'
 				));
 			}
-			$metadata .= '</ul>';
+			$metadata = $metadata2 . '</ul>' . $metadata;
 		}
 
 		$params = array(

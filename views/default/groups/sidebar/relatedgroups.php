@@ -30,7 +30,7 @@ $params = array(
 if (($vars['entity'] instanceof ElggGroup) && $vars['entity']->canEdit()) {
 	$edit_link = elgg_view('output/url', array(
 		'href' => 'relatedgroups/edit/' . $vars['entity']->guid,
-		'text' => 'e',
+		'text' => '&#9998;', // unicode 270E
 		'title' => elgg_echo('relatedgroups:manage'),
 		'is_trusted' => true,
 		'class' => 'manage-relatedgroups aside-plus gwf tooltip sw t',
@@ -41,7 +41,7 @@ if (($vars['entity'] instanceof ElggGroup) && $vars['entity']->canEdit()) {
 
 $params['count'] = true;
 $count = elgg_get_entities_from_relationship($params);
-global $fb; $fb->info($count);
+
 if ($count == 0) {
 	if ($edit_link == '') return false;
 	$all_link = $body = '';

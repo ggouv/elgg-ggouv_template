@@ -189,7 +189,7 @@
 	color: #333 !important;
 }
 #group_activity_module .elgg-head h3:before {
-	content: 'A';
+	content: 'w';
 	font-size: 50px;
 	font-family: 'ggouv';
 	margin-right: 5px;
