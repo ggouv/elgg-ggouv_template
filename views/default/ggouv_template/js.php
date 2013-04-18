@@ -416,6 +416,7 @@ elgg.ggouv_template.init = function() {
 							}
 						}
 						replaceHighlight($('#'+liID), txt);
+						CloneHelpMarkdown($('#'+liID).find('.help-markdown'));
 						form.find('textarea').val('').height(190);
 						form.find('.preview-markdown').html('').height(178);
 						elgg.markdown_wiki.edit.init();
