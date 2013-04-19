@@ -9,7 +9,7 @@
 ?>
 
 <div class="social-connect">
-	<h2 class ="mbl"><?php echo elgg_echo('registration:social-connect'); ?></h2>
+	<!--h2 class ="mbl"><?php echo elgg_echo('registration:social-connect'); ?></h2>
 	<a href="<?php echo elgg_get_site_url(); ?>twitter_api/forward">
 		<span class="twitter-icon gwfb t"></span>Twitter
 	</a>
@@ -18,7 +18,7 @@
 	</a>
 	<a href="<?php echo elgg_get_site_url(); ?>twitter_api/forward">
 		<span class="google-icon gwfb t"></span>Google
-	</a>
+	</a-->
 </div>
 
 <div class="register-helper username hidden">
