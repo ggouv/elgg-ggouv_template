@@ -628,29 +628,26 @@ elgg.ggouv_template.reload = function() {
 		}
 	}
 
-	// validate forms
-	jQuery.validator.addMethod("namecheckcar", function(value, element) {
-		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_-]{3,30}$/.test(value);
+	/**
+	 * validate forms using jQuery validate
+	*/
+
+	// add method for name
+	$.validator.addMethod("namecheckcar", function(value, element) {
+		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_]{3,30}$/.test(value);
 	}, elgg.echo('registration:namecheckcar'));
 
-	$('.elgg-form-groups-edit').validate({
-		invalidHandler: function(form, validator) {
-			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
-				$(this).effect("shake", {times:2, distance:10}, 100, function() {
-					$(this).animate({'margin-left': 0}, 100);
-				});
+	// shake submit button
+	var shakeButton = function() {
+		$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+			$(this).effect("shake", {times:2, distance:10}, 100, function() {
+				$(this).animate({'margin-left': 0}, 100);
 			});
-		}
-	});
+		});
+	};
 
-	$('.elgg-form-profile-edit, .elgg-form-user-requestnewpassword').validate({
-		invalidHandler: function(form, validator) {
-			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
-				$(this).effect("shake", {times:2, distance:10}, 100, function() {
-					$(this).animate({'margin-left': 0}, 100);
-				});
-			});
-		}
+	$('.elgg-form-groups-edit, .elgg-form-profile-edit, .elgg-form-user-requestnewpassword').validate({
+		invalidHandler: shakeButton
 	});
 
 	$('.elgg-form-signup').validate({
@@ -673,13 +670,7 @@ elgg.ggouv_template.reload = function() {
 				minlength: elgg.echo('registration:locationtooshort', [5])
 			}
 		},
-		invalidHandler: function(form, validator) {
-			$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
-				$(this).effect("shake", {times:2, distance:10}, 100, function() {
-					$(this).animate({'margin-left': 0}, 100);
-				});
-			});
-		}
+		invalidHandler: shakeButton
 	});
 
 	if ($('.elgg-form-signup').length) {

@@ -168,7 +168,10 @@ if ($entity) {
 	));
 }
 
-echo elgg_view('input/submit', array('value' => elgg_echo('save')));
+echo elgg_view('input/submit', array(
+	'value' => elgg_echo('save'),
+	'class' => 'elgg-button-submit noajaxified'
+));
 
 if (isset($vars['entity'])) {
 	$delete_url = 'action/groups/delete?guid=' . $entity->getGUID();
