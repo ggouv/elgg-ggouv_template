@@ -38,7 +38,7 @@ label.error {
 }
 label.error.valid:after {
 	color: #51C600;
-	content: "œ";
+	content: "\2714";
 	font-family: 'ggouv';
 	font-size: 60px;
 	font-weight: normal;
