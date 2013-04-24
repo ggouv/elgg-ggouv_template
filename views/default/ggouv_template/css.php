@@ -47,7 +47,7 @@
 	text-decoration: none;
 	background: #0054A7;
 }
-.homepage h2 {
+.homepage .elgg-body h2 {
 	font-size: 2.8em;
 	color: #333;
 	margin-bottom: 30px;
@@ -506,6 +506,9 @@
 }
 .elgg-menu-item-logo {
 	height: 48px !important;
+	overflow: hidden;
+}
+.elgg-menu-item-dashboard {
 	overflow: hidden;
 }
 .elgg-menu-topbar .elgg-menu-item-logo a, .elgg-menu-item-logo a {

@@ -37,4 +37,4 @@ $text = markdown_wiki_parse_link($text);
 
 $attributes = elgg_format_attributes($vars);
 
-echo "<noscript style=\"display:none\" $attributes>$text</noscript>";
+echo "<script type=\"text/template\" style=\"display:none\" $attributes>$text</script>";
