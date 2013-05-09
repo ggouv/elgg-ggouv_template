@@ -123,7 +123,7 @@ header("Content-type: text/html; charset=UTF-8");
 
 <?php echo elgg_view('page/elements/foot'); ?>
 
-<?php if ($piwik_url = elgg_get_plugin_setting('piwik_tracker', 'elgg-ggouv_template')) {
+<?php if ($piwik_url = elgg_get_plugin_setting('piwik_tracker', 'elgg-ggouv_template') && $piwik_id = elgg_get_plugin_setting('piwik_id', 'elgg-ggouv_template')) {
 	echo <<<HTML
 <!-- Piwik -->
 <script type="text/javascript">
@@ -132,12 +132,12 @@ document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/ja
 </script>
 <script type="text/javascript">
 try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", $piwik_id);
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
 </script>
-<noscript><p><img src="http://$piwik_url/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+<noscript><p><img src="http://$piwik_url/piwik/piwik.php?idsite=$piwik_id" style="border:0" alt="" /></p></noscript>
 <!-- End Piwik Tracking Code -->
 HTML;
 

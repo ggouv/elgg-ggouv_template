@@ -96,6 +96,13 @@ $piwik_tracker_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin'
 ));
 
+$piwik_id_string = elgg_echo('ggouv_template:piwik_id');
+$piwik_id_view = elgg_view('input/text', array(
+	'name' => 'params[piwik_id]',
+	'value' => $vars['entity']->piwik_id,
+	'class' => 'elgg-input-thin'
+));
+
 echo <<<__HTML
 <br />
 <div><label>$markdown_wiki_page_for_home_string</label><br />$markdown_wiki_page_for_home_view</div>
@@ -124,5 +131,8 @@ echo <<<__HTML
 <br />
 <div><label>$bot_string</label><br />$bot_view</div>
 <br />
+<hr>
+<br />
 <div><label>$piwik_tracker_string</label><br />$piwik_tracker_view</div>
+<div><label>$piwik_id_string</label><br />$piwik_id_view</div>
 __HTML;
