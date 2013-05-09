@@ -27,7 +27,7 @@ if (!empty($vars['type'])) {
 if (empty($vars['tagcloud']) && !empty($vars['value'])) {
 	$vars['tagcloud'] = $vars['value'];
 }
-global $fb; $fb->info($vars);
+
 $format = elgg_extract('format', $vars, 'cloud');
 
 /* Tag size calculation

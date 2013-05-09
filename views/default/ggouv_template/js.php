@@ -287,7 +287,7 @@ elgg.ggouv_template.init = function() {
 							friend = query.match(/friend=\d+/)[0],
 							stats = $('.user-stats li:first-child .stats');
 
-						$('a.tooltip.add_friend[href*="'+friend+'"]').html('p');
+						$('a.tooltip.add_friend[href*="'+friend+'"]').html('&#44033;'); // unicode AC01
 						$('a.elgg-button.add_friend[href*="'+friend+'"]').html(elgg.echo('friend:remove'));
 						$('a.add_friend[href*="'+friend+'"]')
 							.blur()
@@ -305,7 +305,7 @@ elgg.ggouv_template.init = function() {
 							friend = query.match(/friend=\d+/)[0],
 							stats = $('.user-stats li:first-child .stats');
 
-						$('a.tooltip.remove_friend[href*="'+friend+'"]').html('o');
+						$('a.tooltip.remove_friend[href*="'+friend+'"]').html('&#44032;'); // unicode AC00
 						$('a.elgg-button.remove_friend[href*="'+friend+'"]').html(elgg.echo('friend:add'));
 						$('a.remove_friend[href*="'+friend+'"]')
 							.blur()
@@ -544,8 +544,8 @@ elgg.ggouv_template.reload = function() {
 			nav: true,
 			timeout: 20000, // 20 seconds
 			pause: true,
-			prevText: '<span class="t">î</span>',
-			nextText: '<span class="t">ï</span>'
+			prevText: '<span class="t">&larr;</span>',
+			nextText: '<span class="t">&rarr;</span>'
 		});
 	} else {
 		$('body').removeClass('homepage');

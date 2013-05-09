@@ -6,6 +6,7 @@
  *
  * @uses $vars['subtypes']   Object subtype string or array of subtypes
  * @uses $vars['owner_guid'] The owner of the content being tagged
+ * @uses $vars['container_guid'] The container of the content being tagged
  * @uses $vars['limit']      The maxinum number of tags to display
  */
 
