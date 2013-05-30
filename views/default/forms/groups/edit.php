@@ -53,7 +53,7 @@ if ($group_profile_fields > 0) {
 	}
 }
 ?>
-<?php if (!$entity || !in_array($entity->getSubtype(), array('metagroup', 'typogroup'))) { ?>
+<?php if (!$entity || !in_array($entity->getSubtype(), array('metagroup', 'typogroup', 'localgroup'))) { ?>
 <div>
 	<label><?php echo elgg_echo('groups:membership'); ?></label>&nbsp;
 		<?php echo elgg_view('input/access', array(

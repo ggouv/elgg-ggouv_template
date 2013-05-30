@@ -91,6 +91,7 @@ if (isset($CONFIG->group_tool_options)) {
 }
 
 // Group membership - should these be treated with same constants as access permissions?
+if ($entity && in_array($entity->getSubtype(), array('metagroup', 'typogroup', 'localgroup'))) set_input('membership', ACCESS_PUBLIC);
 switch (get_input('membership')) {
 	case ACCESS_PUBLIC:
 		$group->membership = ACCESS_PUBLIC;
