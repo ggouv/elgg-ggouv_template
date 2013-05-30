@@ -225,13 +225,12 @@ elgg.ggouv_template.init = function() {
 
 	var History = window.History;
 	if (History.enabled) {
-		var rootUrl = History.getRootUrl();
 		// Internal Helper
 		$.expr[':'].internal = function(obj, index, meta, stack) {
 			var $this = $(obj),
 				url = $this.attr('href') || '';
 			// Check link
-			return url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
+			return url.indexOf(elgg.get_site_url()) === 0 || url.indexOf(':') === -1 || site_shorturl && url.indexOf(site_shorturl) === 0;
 		};
 
 		// prevent scroll with link finished by #
