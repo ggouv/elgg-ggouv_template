@@ -1114,21 +1114,16 @@ body, #super-popup {
 	top: -10%;
 }
 .super-popup-active .elgg-page {
-	-webkit-filter: blur(2px);
-	-moz-filter: blur(2px);
-	-ms-filter: blur(2px);
-	-o-filter: blur(2px);
-	filter: blur(2px);
 	height: 100%;
 	overflow: hidden;
 }
 .super-popup-active #overlay {
 	box-shadow: 0 0 600px 200px white inset;
 	height: 102%;
-	left: -1%;
+	left: -5%;
 	position: fixed;
 	top: -1%;
-	width: 102%;
+	width: 110%;
 	z-index: 9999;
 }
 .super-popup-active #goTop div {
@@ -1155,7 +1150,7 @@ body, #super-popup {
 	transform: scale(0.6);
 }
 #super-popup.tiny {
-	height: 200px;
+	height: 134px;
 	margin: -160px -220px;
 	width: 400px;
 }
@@ -1177,9 +1172,6 @@ body, #super-popup {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-}
-#super-popup .elgg-icon-delete-alt:before {
-	font-size: 48px;
 }
 
 

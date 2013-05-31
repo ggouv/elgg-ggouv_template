@@ -29,7 +29,7 @@ $libs = array(
 	//libraries
 	'prototypes',
 	'hooks',
-	'security',
+	//'security',
 	'languages',
 	'ajax',
 	'session',
@@ -47,6 +47,8 @@ foreach ($libs as $file) {
 	echo "\n";
 }
 // Hack ggouv
+include(dirname(__FILE__). '/lib/security.js');
+echo "\n";
 include(dirname(__FILE__). '/lib/ui.js');
 echo "\n";
 include(dirname(__FILE__). '/lib/ui.widgets.js');

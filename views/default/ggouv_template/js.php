@@ -1195,6 +1195,9 @@ ggouv_confirm = function (msg, size) {
         });
 };*/
 
+elgg.provide('ggouv');
+elgg.provide('ggouv.super_popup');
+
 /**
  * Display modal popup with overlay
  * @param  array options {
@@ -1203,29 +1206,24 @@ ggouv_confirm = function (msg, size) {
  *                            cancel: false,
  *                       }
  */
-ggouv_super_popup = function(options) {
+ggouv.super_popup.create = function(options) {
 	var superPopupTemplate = Mustache.compile($('#super-popup-template').html()),
 		superPopup = $('#super-popup'),
-		deactivate = function() {
-			$('html').removeClass('super-popup-active');
-			$('#super-popup').remove();
-		},
 		options = $.extend({
 					size: null,
 					title: null,
 					close: true,
 					body: null,
 					ok: 'OK',
-					okCallback: function(){deactivate();},
+					okCallback: function(){ggouv.super_popup.deactivate()},
 					cancel: false
-				}, options
-		);
+				}, options);
 
 	if (options.cancel === true) options.cancel = elgg.echo('cancel');
 
 	$('.elgg-page').prepend(superPopupTemplate(options));
 	$('#super-popup').find('.elgg-icon-delete-alt, .elgg-button-cancel').click(function() {
-		deactivate();
+		ggouv.super_popup.deactivate();
 	});
 	$('#super-popup').find('.elgg-button-submit').click(function() {
 		options.okCallback();
@@ -1233,11 +1231,20 @@ ggouv_super_popup = function(options) {
 
 	$('html').addClass('super-popup-active');
 	$(window).keyup(function(e) {
-		if( e.keyCode === 27 ) {
-			deactivate();
-		}
+		if ( e.keyCode === 27 && options.close) ggouv.super_popup.deactivate();
 	});
-}
+};
+
+
+/**
+ * Delete modal popup with overlay
+ */
+ggouv.super_popup.deactivate = function() {
+	$('html').removeClass('super-popup-active');
+	$('#super-popup').remove();
+};
+
+
 /*
 (function($){
 

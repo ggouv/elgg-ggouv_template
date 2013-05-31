@@ -1309,7 +1309,7 @@ function ggouv_super_popup($params) {
 	$params = json_encode($params);
 	$script = <<<TEXT
 $(document).ready(function() {
-	ggouv_super_popup($params);
+	ggouv.super_popup.create($params);
 });
 TEXT;
 
