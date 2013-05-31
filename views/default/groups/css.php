@@ -96,6 +96,37 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+.groups-profile-fields {
+	position: relative;
+}
+#toggle-group-description {
+	background: #F4F4F4;
+	bottom: 0;
+	box-shadow: 0 0 4px #CCC;
+	color: #555;
+	font-size: 0.9em;
+	padding: 2px 10px;
+	position: absolute;
+	width: 100%;
+}
+#toggle-group-description:hover {
+	color: #4690D6;
+	cursor: pointer;
+}
+#toggle-group-description:before {
+	content: "▼";
+	padding-right: 5px;
+}
+#toggle-group-description.less {
+	box-shadow: none;
+	position: relative;
+}
+#toggle-group-description.less:before {
+	content: "▲";
+}
+#toggle-group-description:hover {
+	color: #4690D6;
+}
 .groups-profile-fields .odd,
 .groups-profile-fields .even {
 	background: #f4f4f4;
@@ -109,12 +140,6 @@
 }
 .groups-profile-fields .elgg-output {
 	margin: 0;
-}
-.groups-profile-fields .description a.elgg-widget-collapse-button {
-	color: #555;
-}
-.groups-profile-fields .description a.elgg-widget-collapse-button:hover {
-	color: #333;
 }
 .groups-profile-fields .interests {
 	padding: 0 4px 2px;

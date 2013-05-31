@@ -2002,6 +2002,8 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'groups:localgroups' => "Groupes locaux",
 	'groups:localgroup:departement' => "Département",
 	'groups:my_local_group' => "Mon groupe local",
+	'groups:description:show_more' => "Afficher plus",
+	'groups:description:show_less' => "Afficher moins",
 
 	"relatedgroups" => 'Groupes en relation',
 	"relatedgroups:more" => 'Voir tous les groupes en relations',

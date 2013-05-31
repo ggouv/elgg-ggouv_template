@@ -954,8 +954,8 @@ function ggouv_groups_icon_url_override($hook, $type, $returnvalue, $params) {
 function ggouv_template_groups_fields_setup($hook, $entity_type, $returnvalue, $params) {
 	$profile_defaults = array(
 		'briefdescription' => 'text140',
-		'description' => 'longtext',
 		'interests' => 'tags',
+		'description' => 'longtext',
 	);
 	return $profile_defaults;
 }

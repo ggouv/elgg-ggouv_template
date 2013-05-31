@@ -45,13 +45,14 @@ $nbr_groups = elgg_get_entities(array(
 	'limit' => 0,
 	'count' => true
 ));
-if ($nbr_groups > 5) {
-	register_error(elgg_echo('groups:error:more_five_groups'));
-	forward(REFERER);
-}
 
 $group_guid = (int)get_input('group_guid');
 $new_group_flag = $group_guid == 0;
+
+if ($new_group_flag && $nbr_groups > 5) {
+	register_error(elgg_echo('groups:error:more_five_groups'));
+	forward(REFERER);
+}
 
 $group = new ElggGroup($group_guid); // load if present, if not create a new group
 if (($group_guid) && (!$group->canEdit())) {

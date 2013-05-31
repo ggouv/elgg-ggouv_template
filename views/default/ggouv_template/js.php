@@ -624,9 +624,20 @@ elgg.ggouv_template.reload = function() {
 
 	// Resize if groups-profile-fields is taller than 200px
 	if ($('.groups-profile-fields').length) {
-		if ($('.groups-profile-fields').height() > 200) {
-			$('.groups-profile-fields .description').prepend('<a rel="toggle" class="elgg-widget-collapse-button elgg-state-active elgg-widget-collapsed" href="#groups-description">&nbsp;'+ elgg.echo('groups:description') +'</a>');
-			$('.groups-profile-fields #groups-description').hide();
+		var gpf = $('.groups-profile-fields');
+
+		if (gpf.height() > 200) {
+			gpf.height($('.groups-profile .elgg-image').height())
+				.append($('<div>', {id: 'toggle-group-description'}).html(elgg.echo('groups:description:show_more')).click(function() {
+					var t = $(this);
+					if (t.hasClass('less')) {
+						t.html(elgg.echo('groups:description:show_more')).removeClass('less').appendTo(gpf);
+						gpf.animate({height: $('.groups-profile .elgg-image').height() + 'px'});
+					} else {
+						t.html(elgg.echo('groups:description:show_less')).addClass('less').appendTo(gpf.find('.description'));
+						gpf.animate({height: '100%'});
+					}
+				}));
 		}
 	}
 
