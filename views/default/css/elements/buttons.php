@@ -171,7 +171,7 @@
 	font-weight: normal;
 	margin-right: 4px;
 	float: left;
-	content: "\0078";
+	content: "\2715";
 	color: #ff3019;
 }
 .elgg-button-delete:hover:before {
@@ -190,7 +190,7 @@
 	text-transform: uppercase;
 }
 .elgg-button.leave-button:before {
-	content: "\FFF3";
+	content: "\AC03";
 }
 .elgg-button.join-button:before {
 	content: "\AC02";
