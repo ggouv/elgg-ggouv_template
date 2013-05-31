@@ -129,13 +129,13 @@ elgg.ggouv_template.init = function() {
 							forward_url = elgg.normalize_url(decodeURIComponent(jsonResponse.forward_url));
 
 						if (urlPath.match('/action/groups/featured') || urlPath.match('/action/groups/leave')) {
-							History.pushState(data, null, data.origin);
+							History.replaceState(data, null, data.origin);
 						} else if (forward_url != null) {
 							if (urlPath.match('/action/brainstorm/delete')) {
 								var brainstorm_guid = elgg.parse_str(urlParsed.query).guid;
 								$('.elgg-body #elgg-object-'+brainstorm_guid).css('background-color', '#FF7777').fadeOut();
 							}
-							History.pushState(data, null, forward_url); // catch forward(). See ggouv_ajax_forward_hook
+							History.replaceState(data, null, forward_url); // catch forward(). See ggouv_ajax_forward_hook
 						} else if (xmlHttp.status = 200) {
 							window.location.replace(url); // in case of...
 						}
@@ -344,6 +344,9 @@ elgg.ggouv_template.init = function() {
 						url_origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
 						path_origin = elgg.parse_url(url_origin, 'path');
 
+					// History.js doesn't accept url on another domain, so we have to replace shorturl by handler for shorten url
+					if (url.indexOf(site_shorturl) === 0) url = elgg.get_site_url() + 'u/' + url.replace(site_shorturl, '');
+
 					if (fragment && path_origin == path_url) { //same page, go to #hash
 						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
 					} else {
@@ -511,11 +514,11 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	elgg.markdown_wiki.reload();
 	elgg.deck_river.init();
 	elgg.brainstorm.init();
-	elgg.bookmarks.init();
+	//elgg.bookmarks.init();
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.answers.init();
-	elgg.ggouv_pad.resize();
+	//elgg.ggouv_pad.resize();
 	elgg.ggouv_template.reload();
 
 	// compatibility for refresh button in board view
