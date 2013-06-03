@@ -182,15 +182,15 @@ elgg.ggouv_template.init = function() {
 						} else {
 
 							// stash deck river before change elgg-page-body
-							if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(/\/activity/)) {
-								$('.elgg-menu-item-logo a').attr('href', data.origin);
+							if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(elgg.get_site_url() +'activity')) {
+								$('.elgg-menu-item-logo a').attr('href', data.origin.replace(/#$/, ''));
 								var drl = $('#deck-river-lists');
 								drl.data('scrollBkp', drl.scrollLeft()); // store horizontal deck scroll
 								$.each(drl.find('.elgg-river'), function(i, e) {
 									$(e).data('scrollBkp', e.scrollTop); // store all columns scroll
 								});
 								$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
-							} else if (url.match(/\/activity/)) {
+							} else if (url.match(/\/activity/)) { // a tab in activity
 								$('.elgg-menu-item-logo a').attr('href', elgg.get_site_url() + 'activity');
 							}
 
