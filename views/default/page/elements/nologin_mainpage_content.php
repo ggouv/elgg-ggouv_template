@@ -3,16 +3,11 @@
 elgg_load_library('markdown_wiki:utilities');
 
 // get page
-$page_guid = elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg-ggouv_template');
-$page = get_entity($page_guid);
-if (!$page) {
+$text = get_markdown_wiki_text_from_guid(elgg_get_plugin_setting('markdown_wiki_page_for_home', 'elgg-ggouv_template'));
+if (!$text) {
 	return;
 }
 
-// parse page
-$annotation = $page->getAnnotations('markdown_wiki', 1, 0, 'desc');
-$value = unserialize($annotation[0]->value);
-$text = $value['text'];
 $sections = array();
 
 $text = preg_replace('/^# /m', '%%%', $text); // use %%% as a marker to delimit section with only one # (title)
