@@ -37,7 +37,7 @@ elgg.security.setToken = function(json) {
  * @private
  */
 elgg.security.refreshToken = function() {
-	var options = function(data) {
+	elgg.action('security/refreshtoken', function(data) {
 		if (data && data.output.__elgg_ts && data.output.__elgg_token) {
 			elgg.security.setToken(data.output);
 		} else {
@@ -49,18 +49,25 @@ elgg.security.refreshToken = function() {
 				close: false,
 				ok: elgg.echo('js:security:token_refresh_failed:wakeup'),
 				okCallback: function() {
-					elgg.security.refreshToken();
-					setInterval(elgg.security.refreshToken, elgg.security.interval);
-					ggouv.super_popup.deactivate();
+					$.ajax(elgg.get_site_url() +'mod/elgg-ggouv_template/actions/refreshtoken.php', {
+						type: 'post',
+						dataType: 'json',
+						success: function(output) {
+							if (output && output.__elgg_ts && output.__elgg_token) {
+								$('.elgg-system-messages li').hide();
+								elgg.security.setToken(output);
+								setInterval(elgg.security.refreshToken, elgg.security.interval);
+								elgg.system_message(elgg.echo('js:security:token_refreshed', [elgg.get_site_url()]));
+							} else {
+								elgg.security.refreshToken();
+							}
+							ggouv.super_popup.deactivate();
+						}
+					});
 				}
 			});
 		}
-	};
-
-	options = elgg.ajax.handleOptions('action/security/refreshtoken', options);
-	options.data = elgg.security.addToken(options.data);
-	options.dataType = 'json';
-	elgg.post(options);
+	});
 };
 
 

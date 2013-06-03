@@ -1167,7 +1167,7 @@ Pour voir le profil de %s, suivez ce lien :
 	'js:security:token_refresh_failed:title' => "Vous avez été absent trop longtemps !",
 	'js:security:token_refresh_failed:body' => "En attendant, je me suis mis en veille pour des questions de sécurité...",
 	'js:security:token_refresh_failed:wakeup' => "Réveillez moi !",
-	'js:security:token_refreshed' => "La connexion à %s a été restaurée!",
+	'js:security:token_refreshed' => "La connexion à %s a été restaurée !",
 
 /**
  * Languages according to ISO 639-1
