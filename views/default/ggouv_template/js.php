@@ -103,11 +103,14 @@ elgg.ggouv_template.init = function() {
 		var data = data || false,
 			fragment = data.fragment || false;
 
+		$('body').addClass('ajaxLoading');
+
 		if (data.dataForm) {
 			dataPost = data.dataForm + '&ajaxified=true';
 		} else {
 			dataPost = 'ajaxified=true';
 		}
+
 		elgg.post(url, {
 			data: dataPost,
 			success: function(response, textStatus, xmlHttp) {
@@ -143,7 +146,7 @@ elgg.ggouv_template.init = function() {
 					} else { // So this is a page
 
 						var respBody = $(jsonResponse.body),
-							orignParsed = elgg.parse_url(data.origin),
+							orignParsed = data.origin ? elgg.parse_url(data.origin) : false,
 							urlOffset = !elgg.isUndefined(urlParsed.query) ? urlParsed.query.match(/offset=(\d+)/) : false;
 
 						$('title').html(jsonResponse.title);
@@ -349,6 +352,8 @@ elgg.ggouv_template.init = function() {
 
 					if (fragment && path_origin == path_url) { //same page, go to #hash
 						if ($('#'+fragment).length) $(window).scrollTo($('#'+fragment), 'slow', {offset:-60});
+					} else if (path_origin == path_url && /members\/random/.test(path_url)) {
+						parsePage(elgg.get_site_url()+'members/random');
 					} else {
 						History.pushState({origin: url_origin, fragment: fragment}, null, url.split("#")[0]);
 					}
@@ -454,7 +459,6 @@ elgg.ggouv_template.init = function() {
 
 			if (State) {
 				if (State.url.match(/\/activity/) && $('#stash').length) {
-					console.log('ststt');
 					$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
 					$('#stash').remove();
 					$('body').attr('class', 'fixed-deck');
@@ -465,8 +469,6 @@ elgg.ggouv_template.init = function() {
 					});
 					return true;
 				}
-
-				$('body').addClass('ajaxLoading');
 
 				parsePage(State.url, State.data);
 			}

@@ -9,10 +9,15 @@ $tabs = array(
 		'url' => "members/newest",
 		'selected' => $vars['selected'] == 'newest',
 	),
-	'popular' => array(
+	/*'popular' => array(
 		'title' => elgg_echo('members:label:popular'),
 		'url' => "members/popular",
 		'selected' => $vars['selected'] == 'popular',
+	),*/
+	'random' => array(
+		'title' => elgg_echo('members:label:random'),
+		'url' => "members/random",
+		'selected' => $vars['selected'] == 'random',
 	),
 	'online' => array(
 		'title' => elgg_echo('members:label:online'),

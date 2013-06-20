@@ -1972,9 +1972,11 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	/**
 	 * Members
 	 */
+	'gitoyens' => "gitoyens",
 	'members:all' => 'Tous les membres',
 	'members:label:newest' => 'Nouveaux',
 	'members:label:popular' => 'Les plus suivis',
+	'members:label:random' => "Au hasard",
 	'members:label:online' => 'En ligne',
 	'members:searchname' => 'Chercher un membre par son nom',
 	'members:searchtag' => 'Chercher un membre par compétence',
