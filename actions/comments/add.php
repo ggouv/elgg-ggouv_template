@@ -41,14 +41,14 @@ if ($entity->owner_guid != $user->guid) {
 
 	notify_user($entity->owner_guid,
 				$user->guid,
-				elgg_echo('generic_comment:email:subject'),
+				elgg_echo('generic_comment:email:subject', array($entity->title)),
 				elgg_echo('generic_comment:email:body', array(
-					$entity->title,
+					$user->getURL(),
 					$user->name,
+					$entity->getURL(),
+					$entity->title,
 					$comment_text,
 					$entity->getURL(),
-					$user->name,
-					$user->getURL()
 				))
 			);
 }

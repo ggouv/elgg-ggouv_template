@@ -1114,22 +1114,13 @@ Si vous avez demandé ce changement veuillez cliquer sur le lien ci-dessous, sin
 	'generic_comment:none' => "Pas de commentaire",
 	'generic_comment:title' => "Commentaire par %s",
 
-	'generic_comment:email:subject' => "Vous avez un nouveau commentaire !",
-	'generic_comment:email:body' => "Vous avez un nouveau commentaire sur l'élément '%s' de %s. Voici son contenu :
+	'generic_comment:email:subject' => "Nouveau commentaire sur « %s »",
+	'generic_comment:email:body' => "<a href=\"%s\" target=\"_blank\">%s</a> a commenté <a href=\"%s\" target=\"_blank\">%s</a> :
 
-
-%s
-
+<div style=\"background-color: #FAFAFA;font-size: 1.1em;padding: 10px;\">%s</div>
 
 Pour répondre ou voir le contenu de référence, suivez le lien ci-dessous:
-
-%s
-
-Pour voir le profil de %s, suivez ce lien :
-
-%s
-
-(Ceci est un mail automatique de notification. Inutile donc d'y répondre directement).",
+%s",
 
 /**
  * Entities
@@ -1842,6 +1833,25 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'notifications:subscriptions:groups:description' => "Pour recevoir des notifications lorsque de nouveaux contenus sont ajoutés à un groupe auquel vous appartenez, sélectionnez-les ci-dessous, et choisissez le mode de notifications que vous souhaitez utiliser.",
 
 	'notifications:subscriptions:success' => "Vos paramètres de notifications ont bien été enregistrés.",
+
+		/* @package html_email_handler */
+		'html_email_handler' => "HTML E-mail Handler",
+
+		'html_email_handler:theme_preview:menu' => "HTML notification",
+
+		// settings
+		'html_email_handler:settings:notifications:description' => "When you enable this option all notifications to the users of your site will be in HTML format.",
+		'html_email_handler:settings:notifications' => "Use as default e-mail notification handler",
+		'html_email_handler:settings:notifications:subtext' => "This will send all outgoing e-mails as HTML mails",
+
+		'html_email_handler:settings:sendmail_options' => "Additional parameters for use with sendmail (optional)",
+		'html_email_handler:settings:fallback_email' => 'Set a dedicated From email address for your site, something like notifications@yoursite.com',
+		'html_email_handler:settings:sendmail_options:description' => "Here you can configure additional setting when using sendmail, for example -f%s (to better prevent mails being marked as spam)",
+		'html_email_handler:settings:fallback_email_options:description' => 'It is bad business practice not to provide a real email address that people can respond to. Here is an article discussing this topic <a href="http://www.netmagazine.com/opinions/why-noreply-email-addresses-are-bad-business">Why noreply addresses are bad for business</a>, therefore, it is recommended that you provide your users with a valid email which they can respond to.',
+
+		// notification body
+		'html_email_handler:notification:footer:settings' => "%sConfigurez vos paramètres de notifications%s",
+		'html_email_handler:notification:footer:advice' => "Ceci est un mail automatique de notification, inutile d'y répondre directement.",
 
 
 /*
