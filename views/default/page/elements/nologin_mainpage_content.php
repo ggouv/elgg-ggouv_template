@@ -102,6 +102,25 @@ $content .='</ul></div></div>';
 
 $content .= '<div class="signup"><a class="gwfa" href="' . elgg_get_site_url() . 'signup">' . elgg_echo('ggouv:register:wannaplay') . '</a></div>';
 
-$content .='<div id="footer-home"><div class="row-fluid"><div class=" pal width80">A faire. Le footer...</div></div></div>';
+// footer
+$content .='<div id="footer-home"><div class="row-fluid"><div class=" pal width80">';
+
+if (!$url_blog = elgg_get_plugin_setting('blog_of_site', 'elgg-ggouv_template')) $url_blog = '#blog';
+if (!$url_legal_mentions = elgg_get_plugin_setting('legal_mentions', 'elgg-ggouv_template')) $url_legal_mentions = '#legal_mentions';
+if (!$url = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) $url_help = '#help';
+$content .= elgg_view('page/elements/spotlight', array(
+	'title' => elgg_get_site_entity()->name,
+	'items' => array(
+		//'#about' => elgg_echo('ggouv_template:about'),
+		$url_legal_mentions => elgg_echo('ggouv_template:legal_mentions'),
+		//'#conditions' => elgg_echo('ggouv_template:conditions'),
+		//'#privacy' => elgg_echo('ggouv_template:privacy'),
+		//'#assembly' => elgg_echo('ggouv_template:assembly'),
+		$url_blog => elgg_echo('ggouv_template:blog'),
+		$url_help => elgg_echo('ggouv_template:dev:wiki_of_help'),
+	),
+));
+
+$content .= '</div></div></div>';
 
 echo $content;

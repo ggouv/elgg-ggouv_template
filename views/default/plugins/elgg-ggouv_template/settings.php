@@ -15,13 +15,6 @@ $markdown_wiki_page_for_home_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin',
 ));
 
-$blog_of_site_string = elgg_echo('ggouv_template:blog_of_site');
-$blog_of_site_view = elgg_view('input/text', array(
-	'name' => 'params[blog_of_site]',
-	'value' => $vars['entity']->blog_of_site,
-	'class' => 'elgg-input-thin',
-));
-
 $slideshow_home_string = elgg_echo('ggouv_template:slideshow_home');
 $slideshow_home_view = elgg_view('input/text', array(
 	'name' => 'params[slideshow_home]',
@@ -80,7 +73,20 @@ $bugs_of_dev_view = elgg_view('input/text', array(
 	'class' => 'elgg-input-thin',
 ));
 
+// other
+$blog_of_site_string = elgg_echo('ggouv_template:blog_of_site');
+$blog_of_site_view = elgg_view('input/text', array(
+	'name' => 'params[blog_of_site]',
+	'value' => $vars['entity']->blog_of_site,
+	'class' => 'elgg-input-thin',
+));
 
+$legal_mentions_string = elgg_echo('ggouv_template:legal_mentions');
+$legal_mentions_view = elgg_view('input/text', array(
+	'name' => 'params[legal_mentions]',
+	'value' => $vars['entity']->legal_mentions,
+	'class' => 'elgg-input-thin',
+));
 
 $bot_string = elgg_echo('ggouv_template:bot_string');
 $bot_view = elgg_view('input/text', array(
@@ -107,8 +113,6 @@ echo <<<__HTML
 <br />
 <div><label>$markdown_wiki_page_for_home_string</label><br />$markdown_wiki_page_for_home_view</div>
 <br />
-<div><label>$blog_of_site_string</label><br />$blog_of_site_view</div>
-<br />
 <div><label>$slideshow_home_string</label><br />$slideshow_home_view</div>
 <br />
 <div><label>$objectives_home_string</label><br />$objectives_home_view</div>
@@ -126,6 +130,10 @@ echo <<<__HTML
 <div><label>$ideas_of_dev_string</label><br />$ideas_of_dev_view</div>
 <br />
 <div><label>$bugs_of_dev_string</label><br />$bugs_of_dev_view</div>
+<br />
+<div><label>$blog_of_site_string</label><br />$blog_of_site_view</div>
+<br />
+<div><label>$legal_mentions_string</label><br />$legal_mentions_view</div>
 <br />
 <hr>
 <br />

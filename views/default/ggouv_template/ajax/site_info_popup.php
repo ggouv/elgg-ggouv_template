@@ -13,14 +13,16 @@ echo '<div class="spotlight clearfloat row">';
 echo '<div class="spotlight-column span3">';
 
 if (!$url_blog = elgg_get_plugin_setting('blog_of_site', 'elgg-ggouv_template')) $url_blog = '#blog';
+if (!$url_legal_mentions = elgg_get_plugin_setting('legal_mentions', 'elgg-ggouv_template')) $url_legal_mentions = '#legal_mentions';
 echo elgg_view('page/elements/spotlight', array(
 	'title' => elgg_get_site_entity()->name,
 	'items' => array(
 		'/?home=true' => elgg_echo('ggouv_template:home'),
 		'#about' => elgg_echo('ggouv_template:about'),
-		'#conditions' => elgg_echo('ggouv_template:conditions'),
-		'#privacy' => elgg_echo('ggouv_template:privacy'),
-		'#assembly' => elgg_echo('ggouv_template:assembly'),
+		$url_legal_mentions => elgg_echo('ggouv_template:legal_mentions'),
+		//'#conditions' => elgg_echo('ggouv_template:conditions'),
+		//'#privacy' => elgg_echo('ggouv_template:privacy'),
+		//'#assembly' => elgg_echo('ggouv_template:assembly'),
 		$url_blog => elgg_echo('ggouv_template:blog'),
 	),
 ));

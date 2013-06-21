@@ -329,6 +329,13 @@
 	margin-bottom: -20px;
 	padding: 150px 0;
 }
+#footer-home h2 {
+
+}
+#footer-home li {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
 @media (max-width: 1599px) {
 	.homepage .markdown-body {
 		font-size: 10px;
