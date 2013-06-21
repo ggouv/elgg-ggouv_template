@@ -39,7 +39,7 @@
 			}
 			#notification_header td {
 				background: #DEDEDE;
-				padding: 4px 0 7px 10px;
+				padding: 7px 0 4px 10px;
 			}
 			#notification_header a {
 				text-decoration: none;
@@ -64,6 +64,7 @@
 				background: #DEDEDE;
 				padding: 10px;
 				text-align: right;
+				font-size: 0.85em;
 			}
 			.clearfloat {
 				clear:both;
@@ -79,7 +80,7 @@
 		<table id="notification_container" cellspacing="0" cellpadding="0" width="600px">
 			<tr id="notification_header">
 				<td>
-					<img height="24px" width="24px" style="vertical-align:sub;margin-right: 5px;" src="<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/favicon/favicon.png';?>">
+					<img height="24px" width="24px" style="vertical-align:text-bottom;margin-right: 5px;" src="<?php echo elgg_get_site_url() . 'mod/elgg-ggouv_template/graphics/favicon/favicon.png';?>">
 					<?php
 						$site_url = elgg_view("output/url", array("href" => elgg_get_site_url(), "text" => elgg_get_site_entity()->name));
 						echo $site_url;
