@@ -199,7 +199,7 @@
 	color: #0054A7;
 	font-size: 1.5em;
 }
-.homepage .elgg-page-body a[href*="/wiki/"] {
+#section3 a[href*="/wiki/"] {
 	background: #E4ECF5;
 	padding: 0 7px;
 	border-radius: 5px;
@@ -207,12 +207,12 @@
 	margin-top: 10px;
 	font-size: 16px;
 }
-.homepage .elgg-page-body a[href*="/wiki/"]:before {
+#section3 a[href*="/wiki/"]:before {
 	font-family: "ggouv";
 	content: "\2192";
 	padding-right: 3px;
 }
-.homepage .elgg-page-body a[href*="/wiki/"]:hover {
+#section3 a[href*="/wiki/"]:hover {
 	background: #4690D6;
 	color: white;
 	text-decoration: none;
