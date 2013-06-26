@@ -83,6 +83,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_action('livecomments/add', "$base/actions/comments/add.php");
 	elgg_register_action('blog/save', "$base/actions/blog/save.php");
 	elgg_register_action('blog/auto_save_revision', "$base/actions/blog/auto_save_revision.php");
+	elgg_register_action('invitefriends/invite', "$base/actions/invite.php");
 	// Register actions for groups
 	elgg_register_action("groups/edit", "$base/actions/groups/edit.php");
 	elgg_register_action("relatedgroups/add", "$base/actions/relatedgroups/add.php");
