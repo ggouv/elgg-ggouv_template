@@ -257,6 +257,7 @@ elgg.ggouv_template.init = function() {
 								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal'],"+
+								"[href*='/split/'],"+
 								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
 			var href = $(this).attr('href');
