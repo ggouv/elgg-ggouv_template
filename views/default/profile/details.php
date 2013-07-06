@@ -70,6 +70,9 @@ if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
 						$twitter = elgg_get_plugin_user_setting('twitter_name', $user->guid, 'twitter_api');
 						if (!$twitter) $twitter = $user->twitter;
 						echo "<a target='_blank' href='http://twitter.com/{$twitter}' rel='me'>{$twitter}</a>";
+					} else if ($shortname == "facebook") {
+						$facebook = elgg_view("output/{$valtype}", array('value' => $user->$shortname));
+						echo "<a target='_blank' href='{$facebook}' rel='me'>{$facebook}</a>";
 					} else if ($shortname == "location") {
 						echo elgg_view('output/url', array(
 							'href' => "groups/profile/{$user->$shortname}",
