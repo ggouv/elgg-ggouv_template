@@ -67,11 +67,12 @@ if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
 				<?php
 					echo '<b>' . elgg_echo("profile:{$shortname}") .'&nbsp;: </b>';
 					if ($shortname == "twitter") {
-						$twitter = elgg_get_plugin_user_setting('twitter_name', $user->guid, 'twitter_api');
-						if (!$twitter) $twitter = $user->twitter;
-						echo "<a target='_blank' href='http://twitter.com/{$twitter}' rel='me'>{$twitter}</a>";
+						$twitter = elgg_view("output/{$valtype}", array('value' => $user->$shortname));
+						if (!filter_var($twitter, FILTER_VALIDATE_URL)) $twitter = 'http://www.twitter.com/'.$twitter;
+						echo "<a target='_blank' href='{$twitter}' rel='me'>{$twitter}</a>";
 					} else if ($shortname == "facebook") {
 						$facebook = elgg_view("output/{$valtype}", array('value' => $user->$shortname));
+						if (!filter_var($facebook, FILTER_VALIDATE_URL)) $facebook = 'http://www.facebook.com/'.$facebook;
 						echo "<a target='_blank' href='{$facebook}' rel='me'>{$facebook}</a>";
 					} else if ($shortname == "location") {
 						echo elgg_view('output/url', array(
