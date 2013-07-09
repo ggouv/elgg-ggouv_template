@@ -259,7 +259,7 @@ $french = array(
 /**
  * Dashboard and widgets
  */
-	'dashboard' => "Tableau de bord",
+	'dashboard' => "Mon tableau de bord",
 	'dashboard:nowidgets' => "Votre tableau de bord vous permet de suivre l'activité et le contenu vous conçernant.",
 	'widgets:add' => "Ajouter des widgets",
 	'widgets:add:description' => "Cliquez sur n'importe quel widget ci-dessous pour l'ajouter à la page.",
@@ -479,7 +479,7 @@ $french = array(
 	'registration:notemail' => "Cette adresse mail n'est pas valide.",
 	'registration:userexists' => "Ce pseudo est déjà utilisé ou invalide.",
 	'registration:username' => "Votre pseudo",
-	'registration:helper:username' => "Le pseudo est le nom qui sera utilisé et visible partout.<br>C'est par ce pseudo que l'on pourra vous adresser un message en écrivant « @ » et votre pseudo.<br>Seul les caractères alphanumérique sont autorisés. Il ne peut pas contenir d'espace ni les caractères suivants : '/\*&?#%^(){}[]~?<>;|¬`@-+=\"",
+	'registration:helper:username' => "Le pseudo est le nom qui sera utilisé et visible partout.<br>C'est par ce pseudo que l'on pourra vous adresser un message en écrivant « @ » et votre pseudo.<br>Seul les caractères alphanumérique sont autorisés. Il ne peut pas contenir d'espace ni les caractères suivants : '/\*&?#%^(){}[]~?<>;|¬`@-+=\"<br><strong>A savoir :</strong> Ggouv permet d'envoyer et recevoir vos flux Twitter. Utilisez votre pseudo Twitter, c'est plus simple !",
 	'registration:usernamenotvalid' => "Désolé, le pseudo que vous avez entré est invalide sur ce site.",
 	'registration:usernametooshort' => "Le pseudo doit faire minimum %u caractères.",
 	'registration:usernametoolong' => "Le pseudo doit faire maximum %u caractères.",
@@ -1973,6 +1973,11 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'my_blog' => "Mon blog",
 
 	/**
+	 * Tour
+	 */
+	'help:start-tour' => "Démarrer la visite guidée",
+
+	/**
 	 * Comment
 	 */
 	'comment:error'  =>  "Erreur, impossible d'enregistrer le commentaire",
@@ -2063,9 +2068,9 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv_template:privacy' => "Confidentialité",
 	'ggouv_template:assembly' => "Assemblée",
 	'ggouv_template:blog' => "Blog",
-	'ggouv_template:dev:group_of_help' => "Groupe d'assistance",
+	'ggouv_template:dev:group_of_help' => "Groupe d'aide",
 	'ggouv_template:dev:wiki_of_help' => "Toute l'aide",
-	'ggouv_template:dev:faq_of_help' => "Foires aux questions",
+	'ggouv_template:dev:faq_of_help' => "Foire aux questions",
 	'ggouv_template:spotlight:contact' => "Contact",
 	'ggouv_template:contact:mail' => "Mail",
 	'ggouv_template:contact:irc' => "Salon IRC",
@@ -2114,18 +2119,18 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	 * First login welcome message + automaticly created list and cards
 	 */
 	'signup:welcomemessage:title' => "Bienvenue sur Ggouv !",
-	'signup:welcomemessage:body' => "Bravo, vous êtes maintenant un gitoyen.<br/>
-	La plateforme viens juste d'ouvrir. C'est encore en béta et des corrections et ajustements seront en cours. Si vous trouvez un bug, quelque chose mal fait ou à arranger, informez l'équipe des développeurs (!dev).<br/>
-	Merci de ne pas communiquer à n'importe qui son existence. Vous serez tenu au courant du lancement officiel (début Mai).<br/>
+	'signup:welcomemessage:body' => "Bravo, vous êtes maintenant un «gitoyen».<br/>
+	Vous avez envie de changer les choses, d'expérimenter de nouvelles manières de s'organiser, vous avez plein d'idées ? Vous êtes au bon endroit.<br/>
+	La plateforme est encore en béta et des corrections et ajustements sont en cours. Si vous trouvez un bug, quelque chose à corriger, informez l'équipe des développeurs.<br/>
 	Amusez-vous bien !
 	",
 	'deck_river:signup:list' => "À faire",
 	'deck_river:signup:card:title:0' => "Lire l'aide",
 	'deck_river:signup:card:description:0' => "L'aide se trouve [ici](%s).  \nSi vous êtes perdu, vous pouvez demander de l'aide à tout moment en écrivant dans le lanceur de message (dans le bandeau bleu horizontal en haut) votre question en mentionnant le groupe !aide. Exemple :  \n> !aide Comment s'inscrire à un groupe ?\n\nQuelqu'un vous répondra dès qu'il aura vu votre question.\n\nVous pouvez aussi [chercher](%s) si votre question n'a pas déjà été posée...",
 	'deck_river:signup:card:title:1' => "Compléter mon profil",
-	'deck_river:signup:card:description:1' => "On a envie d'en savoir un peu plus sur vous !  \nPar soucis de transparence, et si vous voulez que l'on s'intéresse à vous, il est plutôt conseillé de compléter [votre profil](%s).\n\nVous pouvez modifier votre profil [ici](%s).",
-	'deck_river:signup:card:title:2' => "Voter pour les grands objectifs",
-	'deck_river:signup:card:description:2' => "Vous êtes maintenant un «gitoyen» !  \nAfin de déterminer les grands objectifs du réseau, vous pouvez [voter pour les idées](%s) dont vous souhaitez que l'on s'organise pour essayer de les concrétiser ensemble."
+	'deck_river:signup:card:description:1' => "On a envie d'en savoir un peu plus sur vous !  \nPar soucis de transparence, et si vous voulez que l'on s'intéresse à vous, il est plutôt conseillé de compléter [votre profile](%s).\n\nVous pouvez le compléter [ici](%s).",
+	'deck_river:signup:card:title:2' => "Voter pour les objectifs communs",
+	'deck_river:signup:card:description:2' => "Vous êtes maintenant un «gitoyen» !  \nAfin de déterminer les grands objectifs du réseau, vous pouvez [voter pour les idées](%s) dont vous souhaitez que l'on s'organise pour les concrétiser ensemble."
 
 );
 

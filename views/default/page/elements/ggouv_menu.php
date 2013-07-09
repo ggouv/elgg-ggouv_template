@@ -12,9 +12,20 @@ if ($user) {
 
 	// profil icon for dashboard
 	$icon_url = $user->getIconURL('small');
-	$title = elgg_echo('dashboard');
-	echo	'<li class="elgg-menu-item-dashboard">' .
-				"<a href='{$site_url}dashboard'><img class='tooltip w' src='$icon_url' alt='$user->name' title='$title' /></a>" .
+	echo	'<li class="elgg-menu-item-dashboard ggouv-menu-parent">' .
+				"<a href=''><img src='$icon_url' alt='$user->name' /></a>" .
+				'<ul class="ggouv-menu-child">' .
+					'<ul class="ggouv-menu-child-shadow">' .
+							'<li><a href="' . $site_url . 'dashboard">' . elgg_echo('dashboard') . '</a></li>' .
+							'<div class="underlined"></div>' .
+							'<li><a href="' . $site_url . 'blog/owner/' . $user->username . '">' . elgg_echo('my_blog') . '</a></li>' .
+							'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
+							'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
+							'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .
+							'<li><a href="' . $site_url . 'brainstorm/owner/' . $user->username . '">' . elgg_echo('my_ideas') . '</a></li>' .
+							'<li><a href="' . $site_url . 'answers/owner/' . $user->username . '">' . elgg_echo('answers:your') . '</a></li>' .
+					'</ul>' .
+				'</ul>' .
 			'</li>';
 
 	// @ for user profile, friends, collections, search user(@todo)...
@@ -110,7 +121,7 @@ if ($user) {
 			'<a class="t" href="#">&#44044;</a>' . // unicode AC0C
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
-						'<li><a href="' . $site_url . 'blog/owner/' . $user->username . '">' . elgg_echo('my_blog') . '</a></li>' .
+						'<li><a href="' . $site_url . 'split/">' . elgg_echo('my_blog') . '</a></li>' .
 						'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
 						'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
 						'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .
@@ -147,15 +158,19 @@ if ($user) {
 	}
 
 	// help
-	if ($url = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) {
-		$help = elgg_view('output/url', array(
-			'href' => $url,
-			'text' => 'H',
-			'class' => 'tooltip w t',
-			'title' => elgg_echo('help')
-		));
-		echo '<li class="elgg-menu-item-help gwf scale">' .
-			$help .
+	if ($url_help_group = elgg_get_plugin_setting('group_of_help', 'elgg-ggouv_template')) {
+		$url_help_wiki = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template');
+		$url_help_faq = elgg_get_plugin_setting('faq_of_help', 'elgg-ggouv_template');
+		echo '<li class="elgg-menu-item-help gwf ggouv-menu-parent scale">' .
+			'<a class="t" href="#">H</a>' . // unicode AC0C
+			'<ul class="ggouv-menu-child">' .
+				'<ul class="ggouv-menu-child-shadow">' .
+						'<li><a href="' . $url_help_wiki . '">' . elgg_echo('ggouv_template:dev:wiki_of_help') . '</a></li>' .
+						'<li><a href="#" class="start-tour">' . elgg_echo('help:start-tour') . '</a></li>' .
+						'<li><a class="help-faq-link" href="' . $url_help_faq . '">' . elgg_echo('ggouv_template:dev:faq_of_help') . '</a></li>' .
+						'<li><a class="help-group-link" href="' . $url_help_group . '">' . elgg_echo('ggouv_template:dev:group_of_help') . '</a></li>' .
+				'</ul>' .
+			'</ul>' .
 		'</li>';
 	}
 

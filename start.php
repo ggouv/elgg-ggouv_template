@@ -32,6 +32,7 @@ function elgg_ggouv_template_init() {
 	elgg_register_ajax_view('ggouv_template/ajax/get_city');
 	elgg_register_ajax_view('ggouv_template/ajax/form_validation');
 	elgg_register_ajax_view('ggouv_template/ajax/site_info_popup');
+	elgg_register_ajax_view('ggouv_template/ajax/tour');
 
 	// Want it everywhere
 	elgg_load_js('jquery.scrollTo');
@@ -1187,7 +1188,10 @@ function ggouv_login_user_event($event, $type, $user) {
 		// show welcome super-popup
 		ggouv_super_popup(array(
 			'title' => elgg_echo('signup:welcomemessage:title'),
-			'body' => deck_river_wire_filter(elgg_echo('signup:welcomemessage:body'))
+			'body' => deck_river_wire_filter(elgg_echo('signup:welcomemessage:body')),
+			'ok' => elgg_echo('help:start-tour'),
+			'okCallback' => "ggouv.super_popup.deactivate();$('.elgg-menu-item-help .start-tour').click();",
+			'cancel' => elgg_echo('help:no-start-tour')
 		));
 
 		// add user to his local group and add columns of this group

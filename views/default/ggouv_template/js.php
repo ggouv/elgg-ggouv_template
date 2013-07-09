@@ -2,13 +2,15 @@
 // js for ggouv template
 elgg.provide('elgg.ggouv_template');
 
+// Loaded for the first time only
 elgg.ggouv_template.init = function() {
 
-	// hide developers-log when empty
-	if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
-
+	// we wait everything is loaded
 	$(document).ready(function() {
 		elgg.ggouv_template.reload();
+
+		// hide developers-log when empty
+		if ( $('.developers-log').html() == '' ) $('.developers-log').hide();
 
 		// Tooltip
 		$('.tooltip').tipsy({
@@ -21,14 +23,15 @@ elgg.ggouv_template.init = function() {
 			html: true,
 			delayIn: 500,
 			gravity: function() {
-				if ($(this).hasClass('nw')) return 'nw';
-				if ($(this).hasClass('n')) return 'n';
-				if ($(this).hasClass('ne')) return 'ne';
-				if ($(this).hasClass('w')) return 'w';
-				if ($(this).hasClass('e')) return 'e';
-				if ($(this).hasClass('sw')) return 'sw';
-				if ($(this).hasClass('s')) return 's';
-				if ($(this).hasClass('se')) return 'se';
+				var t = $(this);
+				if (t.hasClass('nw')) return 'nw';
+				if (t.hasClass('n')) return 'n';
+				if (t.hasClass('ne')) return 'ne';
+				if (t.hasClass('w')) return 'w';
+				if (t.hasClass('e')) return 'e';
+				if (t.hasClass('sw')) return 'sw';
+				if (t.hasClass('s')) return 's';
+				if (t.hasClass('se')) return 'se';
 				return 'n';
 			}
 		});
@@ -103,6 +106,20 @@ elgg.ggouv_template.init = function() {
 		var data = data || false,
 			fragment = data.fragment || false;
 
+		// if user go back to the deck-river and river is stashed, we show it and skip elgg.post
+		if (url.match(/\/activity/) && $('#stash').length) {
+			$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
+			$('#stash').remove();
+			$('body').attr('class', 'fixed-deck');
+			var drl = $('#deck-river-lists');
+			drl.scrollLeft(drl.data('scrollBkp'));
+			$.each(drl.find('.elgg-river'), function(i, e) {
+				$(e).scrollTop($(e).data('scrollBkp'));
+			});
+			if (data.callback) data.callback();
+			return true;
+		}
+
 		$('body').addClass('ajaxLoading');
 
 		if (data.dataForm) {
@@ -129,7 +146,7 @@ elgg.ggouv_template.init = function() {
 						 * If it's not an action, response doesn't got a forward_url
 						 * note: when server is down > Object { readyState=0, status=0, statusText="error"}
 						*/
-							forward_url = elgg.normalize_url(decodeURIComponent(jsonResponse.forward_url));
+						forward_url = elgg.normalize_url(decodeURIComponent(jsonResponse.forward_url));
 
 						if (urlPath.match('/action/groups/featured') || urlPath.match('/action/groups/leave')) {
 							History.replaceState(data, null, data.origin);
@@ -211,6 +228,8 @@ elgg.ggouv_template.init = function() {
 					}
 					$('body').removeClass('ajaxLoading');
 
+					if (data.callback) data.callback();
+
 				} catch (err) { // So this is a page
 					console.log(err);
 				}
@@ -257,7 +276,7 @@ elgg.ggouv_template.init = function() {
 								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal'],"+
-								"[href*='/split/'],"+
+								"[href*='"+elgg.get_site_url()+"split'],"+
 								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
 			var href = $(this).attr('href');
@@ -457,22 +476,7 @@ elgg.ggouv_template.init = function() {
 
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState();
-
-			if (State) {
-				if (State.url.match(/\/activity/) && $('#stash').length) {
-					$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
-					$('#stash').remove();
-					$('body').attr('class', 'fixed-deck');
-					var drl = $('#deck-river-lists');
-					drl.scrollLeft(drl.data('scrollBkp'));
-					$.each(drl.find('.elgg-river'), function(i, e) {
-						$(e).scrollTop($(e).data('scrollBkp'));
-					});
-					return true;
-				}
-
-				parsePage(State.url, State.data);
-			}
+			if (State) parsePage(State.url, State.data);
 		});
 	}
 
@@ -543,7 +547,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 
 elgg.ggouv_template.reload = function() {
 
-	if ($('#section1').length) { // this is homepage
+	if ($('#section1').length) { // this is homepage @todo find another way to check if it's homepage. Because someone can write a blog or wiki page with title section1 for example
 		$('body').addClass('homepage');
 		$("#slideshow").removeClass('hidden').responsiveSlides({ // hidden class to prevent ugly effect
 			nav: true,
@@ -1231,25 +1235,40 @@ ggouv.super_popup.create = function(options) {
 					title: null,
 					close: true,
 					body: null,
+					createdCallback: $.noop,
+					activeCallback: $.noop,
+					destroyCallback: $.noop,
 					ok: 'OK',
 					okCallback: function(){ggouv.super_popup.deactivate()},
-					cancel: false
-				}, options);
+					cancel: false,
+					cancelCallback: function(){ggouv.super_popup.deactivate()},
+				}, options),
+		execFunction = function(func) {
+			if (typeof(func) === 'string') {
+				console.log(func);
+				eval(func);
+			} else {
+				func();
+			}
+		};
 
 	if (options.cancel === true) options.cancel = elgg.echo('cancel');
 
 	$('.elgg-page').prepend(superPopupTemplate(options));
+	execFunction(options.createdCallback);
+
 	$('#super-popup').find('.elgg-icon-delete-alt, .elgg-button-cancel').click(function() {
-		ggouv.super_popup.deactivate();
+		execFunction(options.cancelCallback);
 	});
 	$('#super-popup').find('.elgg-button-submit').click(function() {
-		options.okCallback();
+		execFunction(options.okCallback);
+	});
+	$(window).keyup(function(e) {
+		if ( e.keyCode === 27 && options.close) execFunction(options.cancelCallback); // esc key
 	});
 
 	$('html').addClass('super-popup-active');
-	$(window).keyup(function(e) {
-		if ( e.keyCode === 27 && options.close) ggouv.super_popup.deactivate();
-	});
+	execFunction(options.activeCallback);
 };
 
 
@@ -1259,6 +1278,7 @@ ggouv.super_popup.create = function(options) {
 ggouv.super_popup.deactivate = function() {
 	$('html').removeClass('super-popup-active');
 	$('#super-popup').remove();
+	setTimeout(function() {elgg.deck_river.SetColumnsHeight();},500);
 };
 
 
@@ -1320,6 +1340,95 @@ ggouv.super_popup.deactivate = function() {
 
 })(jQuery);*/
 
+
+
+// tour
+$('.start-tour').live('click', function() {
+	var origin = elgg.normalize_url(decodeURIComponent(window.location.href)),
+		EndTour = function() {
+			$("#GgouvTour").joyride('destroy');
+			$(document).off('click.joyride', '.joyride-next-tip, .joyride-modal-bg');
+			$('.elgg-page-topbar .hover').click().add('#TourMenu').removeClass('hover'); // click close wire form
+		},
+		startTour = function(tipID) {
+
+		$('#endTour').die().live('click', function() {
+			EndTour();
+			$('#TourMenu').fadeOut();
+		});
+		$('#endTourAndReturn').die().live('click', function() {
+			History.pushState({origin: null}, null, origin.split("#")[0]);
+			EndTour();
+			$('#TourMenu').fadeOut();
+		});
+
+		if (tipID != 0) $('#TourMenu').removeClass('hover');
+		$('#TourMenu').fadeIn();
+		$("#GgouvTour").joyride({
+			autoStart : true,
+			startOffset: tipID,
+			prevButton: true,
+			template: { // HTML segments for tip layout
+				'link'    : '<a href="#close" class="joyride-close-tip gwf">x</a>',
+				'timer'   : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
+				'button'  : '<a href="#" class="joyride-next-tip"></a>',
+			},
+			preStepCallback : function (index, tip) {
+				eval(tip.find('.preStep').text());
+			},
+			inStepCallback: function (index, tip) {
+				eval(tip.find('.inStep').text());
+			},
+			postStepCallback : function (index, tip) {
+				$('#TourMenu').removeClass('hover');
+				eval(tip.find('.postStep').text());
+			},
+			postRideCallback: function() {
+				EndTour();
+				$('#TourMenu').fadeOut();
+				//History.pushState({origin: null}, null, origin.split("#")[0]);
+			}
+		});
+			//}
+
+/*		// check if we are already in activity page
+		if (elgg.isNull(elgg.parse_url(origin).path.match(/activity$/))) {
+			parsePage(elgg.get_site_url()+'activity', {
+				origin: origin,
+				callback: function() {
+					startJoyride();
+				}
+			});
+		} else {
+			startJoyride();
+		}*/
+	};
+
+	// check if joyride js is already loaded
+	if (true || typeof $.fn.joyride != 'function') {
+		$('#TourMenu, #GgouvTour').remove();
+		elgg.post('ajax/view/ggouv_template/ajax/tour/', {
+			success: function(response) {
+				$('body').append(response);
+				$('#TourMenu li').live('click', function() {
+					EndTour();
+					startTour($(this).data('tip'));
+				});
+				$.getScript(elgg.get_site_url()+'mod/elgg-ggouv_template/vendors/joyride/jquery.joyride-2.1.js', function() {
+					startTour(0);
+				});
+
+			}
+		});
+	} else {
+		$('#TourMenu').addClass('hover');
+		startTour(0);
+	}
+});
+
+
+
+
 /* French initialisation for the jQuery UI date picker plugin. */
 /* Written by Keith Wood (kbwood{at}iinet.com.au) and Stéphane Nahmani (sholby@sholby.net). */
 jQuery(function($){
@@ -1328,10 +1437,8 @@ jQuery(function($){
 		prevText: '&#x3c;Préc',
 		nextText: 'Suiv&#x3e;',
 		currentText: 'Courant',
-		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
-		'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-		'Jul','Aoû','Sep','Oct','Nov','Déc'],
+		monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+		monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
 		dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 		dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
 		dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],

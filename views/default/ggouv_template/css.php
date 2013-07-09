@@ -527,39 +527,39 @@
 	text-shadow: -0.1em 0 0.03em #0f0;
 	float: left;
 }
-.elgg-menu-item-logo > a:before, .elgg-menu-item-logo > a:after {
+.elgg-menu-item-logo a:before, .elgg-menu-item-logo a:after {
 	position: absolute;
 	content: '∇';
 }
-.elgg-menu-item-logo > a:before {
+.elgg-menu-item-logo a:before {
 	text-shadow:  0.03em 0 0.03em #f00;
 	left: 5px;
 }
-.elgg-menu-item-logo > a:after {
+.elgg-menu-item-logo a:after {
 	top: 16px;
 	left: 4px;
 	text-shadow: 0 0 0.02em #fff;
 }
-.elgg-menu-item-logo > a:hover {
+.elgg-menu-item-logo a:hover, .elgg-menu-item-logo.hover a {
 	text-decoration: none;
 	color: transparent;
 	text-shadow:   -0.1em 0 4px #0f0,
-                   -0.1em 0 7px #0f0,
-                   -0.1em 0 8px #0f0,
-                   -0.1em 0 10px #0f0,
-                   -0.1em 0 15px #0f0;
+				   -0.1em 0 7px #0f0,
+				   -0.1em 0 8px #0f0,
+				   -0.1em 0 10px #0f0,
+				   -0.1em 0 15px #0f0;
 }
-.elgg-menu-item-logo > a:hover:before {
+.elgg-menu-item-logo a:hover:before, .elgg-menu-item-logo.hover a:before {
 	text-shadow:   0.03em 0 4px #f00,
-                   0.03em 0 7px #f00,
-                   0.03em 0 8px #f00,
-                   0.03em 0 10px #f00,
-                   0.03em 0 15px #f00;
+				   0.03em 0 7px #f00,
+				   0.03em 0 8px #f00,
+				   0.03em 0 10px #f00,
+				   0.03em 0 15px #f00;
 }
-.elgg-menu-item-logo > a:hover:after {
+.elgg-menu-item-logo a:hover:after, .elgg-menu-item-logo.hover a:after {
 	text-shadow:   0 0 1px #fff,
-                   0 0 2px #fff,
-                   0 0 3px #fff;
+				   0 0 2px #fff,
+				   0 0 3px #fff;
 }
 .ajaxLoading .elgg-menu-item-logo {
 	background: url(<?php echo elgg_get_site_url(); ?>/mod/elgg-ggouv_template/graphics/loaders/loader_white_black.gif) no-repeat scroll 5px 8px transparent;
@@ -571,11 +571,11 @@
 	-ms-transform: scale(0);
 	transform: scale(0);
 }
-.gwf.scale:hover > a {
+.gwf.scale:hover > a, .gwf.scale.hover > a {
 	color: #4690D6;
 	font-size: 70px;
 }
-.gwf.rotate:hover > a {
+.gwf.rotate:hover > a, .gwf.rotate.hover > a {
 	transform: rotate(-10deg);
 	-moz-transform: rotate(-10deg);
 	-webkit-transform: rotate(-10deg);
@@ -659,13 +659,14 @@
 	background-color: #1F2E3D;
 	margin: 10px 10px 10px 0;
 }
+
 .elgg-menu-item-groups .ggouv-menu-child-shadow {
 
 }
 .elgg-menu-item-groups table ul ul {
 	height: 100%;
 }
-.ggouv-menu-parent:hover .ggouv-menu-child {
+.ggouv-menu-parent:hover .ggouv-menu-child, .ggouv-menu-parent.hover .ggouv-menu-child {
 	display: inline;
 }
 .ggouv-menu-child li {
@@ -693,6 +694,11 @@
 }
 .ggouv-menu-child .block-title {
 	color: #CCC;
+}
+.ggouv-menu-child .underlined {
+	background: #CCCCCC;
+	margin: 5px 0;
+	height: 2px;
 }
 .ggouv-menu-child .hr {
 	border-right: 2px solid #CCCCCC;
@@ -868,6 +874,20 @@ h2.markdown-wiki-create .elgg-button-action {
 .elgg-menu-entity .elgg-menu-item-history a:hover:before, .elgg-menu-entity .elgg-menu-item-discussion a:hover:before {
 	color: #4690D6;
 }
+kbd {
+	background-color: #F9F9F9;
+	background-image: -moz-linear-gradient(center top , #EEEEEE, #F9F9F9, #EEEEEE);
+	border: 1px solid #AAAAAA;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+	font-family: monospace;
+	font-size: 0.85em;
+	padding: 1px 3px;
+	white-space: nowrap;
+	font-weight: normal;
+	color: #333;
+}
+
 
 
 /*
@@ -1320,3 +1340,311 @@ body, #super-popup {
   width: 100%;
   border: 0;
   }
+
+
+
+/*
+ * Joyride : tour de présentation du site
+ */
+
+/* added for ggouv */
+#TourMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  color: #fff;
+}
+#TourMenu > div {
+  background: #1F2E3D;
+  font-size: 2em;
+  padding: 15px 20px 13px;
+  font-weight: bold;
+  float: right;
+  height: 20px;
+}
+#TourMenu:hover ul, #TourMenu.hover ul {
+  display: block;
+}
+#TourMenu ul {
+  background: #1F2E3D;
+	 -moz-border-radius: 0 0 0 4px;
+  -webkit-border-radius: 0 0 0 4px;
+		  border-radius: 0 0 0 4px;
+  margin-top: 48px;
+  position: relative;
+  overflow: visible;
+}
+#TourMenu li {
+  font-size: 1.5em;
+}
+#endTourAndReturn {
+  border-left: 1px solid #CCC;
+}
+
+/* Artfully masterminded by ZURB */
+body {
+  position: relative;
+}
+
+#joyRideTipContent { display: none; }
+
+.joyRideTipContent { display: none; }
+
+/* Default styles for the container */
+.joyride-tip-guide {
+  position: absolute;
+  background: rgba(18, 28, 39, 0.9);
+  display: none;
+  color: #fff;
+  width: 300px;
+  z-index: 101;
+  top: 0; /* keeps the page from scrolling when calculating position */
+  left: 0;
+  font-weight: normal;
+	 -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+		  border-radius: 4px;
+}
+.joyride-tip-guide.big {
+  width: 500px;
+}
+
+.joyride-content-wrapper {
+  padding: 10px 10px 18px 15px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+  .joyride-tip-guide {
+	width: 95% !important;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	left: 2.5% !important;
+  }
+  .joyride-tip-guide-wrapper {
+	width: 100%;
+  }
+}
+
+
+/* Add a little css triangle pip, older browser just miss out on the fanciness of it */
+.joyride-tip-guide span.joyride-nub {
+  display: block;
+  position: absolute;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border: solid 14px;
+  border: solid 14px;
+}
+
+.joyride-tip-guide span.joyride-nub.top {
+  /*
+  IE7/IE8 Don't support rgba so we set the fallback
+  border color here. However, IE7/IE8 are also buggy
+  in that the fallback color doesn't work for
+  border-bottom-color so here we set the border-color
+  and override the top,left,right colors below.
+  */
+  border-color: #000;
+  border-color: rgba(18, 28, 39, 0.9);
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  top: -28px;
+  bottom: none;
+}
+
+.joyride-tip-guide span.joyride-nub.bottom {
+  /*
+  IE7/IE8 Don't support rgba so we set the fallback
+  border color here. However, IE7/IE8 are also buggy
+  in that the fallback color doesn't work for
+  border-top-color so here we set the border-color
+  and override the bottom,left,right colors below.
+  */
+  border-color: #000;
+  border-color: rgba(18, 28, 39, 0.9) !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  bottom: -28px;
+  bottom: none;
+}
+
+.joyride-tip-guide span.joyride-nub.right {
+  border-color: #000;
+  border-color: rgba(18, 28, 39, 0.9) !important;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  top: 12px;
+  bottom: none;
+  left: auto;
+  right: -28px;
+}
+
+.joyride-tip-guide span.joyride-nub.left {
+  border-color: #000;
+  border-color: rgba(18, 28, 39, 0.9) !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-bottom-color: transparent !important;
+  top: 12px;
+  left: -28px;
+  right: auto;
+  bottom: none;
+}
+
+.joyride-tip-guide span.joyride-nub.top-right {
+  border-color: #000;
+  border-color: rgba(18, 28, 39, 0.9);
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  top: -28px;
+  bottom: none;
+  left: auto;
+  right: 28px;
+}
+
+/* Typography */
+.joyride-tip-guide h1,.joyride-tip-guide h2,.joyride-tip-guide h3,.joyride-tip-guide h4,.joyride-tip-guide h5,.joyride-tip-guide h6 {
+  line-height: 1.25;
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+  padding-bottom: 15px;
+}
+.joyride-tip-guide h1 { font-size: 30px; }
+.joyride-tip-guide h2 { font-size: 26px; }
+.joyride-tip-guide h3 { font-size: 22px; }
+.joyride-tip-guide h4 { font-size: 18px; }
+.joyride-tip-guide h5 { font-size: 16px; }
+.joyride-tip-guide h6 { font-size: 14px; }
+.joyride-tip-guide p {
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 25px;
+}
+.joyride-tip-guide a {
+  color: rgb(255,255,255);
+  text-decoration: none;
+  border-bottom: dotted 1px rgba(255,255,255,0.6);
+}
+.joyride-tip-guide a:hover {
+  color: rgba(255,255,255,0.8);
+  border-bottom: none;
+}
+
+/* Button Style */
+.joyride-tip-guide .joyride-next-tip {
+  width: auto;
+  padding: 6px 18px 4px;
+  font-size: 13px;
+  text-decoration: none;
+  color: rgb(255,255,255);
+  border: solid 1px rgb(0,60,180);
+  background: rgb(100, 173, 229);
+  background: -moz-linear-gradient(top, rgb(100, 173, 229) 0%, rgb(0,85,214) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(100, 173, 229)), color-stop(100%,rgb(0,85,214)));
+  background: -webkit-linear-gradient(top, rgb(100, 173, 229) 0%,rgb(0,85,214) 100%);
+  background: -o-linear-gradient(top, rgb(100, 173, 229) 0%,rgb(0,85,214) 100%);
+  background: -ms-linear-gradient(top, rgb(100, 173, 229) 0%,rgb(0,85,214) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0063ff', endColorstr='#0055d6',GradientType=0 );
+  background: linear-gradient(top, rgb(100, 173, 229) 0%,rgb(0,85,214) 100%);
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  -webkit-border-radius: 2px;
+	 -moz-border-radius: 2px;
+		  border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
+	 -moz-box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
+		  box-shadow: 0px 1px 0px rgba(255,255,255,0.3) inset;
+}
+
+.joyride-next-tip:before {
+  font-family: ggouv;
+  content: "→";
+  font-size: 30px;
+  vertical-align: -7px;
+  margin: 0 5px 0 -10px;
+}
+
+.joyride-next-tip:hover {
+  color: rgb(255,255,255) !important;
+  border: solid 1px rgb(0,60,180) !important;
+  background: rgb(43,128,255);
+  background: -moz-linear-gradient(top, rgb(43,128,255) 0%, rgb(29,102,211) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(43,128,255)), color-stop(100%,rgb(29,102,211)));
+  background: -webkit-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
+  background: -o-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
+  background: -ms-linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2b80ff', endColorstr='#1d66d3',GradientType=0 );
+  background: linear-gradient(top, rgb(43,128,255) 0%,rgb(29,102,211) 100%);
+}
+
+.joyride-timer-indicator-wrap {
+  width: 50px;
+  height: 3px;
+  border: solid 1px rgba(255,255,255,0.1);
+  position: absolute;
+  right: 17px;
+  bottom: 16px;
+}
+.joyride-timer-indicator {
+  display: block;
+  width: 0;
+  height: inherit;
+  background: rgba(255,255,255,0.25);
+}
+
+.joyride-close-tip {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  color: rgba(255,255,255,0.4) !important;
+  text-decoration: none;
+  font-size: 40px;
+  border-bottom: none !important;
+}
+
+.joyride-close-tip:hover {
+  color: rgba(255,255,255,0.9) !important;
+}
+
+.joyride-modal-bg {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgb(0,0,0);
+  background: transparent;
+  background: rgba(0,0,0, 0.5);
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  z-index: 100;
+  display: none;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.joyride-expose-wrapper {
+	background-color: #ffffff;
+	position: absolute;
+	z-index: 102;
+	-moz-box-shadow: 0px 0px 30px #ffffff;
+	-webkit-box-shadow: 0px 0px 30px #ffffff;
+	box-shadow: 0px 0px 30px #ffffff;
+}
+
+.joyride-expose-cover {
+	background: transparent;
+	position: absolute;
+	z-index: 10000;
+	top: 0px;
+	left: 0px;
+}
+
