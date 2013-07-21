@@ -131,6 +131,7 @@ elgg.ggouv_template.init = function() {
 			$.each(drl.find('.elgg-river'), function(i, e) {
 				$(e).scrollTop($(e).attr('data-scrollBkp'));
 			});
+			elgg.friendly_time.update();
 			if (data.callback) data.callback();
 			return true;
 		}
