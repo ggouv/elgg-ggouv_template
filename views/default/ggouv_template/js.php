@@ -4,6 +4,7 @@ elgg.provide('elgg.ggouv_template');
 
 // Loaded for the first time only
 elgg.ggouv_template.init = function() {
+	var stashedDeck = {};
 
 	// we wait everything is loaded
 	$(document).ready(function() {
@@ -104,17 +105,31 @@ elgg.ggouv_template.init = function() {
 	 */
 	parsePage = function(url, data) {
 		var data = data || false,
-			fragment = data.fragment || false;
+			fragment = data.fragment || false
+			activityTab = url.match(elgg.get_site_url() +'activity(.*)'),
+			stashDeck = function() { // stash deck river before change elgg-page-body
+				if ($('body').hasClass('fixed-deck')) {
+					var deckOrigin = data.origin.replace(/#$/, ''),
+						drl = $('#deck-river-lists');
+
+					$('.elgg-menu-item-logo a').attr('href', deckOrigin);
+					drl.attr('data-scrollBkp', drl.scrollLeft()); // store horizontal deck scroll
+					$.each(drl.find('.elgg-river'), function(i, e) {
+						$(e).attr('data-scrollBkp', e.scrollTop); // store all columns scroll
+					});
+					stashedDeck[deckOrigin.match(elgg.get_site_url() +'activity(.*)')[1]] = $('.elgg-page-body').contents();
+				}
+			};
 
 		// if user go back to the deck-river and river is stashed, we show it and skip elgg.post
-		if (url.match(/\/activity/) && $('#stash').length) {
-			$('.elgg-page-body > .elgg-inner').html('').append($('#stash .elgg-layout'));
-			$('#stash').remove();
+		if (activityTab && stashedDeck[activityTab[1]]) {
+			stashDeck();
+			$('.elgg-page-body').html(stashedDeck[activityTab[1]]);
 			$('body').attr('class', 'fixed-deck');
 			var drl = $('#deck-river-lists');
-			drl.scrollLeft(drl.data('scrollBkp'));
+			drl.scrollLeft(drl.attr('data-scrollBkp'));
 			$.each(drl.find('.elgg-river'), function(i, e) {
-				$(e).scrollTop($(e).data('scrollBkp'));
+				$(e).scrollTop($(e).attr('data-scrollBkp'));
 			});
 			if (data.callback) data.callback();
 			return true;
@@ -201,19 +216,7 @@ elgg.ggouv_template.init = function() {
 
 						} else {
 
-							// stash deck river before change elgg-page-body
-							if ($('body').hasClass('fixed-deck') && !$('#stash').length && !url.match(elgg.get_site_url() +'activity')) {
-								$('.elgg-menu-item-logo a').attr('href', data.origin.replace(/#$/, ''));
-								var drl = $('#deck-river-lists');
-								drl.data('scrollBkp', drl.scrollLeft()); // store horizontal deck scroll
-								$.each(drl.find('.elgg-river'), function(i, e) {
-									$(e).data('scrollBkp', e.scrollTop); // store all columns scroll
-								});
-								$('.elgg-page-body > .elgg-inner').appendTo('body').wrapAll('<div id="stash" class="hidden" />');
-							} else if (url.match(/\/activity/)) { // a tab in activity
-								$('.elgg-menu-item-logo a').attr('href', elgg.get_site_url() + 'activity');
-							}
-
+							stashDeck();
 							$('.elgg-page-body').html(respBody);
 
 						}
