@@ -132,6 +132,8 @@ elgg.ggouv_template.init = function() {
 				$(e).scrollTop($(e).attr('data-scrollBkp'));
 			});
 			elgg.friendly_time.update();
+			elgg.deck_river.SetColumnsHeight();
+			elgg.deck_river.SetColumnsWidth();
 			if (data.callback) data.callback();
 			return true;
 		}
