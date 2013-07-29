@@ -282,8 +282,8 @@ elgg.ggouv_template.init = function() {
 								"[href*='/action/widgets/delete'],"+
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal'],"+
-								"[href*='"+elgg.get_site_url()+"split'],"+
-								"[class*='"+elgg.get_site_url()+"tour'],"+
+								"[href^='"+elgg.get_site_url()+"split'],"+
+								"[href^='"+elgg.get_site_url()+"tour'],"+
 								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
 			var href = $(this).attr('href');
