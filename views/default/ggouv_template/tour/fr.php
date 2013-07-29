@@ -288,8 +288,11 @@
 
 	<li class="big" data-button="Créer une page wiki">
 		<span class="preStep hidden">
-			var origin = elgg.normalize_url(decodeURIComponent(window.location.href)).split("#")[0];
-			History.pushState({origin: origin}, null, '<?php if ($wiki = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) echo $wiki; ?>');
+			var origin = elgg.normalize_url(decodeURIComponent(window.location.href)).split("#")[0],
+				wiki_of_help = <?php if ($wiki = elgg_get_plugin_setting('wiki_of_help', 'elgg-ggouv_template')) echo $wiki; ?>;
+
+			if (!wiki_of_help.match(elgg.get_site_url())) wiki_of_help = elgg.get_site_url() + 'u/' + wiki_of_help.split('/').slice(-1)[0];
+			History.pushState({origin: origin}, null, '');
 		</span>
 		<h2>Les wikis</h2>
 		<p>Vous êtes ici sur la page wiki principale de l'aide.</p>
