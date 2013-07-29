@@ -121,12 +121,7 @@ if ($user) {
 			'<a class="t" href="#">&#44044;</a>' . // unicode AC0C
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
-						'<li><a href="' . $site_url . 'split/">' . elgg_echo('my_blog') . '</a></li>' .
-						'<li><a href="' . $site_url . 'workflow/owner/' . $user->username . '">' . elgg_echo('my_workflow') . '</a></li>' .
-						'<li><a href="' . $site_url . 'wiki/owner/' . $user->username . '">' . elgg_echo('my_wiki_pages') . '</a></li>' .
-						'<li><a href="' . $site_url . 'pad/owner/' . $user->username . '">' . elgg_echo('my_pads') . '</a></li>' .
-						'<li><a href="' . $site_url . 'brainstorm/owner/' . $user->username . '">' . elgg_echo('my_ideas') . '</a></li>' .
-						'<li><a href="' . $site_url . 'answers/owner/' . $user->username . '">' . elgg_echo('answers:your') . '</a></li>' .
+						'<li><a href="' . $site_url . 'split/">' . elgg_echo('split-your-elgg:screen') . '</a></li>' .
 				'</ul>' .
 			'</ul>' .
 		'</li>';
@@ -166,7 +161,7 @@ if ($user) {
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
 						'<li><a href="' . $url_help_wiki . '">' . elgg_echo('ggouv_template:dev:wiki_of_help') . '</a></li>' .
-						'<li><a href="#" class="start-tour">' . elgg_echo('help:start-tour') . '</a></li>' .
+						'<li><a href="' . $site_url .'tour" class="start-tour">' . elgg_echo('help:start-tour') . '</a></li>' .
 						'<li><a class="help-faq-link" href="' . $url_help_faq . '">' . elgg_echo('ggouv_template:dev:faq_of_help') . '</a></li>' .
 						'<li><a class="help-group-link" href="' . $url_help_group . '">' . elgg_echo('ggouv_template:dev:group_of_help') . '</a></li>' .
 				'</ul>' .

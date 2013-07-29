@@ -76,8 +76,8 @@
 			History.pushState({origin: origin}, null, elgg.get_site_url()+'activity');
 		</span>
 		<h2>Le hub de communication</h2>
-		<p>Le hub est une sorte de tableau de bord. C'est cette page avec tout plein de colonnes.<br>Il permet de visualiser l'activité de vos abonnement, vos mentions, vos groupes... le tout classé en colonnes.</p>
-		<p>Il est aussi possible d'intégrer les flux provenants d'autres réseaux comme Twitter et Facebook (en cours).</p>
+		<p>Le hub est une sorte de tableau de bord. C'est cette page avec tout plein de colonnes.<br>Il permet de visualiser l'activité de vos abonnements, vos mentions, vos groupes... le tout classé en colonnes.</p>
+		<p>Il est aussi possible d'intégrer les flux provenant d'autres réseaux comme Twitter et Facebook (en cours).</p>
 		<p>Le hub est mis en cache dans votre navigateur, ce qui permet de revenir très rapidement dessus.</p>
 	</li>
 	<li data-class="elgg-refresh-all-button" data-options="tipAdjustmentX:-12;" data-button="Ajouter une colonne">
@@ -134,7 +134,7 @@
 		</span>
 		<h2>Mon profil</h2>
 		<p>Votre profil est la page vous concernant. Elle peut être vue par tout le monde.</p>
-		<p>Dans un soucis de transparence, et pour vous faire connaître, il est plutôt conseillé de bien remplir cette page.<br>Les droits d'accès sont paramétrables pour toutes les informations que vous publiez sur cette page.</p>
+		<p>Dans un souci de transparence, et pour vous faire connaître, il est plutôt conseillé de bien remplir cette page.<br>Les droits d'accès sont paramétrables pour toutes les informations que vous publiez sur cette page.</p>
 	</li>
 	<li data-class="profile-action-menu" data-options="tipLocation:right;" data-button="Ajouter des widgets">
 		<h2>Modifier mon profil</h2>
@@ -269,7 +269,7 @@
 		<p>Pour vos besoins, vous pouvez créer autant de colonne que vous voulez, et les nommer comme bon vous semble.<br>(le plus classique étant : A faire, En cours, Fait)</p>
 		<p>Les possibilités d'utilisation des flux de travail sont multiples : rédaction de documents, traduction de vidéos, gestion de stock...</p>
 	</li>
-	<li data-class="workflow-lists .workflow-list:first-child" data-options="tipLocation:top;" data-button="Les participants">
+	<li data-class="workflow-lists .workflow-list:first-child .elgg-input-plaintext" data-options="tipLocation:top;" data-button="Les participants">
 		<h2>Ajouter une fiche</h2>
 		<p>Vous pouvez ajouter une fiche dans une liste en bas de chaque colonnes.</p>
 		<p>Ici, vous ne pourrez pas déplacer les fiches car cette possibilité est réservée aux administrateurs du groupe.<br>Pour le faire, il suffit de glisser-déposer de la fiche où l'on veut la mettre.</p>
@@ -314,8 +314,8 @@
 	<li class="big" data-button="Les boutons de l'éditeur">
 		<span class="preStep hidden">
 			var origin = elgg.normalize_url(decodeURIComponent(window.location.href)).split("#")[0],
-				faq_of_help = '<?php if ($wiki = elgg_get_plugin_setting('faq_of_help', 'elgg-ggouv_template')) echo $wiki; ?>';
-			newPage = faq_of_help.match(/\d+$/)[0];
+				faq_of_help = '<?php if ($wiki = elgg_get_plugin_setting('faq_of_help', 'elgg-ggouv_template')) echo $wiki; ?>',
+				newPage = faq_of_help.match(/\d+/)[0];
 			History.pushState({origin: origin}, null, elgg.get_site_url()+'wiki/edit?q=tour&container_guid='+newPage);
 		</span>
 		<span class="postStep hidden">
@@ -360,8 +360,8 @@
 		<span class="inStep hidden">$('.joyride-modal-bg').hide();</span>
 		<h2>Les liens</h2>
 		<div class="row-fluid">
-			<div class="span6"><p>Il y a différente façon d'écrire un lien. Ci-dessous, les exemples permettent de voir toutes les syntaxes.</p></div>
-			<div class="span6"><p>Les liens vers des pages wiki n'existant pas seront en rouge, mais pas lors de la prévisualisation en temps réel.</p></div>
+			<div class="span6"><p>Il y a différentes façons d'écrire un lien. Ci-dessous, les exemples permettent de voir toutes les syntaxes.</p></div>
+			<div class="span6"><p>Les liens vers des pages wiki n'existant pas seront en rouge, mais ne le sont pas lors de la prévisualisation en temps réel.</p></div>
 		</div>
 	</li>
 	<li class="top" data-button="FIN">

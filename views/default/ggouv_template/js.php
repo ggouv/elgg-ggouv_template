@@ -283,6 +283,7 @@ elgg.ggouv_template.init = function() {
 								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal'],"+
 								"[href*='"+elgg.get_site_url()+"split'],"+
+								"[class*='"+elgg.get_site_url()+"tour'],"+
 								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
 			var href = $(this).attr('href');
@@ -1397,7 +1398,7 @@ $('.start-tour').live('click', function() {
 		};
 
 	// check if joyride js is already loaded
-	if (true || typeof $.fn.joyride != 'function') {
+	if (typeof $.fn.joyride != 'function') {
 		$('#TourMenu, #GgouvTour').remove();
 		elgg.post('ajax/view/ggouv_template/ajax/tour/', {
 			success: function(response) {
@@ -1416,6 +1417,8 @@ $('.start-tour').live('click', function() {
 		$('#TourMenu').addClass('hover');
 		startTour(0);
 	}
+
+	return false; // we want to show url for start tour, but not going to this url
 });
 
 
