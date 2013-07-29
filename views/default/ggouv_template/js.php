@@ -1357,58 +1357,44 @@ $('.start-tour').live('click', function() {
 			$('.elgg-page-topbar .hover').click().add('#TourMenu').removeClass('hover'); // click close wire form
 		},
 		startTour = function(tipID) {
-
-		$('#endTour').die().live('click', function() {
-			EndTour();
-			$('#TourMenu').fadeOut();
-		});
-		$('#endTourAndReturn').die().live('click', function() {
-			History.pushState({origin: null}, null, origin.split("#")[0]);
-			EndTour();
-			$('#TourMenu').fadeOut();
-		});
-
-		if (tipID != 0) $('#TourMenu').removeClass('hover');
-		$('#TourMenu').fadeIn();
-		$("#GgouvTour").joyride({
-			autoStart : true,
-			startOffset: tipID,
-			prevButton: true,
-			template: { // HTML segments for tip layout
-				'link'    : '<a href="#close" class="joyride-close-tip gwf">x</a>',
-				'timer'   : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
-				'button'  : '<a href="#" class="joyride-next-tip"></a>',
-			},
-			preStepCallback : function (index, tip) {
-				eval(tip.find('.preStep').text());
-			},
-			inStepCallback: function (index, tip) {
-				eval(tip.find('.inStep').text());
-			},
-			postStepCallback : function (index, tip) {
-				$('#TourMenu').removeClass('hover');
-				eval(tip.find('.postStep').text());
-			},
-			postRideCallback: function() {
+			$('#endTour').die().live('click', function() {
 				EndTour();
 				$('#TourMenu').fadeOut();
-				//History.pushState({origin: null}, null, origin.split("#")[0]);
-			}
-		});
-			//}
+			});
+			$('#endTourAndReturn').die().live('click', function() {
+				History.pushState({origin: null}, null, origin.split("#")[0]);
+				EndTour();
+				$('#TourMenu').fadeOut();
+			});
 
-/*		// check if we are already in activity page
-		if (elgg.isNull(elgg.parse_url(origin).path.match(/activity$/))) {
-			parsePage(elgg.get_site_url()+'activity', {
-				origin: origin,
-				callback: function() {
-					startJoyride();
+			if (tipID != 0) $('#TourMenu').removeClass('hover');
+			$('#TourMenu').fadeIn();
+			$("#GgouvTour").joyride({
+				autoStart : true,
+				startOffset: tipID,
+				prevButton: true,
+				template: { // HTML segments for tip layout
+					'link'    : '<a href="#close" class="joyride-close-tip gwf">x</a>',
+					'timer'   : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
+					'button'  : '<a href="#" class="joyride-next-tip"></a>',
+				},
+				preStepCallback : function (index, tip) { // called before tip displayed
+					eval(tip.find('.preStep').text());
+				},
+				inStepCallback: function (index, tip) { // called after tip displayed
+					eval(tip.find('.inStep').text());
+				},
+				postStepCallback : function (index, tip) { // called after tip removed, and before next tip
+					$('#TourMenu').removeClass('hover');
+					eval(tip.find('.postStep').text());
+				},
+				postRideCallback: function() { // called when tour finished or stopped
+					EndTour();
+					$('#TourMenu').fadeOut();
 				}
 			});
-		} else {
-			startJoyride();
-		}*/
-	};
+
+		};
 
 	// check if joyride js is already loaded
 	if (true || typeof $.fn.joyride != 'function') {

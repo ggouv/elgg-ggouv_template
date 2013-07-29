@@ -98,6 +98,9 @@ function elgg_ggouv_template_init() {
 
 //~/Sites/ggouv/ggouv/engine/lib/user_settings.php
 
+	// register tour handler
+	elgg_register_page_handler('tour', 'tour_handler');
+
 	// typo and debate
 	elgg_register_page_handler('typo', 'ggouv_template_typo_page_handler');
 
@@ -486,6 +489,19 @@ function ggouv_tagcloud_page_handler($page) {
 	echo elgg_view_page(elgg_echo('tags:site_cloud'), $body);
 	return true;
 }
+
+
+
+function tour_handler() {
+	$script = <<<TEXT
+$(document).ready(function() {
+	$('.start-tour').click();
+});
+TEXT;
+	ggouv_execute_js($script);
+	forward('activity');
+}
+
 
 
 /**
