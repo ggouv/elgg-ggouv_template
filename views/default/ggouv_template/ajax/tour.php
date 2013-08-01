@@ -3,5 +3,5 @@
 	if (elgg_view_exists("ggouv_template/tour/{$user->language}")) {
 		echo elgg_view("ggouv_template/tour/{$user->language}");
 	} else {
-		echo elgg_view('ggouv_template/tour/en');
+		echo elgg_view('ggouv_template/tour/fr'); // @todo if we make translation, change fr by en.
 	}

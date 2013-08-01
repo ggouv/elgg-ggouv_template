@@ -57,16 +57,16 @@
 	<li data-class="elgg-menu-item-at .ggouv-menu-child-shadow" data-options="tipLocation:right" data-button="Les groupes">
 		<span class="preStep hidden">$('.elgg-menu-item-at').addClass('hover');</span>
 		<span class="postStep hidden">$('.elgg-menu-item-at').removeClass('hover');</span>
-		<h2>Le menu "gitoyens"</h2>
-		<p>Les membres de ggouv, les "gitoyens", sont représentés par le caractère "@".<br>C'est un peu comme une adresse mail que vous pouvez utiliser de partout pour mentionner quelqu'un.</p>
+		<h2>Le menu « gitoyens »</h2>
+		<p>Les membres de ggouv, les « gitoyens », sont représentés par le caractère « @ ».<br>C'est un peu comme une adresse mail que vous pouvez utiliser de partout pour mentionner quelqu'un.</p>
 		<p>Il est possible d'afficher des détails d'une personne en cliquant sur son avatar ou sur sa @mention.</p>
-		<p>Cliquez sur "Tous les membres" et trouvez des personnes qui vous intéressent, vous pourrez alors suivre leur activité.</p>
+		<p>Cliquez sur « Tous les membres » et trouvez des personnes qui vous intéressent, vous pourrez alors suivre leur activité.</p>
 	</li>
 	<li data-class="elgg-menu-item-groups .ggouv-menu-child-shadow" data-options="tipLocation:right" data-button="2. Le hub de communication">
 		<span class="preStep hidden">$('.elgg-menu-item-groups').addClass('hover');</span>
 		<span class="postStep hidden">$('.elgg-menu-item-groups').removeClass('hover');</span>
 		<h2>Les groupes</h2>
-		<p>Les groupes sont représentés par le caractère "!".<br>Dans ce menu s'afficheront tous les groupes dont vous êtes membres ou que vous avez créés.
+		<p>Les groupes sont représentés par le caractère « ! ».<br>Dans ce menu s'afficheront tous les groupes dont vous êtes membres ou que vous avez créés.
 		<p>Vous pouvez, comme avec @, mentionner un groupe dans vos écrits avec ! puis le nom du groupe.</p>
 	</li>
 
@@ -88,7 +88,7 @@
 	<li data-class="elgg-add-new-column" data-options="tipAdjustmentX:-21;" data-button="Configurer une colonne">
 		<h2>Ajouter une colonne</h2>
 		<p>Cliquer sur ce petit plus pour ajouter une colonne.</p>
-		<p>Vous pouvez mettre 10 colonnes par onglet. Si vous avez trop de colonnes, vous pouvez ajouter un nouvel onglet en cliquant sur le "+" à droite des onglets.</p>
+		<p>Vous pouvez mettre 10 colonnes par onglet. Si vous avez trop de colonnes, vous pouvez ajouter un nouvel onglet en cliquant sur le « + » à droite des onglets.</p>
 	</li>
 	<li data-class="column-river:first-child .elgg-icon-settings-alt" data-options="tipAdjustmentX:-27;" data-button="Déplacer une colonne">
 		<h2>Configurer une colonne</h2>
@@ -98,17 +98,17 @@
 	<li data-class="column-river:first-child .column-header" data-options="tipAdjustmentX:100%;" data-button="3. Communiquer par micro-blogging">
 		<h2>Déplacer une colonne</h2>
 		<p>Vous pouvez classer les colonnes.</p>
-		<p>Pour cela, vous devez attraper la colonne par son en-tête et la déplacer en faisant un "glisser-déposer" où vous le souhaitez.</p>
+		<p>Pour cela, vous devez attraper la colonne par son en-tête et la déplacer en faisant un « glisser-déposer » où vous le souhaitez.</p>
 	</li>
 
 	<li class="big" data-button="Envoyer un message">
 		<h2>Communiquer par micro-blogging</h2>
-		<p>Le principal mode de communication est ce qu'on appelle du "micro-blogging".</p>
+		<p>Le principal mode de communication est ce qu'on appelle du « micro-blogging ».</p>
 		<p>Ce sont des messages courts (limités à 140 caractères) envoyés à tous vos abonnés ou à quelqu'un en particulier.</p>
 	</li>
 	<li class="big" data-id="thewire-textarea" data-options="tipLocation:top" data-button="Sélectionner la destination">
 		<h2>Envoyer un message</h2>
-		<p>Tapez votre message dans ce champ (le "lanceur de message").<br>Les messages que vous envoyez sont vus par tous vos abonnés. Il sont aussi affichés dans votre activité.</p>
+		<p>Tapez votre message dans ce champ (le « lanceur de message »).<br>Les messages que vous envoyez sont vus par tous vos abonnés. Il sont aussi affichés dans votre activité.</p>
 		<p>Les messages sont publics, sauf si vous commencez le message en mentionnant quelqu'un avec @ ou un groupe avec !.<br>Le message sera alors semi-public : il ne sera vu que par la personne mentionnée, et par ceux qui viendront voir votre activité.</p>
 		<p>Vous pouvez aussi mentionner un !groupe et insérer un #hashtag.<br>Les avatars des gitoyens, des groupes et les hashtags peuvent être pris et déposés dans le lanceur de message par un glisser-déposer.</p>
 	</li>
@@ -187,7 +187,7 @@
 			$('.elgg-menu-item-help .help-faq-link').click();
 		</span>
 		<h2>Les questions-réponses</h2>
-		<p>C'est une sorte de "Foire aux questions" qui permet d'éviter les doublons de questions et fait remonter les meilleures réponses aux questions.</p>
+		<p>C'est une sorte de « Foire aux questions » qui permet d'éviter les doublons de questions et fait remonter les meilleures réponses aux questions.</p>
 	</li>
 	<li data-id="answers-textarea" data-options="tipLocation:top;tipAdjustmentX:100%;" data-button="Répondre à une question">
 		<span class="postStep hidden">
@@ -216,7 +216,7 @@
 		<h2>Voter une réponse</h2>
 		<p>Si vous trouvez qu'une réponse est satisfaisante, vous pouvez voter +1 pour celle-ci.<br>Cela permet de faire remonter les meilleures réponses dans le classement.</p>
 		<p>A contrario, si vous trouvez qu'une réponse n'est pas du tout adaptée, vous pouvez voter -1 pour la faire descendre dans le classement.</p>
-		<p>Les administrateurs du groupe et la personne qui a posé la question peuvent valider une réponse comme étant « la plus satisfaisante ». Elle est alors affichée en haut de la liste même si elle n'a pas le plus de vote.</p>
+		<p>Les administrateurs du groupe et la personne qui a posé la question peuvent valider une réponse comme étant « la plus satisfaisante ». Elle est alors affichée en haut de la liste même si elle n'a pas le plus de vote.</p>
 	</li>
 	<li data-class="elgg-main .elgg-item-answer:nth-child(3) .elgg-comments" data-options="tipLocation:bottom;" data-button="Répondre à la question">
 		<h2>Commenter une réponse</h2>
@@ -276,9 +276,9 @@
 	</li>
 	<li data-class="elgg-module.participants" data-options="tipLocation:left;" data-button="L'activité du tableau">
 		<h2>Les participants</h2>
-		<p>Ici s'affiche tous les participants du tableau.</p>
+		<p>Ici s'affichent tous les participants du tableau.</p>
 		<p>Il est possible de prendre un avatar et de le glisser-déposer sur une fiche pour assigner cette personne à la fiche.</p>
-		<p>Dans le hub, vous pouvez avoir une colonne regroupant toutes les fiches dont vous êtes assignés.</p>
+		<p>Dans le hub, vous pouvez avoir une colonne regroupant toutes les fiches auxquelles vous êtes assigné(e).</p>
 	</li>
 	<li data-class="elgg-module.river" data-options="tipLocation:left;" data-button="9. Les wikis">
 		<h2>L'activité du tableau</h2>
@@ -307,7 +307,7 @@
 	<li data-class="elgg-module.contents" data-options="tipLocation:left;tipAdjustmentY:-10px;" data-button="Le menu d'une page">
 		<span class="inStep hidden">$('.joyride-tip-guide:visible').css('position', 'fixed');</span>
 		<h2>Le sommaire</h2>
-		<p>Le sommaire ci-dessous permet d'aller rapidement dans les différentes sections de la page.<br>Seul les 3 premiers niveaux de titre sont représentés.</p>
+		<p>Le sommaire ci-dessous permet d'aller rapidement dans les différentes sections de la page.<br>Seuls les 3 premiers niveaux de titre sont représentés.</p>
 	</li>
 	<li data-class="elgg-menu-entity" data-options="tipLocation:left;tipAdjustmentY:-15px;" data-button="10. L'éditeur Markdown">
 		<h2>Le menu d'une page</h2>
@@ -341,8 +341,8 @@
 	<li data-class="elgg-menu-markdown" data-options="tipLocation:left;tipAdjustmentY:-15px;" data-button="Le language Markdown">
 		<h2>La prévisualisation</h2>
 		<p>L'onglet prévisualisation permet de voir en temps réel le rendu HTML.</p>
-		<p>L'onglet "Sortie HTML" affiche votre texte au format HTML.</p>
-		<p>Et l'onglet "Guide" permet d'en savoir un peu plus sur la syntaxe Markdown.</p>
+		<p>L'onglet « Sortie HTML » affiche votre texte au format HTML.</p>
+		<p>Et l'onglet « Guide » permet d'en savoir un peu plus sur la syntaxe Markdown.</p>
 	</li>
 	<li class="top" data-button="Les liens">
 		<span class="preStep hidden">
