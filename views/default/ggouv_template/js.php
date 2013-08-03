@@ -4,7 +4,6 @@ elgg.provide('elgg.ggouv_template');
 
 // Loaded for the first time only
 elgg.ggouv_template.init = function() {
-	var stashedDeck = {};
 
 	// we wait everything is loaded
 	$(document).ready(function() {
@@ -117,14 +116,19 @@ elgg.ggouv_template.init = function() {
 					$.each(drl.find('.elgg-river'), function(i, e) {
 						$(e).attr('data-scrollBkp', e.scrollTop); // store all columns scroll
 					});
-					stashedDeck[deckOrigin.match(elgg.get_site_url() +'activity(.*)')[1]] = $('.elgg-page-body').contents();
+					$('.elgg-page-body .elgg-layout')
+						.appendTo('body')
+						.wrapAll('<div id="stash_'+deckOrigin.match(elgg.get_site_url() +'activity(.*)')[1].replace(/^\//, '')+'" class="hidden" />');
 				}
 			};
 
 		// if user go back to the deck-river and river is stashed, we show it and skip elgg.post
-		if (activityTab && stashedDeck[activityTab[1]]) {
+		if (activityTab && $('#stash_'+activityTab[1].replace(/^\//, '')).length) {
+			var $stash = $('#stash_'+activityTab[1].replace(/^\//, ''));
+
 			stashDeck();
-			$('.elgg-page-body').html(stashedDeck[activityTab[1]]);
+			$('.elgg-page-body > .elgg-inner').html('').append($stash.contents());
+			$stash.remove();
 			$('body').attr('class', 'fixed-deck');
 			var drl = $('#deck-river-lists');
 			drl.scrollLeft(drl.attr('data-scrollBkp'));
