@@ -13,12 +13,17 @@
 	border: medium none;
 	color: black;
 	font-size: 1.2em;
+	line-height: 1em;
+	padding: 4px 6px 2px;
 }
 #login-dropdown .elgg-button-dropdown:hover {
 	background: #4690D6;
 	border: medium none;
 	color: white;
 	font-size: 1.2em;
+}
+#login-dropdown .elgg-button-dropdown:after {
+	padding-left: 5px;
 }
 #login-dropdown .elgg-button-dropdown.elgg-state-active:hover, #login-dropdown .elgg-button-dropdown.elgg-state-active:focus {
 	box-shadow: none;

@@ -24,7 +24,8 @@
 	border-radius: 4px;
 
 	width: auto;
-	min-width: 30px;
+	min-width: 10px;
+	height: 16px;
 	text-align: center;
 	padding: 3px 6px 2px;
 	margin-bottom: 4px;
@@ -53,6 +54,13 @@
 	-webkit-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
 	box-shadow: inset 0px -10px 10px 2px rgba(0, 0, 0, 0.2);
+}
+input.elgg-button {
+	margin: 0;
+	height: 23px;
+}
+input.elgg-button:after {
+	margin: 0;
 }
 
 /* Submit: This button should convey, "you're about to take some definitive action" */
@@ -135,12 +143,11 @@
 
 .elgg-button-dropdown:after {
 	content: "\2193";
-	padding-left: 5px;
 	font-family: "ggouv";
 	font-size: 1.2em;
 	font-weight: normal;
 	text-transform: none;
-	vertical-align: sub;
+	vertical-align: bottom;
 }
 
 .elgg-button-dropdown:hover {
@@ -160,6 +167,37 @@
 }
 .elgg-button.group_admin_only {
 	border:1px solid red;
+}
+
+/*
+ * output-group
+ */
+.output-group > * {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	margin-right: -1px;
+}
+.output-group > *:first-child {
+	-webkit-border-radius: 4px 0 0 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+.output-group > *:last-child {
+	-webkit-border-radius: 0 4px 4px 0;
+	-moz-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+}
+.output-group input + * {
+	margin-left: -4px;
+}
+.output-group .elgg-input-text {
+	font-size: 1em;
+	height: 23px;
+	margin-right: 3px;
+	padding: 2px 6px 1px;
+	width: 100px;
+	border: 1px solid #999;
 }
 
 /*
