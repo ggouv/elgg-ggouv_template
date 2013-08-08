@@ -104,8 +104,12 @@ elgg.ggouv_template.init = function() {
 	 */
 	parsePage = function(url, data) {
 		var data = data || false,
-			fragment = data.fragment || false
-			activityTab = url.match(elgg.get_site_url() +'activity(.*)'),
+			fragment = data.fragment || false,
+			urlActivity = elgg.get_site_url() +'activity(.*)',
+			activityTab = url.match(urlActivity),
+			urlToStashID = function(match) {
+				return match[1].replace(/^\//, '').replace(/\s/, '');
+			},
 			stashDeck = function() { // stash deck river before change elgg-page-body
 				if ($('body').hasClass('fixed-deck')) {
 					var deckOrigin = data.origin.replace(/#$/, ''),
@@ -118,13 +122,13 @@ elgg.ggouv_template.init = function() {
 					});
 					$('.elgg-page-body .elgg-layout')
 						.appendTo('body')
-						.wrapAll('<div id="stash_'+deckOrigin.match(elgg.get_site_url() +'activity(.*)')[1].replace(/^\//, '')+'" class="hidden" />');
+						.wrapAll('<div id="stash_'+urlToStashID(deckOrigin.match(urlActivity))+'" class="hidden" />');
 				}
 			};
 
 		// if user go back to the deck-river and river is stashed, we show it and skip elgg.post
-		if (activityTab && $('#stash_'+activityTab[1].replace(/^\//, '')).length) {
-			var $stash = $('#stash_'+activityTab[1].replace(/^\//, ''));
+		if (activityTab && $('#stash_'+urlToStashID(activityTab)).length) {
+			var $stash = $('#stash_'+urlToStashID(activityTab));
 
 			stashDeck();
 			$('.elgg-page-body > .elgg-inner').html('').append($stash.contents());
