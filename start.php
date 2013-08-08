@@ -63,6 +63,10 @@ function elgg_ggouv_template_init() {
 	elgg_unregister_plugin_hook_handler('forward', 'all', 'ajax_forward_hook');
 	elgg_register_plugin_hook_handler('forward', 'all', 'ggouv_ajax_forward_hook');
 
+	// Hook for spam-loggin-filter
+	elgg_unregister_plugin_hook_handler("action", "register", "spam_login_filter_verify_action_hook");
+	elgg_register_plugin_hook_handler("action", "signup", "spam_login_filter_verify_action_hook", 999);
+
 	//title ?
 	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
 
