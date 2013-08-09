@@ -86,4 +86,4 @@ if (elgg_get_config('allow_registration')) {
 	register_error(elgg_echo('registerdisabled'));
 }
 
-forward(REFERER);
+forward('signup');

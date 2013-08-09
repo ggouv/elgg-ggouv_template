@@ -58,7 +58,7 @@ if (elgg_is_sticky_form('register')) {
 	echo elgg_view('input/text', array(
 		'name' => 'location',
 		'value' => $location,
-		'class' => 'digits',
+		'class' => 'digits registerCP',
 		'minlength' => 5,
 		'maxlength' => 5
 	));
@@ -102,3 +102,288 @@ echo elgg_view('input/hidden', array('name' => 'friend_guid', 'value' => $vars['
 echo elgg_view('input/hidden', array('name' => 'invitecode', 'value' => $vars['invitecode']));
 echo elgg_view('input/submit', array('name' => 'submit', 'value' => elgg_echo('register'), 'id' => 'button-signup'));
 echo '</div>';
+
+?>
+
+<script language="Javascript">
+	$(document).ready(function() {
+
+		/*
+		Complexify function for password
+
+		http://github.com/danpalmer/jquery.complexify.js
+		This code is distributed under the WTFPL v2:
+		*/
+		(function($){$.fn.extend({complexify:function(options,callback){var MIN_COMPLEXITY=49;var MAX_COMPLEXITY=120;var CHARSETS=[[48,57],[65,90],[97,122],[33,47],[58,64],[91,96],[123,126],[128,255],[256,383],[384,591],[592,687],[688,767],[768,879],[880,1023],[1024,1279],[1328,1423],[1424,1535],[1536,1791],[1792,1871],[1920,1983],[2304,2431],[2432,2559],[2560,2687],[2688,2815],[2816,2943],[2944,3071],[3072,3199],[3200,3327],[3328,3455],[3456,3583],[3584,3711],[3712,3839],[3840,4095],[4096,4255],[4256,4351],
+		[4352,4607],[4608,4991],[5024,5119],[5120,5759],[5760,5791],[5792,5887],[6016,6143],[6144,6319],[7680,7935],[7936,8191],[8192,8303],[8304,8351],[8352,8399],[8400,8447],[8448,8527],[8528,8591],[8592,8703],[8704,8959],[8960,9215],[9216,9279],[9280,9311],[9312,9471],[9472,9599],[9600,9631],[9632,9727],[9728,9983],[9984,10175],[10240,10495],[11904,12031],[12032,12255],[12272,12287],[12288,12351],[12352,12447],[12448,12543],[12544,12591],[12592,12687],[12688,12703],[12704,12735],[12800,13055],[13056,13311],
+		[13312,19893],[19968,40959],[40960,42127],[42128,42191],[44032,55203],[55296,56191],[56192,56319],[56320,57343],[57344,63743],[63744,64255],[64256,64335],[64336,65023],[65056,65071],[65072,65103],[65104,65135],[65136,65278],[65279,65279],[65280,65519],[65520,65533]];var defaults={minimumChars:8,strengthScaleFactor:1};if($.isFunction(options)&&!callback){callback=options;options={}}options=$.extend(defaults,options);function additionalComplexityForCharset(str,charset){for(var i=str.length-1;i>=0;i--)if(charset[0]<=
+		str.charCodeAt(i)&&str.charCodeAt(i)<=charset[1])return charset[1]-charset[0]+1;return 0}return this.each(function(){$(this).keyup(function(){var password=$(this).val();var complexity=0,valid=false;for(var i=CHARSETS.length-1;i>=0;i--)complexity+=additionalComplexityForCharset(password,CHARSETS[i]);complexity=Math.log(Math.pow(complexity,password.length))*(1/options.strengthScaleFactor);valid=complexity>MIN_COMPLEXITY&&password.length>=options.minimumChars;complexity=complexity/
+		MAX_COMPLEXITY*100;complexity=complexity>100?100:complexity;callback.call(this,valid,complexity)})})}})})(jQuery);
+
+
+
+		var hasMarkers,
+			shakeButton = function() {
+				$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+					$(this).effect("shake", {times:2, distance:10}, 100, function() {
+						$(this).animate({'margin-left': 0}, 100);
+					});
+				});
+			};
+
+		/*var groupMap = $("#map"),
+			hasMarkers,
+			zoom = 6,
+			latitude = 46.763056,
+			longitude = 2.424722,
+			cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+			cloudmade = new L.TileLayer(cloudmadeUrl, {
+				maxZoom: 12,
+				attribution: ''
+			});
+
+		map = new L.Map('map');
+		map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
+
+		$.validator.addMethod("registerCP", function(value, element) {
+			if (value.length != 5) return true;
+
+			if (value == '75000') {
+				$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
+				$('.register-location').hide();
+				return false;
+			}
+
+			var response;
+			elgg.post('ajax/view/ggouv_template/ajax/form_validation', {
+				dataType: 'json',
+				async: false,
+				data: {
+					location: value,
+				},
+				beforeSend: function() {
+					$('#searching').removeClass().html('').addClass('loading');
+				},
+				success: function(data) {
+					response = data;
+				},
+				error: function() {
+					valuevalid = '"erreur avec le serveur"';
+				}
+			});
+			if (response) {
+				$('#map').css({opacity: 1});
+				$('.register-location').show().animate({opacity: 1});
+				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+
+				if (hasMarkers) map.removeLayer(villes);
+				var maxHab = 0,
+					maxNorth = -90,
+					maxSouth = 90,
+					maxEast = -180,
+					maxOuest = 180,
+					maxHabKey = 0,
+					markers = [];
+				$.each(response, function(key, value) {
+					var popupContent = $('<div>').append(
+						$('<h2>').html(value.article+' '+value.ville).after(
+							$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
+								$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
+									$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
+						))).clone()).remove().html();
+					markers.push(L.marker([value.lat, value.long]).bindPopup(
+					popupContent));
+					if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
+					if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
+					if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
+					if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
+					if (parseFloat(value.habitants30122008) > maxHab) {
+						maxHabKey = key;
+						maxHab = parseFloat(value.habitants30122008);
+					}
+				});
+				villes = L.layerGroup(markers);
+				map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
+				markers[maxHabKey].openPopup();
+				hasMarkers = true;
+				return true;
+			} else {
+				$('#map').css({opacity: 0});
+				$('#searching').addClass('notfound');
+				$('.register-location').show().animate({opacity: 1});
+				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+				return false;
+			}
+		}, $.validator.format(elgg.echo('ggouv:search:localgroups:notfound')));*/
+/*.searchlocalgroup(function(response) {
+				if ($(".elgg-form-signup input[name='location']").val() == '75000') {
+					$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
+					$('.register-location').hide();
+				} else if (response == false) {
+					$('#map').css({opacity: 0});
+					$('#searching').addClass('notfound');
+					$('.register-location').show().animate({opacity: 1});
+					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+				} else {
+					$('#map').css({opacity: 1});
+					$('.register-location').show().animate({opacity: 1});
+					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+					if (hasMarkers) map.removeLayer(villes);
+					var maxHab = 0,
+						maxNorth = -90,
+						maxSouth = 90,
+						maxEast = -180,
+						maxOuest = 180,
+						maxHabKey = 0,
+						markers = [];
+					$.each(response, function(key, value) {
+						var popupContent = $('<div>').append(
+							$('<h2>').html(value.article+' '+value.ville).after(
+								$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
+									$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
+										$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
+							))).clone()).remove().html();
+						markers.push(L.marker([value.lat, value.long]).bindPopup(
+						popupContent));
+						if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
+						if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
+						if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
+						if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
+						if (parseFloat(value.habitants30122008) > maxHab) {
+							maxHabKey = key;
+							maxHab = parseFloat(value.habitants30122008);
+						}
+					});
+					villes = L.layerGroup(markers);
+					map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
+					markers[maxHabKey].openPopup();
+					hasMarkers = true;
+				}
+			}, 5)*/
+
+$.validator.addMethod("registerCP", function(value, element) {
+	console.log($(element), 'e');
+	//if (value.length != 5) return true;
+	if ($(element).hasClass('notfound')) return false;
+	return true;
+}, $.validator.format(elgg.echo('ggouv:search:localgroups:notfound')));
+
+
+		$('.elgg-form-signup').validate({
+			success: "valid",
+			rules: {
+				username: {
+					remote: {
+						url: 'ajax/view/ggouv_template/ajax/form_validation',
+						type: 'POST'
+					}
+				}
+			},
+			messages: {
+				username: {
+					minlength: elgg.echo('registration:usernametooshort', [4]),
+					maxlength: elgg.echo('registration:usernametoolong', [30]),
+					remote: $.validator.format(elgg.echo('registration:userexists'))
+				},
+				location: {
+					minlength: elgg.echo('registration:locationtooshort', [5])
+				}
+			},
+			invalidHandler: shakeButton,
+			beforeSubmit: function(form) {
+				console.log(form, 'f');
+				//form.submit();
+			}
+		});
+
+
+
+		if ($('.elgg-form-signup').length) {
+			if ($(".elgg-form-signup input[name='username']").val().length) $('.elgg-form-signup').valid(); // perform valid() in case of REFERER
+			$('.elgg-form-signup, #map, .social-connect').height($(window).height() - $('.elgg-form-signup').position().top - 93);
+			$('.elgg-form-signup input').focus(function() {
+				$('.social-connect').hide();
+				$('.back-socialnetwork').show().click(function() {
+					$(this).hide();
+					$('.register-location').hide();
+					$('.social-connect').show();
+				});
+				var name = $(this).attr('name');
+				if (name == 'password2') name = 'password';
+				if (name != 'location') $('.register-helper, .register-location').hide();
+				if (name == 'location' && $(this).val().length > 4 && $(this).val() != '75000') {
+					$('.register-location').fadeIn(300);
+				} else {
+					$('.register-helper.'+name).fadeIn(300);
+				}
+			}).blur(function() {
+				if ($(this).attr('name') != 'location') $('.register-helper, .register-location').hide();
+			});
+			$("#password").complexify({strengthScaleFactor: 0.5, minimumChars: 6 }, function (valid, complexity) {
+				if (!valid) {
+					$('#progress').css({'width':complexity + '%'}).removeClass('progressbarValid').addClass('progressbarInvalid');
+				} else {
+					$('#progress').css({'width':complexity + '%'}).removeClass('progressbarInvalid').addClass('progressbarValid');
+				}
+				$('#complexity').html(Math.round(complexity) + ' %');
+			});
+			$(".elgg-form-signup input[name='location']").keyup(function(k) {
+				if ($(".elgg-form-signup input[name='location']").val().length < 5) {
+					$('.register-location').hide();
+					$('.register-helper.location').html(elgg.echo('registration:helper:location')).show();
+				} else {
+					$('.register-location, .register-helper.location').show();
+				}
+			}).searchlocalgroup(function(response) {
+				if ($(".elgg-form-signup input[name='location']").val() == '75000') {
+					$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
+					$('.register-location').hide();
+					$('input[name="location"]').addClass('notfound');
+				} else if (response == false) {
+					$('#map').css({opacity: 0});
+					$('label[for="location"]').removeClass('valid').html(elgg.echo('ggouv:search:localgroups:notfound'));
+					$('.register-location').show().animate({opacity: 1});
+					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+					$('input[name="location"]').addClass('notfound');
+				} else {
+					$('#map').css({opacity: 1});
+					$('.register-location').show().animate({opacity: 1});
+					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+					$('input[name="location"]').removeClass('notfound');
+					if (hasMarkers) map.removeLayer(villes);
+					var maxHab = 0,
+						maxNorth = -90,
+						maxSouth = 90,
+						maxEast = -180,
+						maxOuest = 180,
+						maxHabKey = 0,
+						markers = [];
+					$.each(response, function(key, value) {
+						var popupContent = $('<div>').append(
+							$('<h2>').html(value.article+' '+value.ville).after(
+								$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
+									$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
+										$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
+							))).clone()).remove().html();
+						markers.push(L.marker([value.lat, value.long]).bindPopup(
+						popupContent));
+						if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
+						if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
+						if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
+						if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
+						if (parseFloat(value.habitants30122008) > maxHab) {
+							maxHabKey = key;
+							maxHab = parseFloat(value.habitants30122008);
+						}
+					});
+					villes = L.layerGroup(markers);
+					map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
+					markers[maxHabKey].openPopup();
+					hasMarkers = true;
+				}
+			}, 5);
+
+		}
+
+	});
+</SCRIPT>

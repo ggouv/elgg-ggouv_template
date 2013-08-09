@@ -14,7 +14,7 @@
 			<span class="elgg-icon elgg-icon-delete-alt"></span>
 		</a>
 		{{/close}}
-		<div class="elgg-body">
+		<div class="elgg-body mvm">
 			{{{body}}}
 		</div>
 		<div class="elgg-footer">

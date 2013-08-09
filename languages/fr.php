@@ -471,7 +471,7 @@ $french = array(
 	'register' => "S'enregistrer",
 	'registration:social-connect' => "S'enregistrer ou se connecter avec",
 	'registration:back:socialnetwork' => "... ou utiliser un réseau social ",
-	'registerok' => "Vous vous êtes enregistré avec succès sur %s.",
+	'registerok' => "Vous vous êtes enregistré avec succès sur %s !",
 	'registerbad' => "Votre création de compte n'a pas fonctionné pour une raison inconnue.",
 	'registerdisabled' => "La création de compte a été désactivé par l'administrateur du site.",
 	'register:fields' => "Tous les champs sont requis",
@@ -1760,25 +1760,21 @@ Pour vous inscrire, cliquez sur le lien suivant :
  */
 	'admin:users:unvalidated' => "Invalidées",
 
-	'email:validate:subject' => "%s veuillez confirmer votre adresse de courriel !",
+	'email:validate:subject' => "%s, confirmez votre adresse email !",
 	'email:validate:body' => "Bonjour %s,
 
-Before you can start you using %s, you must confirm your email address.
+Plus qu'un clic et vous êtes sur %s !
 
-Veuillez confirmer votre adresse de courriel en cliquant sur le lien suivant:
-
+C'est bien mon adresse email, je confirme :
 %s
 
-Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre navigateur manuellement.
-
-%s
-%s
+Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre navigateur...
 ",
 	'email:confirm:success' => "Vous avez validé votre adresse de courriel !",
 	'email:confirm:fail' => "Votre adresse de courriel n'a pu être vérifiée...",
 
-	'uservalidationbyemail:registerok' => "Pour activer votre compte, veuillez confirmer votre adresse e-mail en cliquant sur le lien qui vient de vous être envoyé (si vous ne recevez rien, veuillez vérifier votre dossier Spam).<br/>Merci de vous être inscrit !",
-	'uservalidationbyemail:login:fail' => "Votre compte n'est pas validé, par conséquent la tentative de connexion a échoué. Un autre e-mail de validation a été envoyé.",
+	'uservalidationbyemail:registerok' => "<p>Pour activer votre compte, veuillez confirmer votre adresse email en cliquant sur le lien qui vient de vous être envoyé (si vous ne recevez rien, veuillez vérifier votre dossier Spam).</p><p>Merci de vous être inscrit !</p>",
+	'uservalidationbyemail:login:fail' => "Votre compte n'est pas validé, par conséquent la tentative de connexion a échoué. Un autre email de validation a été envoyé.",
 
 	'uservalidationbyemail:admin:no_unvalidated_users' => "Aucun utilisateurs non-validés.",
 
@@ -1788,7 +1784,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'uservalidationbyemail:admin:validate' => "Valider",
 	'uservalidationbyemail:admin:delete' => "Supprimer",
 	'uservalidationbyemail:confirm_validate_user' => "Valider %s ?",
-	'uservalidationbyemail:confirm_resend_validation' => "Renvoyer la validation e-mail à %s?",
+	'uservalidationbyemail:confirm_resend_validation' => "Renvoyer la validation email à %s?",
 	'uservalidationbyemail:confirm_delete' => "Supprimer %s?",
 	'uservalidationbyemail:confirm_validate_checked' => "Valider les utilisateurs cochés ?",
 	'uservalidationbyemail:confirm_resend_validation_checked' => "Renvoyer la validation aux utilisateurs cochés ?",
@@ -1835,14 +1831,14 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'notifications:subscriptions:success' => "Vos paramètres de notifications ont bien été enregistrés.",
 
 		/* @package html_email_handler */
-		'html_email_handler' => "HTML E-mail Handler",
+		'html_email_handler' => "HTML email Handler",
 
 		'html_email_handler:theme_preview:menu' => "HTML notification",
 
 		// settings
 		'html_email_handler:settings:notifications:description' => "When you enable this option all notifications to the users of your site will be in HTML format.",
-		'html_email_handler:settings:notifications' => "Use as default e-mail notification handler",
-		'html_email_handler:settings:notifications:subtext' => "This will send all outgoing e-mails as HTML mails",
+		'html_email_handler:settings:notifications' => "Use as default email notification handler",
+		'html_email_handler:settings:notifications:subtext' => "This will send all outgoing emails as HTML mails",
 
 		'html_email_handler:settings:sendmail_options' => "Additional parameters for use with sendmail (optional)",
 		'html_email_handler:settings:fallback_email' => 'Set a dedicated From email address for your site, something like notifications@yoursite.com',
@@ -1976,6 +1972,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	 * Tour
 	 */
 	'help:start-tour' => "Démarrer la visite guidée",
+	'help:no-start-tour' => "Je ferai la visite plus tard...",
 
 	/**
 	 * Comment
@@ -2043,6 +2040,7 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	'ggouv:search:localgroups:notfound' => "La commune n'a pas été trouvée.",
 	'xoxco:removing_tag' => "Enlever ce mot-clé",
 	'xoxco:input:default' => "Ajoutez des mot-clés (séparez par des virgules ou tapez Entrer)",
+	'forms:not_valid' => "Le formulaire n'est pas valide !",
 	'forms:required' => "Ce champ est obligatoire !",
 	'forms:remote' => "Ce champ n'est pas valide.",
 	'forms:url' => "Veuillez entrer une URL valide.",
@@ -2118,11 +2116,14 @@ Si vous ne pouvez pas cliquer sur le lien, copier et coller le dans votre naviga
 	/*
 	 * First login welcome message + automaticly created list and cards
 	 */
+	'signup:welcomemessage:location_change' => "Info : la localité que vous avez saisie n'existe pas dans ggouv. %s a été sélectionné à la place de %s.",
 	'signup:welcomemessage:title' => "Bienvenue sur Ggouv !",
-	'signup:welcomemessage:body' => "Bravo, vous êtes maintenant un «gitoyen».<br/>
-	Vous avez envie de changer les choses, d'expérimenter de nouvelles manières de s'organiser, vous avez plein d'idées ? Vous êtes au bon endroit.<br/>
-	La plateforme est encore en béta et des corrections et ajustements sont en cours. Si vous trouvez un bug, quelque chose à corriger, informez l'équipe des développeurs.<br/>
-	Amusez-vous bien !
+	'signup:welcomemessage:body' => "<p>Félicitation, vous êtes maintenant un «gitoyen».</p>
+	<p>Vous avez envie de changer les choses ? Expérimenter de nouvelles manières de s'organiser ? Vous avez plein d'idées ? Vous êtes au bon endroit !</p>
+	<p>Ggouv.fr est une expérience démocratique, un mouvement, une tentative de faire émerger quelque chose de nouveau...<br/>Et cela ne tient qu'à vous pour que cette chose grandisse, alors n'hésitez pas à vous exprimer !</p>
+	<p>La plateforme est encore en béta et des corrections et ajustements sont en cours. Si vous trouvez un bug, quelque chose à corriger, informez l'équipe des développeurs.</p>
+	<p>Vous pouvez démarrer la viste guidée maintenant, ou la faire plus tard depuis le menu aide (la bouée en bas à gauche).</p>
+	<p>Amusez-vous bien !</p>
 	",
 	'deck_river:signup:list' => "À faire",
 	'deck_river:signup:card:title:0' => "Lire l'aide",

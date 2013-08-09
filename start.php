@@ -1205,60 +1205,74 @@ function ggouv_login_user_event($event, $type, $user) {
 
 	} else { // first login
 
+		// add user to his local group and add columns of this group
+		if ($user->location) {
+			$degraded_loc = degrade_cp($user->location); // check if local group exist or if we can retrieve it
+			if ($degraded_loc) {
+				if ($degraded_loc != $user->location) {
+					$alert_loc_change = '<p style="color:red;">' . elgg_echo('signup:welcomemessage:location_change', array($degraded_loc, $user->location)) . '</p>';
+					$user->location = $degraded_loc;
+					$user->save();
+				}
+
+				$group = get_entity($user->location); // now we are sure group exist
+
+				// join user to the city group
+				$group->join($user);
+				// join user to department group
+				$dep = get_entity(get_dep_from_group_guid($user->location));
+				$dep->join($user);
+
+				// add column in deck
+				// get columns user settings. It's first login, so settins doesn't exist. We create it.
+				$set = str_replace("&gt;", ">", elgg_get_plugin_setting('default_columns', 'elgg-deck_river'));
+				if (!$set) $set = elgg_echo('deck_river:settings:default_column:default');
+				eval("\$defaults = $set;");
+
+				// define new column for department group
+				$defaults['local']['column-1'] = array(
+					'group' => $dep->getGUID(),
+					'title' => $dep->name,
+					'subtitle' => 'river:group_activity',
+					'type' => 'group',
+					'network' => 'elgg'
+				);
+				$defaults['local']['column-2'] = array(
+					'group' => $dep->getGUID(),
+					'title' => '!' . $dep->name,
+					'subtitle' => 'river:group_mentions',
+					'type' => 'group_mention',
+					'network' => 'elgg'
+				);
+				// define new column for city group
+				$defaults['local']['column-3'] = array(
+					'group' => $user->location,
+					'title' => $group->name,
+					'subtitle' => 'river:group_activity',
+					'type' => 'group',
+					'network' => 'elgg'
+				);
+				// define new column for group mentions
+				$defaults['local']['column-4'] = array(
+					'group' => $user->location,
+					'title' => '!' . $group->name,
+					'subtitle' => 'river:group_mentions',
+					'type' => 'group_mention',
+					'network' => 'elgg'
+				);
+				// set settings
+				set_private_setting($user_guid, 'deck_river_settings', serialize($defaults));
+			}
+		}
+
 		// show welcome super-popup
 		ggouv_super_popup(array(
 			'title' => elgg_echo('signup:welcomemessage:title'),
-			'body' => deck_river_wire_filter(elgg_echo('signup:welcomemessage:body')),
+			'body' => deck_river_wire_filter($alert_loc_change . elgg_echo('signup:welcomemessage:body')),
 			'ok' => elgg_echo('help:start-tour'),
 			'okCallback' => "ggouv.super_popup.deactivate();$('.elgg-menu-item-help .start-tour').click();",
 			'cancel' => elgg_echo('help:no-start-tour')
 		));
-
-		// add user to his local group and add columns of this group
-		if ($user->location && $group = get_entity($user->location)) {
-			// join user to the group
-			$group->join($user);
-
-			// add column in deck
-			// get columns user settings. It's first login, so settins doesn't exist. We create it.
-			$set = str_replace("&gt;", ">", elgg_get_plugin_setting('default_columns', 'elgg-deck_river'));
-			if (!$set) $set = elgg_echo('deck_river:settings:default_column:default');
-			eval("\$defaults = $set;");
-			// define new column for department group
-			$dep = get_entity(get_dep_from_group_guid($user->location));
-			$defaults['local']['column-1'] = array(
-				'group' => $dep->getGUID(),
-				'title' => $dep->name,
-				'subtitle' => 'river:group_activity',
-				'type' => 'group',
-				'network' => 'elgg'
-			);
-			$defaults['local']['column-2'] = array(
-				'group' => $dep->getGUID(),
-				'title' => '!' . $dep->name,
-				'subtitle' => 'river:group_mentions',
-				'type' => 'group_mention',
-				'network' => 'elgg'
-			);
-			// define new column for city group
-			$defaults['local']['column-3'] = array(
-				'group' => $user->location,
-				'title' => $group->name,
-				'subtitle' => 'river:group_activity',
-				'type' => 'group',
-				'network' => 'elgg'
-			);
-			// define new column for group mentions
-			$defaults['local']['column-4'] = array(
-				'group' => $user->location,
-				'title' => '!' . $group->name,
-				'subtitle' => 'river:group_mentions',
-				'type' => 'group_mention',
-				'network' => 'elgg'
-			);
-			// set settings
-			set_private_setting($user_guid, 'deck_river_settings', serialize($defaults));
-		}
 
 		// create user board
 		elgg_load_library('workflow:utilities');

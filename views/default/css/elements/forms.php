@@ -44,7 +44,7 @@ label.error.valid:after {
 	font-weight: normal;
 	position: absolute;
 	right: 5px;
-	bottom: 4px;
+	bottom: 6px;
 }
 fieldset > div > label {
 	background-color: #DEDEDE;

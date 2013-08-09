@@ -1122,11 +1122,11 @@ body, #super-popup {
 .super-popup-active body {
 	height: 100%;
 	position: fixed;
-	-webkit-transform: scale(0.9);
-	-moz-transform: scale(0.9);
-	-ms-transform: scale(0.9);
-	-o-transform: scale(0.9);
-	transform: scale(0.9);
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	-o-transform: scale(0.8);
+	transform: scale(0.8);
 }
 .super-popup-active body:before, .super-popup-active body:after, .super-popup-active .elgg-page:before {
 	background: white;
@@ -1189,14 +1189,14 @@ body, #super-popup {
 }
 .super-popup-active #super-popup {
 	display: block;
-	-webkit-transform: scale(1.2);
-	-moz-transform: scale(1.2);
-	-ms-transform: scale(1.2);
-	-o-transform: scale(1.2);
-	transform: scale(1.2);
+	-webkit-transform: scale(1.25);
+	-moz-transform: scale(1.25);
+	-ms-transform: scale(1.25);
+	-o-transform: scale(1.25);
+	transform: scale(1.25);
 }
 #super-popup .elgg-body {
-	min-height: 80px;
+	min-height: 60px;
 }
 #super-popup .elgg-footer {
 	margin-right: -10px;

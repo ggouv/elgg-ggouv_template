@@ -153,6 +153,38 @@ function get_dep_from_group_guid($group_guid) {
 
 
 /**
+ * Degrade postal code if group doesn't exist (eg: 69001 > 69000 or 31500 > 31000)
+ * @param  GUID           $cp postal code
+ * @return GUID|false     postal code as GUID of local group
+ */
+function degrade_cp($cp) {
+
+	if ($cp > 98880) return false; // 98880 highest postal code
+
+	$cp = (string) $cp;
+
+	if (strlen($cp) == 4 && $cp < 10000) $cp = '0' . $cp;
+
+	// degrade if $cp doesn't exist
+	if (!elgg_entity_exists($cp)) {
+		if (substr($cp, -3) === '000') {
+			return false;
+		} else if (substr($cp, -2) === '00') {
+			$cp = substr($cp, 0, 2) . '000';
+		} else if (substr($cp, -1) === '0') {
+			$cp = substr($cp, 0, 3) . '00';
+		} else {
+			$cp = substr($cp, 0, 4) . '0';
+		}
+		$cp = degrade_cp($cp);
+	}
+
+	return $cp;
+}
+
+
+
+/**
  * Change group subtype
  *
  * @param string $group_guid GUID of the group
