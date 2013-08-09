@@ -1,5 +1,22 @@
 
 // js for ggouv template
+
+// Constantes
+FranceGeoCenter = L.latLng(46.763056, 2.424722);
+defaultZoom = 6;
+cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png';
+paramsMap = {
+	center: FranceGeoCenter,
+	zoom: defaultZoom,
+	layers: [
+	L.tileLayer(cloudmadeUrl, {
+			maxZoom: 12,
+			attribution: ''
+		})
+	]
+};
+
+
 elgg.provide('elgg.ggouv_template');
 
 // Loaded for the first time only
@@ -826,57 +843,57 @@ elgg.ggouv_template.reload = function() {
 }
 
 
-$.fn.searchlocalgroup = function(mapLoaded, nbrChar) {
-	var nbrChar = nbrChar || 2;
-	TheInput = this;
-	var groupMap = $("#map"),
-		zoom = 6,
-		latitude = 46.763056,
-		longitude = 2.424722,
-		cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-		cloudmade = new L.TileLayer(cloudmadeUrl, {
-			maxZoom: 12,
-			attribution: ''
-		});
-	map = new L.Map('map');
-	map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
-
-	// live search
-	var timeout,
-		villes,
-		hasMarkers = false;
-	TheInput.keyup(function(e) {
-		if ( e.which == 13) return false;
-		var search_input = $(this).val();
-		if (search_input.length > nbrChar-1) { // @todo when is numeric, trigger only with 5 chars
-			if (timeout) {
-				clearTimeout(timeout);
-				timeout = null;
+/**
+ * Live search on map ! Used with input to provide keyup search
+ * @param  {array} options [description]
+ * @return {Array}             An array containing group corresponding
+ */
+$.fn.searchlocalgroup = function(options) {
+	var $this = $(this),
+		queryTimer,
+		options = $.extend({
+			nbrChar: 2, // Minimum chars to start searching
+			beforeSendCallback: $.noop, // function to execute before send request
+			successCallback: $.noop, // function to execute after send request
+		}, options),
+		execFunction = function(func) {
+			if (typeof(func) === 'string') {
+				eval(func);
+			} else if (!elgg.isUndefined(func)) {
+				func();
 			}
+		};
 
-			timeout = setTimeout(function() {
-				search_input = TheInput.val();
-				if (search_input.length > nbrChar-1) { // @todo check why need to do it again ?
-					elgg.post('ajax/view/ggouv_template/ajax/get_city', {
-						dataType: 'json',
-						data: {
-							city: search_input
-						},
-						beforeSend:  function() {
-							$('#searching').removeClass().html('').addClass('loading');
-						},
-						success: function(response) {
-							$('#searching').removeClass().html('');
-							clearTimeout(timeout);
-							if (mapLoaded) mapLoaded(response);
-						}
-					});
-				}
+	// create map
+	map = L.map('map', paramsMap);
+
+	$this.keyup(function(e) {
+		if ( e.which == 13) e.preventDefault(); // prevent validate form
+
+		var search_input = $this.val();
+		if (search_input.length > options.nbrChar-1) { // @todo when is numeric, trigger only with 5 chars
+			clearTimeout(queryTimer);
+			queryTimer = setTimeout(function() {
+				search_input = $this.val();
+				elgg.post('ajax/view/ggouv_template/ajax/get_city', {
+					dataType: 'json',
+					data: {
+						city: search_input
+					},
+					beforeSend: function() {
+						$('#searching').removeClass().html('').addClass('loading');
+						execFunction(options.beforeSendCallback);
+					},
+					success: function(response) {
+						clearTimeout(queryTimer);
+						$('#searching').removeClass().html('');
+						execFunction(options.successCallback(response));
+					}
+				});
 			}, 500);
 		}
 	});
 }
-
 
 
 /**
@@ -1117,6 +1134,18 @@ ggouv_confirm = function (msg, size) {
 };*/
 
 elgg.provide('ggouv');
+
+elgg.provide('ggouv.shakeButton');
+ggouv.shakeButton = function() {
+	$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
+		$(this).effect("shake", {times:2, distance:10}, 100, function() {
+			$(this).animate({'margin-left': 0}, 100);
+		});
+	});
+};
+
+
+
 elgg.provide('ggouv.super_popup');
 
 /**
@@ -1146,7 +1175,7 @@ ggouv.super_popup.create = function(options) {
 		execFunction = function(func) {
 			if (typeof(func) === 'string') {
 				eval(func);
-			} else {
+			} else if (!elgg.isUndefined(func)) {
 				func();
 			}
 		};

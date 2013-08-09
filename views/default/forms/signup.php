@@ -121,152 +121,11 @@ echo '</div>';
 		MAX_COMPLEXITY*100;complexity=complexity>100?100:complexity;callback.call(this,valid,complexity)})})}})})(jQuery);
 
 
-
-		var hasMarkers,
-			shakeButton = function() {
-				$('.elgg-form .elgg-button-submit').animate({'margin-left': 10}, 100, function() {
-					$(this).effect("shake", {times:2, distance:10}, 100, function() {
-						$(this).animate({'margin-left': 0}, 100);
-					});
-				});
-			};
-
-		/*var groupMap = $("#map"),
-			hasMarkers,
-			zoom = 6,
-			latitude = 46.763056,
-			longitude = 2.424722,
-			cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-			cloudmade = new L.TileLayer(cloudmadeUrl, {
-				maxZoom: 12,
-				attribution: ''
-			});
-
-		map = new L.Map('map');
-		map.setView(new L.LatLng(latitude, longitude), zoom).addLayer(cloudmade);
-
 		$.validator.addMethod("registerCP", function(value, element) {
 			if (value.length != 5) return true;
-
-			if (value == '75000') {
-				$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
-				$('.register-location').hide();
-				return false;
-			}
-
-			var response;
-			elgg.post('ajax/view/ggouv_template/ajax/form_validation', {
-				dataType: 'json',
-				async: false,
-				data: {
-					location: value,
-				},
-				beforeSend: function() {
-					$('#searching').removeClass().html('').addClass('loading');
-				},
-				success: function(data) {
-					response = data;
-				},
-				error: function() {
-					valuevalid = '"erreur avec le serveur"';
-				}
-			});
-			if (response) {
-				$('#map').css({opacity: 1});
-				$('.register-location').show().animate({opacity: 1});
-				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-
-				if (hasMarkers) map.removeLayer(villes);
-				var maxHab = 0,
-					maxNorth = -90,
-					maxSouth = 90,
-					maxEast = -180,
-					maxOuest = 180,
-					maxHabKey = 0,
-					markers = [];
-				$.each(response, function(key, value) {
-					var popupContent = $('<div>').append(
-						$('<h2>').html(value.article+' '+value.ville).after(
-							$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
-								$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
-									$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
-						))).clone()).remove().html();
-					markers.push(L.marker([value.lat, value.long]).bindPopup(
-					popupContent));
-					if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
-					if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
-					if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
-					if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
-					if (parseFloat(value.habitants30122008) > maxHab) {
-						maxHabKey = key;
-						maxHab = parseFloat(value.habitants30122008);
-					}
-				});
-				villes = L.layerGroup(markers);
-				map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
-				markers[maxHabKey].openPopup();
-				hasMarkers = true;
-				return true;
-			} else {
-				$('#map').css({opacity: 0});
-				$('#searching').addClass('notfound');
-				$('.register-location').show().animate({opacity: 1});
-				$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-				return false;
-			}
-		}, $.validator.format(elgg.echo('ggouv:search:localgroups:notfound')));*/
-/*.searchlocalgroup(function(response) {
-				if ($(".elgg-form-signup input[name='location']").val() == '75000') {
-					$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
-					$('.register-location').hide();
-				} else if (response == false) {
-					$('#map').css({opacity: 0});
-					$('#searching').addClass('notfound');
-					$('.register-location').show().animate({opacity: 1});
-					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-				} else {
-					$('#map').css({opacity: 1});
-					$('.register-location').show().animate({opacity: 1});
-					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-					if (hasMarkers) map.removeLayer(villes);
-					var maxHab = 0,
-						maxNorth = -90,
-						maxSouth = 90,
-						maxEast = -180,
-						maxOuest = 180,
-						maxHabKey = 0,
-						markers = [];
-					$.each(response, function(key, value) {
-						var popupContent = $('<div>').append(
-							$('<h2>').html(value.article+' '+value.ville).after(
-								$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
-									$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
-										$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
-							))).clone()).remove().html();
-						markers.push(L.marker([value.lat, value.long]).bindPopup(
-						popupContent));
-						if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
-						if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
-						if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
-						if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
-						if (parseFloat(value.habitants30122008) > maxHab) {
-							maxHabKey = key;
-							maxHab = parseFloat(value.habitants30122008);
-						}
-					});
-					villes = L.layerGroup(markers);
-					map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
-					markers[maxHabKey].openPopup();
-					hasMarkers = true;
-				}
-			}, 5)*/
-
-$.validator.addMethod("registerCP", function(value, element) {
-	console.log($(element), 'e');
-	//if (value.length != 5) return true;
-	if ($(element).hasClass('notfound')) return false;
-	return true;
-}, $.validator.format(elgg.echo('ggouv:search:localgroups:notfound')));
+			if ($(element).hasClass('notfound')) return false;
+			return true;
+		}, $.validator.format(elgg.echo('ggouv:search:localgroups:notfound')));
 
 
 		$('.elgg-form-signup').validate({
@@ -281,26 +140,28 @@ $.validator.addMethod("registerCP", function(value, element) {
 			},
 			messages: {
 				username: {
-					minlength: elgg.echo('registration:usernametooshort', [4]),
-					maxlength: elgg.echo('registration:usernametoolong', [30]),
+					minlength: $.validator.format(elgg.echo('registration:usernametooshort', [4])),
+					maxlength: $.validator.format(elgg.echo('registration:usernametoolong', [30])),
 					remote: $.validator.format(elgg.echo('registration:userexists'))
 				},
 				location: {
-					minlength: elgg.echo('registration:locationtooshort', [5])
+					minlength: $.validator.format(elgg.echo('registration:locationtooshort', [5]))
 				}
 			},
-			invalidHandler: shakeButton,
-			beforeSubmit: function(form) {
-				console.log(form, 'f');
-				//form.submit();
-			}
+			invalidHandler: ggouv.shakeButton
 		});
 
 
 
 		if ($('.elgg-form-signup').length) {
+
 			if ($(".elgg-form-signup input[name='username']").val().length) $('.elgg-form-signup').valid(); // perform valid() in case of REFERER
-			$('.elgg-form-signup, #map, .social-connect').height($(window).height() - $('.elgg-form-signup').position().top - 93);
+
+			// resize stuffs
+			$('.elgg-form-signup, #map, .social-connect').height(Math.max($('.elgg-form-signup').height(), $(window).height() - $('.elgg-form-signup').position().top - 93));
+			$('#map').width($(window).width() - 540);
+
+			var villes = new L.FeatureGroup();
 			$('.elgg-form-signup input').focus(function() {
 				$('.social-connect').hide();
 				$('.back-socialnetwork').show().click(function() {
@@ -331,59 +192,66 @@ $.validator.addMethod("registerCP", function(value, element) {
 				if ($(".elgg-form-signup input[name='location']").val().length < 5) {
 					$('.register-location').hide();
 					$('.register-helper.location').html(elgg.echo('registration:helper:location')).show();
+					if (map.hasLayer(villes)) {
+						villes.clearLayers();
+						map.removeLayer(villes);
+					}
 				} else {
 					$('.register-location, .register-helper.location').show();
 				}
-			}).searchlocalgroup(function(response) {
-				if ($(".elgg-form-signup input[name='location']").val() == '75000') {
-					$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
-					$('.register-location').hide();
-					$('input[name="location"]').addClass('notfound');
-				} else if (response == false) {
-					$('#map').css({opacity: 0});
-					$('label[for="location"]').removeClass('valid').html(elgg.echo('ggouv:search:localgroups:notfound'));
-					$('.register-location').show().animate({opacity: 1});
-					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-					$('input[name="location"]').addClass('notfound');
-				} else {
-					$('#map').css({opacity: 1});
-					$('.register-location').show().animate({opacity: 1});
-					$('.register-helper.location').html(elgg.echo('registration:helper:location'));
-					$('input[name="location"]').removeClass('notfound');
-					if (hasMarkers) map.removeLayer(villes);
-					var maxHab = 0,
-						maxNorth = -90,
-						maxSouth = 90,
-						maxEast = -180,
-						maxOuest = 180,
-						maxHabKey = 0,
-						markers = [];
-					$.each(response, function(key, value) {
-						var popupContent = $('<div>').append(
-							$('<h2>').html(value.article+' '+value.ville).after(
-								$('<span>', {style: 'font-size: 1.5em;'}).html(value.cp).after(
-									$('<h3>').html(elgg.echo('groups:localgroup:departement')).after(
-										$('<span>', {style: 'font-size: 1.2em;'}).html(value.dep)
-							))).clone()).remove().html();
-						markers.push(L.marker([value.lat, value.long]).bindPopup(
-						popupContent));
-						if (parseFloat(value.lat) > maxNorth) maxNorth = parseFloat(value.lat);
-						if (parseFloat(value.lat) < maxSouth) maxSouth = parseFloat(value.lat);
-						if (parseFloat(value.long) > maxEast) maxEast = parseFloat(value.long);
-						if (parseFloat(value.long) < maxOuest) maxOuest = parseFloat(value.long);
-						if (parseFloat(value.habitants30122008) > maxHab) {
-							maxHabKey = key;
-							maxHab = parseFloat(value.habitants30122008);
+			}).searchlocalgroup({
+				nbrChar: 5,
+				beforeSendCallback: function() {
+					$('label[for="location"]').addClass('hidden');
+				},
+				successCallback: function(response) {
+					if ($(".elgg-form-signup input[name='location']").val() == '75000') {
+						$('.register-helper.location').html(elgg.echo('registration:helper:location:paris'));
+						$('.register-location').hide();
+						$('input[name="location"]').addClass('notfound');
+						$('label[for="location"]').removeClass('hidden');
+					} else if (response == false) {
+						$('#map').css({opacity: 0});
+						$('label[for="location"]').removeClass('valid hidden').html(elgg.echo('ggouv:search:localgroups:notfound'));
+						$('.register-location').show().animate({opacity: 1});
+						$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+						$('input[name="location"]').addClass('notfound');
+					} else {
+						$('#map').css({opacity: 1});
+						$('.register-location').show().animate({opacity: 1});
+						$('.register-helper.location').html(elgg.echo('registration:helper:location'));
+						$('label[for="location"]').removeClass('valid hidden').html('');
+						$('input[name="location"]').removeClass('notfound');
+						if (map.hasLayer(villes)) {
+							villes.clearLayers();
+							map.removeLayer(villes);
 						}
-					});
-					villes = L.layerGroup(markers);
-					map.addLayer(villes).fitBounds([[maxSouth, maxOuest], [maxNorth, maxEast]]).setZoom(12);
-					markers[maxHabKey].openPopup();
-					hasMarkers = true;
+
+						var LeafletPopup = Mustache.compile($('#leaflet-popup-template').html()),
+							maxHab = 0,
+							maxHabKey = 0,
+							markers = [];
+						$.each(response, function(key, value) {
+							markers[key] = L.marker([value.lat, value.long]).bindPopup(LeafletPopup(value));
+							if (parseFloat(value.habitants30122008) > maxHab) {
+								maxHabKey = key;
+								maxHab = parseFloat(value.habitants30122008);
+							}
+							villes.addLayer(markers[key]);
+						});
+						map.addLayer(villes).fitBounds(villes.getBounds());
+						markers[maxHabKey].openPopup();
+					}
 				}
-			}, 5);
+			});
 
 		}
 
 	});
+
+$(window).bind("resize", function() {
+	$('.elgg-form-signup').height('auto');
+	$('.elgg-form-signup, #map, .social-connect').height(Math.max($('.elgg-form-signup').height(), $(window).height() - $('.elgg-form-signup').position().top - 93));
+	$('#map').width($(window).width() - 540);
+});
 </SCRIPT>

@@ -27,7 +27,7 @@ function elgg_ggouv_template_init() {
 	elgg_unregister_js('elgg.autocomplete');
 	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js", 'footer');
 
-	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.4/leaflet.js", 'footer');
+	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.6.4/leaflet.js", 'head', 100); // we load it in head because this lib provide a global function L
 
 	elgg_register_ajax_view('ggouv_template/ajax/get_city');
 	elgg_register_ajax_view('ggouv_template/ajax/form_validation');
@@ -1354,7 +1354,6 @@ TEXT;
 
 	ggouv_execute_js($script);
 }
-
 
 
 

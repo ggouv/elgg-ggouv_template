@@ -27,3 +27,14 @@
 		</div>
 	</div>
 </script>
+
+
+<!-- Template for leaflet popup -->
+<script id="leaflet-popup-template" type="text/template">
+	<div>
+		<h2>{{#article}}{{article}}&nbsp;{{/article}}{{ville}}</h2>
+		<span style="font-size: 1.5em;">{{cp}}</span>
+		<h3><?php echo elgg_echo('groups:localgroup:departement'); ?></h3>
+		<span style="font-size: 1.2em;">{{dep}}</span>
+	<div>
+</script>

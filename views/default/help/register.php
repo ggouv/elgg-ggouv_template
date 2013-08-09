@@ -54,7 +54,6 @@
 		margin-left: 500px;
 		position: absolute;
 		top: 15px;
-		width: 100%;
 		font-style: italic;
 	}
 	.register-helper.username {
