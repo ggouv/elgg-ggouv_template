@@ -92,6 +92,6 @@ echo elgg_view('page/elements/spotlight', array(
 
 echo '</div>';
 
-echo '<span class="elgg-icon elgg-icon-delete"></span>';
+echo '<span class="elgg-icon elgg-icon-delete link"></span>';
 
 echo '</div>';

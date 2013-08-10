@@ -33,8 +33,12 @@
 <script id="leaflet-popup-template" type="text/template">
 	<div>
 		<h2>{{#article}}{{article}}&nbsp;{{/article}}{{ville}}</h2>
-		<span style="font-size: 1.5em;">{{cp}}</span>
+		<a href="<?php echo elgg_get_site_url(); ?>groups/profile/{{cp}}/{{ville}}">
+			<span style="font-size: 1.5em;">{{cp}}</span>
+		</a>
 		<h3><?php echo elgg_echo('groups:localgroup:departement'); ?></h3>
-		<span style="font-size: 1.2em;">{{dep}}</span>
+		<a href="<?php echo elgg_get_site_url(); ?>groups/profile/{{dep}}/{{nom_dep}}">
+			<span style="font-size: 1.2em;">{{dep}}</span>
+		</a>
 	<div>
 </script>

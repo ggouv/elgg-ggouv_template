@@ -29,8 +29,22 @@ if (in_array($group->getSubtype(), array('localgroup'))) {
 	<div class="elgg-image">
 		<div class="groups-profile-map">
 			<?php
-				echo '<div id="map" style="height: 200px; width: 400px;" data-zoom="' . $zoom . '" data-lat="' . $data_ville[0]->lat . '" data-long="' . $data_ville[0]->long . '"></div>';
+				echo '<div id="map" style="height: 200px; width: 400px;"></div>';
 			?>
+		<script language="Javascript">
+			$(document).ready(function() {
+				var groupMap = $("#map");
+
+				map = L.map('map', ggouv.getParamsMap(18));
+				map.setView(
+					new L.LatLng(
+						<?php echo $data_ville[0]->lat; ?>,
+						<?php echo $data_ville[0]->long; ?>
+					),
+					<?php echo $zoom; ?>
+				);
+			});
+		</script>
 		</div>
 	</div>
 
@@ -43,7 +57,7 @@ if (in_array($group->getSubtype(), array('localgroup'))) {
 			<div class="stats mls mrm"><?php echo $group->getMembers(0, 0, TRUE); ?></div>
 			<h3><?php echo elgg_echo('groups:summary:members'); ?></h3>
 		</li>
-		
+
 		<?php echo elgg_view('groups_admins_elections/list_mandats'); ?>
 
 	</ul>

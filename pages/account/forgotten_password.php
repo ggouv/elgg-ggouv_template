@@ -14,7 +14,8 @@ $title = elgg_echo("user:password:lost");
 $content = elgg_view_title($title);
 
 $content .= elgg_view_form('user/requestnewpassword', array(
-	'class' => 'elgg-form-account',
+	'class' => 'elgg-form-account validate-form',
+	'style' => 'width: 50%;'
 ));
 
 $body = elgg_view_layout("one_column", array('content' => $content));

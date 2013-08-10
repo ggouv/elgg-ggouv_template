@@ -23,7 +23,7 @@ foreach ($text as $key => $section) {
 }
 
 // section 1
-$content = '<div id="section1" class="width80"><div class="row-fluid">';
+$content = '<div id="section1" class="width80" data-homepage="true"><div class="row-fluid">';
 
 	$content .= '<div class="span8">' .
 		elgg_view('output/longtext', array(
@@ -124,3 +124,18 @@ $content .= elgg_view('page/elements/spotlight', array(
 $content .= '</div></div></div>';
 
 echo $content;
+
+?>
+
+<script language="Javascript">
+	$(document).ready(function() {
+		$('body').addClass('homepage');
+		$("#slideshow").removeClass('hidden').responsiveSlides({ // hidden class to prevent ugly effect
+			nav: true,
+			timeout: 20000, // 20 seconds
+			pause: true,
+			prevText: '<span class="t">&larr;</span>',
+			nextText: '<span class="t">&rarr;</span>'
+		});
+	});
+</script>

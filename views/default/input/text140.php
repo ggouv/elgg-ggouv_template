@@ -6,8 +6,8 @@
  * @package Elgg
  * @subpackage Core
  *
- * @uses $vars['class'] Additional CSS class
- 		$vars['id_count'] Id of the counter
+ * @uses $vars['class']     Additional CSS class
+ *       $vars['id_count']  Id of the counter
  */
 
 if (isset($vars['class'])) {
@@ -30,6 +30,7 @@ $defaults = array(
 $vars = array_merge($defaults, $vars);
 
 ?>
+
 <div class="text140-characters-remaining">
 	<input type="text" <?php echo elgg_format_attributes($vars); ?> />
 	<span <?php echo $id_count; ?> class="pts"><?php echo 140 - mb_strlen($vars['value']); ?></span>

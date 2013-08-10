@@ -10,7 +10,10 @@ function elgg_ggouv_template_init() {
 	elgg_extend_view('css/elgg','ggouv_template/css');
 	elgg_extend_view('css/elgg','ggouv_template/bootstrap-responsive');
 	elgg_extend_view('css/elgg','ggouv_template/tipsy');
-	elgg_extend_view('js/elgg', 'ggouv_template/js');
+
+	elgg_extend_view('js/elgg', 'ggouv_template/js/init');
+	elgg_extend_view('js/elgg', 'ggouv_template/js/history');
+	elgg_extend_view('js/elgg', 'ggouv_template/js/tools');
 	elgg_extend_view('page/elements/foot', 'ggouv_template/templates_mustache', 498);
 
 	elgg_register_js('jquery.scrollTo',"$http_base/vendors/jquery.scrollTo-min.js", 'footer');
@@ -118,7 +121,10 @@ function elgg_ggouv_template_init() {
 
 	// Override register page handler to change case register by signup
 	elgg_unregister_page_handler('register');
+	elgg_unregister_page_handler('forgotpassword');
 	elgg_register_page_handler('signup', 'ggouv_user_account_page_handler');
+	elgg_register_page_handler('forgotpassword', 'ggouv_user_account_page_handler');
+
 	elgg_unregister_page_handler('twitter_api', 'twitter_api_pagehandler');
 	elgg_register_page_handler('twitter_api', 'ggouv_twitter_api_pagehandler');
 
@@ -348,9 +354,6 @@ function ggouv_user_account_page_handler($page_elements, $handler) {
 			break;
 		case 'forgotpassword':
 			require_once("$base_dir/forgotten_password.php");
-			break;
-		case 'resetpassword':
-			require_once("$base_dir/reset_password.php");
 			break;
 		case 'signup':
 			require_once("$base_dir/register.php");
