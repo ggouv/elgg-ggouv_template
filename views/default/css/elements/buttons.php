@@ -24,7 +24,6 @@
 	border-radius: 4px;
 
 	width: auto;
-	min-width: 10px;
 	height: 16px;
 	text-align: center;
 	padding: 3px 6px 2px;
@@ -127,20 +126,12 @@ input.elgg-button:after {
 	text-decoration: none;
 	color: #333;
 	border: 1px solid #999;
-
-	/*-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	border-radius:4px;
-
-	-webkit-box-shadow: 0 0 0;
-	-moz-box-shadow: 0 0 0;
-	box-shadow: 0 0 0;*/
-
-	/*background-image:url(<?php echo elgg_get_site_url(); ?>_graphics/elgg_sprites.png);
-	background-position:-150px -51px;
-	background-repeat:no-repeat;*/
 }
-
+@media screen and (-webkit-min-device-pixel-ratio:0) { /* hack Chrome / Safari */
+	.elgg-button-dropdown {
+		line-height: 16px;
+	}
+}
 .elgg-button-dropdown:after {
 	content: "\2193";
 	font-family: "ggouv";
@@ -149,22 +140,25 @@ input.elgg-button:after {
 	text-transform: none;
 	vertical-align: bottom;
 }
-
 .elgg-button-dropdown:hover {
-	background-color: #71B9F7;
+	background: #71B9F7;
 	text-decoration: none;
 }
-
+.elgg-button-dropdown.elgg-submenu:hover {
+	background: #ccc;
+}
 .elgg-button-dropdown.elgg-state-active {
 	background: #ccc;
 	outline: none;
-	color: #333;
-	border:1px solid #ccc;
+	color: white;
+	box-shadow: none;
+	text-shadow: none;
 
 	-webkit-border-radius:4px 4px 0 0;
 	-moz-border-radius:4px 4px 0 0;
 	border-radius:4px 4px 0 0;
 }
+
 .elgg-button.group_admin_only {
 	border:1px solid red;
 }
@@ -188,7 +182,7 @@ input.elgg-button:after {
 	-moz-border-radius: 0 4px 4px 0;
 	border-radius: 0 4px 4px 0;
 }
-.output-group input + * {
+.output-group > * + * {
 	margin-left: -4px;
 }
 .output-group .elgg-input-text {

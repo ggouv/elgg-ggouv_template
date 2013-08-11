@@ -25,10 +25,6 @@
 #login-dropdown .elgg-button-dropdown:after {
 	padding-left: 5px;
 }
-#login-dropdown .elgg-button-dropdown.elgg-state-active:hover, #login-dropdown .elgg-button-dropdown.elgg-state-active:focus {
-	box-shadow: none;
-	text-shadow: none;
-}
 #login-dropdown .elgg-button-dropdown.elgg-state-active {
 	background: #4690D6;
 	color: white;
