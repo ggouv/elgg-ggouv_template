@@ -105,7 +105,7 @@ echo '</div>';
 
 ?>
 
-<script language="Javascript">
+<script language="javascript" type="text/javascript">
 	$(document).ready(function() {
 
 		/*

@@ -501,9 +501,10 @@ function ggouv_tagcloud_page_handler($page) {
 
 function tour_handler() {
 	$script = <<<TEXT
-$(document).ready(function() {
-	$('.start-tour').click();
-});
+	$(document).ready(function() {
+			$('.start-tour').click();
+			console.log('uiui');
+	});
 TEXT;
 	ggouv_execute_js($script);
 	forward('activity');

@@ -68,12 +68,14 @@ $release = get_version(true);
 <?php } ?>
 
 <script type="text/javascript">
+	<?php echo elgg_view('js/initialize_elgg'); ?>
 	<?php
 		foreach (ggouv_execute_js() as $value) {
+			echo "\nexecute_js_at_start = function() {\n";
 			echo $value;
+			echo "\n};\nelgg.register_hook_handler('init', 'system', execute_js_at_start, 9999);";
 		}
 	?>
-	<?php echo elgg_view('js/initialize_elgg'); ?>
 </script>
 
 <?php

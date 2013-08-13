@@ -32,7 +32,6 @@ elgg.ggouv_template.history = function() {
 								"[href*='address='],"+
 								"[href*='/avatar/edit'],"+
 								"[href*='/action/widgets/delete'],"+
-								"[href*='/action/workflow/list/delete'],"+
 								"[href*='notifications/personal'],"+
 								"[href^='"+elgg.get_site_url()+"split'],"+
 								"[href^='"+elgg.get_site_url()+"tour'],"+
@@ -453,11 +452,11 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	elgg.markdown_wiki.reload();
 	elgg.deck_river.init();
 	elgg.brainstorm.init();
-	//elgg.bookmarks.init();
+	//elgg.bookmarks.reload();
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.answers.init();
-	//elgg.ggouv_pad.resize();
+	//elgg.ggouv_pad.reload();
 	elgg.ggouv_template.reload();
 
 	// Reload autocomplete elgg.userpicker.userList @todo remove it for next version. Elgg 1.8.9 don't fix it

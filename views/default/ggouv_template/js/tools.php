@@ -268,28 +268,33 @@ $.fn.searchlocalgroup = function(options) {
 (function( $ ){
 	$.fn.fitElement = function(element, kompressor, options, based, callback ) {
 		// Setup options
-		var compressor = kompressor || 1,
-		settings = $.extend({
-			'minSize' : Number.NEGATIVE_INFINITY,
-			'maxSize' : Number.POSITIVE_INFINITY,
-			'modificator' : 0
-		}, options);
+		var GUID,
+			compressor = kompressor || 1,
+			settings = $.extend({
+				'minSize' : Number.NEGATIVE_INFINITY,
+				'maxSize' : Number.POSITIVE_INFINITY,
+				'modificator' : 0
+			}, options);
 
 		return this.each(function() {
-			var $this = $(this);
-			var container = based || $this;
-			// Resizer() resizes items based on the object width divided by the compressor
-			var resizer = function() {
-				var newCSS = Math.max(Math.min(container.width()/(compressor), parseFloat(settings.maxSize)), parseFloat(settings.minSize)) + settings.modificator;
-				$this.css(element, newCSS);
-				// Execute callback if any
-				if (callback) callback();
-			};
+			var $this = $(this),
+				container = based || $this,
+				resizer = function() { // Resizer() resizes items based on the object width divided by the compressor
+					$this.css(element, Math.max(
+						Math.min(
+							container.width()/(compressor),
+							parseFloat(settings.maxSize)
+						),
+						parseFloat(settings.minSize)
+					) + settings.modificator);
+					if (callback) callback(); // Execute callback if any
+				},
+			nodeBind = 'resize.fitElement.'+this.nodeName+this.id+this.className.replace(/\s+/g, '-'); // identify bind handler
 
-			// Call once to set
-			resizer();
+			resizer(); // Call once to set
+
 			// Call on resize. Opera debounces their resize by default
-			$(window).bind('resize', resizer);
+			$(window).unbind(nodeBind).bind(nodeBind, resizer);
 		});
 	};
 })( jQuery );

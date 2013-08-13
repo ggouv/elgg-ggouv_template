@@ -25,7 +25,7 @@ echo '<div id="map"></div>';
 
 ?>
 
-<script language="Javascript">
+<script language="javascript" type="text/javascript">
 	$(document).ready(function() {
 
 		$('#map').height($(window).height() - $('#map').position().top - 68);
