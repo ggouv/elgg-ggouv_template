@@ -1979,7 +1979,8 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	 */
 	'comment:error'  =>  "Erreur, impossible d'enregistrer le commentaire",
 	'comment:edited' => "Commentaire modifié.",
-	'comment:edit' =>"Modifier le commentaire",
+	'comment:edit' => "Modifier le commentaire",
+	'comment:mention' => "Mentionner l'auteur<br>(et citer le texte sélectionné)",
 
 	/**
 	 * Members

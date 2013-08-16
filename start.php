@@ -1074,22 +1074,32 @@ function gravatar_avatar_hook($hook, $type, $url, $params) {
 function editablecomments_annotation_menu($hook, $type, $return, $params) {
 	if ($params['annotation']->name == 'generic_comment') {
 
+		$options = array(
+			'name' => 'comment-reply',
+			'text' => '&#60;', // unicode 003C
+			'title' => elgg_echo('comment:mention'),
+			'class' => 'gwf tooltip s',
+			'href' => "#",
+			'onclick' => "ggouv.quoteComment(this);",
+			'priority' => 80
+		);
+		$return[] = ElggMenuItem::factory($options);
 
 		if ($params['annotation']->canEdit()) {
-			$url = "#editablecomments-edit-annotation-" . $params['annotation']->id;
 			$options = array(
 				'name' => 'comment-edit',
 				'text' => '&#9998;', // unicode 270E
 				'title' => elgg_echo('comment:edit'),
 				'class' => 'gwf tooltip s',
-				'href' => $url,
+				'href' => "#editablecomments-edit-annotation-" . $params['annotation']->id,
 				'rel' => 'toggle',
 				'priority' => 90
 			);
 			$return[] = ElggMenuItem::factory($options);
-			return $return;
 		}
+		return $return;
 	}
+
 }
 
 

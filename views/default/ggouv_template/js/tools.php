@@ -16,6 +16,38 @@ ggouv.shakeButton = function() {
 
 
 
+/*
+ * Tools for comment
+ */
+
+/**
+ * Return selected text
+ * @return {text} The text selected
+ */
+ggouv.getSelectionText = function() {
+	var text = '';
+	if (window.getSelection) {
+		text = window.getSelection().toString();
+	} else if (document.selection && document.selection.type != 'Control') {
+		text = document.selection.createRange().text;
+	}
+	return text;
+};
+
+
+
+ggouv.quoteComment = function(e) {
+	var text = ggouv.getSelectionText(),
+		mention = $(e).closest('.elgg-item').find('a[href*="profile"]').attr('href').match('/profile/(.*)')[1],
+		inputMD = $(e).closest('.elgg-comments').find('.elgg-form-comments-add .input-markdown'),
+		pre = post = '';
+
+	if (inputMD.val() != '') pre = inputMD.val() + '\n\n';
+	if (text != '') post = ' \n> ' + text.replace(/[\n\r]/g, '  \n> ') + '\n\n';
+	inputMD.focus().val(pre + '@'+mention + ' : ' + post).keyup();
+};
+
+
 elgg.provide('ggouv.super_popup');
 /**
  * Display a modal popup with overlay

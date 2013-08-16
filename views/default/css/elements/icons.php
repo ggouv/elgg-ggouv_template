@@ -473,15 +473,19 @@ a.external:after {
 }
 
 /* ggouv */
-.elgg-menu-item-edit a, .elgg-menu-item-comment-edit a {
+.elgg-menu-item-edit a, .elgg-menu-item-comment-edit a, .elgg-menu-item-comment-reply a {
 	font-size: 32px;
 	color: #CCC;
 	margin-top: -2px;
 	text-decoration: none;
 	transition: all 0.5s ease;
 }
-.elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover {
+.elgg-menu-item-edit a:hover, .elgg-menu-item-comment-edit a:hover, .elgg-menu-item-comment-reply a:hover {
 	color: #4690D6;
+}
+.elgg-menu-item-comment-reply a {
+	font-size: 40px;
+	margin: -2px 4px 0 0;
 }
 
 .elgg-avatar > .elgg-icon-hover-menu {
