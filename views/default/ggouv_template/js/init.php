@@ -369,6 +369,29 @@ elgg.ggouv_template.reload = function() {
 		invalidHandler: ggouv.shakeButton
 	});
 
+	// share menu
+	$('.ggouv-share').click(function(e) {
+		var $this = $(this),
+			thisPos = $this.offset(),
+			sMenu = Mustache.compile($('#share-menu').html());
+
+		if ($('.share-menu').length) $('.share-menu').remove();
+		$this.addClass('elgg-state-active');
+		$('.elgg-page-body').append(
+			$(sMenu({
+				sl: $this.attr('href'),
+				text: $this.data('title')
+			})).css({top: thisPos.top+22, left: thisPos.left-218})
+		);
+
+		$(document).unbind('click.sharemenu').bind('click.sharemenu', function() {
+			$this.removeClass('elgg-state-active');
+			$('.share-menu').remove();
+			$(document).unbind('click.sharemenu');
+		});
+		return false;
+	});
+
 };
 
 /*

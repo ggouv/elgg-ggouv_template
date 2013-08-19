@@ -804,6 +804,20 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 		$return[] = ElggMenuItem::factory($options);
 	}
 
+	if ($entity->getType() != 'group') {
+		$options = array(
+			'name' => 'shortlink',
+			'text' => 'r',
+			'title' => elgg_echo('menu:shortlink'),
+			'class' => 'ggouv-share gwf tooltip s t prs',
+			'onclick' => 'javascript:void(0)',
+			'href' => elgg_get_plugin_setting('site_shorturl', 'elgg-deck_river') . alphaID($entity->getGUID()),
+			'data-title' => $entity->title,
+			'priority' => 150,
+		);
+		$return[] = ElggMenuItem::factory($options);
+	}
+
 	if ($entity->canEdit() && $handler) {
 		// edit link
 		$options = array(

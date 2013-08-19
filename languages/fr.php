@@ -926,7 +926,7 @@ $french = array(
 /**
  * Input / output strings
  */
-	'deleteconfirm' => "Etes-vous sur de vouloir supprimer cet élément?",
+	'deleteconfirm' => "Etes-vous sur de vouloir supprimer cet élément ?",
 	'fileexists' => "Un fichier a déjà été chargé. Pour le remplacer sélectionner le ci-dessous :",
 
 /**
@@ -2051,6 +2051,14 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'forms:digits' => "Entrez seulement des chiffres !",
 	'forms:minlength' => "Entrez au moins {0} caractères !",
 	'forms:maxlength' => "Entrez {0} caractères maximum !",
+
+	/*
+	 * Menus
+	 */
+	'menu:shortlink' => "Partager le lien court",
+	'thewire:put_shortlink_in_wire' => "Ajouter le lien dans le lanceur",
+	'thewire:put_title_shortlink_in_wire' => "Ajouter le titre et le lien",
+	'share:on' => "Partager sur",
 
 	/**
 	 * System message

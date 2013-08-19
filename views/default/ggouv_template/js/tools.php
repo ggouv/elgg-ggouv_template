@@ -36,6 +36,11 @@ ggouv.getSelectionText = function() {
 
 
 
+/**
+ * Quote author of a comment and add text as a citation if text is selected
+ * @param  [Object] e the button
+ * @return nothing
+ */
 ggouv.quoteComment = function(e) {
 	var text = ggouv.getSelectionText(),
 		mention = $(e).closest('.elgg-item').find('a[href*="profile"]').attr('href').match('/profile/(.*)')[1],
@@ -46,6 +51,8 @@ ggouv.quoteComment = function(e) {
 	if (text != '') post = ' \n> ' + text.replace(/[\n\r]/g, '  \n> ') + '\n\n';
 	inputMD.focus().val(pre + '@'+mention + ' : ' + post).keyup();
 };
+
+
 
 
 elgg.provide('ggouv.super_popup');
@@ -266,7 +273,7 @@ $.fn.searchlocalgroup = function(options) {
 			clearTimeout(queryTimer);
 			queryTimer = setTimeout(function() {
 				search_input = $this.val();
-				elgg.post('ajax/view/ggouv_template/ajax/get_city', {
+				/*elgg.post('ajax/view/ggouv_template/ajax/get_city', {
 					dataType: 'json',
 					data: {
 						city: search_input
@@ -280,7 +287,14 @@ $.fn.searchlocalgroup = function(options) {
 						$('#searching').removeClass().html('');
 						execFunction(options.successCallback(response));
 					}
-				});
+				});*/
+				$('#searching').removeClass().html('').addClass('loading');
+				execFunction(options.beforeSendCallback);
+				var response = geoCities[search_input];
+				clearTimeout(queryTimer);
+				$('#searching').removeClass().html('');
+				console.log(response);
+				execFunction(options.successCallback(response));
 			}, 500);
 		}
 	});

@@ -774,6 +774,22 @@
 	padding-right: 5px;
 }
 
+
+/*
+ * Share menu
+ */
+.share-menu {
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	display: block;
+	position: absolute;
+	right: 3px;
+	top: 15px;
+	width: 182px;
+	color: #333;
+	padding: 0;
+}
+
+
 /*
  * Plugin markdown-wiki + special debate
  */
