@@ -707,6 +707,16 @@
 	background-color: transparent;
 }
 
+/*
+ * Layout
+ */
+.sidebar-2-fixed .elgg-sidebar-2 > * {
+	position: fixed;
+	max-width: 360px;
+}
+.elgg-sidebar-2 .elgg-river {
+	border-top: 1px solid #CCC;
+}
 
 
 /*

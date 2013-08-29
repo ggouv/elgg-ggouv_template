@@ -363,6 +363,7 @@ function groups_handle_profile_page($guid) {
 		'sidebar_2' => $sidebar2,
 		'title' => $group->name,
 		'filter' => '',
+		'class' => 'sidebar-2-fixed'
 	);
 	$body = elgg_view_layout('content_two_right_sidebars', $params);
 

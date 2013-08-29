@@ -4,6 +4,7 @@
  *
  * @uses $vars['content']        HTML of main content area
  * @uses $vars['sidebar']        HTML of the sidebar
+ * @uses $vars['sidebar_2']      HTML of the sidebar_2
  * @uses $vars['header']         HTML of the content area header (override)
  * @uses $vars['nav']            HTML of the content area nav (override)
  * @uses $vars['footer']         HTML of the content area footer

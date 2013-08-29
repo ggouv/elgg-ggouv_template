@@ -188,15 +188,8 @@
 .groups-latest-reply {
 	float: right;
 }
-#group_activity_module {
-	position: fixed;
-	max-width: 360px;
-}
 #group_activity_module .column-header {
 	display: none;
-}
-#group_activity_module .elgg-river {
-	border-top: 1px solid #CCC;
 }
 .elgg-layout-one-sidebar #group_activity_module {
 	position: relative;

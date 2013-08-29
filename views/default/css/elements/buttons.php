@@ -132,13 +132,16 @@ input.elgg-button:after {
 		line-height: 16px;
 	}
 }
-.elgg-button-dropdown:after {
+.elgg-button-dropdown:after, .elgg-button-dropdown.invert.elgg-state-active:after {
 	content: "\2193";
 	font-family: "ggouv";
 	font-size: 1.2em;
 	font-weight: normal;
 	text-transform: none;
 	vertical-align: bottom;
+}
+.elgg-button-dropdown.invert:after, .elgg-button-dropdown.elgg-state-active:after {
+	content: "\2191";
 }
 .elgg-button-dropdown:hover {
 	background: #71B9F7;
