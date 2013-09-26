@@ -10,55 +10,6 @@ elgg.provide('elgg.ggouv_template');
 
 
 
-/*
- * Sample to understand how js is loaded.
- * You can uncomment to log time and perform benchmark.
- */
-/*
-
-benchmarkTimeInit = new Date().getTime();
-benchmarkTimeHistory = 0;
-console.log(benchmarkTimeInit, 'init'); // Executed when the js loads and the user arrives for the first time on ggouv. elgg core could be not loaded.
-
-elgg.provide('elgg.ggouv_benchmark');
-elgg.ggouv_benchmark.init = function() {
-	console.log(new Date().getTime()-benchmarkTimeInit, 'provide'); // Executed after elgg core js is loaded, only on the first time on ggouv
-	$(document).ready(function() {
-		console.log(new Date().getTime()-benchmarkTimeInit, 'ready'); // Executed when DOM is ready, only on the first time on ggouv
-	});
-	$(window).load(function(){ //Executed after everythings (css,js,images) are loaded, only on the first time on ggouv
-		console.log(new Date().getTime()-benchmarkTimeInit, 'load');
-	});
-
-};
-elgg.register_hook_handler('init', 'system', elgg.ggouv_benchmark.init);
-
-elgg.ggouv_benchmark.click = function() { // Executed when user click on a link
-	benchmarkTimeHistory = new Date().getTime();
-	console.log(benchmarkTimeHistory, 'click');
-};
-elgg.register_hook_handler('ggouv_history', 'click', elgg.ggouv_benchmark.click);
-
-elgg.ggouv_benchmark.statechange = function() { // Executed when url change
-	console.log(new Date().getTime()-benchmarkTimeHistory, 'statechange');
-};
-elgg.register_hook_handler('ggouv_history', 'statechange', elgg.ggouv_benchmark.statechange);
-
-elgg.ggouv_benchmark.success = function() { // Executed when page are loaded after a click or url change
-	console.log(new Date().getTime()-benchmarkTimeHistory, 'success');
-};
-elgg.register_hook_handler('ggouv_history', 'success', elgg.ggouv_benchmark.success);
-
-elgg.ggouv_benchmark.done = function() { // Executed when page are loaded and all stuff are done (reload template and js...)
-	console.log(new Date().getTime()-benchmarkTimeHistory, 'done');
-};
-elgg.register_hook_handler('ggouv_history', 'done', elgg.ggouv_benchmark.done);
-
-*/
-
-
-
-
 // Loaded for the first time only
 elgg.ggouv_template.init = function() {
 
