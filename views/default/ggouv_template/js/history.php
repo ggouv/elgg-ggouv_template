@@ -271,6 +271,7 @@ elgg.ggouv_template.history = function() {
 				});
 
 			} else if (form.hasClass('elgg-form-answers-answer-edit')) { // Special for edit answer
+
 				elgg.action('answers/answer/edit', {
 					data: dataForm,
 					success: function(response) {
@@ -282,6 +283,7 @@ elgg.ggouv_template.history = function() {
 						}
 					}
 				});
+
 			} else { // ajaxify others forms
 
 				var url = elgg.normalize_url(decodeURIComponent(form.attr('action'))),
@@ -296,8 +298,7 @@ elgg.ggouv_template.history = function() {
 
 		$(window).bind('statechange',function() { //History.Adapter.bind(window, 'statechange', function(event) {
 			var State = History.getState();
-			if (State) {
-				elgg.trigger_hook('ggouv_history', 'statechange');
+			if (State && elgg.trigger_hook('ggouv_history', 'statechange')) {
 				elgg.ggouv_template.loadPage(State.url, State.data);
 			}
 		});
@@ -473,6 +474,46 @@ elgg.ggouv_template.loadPage = function(url, data) {
 		}*/
 	});
 };
+
+
+
+/**
+ * Unregister a hook handler
+ * @param {String}   name     Name of the plugin hook
+ * @param {String}   type     Type of the event
+ * @param {Function} handler  Handle to remove
+ * @return {bool}
+ */
+elgg.unregister_hook_handler = function(name, type, handler) {
+	var priorities =  elgg.config.hooks;
+
+	if (!(priorities[name][type] instanceof elgg.ElggPriorityList)) {
+		priorities[name][type] = new elgg.ElggPriorityList();
+	}
+
+	return priorities[name][type].remove(handler);
+};
+
+
+
+/**
+ * Change url in browser without load the page. Only url is changed.
+ * To do that, we need to register a hook on ggouv_history statechane to return false, and remove it just after.
+ *
+ * @param {Obj}      data     data of History State
+ * @param {String}   url      Url to put in browser url (optional). If no url is provided, data.origin is the url.
+ */
+elgg.ggouv_template.changeUrl = function(data, url) {
+	var url = url || data.origin;
+	elgg.register_hook_handler('ggouv_history', 'statechange', elgg.ggouv_template.interceptHistory);
+	History.replaceState(data, null, url);
+};
+// the hook that return false and remove himself
+elgg.ggouv_template.interceptHistory = function() {
+	elgg.unregister_hook_handler('ggouv_history', 'statechange', elgg.ggouv_template.interceptHistory);
+	return false;
+};
+
 
 
 /**
