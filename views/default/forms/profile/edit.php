@@ -11,7 +11,11 @@
 </h3>
 <div>
 	<label><?php echo elgg_echo('Votre nom réel'); ?></label>
-	<?php echo elgg_view('input/text', array('name' => 'realname', 'value' => $vars['entity']->realname, 'class' => 'required', 'maxlength' => 90)); ?>
+	<?php echo elgg_view('input/text', array(
+		'name' => 'realname',
+		'value' => $vars['entity']->realname,
+		'maxlength' => 90
+	)); ?>
 </div>
 <?php
 
@@ -56,17 +60,13 @@ if (is_array($profile_fields) && count($profile_fields) > 0) {
 			'class' => $class
 		);
 		if($shortname == 'location') {
-			$params['class'] = 'required digits';
-			$params['minlength'] = 5;
-			$params['maxlength'] = 5;
-		}
-		if($shortname == 'location') {
-			$params['class'] = 'required digits';
+			$params['id'] = 'location';
+			$params['class'] = 'digits' . (get_input('show_location', false) ? ' elgg-autofocus' : '');
 			$params['minlength'] = 5;
 			$params['maxlength'] = 5;
 		}
 		echo elgg_view("input/{$valtype}", $params);
-		
+
 	?>
 </div>
 <?php
