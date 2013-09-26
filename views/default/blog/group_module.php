@@ -19,10 +19,11 @@ $content = elgg_list_entities_from_metadata(array(
 	'full_view' => false,
 	'pagination' => false,
 ));
-$count = elgg_get_entities(array(
+$count = elgg_get_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'blog',
 	'container_guid' => $group->guid,
+	'metadata_name_value_pairs' => array('name' => 'status', 'value' => 'published'),
 	'limit' => 0,
 	'count' => true
 ));
