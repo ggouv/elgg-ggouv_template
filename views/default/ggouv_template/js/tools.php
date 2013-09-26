@@ -62,7 +62,6 @@ elgg.provide('ggouv.super_popup');
  */
 ggouv.super_popup.create = function(options) {
 	var superPopupTemplate = Mustache.compile($('#super-popup-template').html()),
-		superPopup = $('#super-popup'),
 		options = $.extend({
 					size: null,                         // [string]           'tiny' for a smaller popup
 					title: null,                        // [string]            Title of the popup
@@ -92,11 +91,12 @@ ggouv.super_popup.create = function(options) {
 
 	$('.elgg-page').prepend(superPopupTemplate(options));
 	execFunction(options.createdCallback);
+	var sP = $('#super-popup');
 
-	$('#super-popup').find('.elgg-icon-delete-alt, .elgg-button-cancel').click(function() {
+	sP.find('.elgg-icon-delete-alt, .elgg-button-cancel').click(function() {
 		execFunction(options.cancelCallback);
 	});
-	$('#super-popup').find('.elgg-button-submit').click(function() {
+	sP.find('.elgg-button-submit').click(function() {
 		execFunction(options.okCallback);
 	});
 	$(window).keyup(function(e) {
@@ -112,7 +112,7 @@ ggouv.super_popup.create = function(options) {
  */
 ggouv.super_popup.deactivate = function() {
 	$('html').removeClass('super-popup-active');
-	$('#super-popup').remove();
+	$('#super-popup').remove(); // @todo if many super popup was created, only one is deleted. Should remove all.
 	setTimeout(function() {elgg.deck_river.SetColumnsHeight();},500);
 };
 
@@ -298,6 +298,7 @@ $.fn.searchlocalgroup = function(options) {
 			}, 500);
 		}
 	});
+	return this;
 };
 
 
