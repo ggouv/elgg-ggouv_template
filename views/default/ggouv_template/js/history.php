@@ -325,17 +325,10 @@ elgg.ggouv_template.loadPage = function(url, data) {
 		},
 		stashDeck = function() { // stash deck river before change elgg-page-body
 			if ($('body').hasClass('fixed-deck')) {
-				var deckOrigin = data.origin.replace(/#$/, ''),
-					drl = $('#deck-river-lists');
+				var deckOrigin = data.origin.replace(/#$/, '');
 
 				$('.elgg-menu-item-logo a').attr('href', deckOrigin);
-				drl.attr('data-scrollBkp', drl.scrollLeft()); // store horizontal deck scroll
-				$.each(drl.find('.elgg-river'), function(i, e) {
-					$(e).attr('data-scrollBkp', e.scrollTop); // store all columns scroll
-				});
-				$('.elgg-page-body .elgg-layout')
-					.appendTo('body')
-					.wrapAll('<div id="stash_'+urlToStashID(deckOrigin.match(urlActivity))+'" class="hidden" />');
+				$('.elgg-river-layout:not(.hidden)').addClass('hidden').attr('id', 'stash_'+urlToStashID(deckOrigin.match(urlActivity)));
 			}
 		};
 
@@ -344,17 +337,10 @@ elgg.ggouv_template.loadPage = function(url, data) {
 		var $stash = $('#stash_'+urlToStashID(activityTab));
 
 		stashDeck();
-		$('.elgg-page-body > .elgg-inner').html('').append($stash.contents());
-		$stash.remove();
-		$('body').attr('class', 'fixed-deck');
-		var drl = $('#deck-river-lists');
-		drl.scrollLeft(drl.attr('data-scrollBkp'));
-		$.each(drl.find('.elgg-river'), function(i, e) {
-			$(e).scrollTop($(e).attr('data-scrollBkp'));
-		});
-		elgg.friendly_time.update();
-		elgg.deck_river.SetColumnsHeight();
-		elgg.deck_river.SetColumnsWidth();
+		$('.elgg-river-layout:not(.hidden)').remove();
+		$stash.removeClass('hidden');
+		$('body').attr('class', 't25 fixed-deck'); // we replace class remove all other class
+		$('.deck-popup').not('.pinned').remove(); // remove non-pinned popup
 		if (data.callback) data.callback();
 		return true;
 	}
@@ -442,9 +428,11 @@ elgg.ggouv_template.loadPage = function(url, data) {
 						}
 
 					} else {
-
+						var $epb = $('.elgg-page-body > .elgg-inner');
 						stashDeck();
-						$('.elgg-page-body').html(respBody);
+						$epb.children().not('.elgg-river-layout').remove();
+						$epb.append(respBody);
+						$('.deck-popup').not('.pinned').remove(); // remove non-pinned popup
 
 					}
 
