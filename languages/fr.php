@@ -2140,8 +2140,25 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'deck_river:signup:card:title:1' => "Compléter mon profil",
 	'deck_river:signup:card:description:1' => "On a envie d'en savoir un peu plus sur vous !  \nPar soucis de transparence, et si vous voulez que l'on s'intéresse à vous, il est plutôt conseillé de compléter [votre profile](%s).\n\nVous pouvez le compléter [ici](%s).",
 	'deck_river:signup:card:title:2' => "Voter pour les objectifs communs",
-	'deck_river:signup:card:description:2' => "Vous êtes maintenant un «gitoyen» !  \nAfin de déterminer les grands objectifs du réseau, vous pouvez [voter pour les idées](%s) dont vous souhaitez que l'on s'organise pour les concrétiser ensemble."
+	'deck_river:signup:card:description:2' => "Vous êtes maintenant un «gitoyen» !  \nAfin de déterminer les grands objectifs du réseau, vous pouvez [voter pour les idées](%s) dont vous souhaitez que l'on s'organise pour les concrétiser ensemble.",
 
+
+	/*
+	 * Widgets
+	 */
+	'widget:sort_items:last_action' => "Plus actif",
+	'widget:sort_items:creation' => "Date de création",
+	'widget:sort_items:abc' => "Ordre alphabétique",
+	'widgets:size_items' => "Taille",
+	'widget:size_items:small' => "Normal",
+	'widget:size_items:tiny' => "Petit",
+	'widget:size_items:small_image' => "Image seulement",
+	'widget:size_items:tiny_image' => "Petite image",
+	'slidr:widget:group:owned' => "Afficher les groupes que j'ai créé",
+	'slidr:widget:group:memberof' => "Afficher les groupes dont je suis membre",
+	'dashboard:widget:owned_groups:nogroup' => "Vous n'avez pas encore créé de groupe.",
+	'dashboard:widget:memberof_groups:nogroup' => "Allez sur la page affichant <a href=\"%s\">tous les groupes</a> et rejoignez les groupes qui vous plaisent !",
+	''
 );
 
 add_translation("fr", $french);
