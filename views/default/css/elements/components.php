@@ -158,7 +158,7 @@
 .elgg-river-item {
 	padding: 7px 0;
 }
-.elgg-river-item.elgg-image-block .elgg-body {
+.elgg-river-item.elgg-image-block > .elgg-body {
 	overflow: visible;
 	margin-left: 37px;
 }

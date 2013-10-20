@@ -32,12 +32,12 @@
 <script id="share-menu" type="text/template">
 	<ul class="elgg-module-popup share-menu elgg-submenu">
 		<li>
-			<a href="#" onclick="javascript:elgg.deck_river.insertInThewire('{{sl}}');">
+			<a href="#" onclick="javascript:elgg.thewire.insertInThewire('{{sl}}');">
 				<?php echo elgg_echo('thewire:put_shortlink_in_wire'); ?>
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="javascript:elgg.deck_river.insertInThewire('{{text}} {{sl}}');">
+			<a href="#" onclick="javascript:elgg.thewire.insertInThewire('{{text}} {{sl}}');">
 				<?php echo elgg_echo('thewire:put_title_shortlink_in_wire'); ?>
 			</a>
 		</li>

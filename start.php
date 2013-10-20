@@ -73,8 +73,8 @@ function elgg_ggouv_template_init() {
 	//title ?
 	elgg_register_plugin_hook_handler('format', 'friendly:title', 'seo_friendly_url_plugin_hook');
 
-	elgg_register_class('TwitterOAuth', "$base/vendors/twitteroauth/twitterOAuth.php");
-	elgg_register_library('twitter_api', "$base/lib/twitter_api.php");
+	//elgg_register_class('TwitterOAuth', "$base/vendors/twitteroauth/twitterOAuth.php");
+	//elgg_register_library('twitter_api', "$base/lib/twitter_api.php");
 	elgg_register_library('user_ggouv', "$base/lib/users/lib.php");
 	elgg_register_library('group_ggouv', "$base/lib/groups/utilities.php");
 	elgg_register_library('ggouv:typo', "$base/lib/groups/typo.php");
@@ -503,7 +503,6 @@ function tour_handler() {
 	$script = <<<TEXT
 	$(document).ready(function() {
 			$('.start-tour').click();
-			console.log('uiui');
 	});
 TEXT;
 	ggouv_execute_js($script);
