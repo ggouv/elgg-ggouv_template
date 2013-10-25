@@ -525,38 +525,47 @@
 	font-size: 48px;
 	text-shadow: 0 0 5px white;
 }
-.elgg-menu-owner-block .elgg-menu-item-activity a:before {
+.activity:before, .elgg-menu-item-activity a:before {
 	content: 'w';
 }
-.elgg-menu-owner-block .elgg-menu-item-markdown-wiki a:before {
+.markdown_wiki:before, .elgg-menu-item-markdown-wiki a:before {
 	content: 'W';
 }
-.elgg-menu-owner-block .elgg-menu-item-bookmarks a:before {
+.bookmarks:before, .elgg-menu-item-bookmarks a:before {
 	content: 'U';
 }
-.elgg-menu-owner-block .elgg-menu-item-brainstorm a:before {
+.idea:before, .elgg-menu-item-brainstorm a:before {
 	content: 'I';
 }
-.elgg-menu-owner-block .elgg-menu-item-workflow a:before {
+.workflow_board:before, .elgg-menu-item-workflow a:before {
 	content: 'O';
 }
-.elgg-menu-owner-block .elgg-menu-item-questions a:before {
+.question:before, .elgg-menu-item-questions a:before {
 	content: 'Q';
 }
-.elgg-menu-owner-block .elgg-menu-item-discussion a:before {
+.discussion:before, .elgg-menu-item-discussion a:before {
 	content: 'C';
 }
-.elgg-menu-owner-block .elgg-menu-item-blog a:before {
+.blog:before, .elgg-menu-item-blog a:before {
 	content: 'B';
 }
-.elgg-menu-owner-block .elgg-menu-item-etherpad a:before {
+.etherpad:before, .elgg-menu-item-etherpad a:before {
 	content: 'P';
 }
-.elgg-menu-owner-block .elgg-menu-item-thewire a:before {
+.thewire:before, .elgg-menu-item-thewire a:before {
 	content: 'A';
 }
-.elgg-menu-owner-block .elgg-menu-item-answers  a:before {
+.answers:before, .elgg-menu-item-answers a:before {
 	content: 'Q';
+}
+.decision:before, .elgg-menu-item-decision a:before {
+	content: 'Q';
+}
+label.user:before {
+	content: 'w';
+}
+label.group:before {
+	content: 'K';
 }
 .elgg-menu-owner-block.tiny li {
 	float: left;

@@ -337,7 +337,7 @@ elgg.ggouv_template.loadPage = function(url, data) {
 		var $stash = $('#stash_'+urlToStashID(activityTab));
 
 		stashDeck();
-		$('.elgg-river-layout:not(.hidden)').remove();
+		$('.elgg-layout:not(.hidden)').remove();
 		$stash.removeClass('hidden');
 		$('body').attr('class', 't25 fixed-deck'); // we replace class remove all other class
 		$('.deck-popup').not('.pinned').remove(); // remove non-pinned popup
@@ -430,7 +430,7 @@ elgg.ggouv_template.loadPage = function(url, data) {
 					} else {
 						var $epb = $('.elgg-page-body > .elgg-inner');
 						stashDeck();
-						$epb.children().not('.elgg-river-layout').remove();
+						$epb.children().not('.elgg-layout.hidden').remove();
 						$epb.append(respBody);
 						$('.deck-popup').not('.pinned').remove(); // remove non-pinned popup
 

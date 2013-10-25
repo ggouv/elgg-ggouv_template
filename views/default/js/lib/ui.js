@@ -38,7 +38,7 @@ elgg.ui.toggles = function(event) {
 	// @todo might want to switch this to elgg.getSelectorFromUrlFragment().
 	var target = $(this).toggleClass('elgg-state-active').attr('href'),
 		texta = $(target).find('.input-markdown');
-		
+
 	$(target).slideToggle('medium');
 	if (texta) {
 		$(target).find('.toggle-preview').click();

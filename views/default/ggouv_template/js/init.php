@@ -318,7 +318,9 @@ elgg.ggouv_template.reload = function() {
 		invalidHandler: ggouv.shakeButton
 	});
 
-	// share menu
+	/* share menu
+	 * @todo I don't remember why I didn't put this code in elgg.ggouv_template.init // This code should move
+	 */
 	$('.ggouv-share').click(function(e) {
 		var $this = $(this),
 			thisPos = $this.offset(),
