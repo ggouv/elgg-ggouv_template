@@ -7,7 +7,7 @@
 }
 
 /* Aside */
-.elgg-module-aside .elgg-head {
+.elgg-module-aside > .elgg-head {
 	border-bottom: 1px solid #CCC;
 
 	margin-bottom: 5px;

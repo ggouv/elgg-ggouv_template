@@ -57,7 +57,7 @@ input, textarea {
 	padding: 5px;
 	width: 100%;
 	-webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2) inset;
-	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2) inset; 
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2) inset;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -155,18 +155,18 @@ input[type="radio"] {
 	width: 730px;
 	height: auto;
 	background-color: #dedede;
-	
+
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
 }
 .friendspicker-savebuttons {
 	background: white;
-	
+
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
-	
+
 	margin:0 10px 10px;
 }
 .friends-picker .friends-picker-container { /* long container used to house end-to-end panels. Width is calculated in JS  */
@@ -212,7 +212,7 @@ input[type="radio"] {
 	display: block;
 	padding: 0;
 	width:20px;
-	
+
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -265,11 +265,11 @@ input[type="radio"] {
 }
 .friendspicker-members-table {
 	background: #dedede;
-	
+
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
-	
+
 	margin:10px 0 0;
 	padding:10px 10px 0;
 }
@@ -414,4 +414,68 @@ input[type="radio"] {
     border: 1px solid #0054A7;
     color: #0054A7;
 	background: #E4ECF5;
+}
+
+
+
+/* checkboxes */
+.ggouv-checkbox {
+	padding: 2px 0;
+	float: left;
+}
+.ggouv-checkbox:hover [type="checkbox"]:not(:checked) + label:before {
+	border: 2px solid #4690D6;
+}
+.ggouv-checkbox [type="checkbox"]:not(:checked),
+.ggouv-checkbox [type="checkbox"]:checked {
+	position: absolute;
+	left: -9999px;
+}
+.ggouv-checkbox [type="checkbox"]:not(:checked) + label,
+.ggouv-checkbox [type="checkbox"]:checked + label {
+	position: relative;
+	padding-left: 22px;
+	cursor: pointer;
+}
+.ggouv-checkbox [type="checkbox"]:not(:checked) + label:before,
+.ggouv-checkbox [type="checkbox"]:checked + label:before {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #999;
+	left: 0;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.ggouv-checkbox [type="checkbox"]:checked + label:before {
+	content: '✔';
+	font-size: 32px;
+	text-align: center;
+	line-height: 14px;
+	background: #4690D6;
+	color: white;
+	border-color: #4690D6;
+	text-indent: 1px;
+}
+/* aspect désactivée */
+.ggouv-checkbox [type="checkbox"]:disabled:not(:checked) + label:before,
+.ggouv-checkbox [type="checkbox"]:disabled:checked + label:before {
+	border-color: #bbb;
+	background-color: #ddd;
+}
+/* styles de la coche (si cochée/désactivée) */
+.ggouv-checkbox [type="checkbox"]:disabled:checked + label:before {
+	color: #999;
+}
+/* on style aussi le label quand désactivé */
+.ggouv-checkbox [type="checkbox"]:disabled + label {
+	color: #aaa;
+}
+
+/* aspect au focus de l'élément */
+.ggouv-checkbox [type="checkbox"]:checked:focus + label:before,
+.ggouv-checkbox [type="checkbox"]:not(:checked):focus + label:before {
+
 }

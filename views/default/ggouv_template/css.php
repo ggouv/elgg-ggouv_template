@@ -748,17 +748,36 @@
 	padding: 6px;
 	text-shadow: -1px 1px 0 white;
 }
-.column-header[data-network="elgg"]:before {
+.column-header.elgg:before {
 	content: "∇";
 	font-size: 3em;
 	font-weight: bold;
-	padding: 7px;
+	padding: 6px;
 }
-.column-header[data-network="twitter"]:before {
+.column-header.twitter:before {
 	content: "\0054";
 }
-.column-header[data-network="facebook"]:before {
+.column-header.facebook:before {
 	content: "\0046";
+	padding: 5px 2px;
+	font-size: 3.4em;
+}
+.elgg-list-item {
+	position: relative;
+}
+.elgg-list-item:before {
+	font-family: 'ggouv';
+	position: absolute;
+	left: 18px;
+	top: 40px;
+	font-size: 2.4em;
+	color: #DEDEDE;
+}
+.thread .elgg-list-item:before {
+	content: '';
+}
+#deck-river-lists .column-river:first-child > ul > li:before {
+	left: 23px;
 }
 .elgg-river-item .elgg-icon-arrow-right {
 	margin: 5px;
@@ -769,7 +788,44 @@
 	font-size: 10em;
 	color: #EEE;
 }
-
+.filter-checkbox label {
+	font-size: 0;
+	color: transparent;
+	display: block;
+	padding: 1px;
+}
+.filter-checkbox label:before {
+	font-size: 40px;
+	color: #555;
+	padding: 6px 1px 4px;
+	border-radius: 5px;
+}
+.filter-checkbox label:hover:before {
+	-webkit-box-shadow: 0 0 4px #555;
+	box-shadow: 0 0 4px #555;
+}
+.filter-checkbox input {
+	display: none;
+}
+.filter-checkbox [type="checkbox"]:checked + label:before {
+	color: #359930;
+}
+.filter-checkbox .All {
+	font-size: 1.1em;
+	color: #333;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border-radius: 6px;
+	padding: 1px 6px;
+}
+.filter-checkbox .All:hover {
+	color: #359930;
+}
+.filter-checkbox [type="checkbox"]:checked + .All {
+	color: #FFC;
+	background: #359930;
+}
 
 /*
  * Comments
@@ -1232,6 +1288,13 @@ body, #super-popup {
 	right: 10px;
 }
 
+/* search */
+.search-highlight {
+	background-color: #DEF;
+}
+.search-highlight-color1 {
+	background-color: #DEF;
+}
 
 
 /* leaflet 0.6.4 minified with http://cssminifier.com/ */
