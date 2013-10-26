@@ -331,8 +331,9 @@ elgg.ggouv_template.reload = function() {
 		$('.elgg-page-body').append(
 			$(sMenu({
 				sl: $this.attr('href'),
-				text: $this.data('title')
-			})).css({top: thisPos.top+22, left: thisPos.left-218})
+				text: $this.data('title'),
+				logged_in: elgg.is_logged_in()
+			})).css({top: thisPos.top+22, left: ($('.elgg-page-topbar').length ? 0 : 40) + thisPos.left-198})
 		);
 
 		$(document).unbind('click.sharemenu').bind('click.sharemenu', function() {

@@ -559,7 +559,7 @@
 	content: 'Q';
 }
 .decision:before, .elgg-menu-item-decision a:before {
-	content: 'Q';
+	content: 'V';
 }
 label.user:before {
 	content: 'w';
@@ -624,7 +624,7 @@ label.group:before {
 	display: inline-block;
 	width: 18px;
 	height: 18px;
-	padding: 2px 2px 0 0;
+	padding: 2px 8px 0 0;
 }
 
 .elgg-menu-widget > .elgg-menu-item-collapse {

@@ -31,6 +31,7 @@
 <!-- Template for share menu -->
 <script id="share-menu" type="text/template">
 	<ul class="elgg-module-popup share-menu elgg-submenu">
+		{{#logged_in}}
 		<li>
 			<a href="#" onclick="javascript:elgg.thewire.insertInThewire('{{sl}}');">
 				<?php echo elgg_echo('thewire:put_shortlink_in_wire'); ?>
@@ -41,7 +42,8 @@
 				<?php echo elgg_echo('thewire:put_title_shortlink_in_wire'); ?>
 			</a>
 		</li>
-		<li class="section">
+		{{/logged_in}}
+		<li{{#logged_in}} class="section"{{/logged_in}}>
 			<a href="#" onclick="javascript:(function(){var w=671,h=216,x=Number((window.screen.width-w)/2),y=Number((window.screen.height-h)/2),d=window,u='http://facebook.com/share.php?u={{sl}}';a=function(){d.open(u,'f','scrollbars=0,toolbar=0,location=0,resizable=0,status=0,width='+w+',height='+h+',left='+x+',top='+y)};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();void(0);})()">
 				<span class="elgg-icon facebook-icon"></span>&nbsp;<?php echo elgg_echo('share:on'); ?>&nbsp;Facebook
 			</a>

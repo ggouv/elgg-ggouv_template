@@ -170,7 +170,6 @@
 	margin-right: 20px;
 }
 .elgg-river-summary {
-	font-size: 95%;
 	line-height: 1.2em;
 }
 .elgg-river-subject {
@@ -192,10 +191,11 @@
 .elgg-river-message,
 .elgg-river-content {
 	border-left: 1px solid #CCC;
-	font-size: 85%;
+	font-size: 90%;
 	line-height: 1.5em;
 	margin: 8px 0 5px 0;
 	padding-left: 5px;
+	color: #111;
 }
 .elgg-river-attachments .elgg-avatar,
 .elgg-river-attachments .elgg-icon {

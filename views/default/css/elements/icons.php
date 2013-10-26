@@ -42,18 +42,14 @@
 	color: #CCC;
 }
 
-.elgg-icon-response, .elgg-icon-share, .elgg-icon-hover-menu, .elgg-icon-response-all {
+.elgg-menu-river .elgg-icon {
 	color: #CCC;
-	font-size: 40px;
 	margin: 0;
-}
-.elgg-icon-response:hover, .elgg-icon-share:hover, .elgg-icon-hover-menu:hover, {
-	color: #555;
 }
 .elgg-icon-response:before {
 	content: "\003C";
 }
-.elgg-menu-item-response-all .elgg-icon-response:before {
+.elgg-icon-response-all:before {
 	content: "\2264";
 }
 
@@ -73,11 +69,14 @@
 	content: "\0043";
 	color: #999;
 	font-size: 24px;
+	text-indent: 2px;
 }
 
 .elgg-icon-settings-alt:before {
-	color: #CCC;
 	content: "\AC0A";
+}
+.workflow-list .elgg-icon-settings-alt:before {
+	color: #CCC;
 	font-size: 36px;
 	cursor: pointer;
 }
@@ -346,8 +345,8 @@
 .elgg-icon-search-focus {
 	background-position: 0 -918px;
 }
-.elgg-icon-search {
-	background-position: 0 -936px;
+.elgg-icon-search:before {
+	content: "\ABFD";
 }
 .elgg-icon-settings-alt:hover {
 	background-position: 0 -954px;
@@ -423,15 +422,17 @@
 .elgg-icon-thumbs-down {
 	background-position: 0 -1314px;
 }
-.elgg-icon-thumbs-up-alt:hover {
-	background-position: 0 -1332px;
+.elgg-icon-thumbs-up-alt:before {
+	content: "\AA00";
+	color: #999;
+	font-size: 32px;
 }
-.elgg-icon-thumbs-up:hover,
-.elgg-icon-thumbs-up-alt {
-	background-position: 0 -1350px;
+.elgg-icon-thumbs-up-alt:hover:before {
 }
-.elgg-icon-thumbs-up {
-	background-position: 0 -1368px;
+.elgg-icon-thumbs-up:before {
+	content: "\AA00";
+}
+.elgg-icon-thumbs-up:hover:before {
 }
 .elgg-icon-trash {
 	background-position: 0 -1386px;

@@ -768,10 +768,10 @@
 .elgg-list-item:before {
 	font-family: 'ggouv';
 	position: absolute;
-	left: 18px;
-	top: 40px;
+	left: 10px;
+	top: 46px;
 	font-size: 2.4em;
-	color: #DEDEDE;
+	opacity: 0.2;
 }
 .thread .elgg-list-item:before {
 	content: '';

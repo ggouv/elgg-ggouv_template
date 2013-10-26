@@ -146,7 +146,7 @@
 		</span>
 		<span class="postStep hidden">
 			$('.elgg-widget-add-control a').click();
-			$('.net-profile.ggouv:first-child .user-info-popup').click();
+			$('.net-profile.ggouv:first-child .elgg-user-info-popup').click();
 		</span>
 		<h2>Ajouter des widgets</h2>
 		<p>Vous pouvez ajouter des widgets qui se remplieront au fur et à mesure de votre activité sur ggouv.</p>
