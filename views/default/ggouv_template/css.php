@@ -726,11 +726,8 @@
 	margin: 0 0 0 -20px;
 	padding: 0px;
 }
-#deck-river-lists .column-river:first-child > ul > li {
+#deck-river-lists .column-river:first-child > ul > * {
 	padding-left: 10px;
-}
-#deck-river-lists .column-river:first-child > ul.column-header > li {
-	padding-left: 5px;
 }
 .elgg-river .elgg-list-item {
 	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(200, 200, 200,0.1) 100%) white;
@@ -776,8 +773,11 @@
 .thread .elgg-list-item:before {
 	content: '';
 }
+.elgg-list-item.viewed:before {
+	display: none;
+}
 #deck-river-lists .column-river:first-child > ul > li:before {
-	left: 23px;
+	left: 15px;
 }
 .elgg-river-item .elgg-icon-arrow-right {
 	margin: 5px;

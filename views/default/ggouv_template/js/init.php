@@ -116,7 +116,7 @@ elgg.ggouv_template.init = function() {
 						startOffset: tipID,
 						prevButton: true,
 						template: { // HTML segments for tip layout
-							'link'    : '<a href="#close" class="joyride-close-tip gwf">x</a>',
+							'link'    : '<a href="#close" class="joyride-close-tip gwf">&#xaa02;</a>',
 							'timer'   : '<div class="joyride-timer-indicator-wrap"><span class="joyride-timer-indicator"></span></div>',
 							'button'  : '<a href="#" class="joyride-next-tip"></a>',
 						},

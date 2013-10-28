@@ -321,6 +321,7 @@ elgg.ggouv_template.loadPage = function(url, data) {
 		urlActivity = elgg.get_site_url() +'activity(.*)',
 		activityTab = url.match(urlActivity),
 		urlToStashID = function(match) {
+			if (!match) return false;
 			return match[1].replace(/^\//, '').replace(/\s/, '');
 		},
 		stashDeck = function() { // stash deck river before change elgg-page-body
@@ -525,8 +526,8 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	elgg.autocomplete.init();
 
 	// Reload plugins
-	elgg.markdown_wiki.reload();
-	elgg.deck_river.init();
+	elgg.deck_river.reload();
+	elgg.markdown_wiki.init();
 	elgg.brainstorm.init();
 	//elgg.bookmarks.reload();
 	elgg.tags.init();
