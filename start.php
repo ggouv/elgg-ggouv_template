@@ -9,7 +9,6 @@ function elgg_ggouv_template_init() {
 
 	elgg_extend_view('css/elgg','ggouv_template/css');
 	elgg_extend_view('css/elgg','ggouv_template/bootstrap-responsive');
-	elgg_extend_view('css/elgg','ggouv_template/tipsy');
 
 	elgg_extend_view('js/elgg', 'ggouv_template/js/init');
 	elgg_extend_view('js/elgg', 'ggouv_template/js/history');
@@ -27,8 +26,6 @@ function elgg_ggouv_template_init() {
 
 	elgg_unregister_js('elgg.avatar_cropper');
 	elgg_register_js('elgg.avatar_cropper', "$http_base/views/default/js/lib/ui.avatar_cropper.js", 'footer');
-	elgg_unregister_js('elgg.autocomplete');
-	elgg_register_js('elgg.autocomplete', "$http_base/views/default/js/lib/ui.autocomplete.js", 'footer');
 
 	elgg_register_js('leaflet.js', "$http_base/vendors/leaflet-0.6.4/leaflet.js", 'head', 100); // we load it in head because this lib provide a global function L
 
@@ -41,8 +38,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('jquery.scrollTo');
 	elgg_load_js('elgg.userpicker');
 	elgg_load_js('elgg.friendspicker');
-	elgg_load_js('elgg.autocomplete');
-	elgg_load_js('jquery.ui.autocomplete.html');
 	elgg_load_js('jquery.easing');
 	elgg_load_js('showdown');
 	elgg_load_js('highlight');

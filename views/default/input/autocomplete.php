@@ -39,6 +39,23 @@ $ac_url_params = http_build_query($params);
 
 $vars['aria-source'] = elgg_get_site_url() . 'livesearch?' . $ac_url_params;
 
+if (is_array($params['match_on']) || !isset($params['match_on']) || $params['match_on'] == 'all') {
+	$placeholder = elgg_echo('autocomplete:placeholder:all');
+} else {
+	$placeholder = elgg_echo('autocomplete:placeholder:' . $params['match_on']);
+}
+
+$value = $vars['value'];
+if ($value && is_int(intval($value))) {
+	$entity = get_entity($value);
+	if ($entity->getType() == 'group') {
+		$vars['value'] = $entity->name;
+	} else {
+		$vars['value'] = $entity->username;
+	}
+}
+
 ?>
 
-<input type="text" <?php echo elgg_format_attributes($vars); ?> />
+<input type="text" data-original_value="<?php echo $value; ?>" <?php echo elgg_format_attributes($vars); ?> placeholder="<?php echo $placeholder;?>"/>
+<input type="hidden" name="<?php echo $vars['name']; ?>" value="<?php echo $value; ?>" />

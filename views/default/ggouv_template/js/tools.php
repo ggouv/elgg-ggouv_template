@@ -209,6 +209,74 @@ elgg.register_hook_handler('init', 'system', elgg.tags.init);
 
 
 
+/**
+ * Autocomplete. Merge from js/lib/ui.autocomplete.js. And modified.
+ */
+elgg.provide('elgg.autocomplete');
+
+elgg.autocomplete.init = function() {
+	$('.elgg-input-autocomplete').each(function() {
+		var source = $(this).attr('aria-source');
+		$(this).autocomplete({
+			source: source, //gets set by input/autocomplete view
+			minLength: 2,
+			html: "html",
+			select: function( event, ui ) {
+				$(this).val(ui.item.name);
+				$(this).next().val(ui.item.value);
+				return false;
+			}
+		}).removeAttr('name');
+	});
+};
+elgg.register_hook_handler('init', 'system', elgg.autocomplete.init);
+
+
+/*
+ * jQuery UI Autocomplete HTML Extension
+ *
+ * Copyright 2010, Scott González (http://scottgonzalez.com)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ * http://github.com/scottgonzalez/jquery-ui-extensions
+ *
+ * GGOUV : Merged from vendors/jquery/jquery.ui.autocomplete.html.js < Minimize requests
+ */
+(function( $ ) {
+
+var proto = $.ui.autocomplete.prototype,
+	initSource = proto._initSource;
+
+function filter( array, term ) {
+	var matcher = new RegExp( $.ui.autocomplete.escapeRegex(term), "i" );
+	return $.grep( array, function(value) {
+		return matcher.test( $( "<div>" ).html( value.label || value.value || value ).text() );
+	});
+}
+
+$.extend( proto, {
+	_initSource: function() {
+		if ( this.options.html && $.isArray(this.options.source) ) {
+			this.source = function( request, response ) {
+				response( filter( this.options.source, request.term ) );
+			};
+		} else {
+			initSource.call( this );
+		}
+	},
+
+	_renderItem: function( ul, item) {
+		return $( "<li></li>" )
+			.data( "item.autocomplete", item )
+			.append( $( "<a></a>" )[ this.options.html ? "html" : "text" ]( item.label ) )
+			.appendTo( ul );
+	}
+});
+
+})( jQuery );
+
+
+
 /*
  * Constants for map
  */
