@@ -1980,7 +1980,7 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'ggouv:search:localgroups' => "Cherchez un groupe local par son code postal ou son nom :",
 	'ggouv:search:localgroups:notfound' => "La commune n'a pas été trouvée.",
 	'xoxco:removing_tag' => "Enlever ce mot-clé",
-	'xoxco:input:default' => "Ajoutez des mot-clés (séparez par des virgules ou tapez Entrer)",
+	'xoxco:input:default' => "Tapez ↲ ou , pour séparer les mots-clés",
 	'forms:not_valid' => "Le formulaire n'est pas valide !",
 	'forms:required' => "Ce champ est obligatoire !",
 	'forms:remote' => "Ce champ n'est pas valide.",

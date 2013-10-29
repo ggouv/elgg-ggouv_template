@@ -1,4 +1,4 @@
-/*!
+/*
 
 	jQuery Tags Input Plugin 1.3.3
 
@@ -12,6 +12,8 @@
 
 	ben@xoxco.com
 
+	GGOUV : https://raw.github.com/itsthatguy/jQuery-Tags-Input/591624a23abdc7bd10e9dddf2521a78d00fd4775/jquery.tagsinput.js
+	+ MODIF ! addTag unique.
 */
 
 (function($) {
@@ -85,19 +87,14 @@
 
 				value = jQuery.trim(value);
 
-				if (options.unique) {
-					var skipTag = $(this).tagExist(value);
-					if(skipTag == true) {
-					    //Marks fake input as not_valid to let styling it
-    				    $('#'+id+'_tag').addClass('not_valid');
-    				}
-				} else {
-					var skipTag = false;
-				}
-
-				if (value !='' && skipTag != true) {
+				var skipTag = $(this).tagExist(value);
+				console.log(value);
+				if(value !='' && skipTag == true) {
+				    //Marks fake input as not_valid to let styling it
+				    $('#'+id+'_tag').addClass('not_valid');
+				} else if(value !='') {
                     $('<span>').addClass('tag').append(
-                        $('<span>').text(value).append('&nbsp;'),
+                        $('<span>').text(value),
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
@@ -162,9 +159,9 @@
 		};
 
 	$.fn.tagExist = function(val) {
-        var id = $(this).attr('id');
-        var tagslist = $(this).val().split(delimiter[id]);
-        return (jQuery.inArray(val, tagslist) >= 0); //true when tag exists, false when not
+		var id = $(this).attr('id');
+		var tagslist = $(this).val().split(delimiter[id]);
+		return (jQuery.inArray(val, tagslist) >= 0); //true when tag exists, false when not
 	};
 
 	// clear all existing tags and import new ones from a string
@@ -179,7 +176,7 @@
       interactive:true,
       defaultText:'add a tag',
       minChars:0,
-      width:'300px',
+      width:'100%',
       height:'100px',
       autocomplete: {selectFirst: false },
       'hide':true,
@@ -196,8 +193,10 @@
 			if (settings.hide) {
 				$(this).hide();
 			}
-
 			var id = $(this).attr('id');
+			if (!id || delimiter[$(this).attr('id')]) {
+				id = $(this).attr('id', 'tags' + new Date().getTime()).attr('id');
+			}
 
 			var data = jQuery.extend({
 				pid:id,
@@ -227,7 +226,8 @@
 			$(markup).insertAfter(this);
 
 			$(data.holder).css('width',settings.width);
-			$(data.holder).css('height',settings.height);
+			$(data.holder).css('min-height',settings.height);
+			$(data.holder).css('height','100%');
 
 			if ($(data.real_input).val()!='') {
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
@@ -282,6 +282,7 @@
 								$(event.data.fake_input).val($(event.data.fake_input).attr('data-default'));
 								$(event.data.fake_input).css('color',settings.placeholderColor);
 							}
+							$(this).unselectTags();
 							return false;
 						});
 
@@ -295,21 +296,30 @@
 					  	$(event.data.fake_input).resetAutosize(settings);
 						return false;
 					} else if (event.data.autosize) {
-			            $(event.data.fake_input).doAutosize(settings);
-
-          			}
+            $(event.data.fake_input).doAutosize(settings);
+    			}
 				});
 				//Delete last tag on backspace
 				data.removeWithBackspace && $(data.fake_input).bind('keydown', function(event)
 				{
+					/* ----------------------------------------------------------------
+						Select tag before deleting
+				  ---------------------------------------------------------------- */
 					if(event.keyCode == 8 && $(this).val() == '')
 					{
-						 event.preventDefault();
-						 var last_tag = $(this).closest('.tagsinput').find('.tag:last').text();
-						 var id = $(this).attr('id').replace(/_tag$/, '');
-						 last_tag = last_tag.replace(/[\s]+x$/, '');
-						 $('#' + id).removeTag(escape(last_tag));
-						 $(this).trigger('focus');
+						event.preventDefault();
+						var lastTag = $(this).closest('.tagsinput').find('.tag:last');
+						var lastTagText = lastTag.text();
+						var id = $(this).attr('id').replace(/_tag$/, '');
+						lastTagText = lastTagText.replace(/[\s]+x$/, '');
+
+						if (lastTag.hasClass('selected') == true) {
+							$('#' + id).removeTag(escape(lastTagText));
+							$(this).trigger('focus');
+						} else {
+							$(this).selectTag(lastTag);
+						}
+
 					}
 				});
 				$(data.fake_input).blur();
@@ -323,13 +333,21 @@
 				    });
 				}
 			} // if settings.interactive
-			return false;
 		});
 
 		return this;
 
 	};
 
+	$.fn.selectTag = function(tag) {
+		tag.addClass('selected');
+		$(this).css('color', '#fff');
+	}
+
+	$.fn.unselectTags = function() {
+		var input = $(this).closest('.tagsinput');
+		input.find('.selected').removeClass('selected');
+	}
 	$.fn.tagsInput.updateTagsField = function(obj,tagslist) {
 		var id = $(obj).attr('id');
 		$(obj).val(tagslist.join(delimiter[id]));
