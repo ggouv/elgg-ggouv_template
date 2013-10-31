@@ -745,7 +745,7 @@
 	padding: 6px;
 	text-shadow: -1px 1px 0 white;
 }
-.column-header.elgg:before {
+.column-header.elgg:before, .icon-elgg:before {
 	content: "∇";
 	font-size: 3em;
 	font-weight: bold;

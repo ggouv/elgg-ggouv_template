@@ -562,7 +562,7 @@
 	content: 'V';
 }
 label.user:before {
-	content: 'w';
+	content: '\ABFF';
 }
 label.group:before {
 	content: 'K';
@@ -590,9 +590,8 @@ label.group:before {
 /* ***************************************
 	RIVER
 *************************************** */
-.elgg-menu-river > li {
-	display: inline-block;
-	margin-left: 5px;
+.elgg-menu-river > li:first-child {
+	padding: 0;
 }
 .elgg-menu-river > li > a {
 	color: #aaa;

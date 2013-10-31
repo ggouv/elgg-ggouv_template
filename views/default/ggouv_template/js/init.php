@@ -318,31 +318,6 @@ elgg.ggouv_template.reload = function() {
 		invalidHandler: ggouv.shakeButton
 	});
 
-	/* share menu
-	 * @todo I don't remember why I didn't put this code in elgg.ggouv_template.init // This code should move
-	 */
-	$('.ggouv-share').click(function(e) {
-		var $this = $(this),
-			thisPos = $this.offset(),
-			sMenu = Mustache.compile($('#share-menu').html());
-
-		if ($('.share-menu').length) $('.share-menu').remove();
-		$this.addClass('elgg-state-active');
-		$('.elgg-page-body').append(
-			$(sMenu({
-				sl: $this.attr('href'),
-				text: $this.data('title'),
-				logged_in: elgg.is_logged_in()
-			})).css({top: thisPos.top+22, left: ($('.elgg-page-topbar').length ? 0 : 40) + thisPos.left-198})
-		);
-
-		$(document).unbind('click.sharemenu').bind('click.sharemenu', function() {
-			$this.removeClass('elgg-state-active');
-			$('.share-menu').remove();
-			$(document).unbind('click.sharemenu');
-		});
-		return false;
-	});
 
 };
 

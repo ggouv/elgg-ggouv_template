@@ -82,6 +82,7 @@ elgg.ggouv_template.history = function() {
 								"[href*='notifications/personal'],"+
 								"[href^='"+elgg.get_site_url()+"split'],"+
 								"[href^='"+elgg.get_site_url()+"tour'],"+
+								"[class*='noajaxified'],"+
 								"[class='ui-corner-all'])" // autocomplete popup
 		).live('click', function(e) {
 
