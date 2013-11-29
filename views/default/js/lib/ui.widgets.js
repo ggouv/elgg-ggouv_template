@@ -6,13 +6,9 @@ elgg.provide('elgg.ui.widgets');
  * @return void
  */
 elgg.ui.widgets.init = function() {
+	var $ew = $('.elgg-widgets');
 
-	// widget layout?
-	if ($(".elgg-widgets").length == 0) {
-		//return;
-	}
-
-	$(".elgg-widgets").sortable({
+	$ew.sortable({
 		items:                'div.elgg-module-widget.elgg-state-draggable',
 		connectWith:          '.elgg-widgets',
 		handle:               '.elgg-widget-handle',
@@ -20,7 +16,7 @@ elgg.ui.widgets.init = function() {
 		placeholder:          'elgg-widget-placeholder',
 		opacity:              0.8,
 		revert:               500,
-		stop:                 elgg.ui.widgets.move
+		update:                 elgg.ui.widgets.move
 	});
 
 	$('.elgg-widgets-add-panel li.elgg-state-available').die().live('click', elgg.ui.widgets.add);
@@ -29,7 +25,7 @@ elgg.ui.widgets.init = function() {
 	$('.elgg-widget-edit > form ').die().live('submit', elgg.ui.widgets.saveSettings);
 	$('a.elgg-widget-collapse-button').die().live('click', elgg.ui.widgets.collapseToggle);
 
-	elgg.ui.widgets.setMinHeight(".elgg-widgets");
+	if (!$ew.hasClass('noresize')) elgg.ui.widgets.setMinHeight($ew);
 };
 
 /**
@@ -41,27 +37,30 @@ elgg.ui.widgets.init = function() {
  * @return void
  */
 elgg.ui.widgets.add = function(event) {
+	var $this = $(this),
+		type = $this.attr('id')
+		$widgetPanel = $this.closest('div');
+
 	// elgg-widget-type-<type>
-	var type = $(this).attr('id');
 	type = type.substr(type.indexOf('elgg-widget-type-') + "elgg-widget-type-".length);
 
 	// if multiple instances not allow, disable this widget type add button
-	var multiple = $(this).attr('class').indexOf('elgg-widget-multiple') != -1;
+	var multiple = $this.attr('class').indexOf('elgg-widget-multiple') != -1;
 	if (multiple == false) {
-		$(this).addClass('elgg-state-unavailable');
-		$(this).removeClass('elgg-state-available');
-		$(this).unbind('click', elgg.ui.widgets.add);
+		$this.addClass('elgg-state-unavailable')
+			.removeClass('elgg-state-available')
+			.unbind('click', elgg.ui.widgets.add);
 	}
 
 	elgg.action('widgets/add', {
 		data: {
 			handler: type,
-			owner_guid: elgg.get_page_owner_guid(),
-			context: $("input[name='widget_context']").val(),
-			default_widgets: $("input[name='default_widgets']").val() || 0
+			owner_guid: elgg.isUndefined(elgg.admin) ? elgg.get_logged_in_user_guid() : elgg.get_page_owner_guid(),
+			context: $widgetPanel.find("input[name='widget_context']").val(),
+			default_widgets: $widgetPanel.parent().find("input[name='default_widgets']").val() || 0
 		},
 		success: function(json) {
-			$('#elgg-widget-col-1').prepend(json.output);
+			$widgetPanel.parent().find('#elgg-widget-col-1').prepend(json.output);
 		}
 	});
 	event.preventDefault();
@@ -155,10 +154,10 @@ elgg.ui.widgets.saveSettings = function(event) {
 	var $widgetContent = $(this).parent().parent().children('.elgg-widget-content');
 
 	// stick the ajax loader in there
-	var $loader = $('#elgg-widget-loader').clone();
+	/*var $loader = $('#elgg-widget-loader').clone();
 	$loader.attr('id', '#elgg-widget-active-loader');
 	$loader.removeClass('hidden');
-	$widgetContent.html($loader);
+	$widgetContent.html($loader);*/
 
 	var default_widgets = $("input[name='default_widgets']").val() || 0;
 	if (default_widgets) {
@@ -185,13 +184,13 @@ elgg.ui.widgets.saveSettings = function(event) {
  */
 elgg.ui.widgets.setMinHeight = function(selector) {
 	var maxBottom = 0;
-	$(selector).each(function() {
+	selector.each(function() {
 		var bottom = parseInt($(this).offset().top + $(this).height());
 		if (bottom > maxBottom) {
 			maxBottom = bottom;
 		}
 	})
-	$(selector).each(function() {
+	selector.each(function() {
 		var bottom = parseInt($(this).offset().top + $(this).height());
 		if (bottom < maxBottom) {
 			var newMinHeight = parseInt($(this).height() + (maxBottom - bottom));

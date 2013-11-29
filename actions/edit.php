@@ -106,6 +106,21 @@ if (sizeof($input) > 0) {
 	elgg_trigger_event('profileupdate', $owner->type, $owner);
 
 	system_message(elgg_echo("profile:saved"));
+
+	// change link to local group of the user in slidr-group
+	$site = elgg_get_site_url();
+	if ($owner->location) {
+		$script = <<<TEXT
+		$('#slidr-groups .elgg-menu-item-my-localgroup')
+			.html('<a class="t25" href="{$site}groups/profile/{$owner->location}"><span>!{$owner->location}</span></a>');
+TEXT;
+	} else {
+		$script = <<<TEXT
+		$('#slidr-groups .elgg-menu-item-my-localgroup')
+			.html('<a class="t25" href="{$site}profile/{$owner->username}/edit?show_location=true"><span>?</span></a>');
+TEXT;
+	}
+	ggouv_execute_js($script);
 }
 
 forward($owner->getUrl());

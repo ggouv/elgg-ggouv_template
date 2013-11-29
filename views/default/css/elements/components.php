@@ -191,7 +191,7 @@
 .elgg-river-message,
 .elgg-river-content {
 	border-left: 1px solid #CCC;
-	font-size: 90%;
+	font-size: 92%;
 	line-height: 1.5em;
 	margin: 8px 0 5px 0;
 	padding-left: 5px;
@@ -220,7 +220,9 @@
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
 }
-
+.elgg-river-comments .elgg-image-block {
+	margin-left: -35px;
+}
 <?php //@todo components.php ?>
 .elgg-river-comments {
 	margin: 0;

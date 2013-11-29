@@ -74,11 +74,11 @@
 }
 
 .elgg-icon-settings-alt:before {
+	color: #CCC;
+	font-size: 36px;
 	content: "\AC0A";
 }
 .workflow-list .elgg-icon-settings-alt:before {
-	color: #CCC;
-	font-size: 36px;
 	cursor: pointer;
 }
 .elgg-icon-settings-alt:hover:before {
@@ -94,8 +94,9 @@
 	color: #999;
 	font-size: 32px;
 }
-
-
+.elgg-icon-retweet-sub.retweeted:before {
+	color: #0A0;
+}
 
 
 
@@ -285,6 +286,7 @@
 }
 .elgg-icon-search:before {
 	content: "\ABFD";
+	font-size: 36px;
 }
 .elgg-icon-settings-alt:hover {
 }
@@ -306,13 +308,23 @@
 }
 .elgg-icon-star-alt {
 }
-.elgg-icon-star-empty:hover {
+.elgg-icon-star-empty:before {
+	content: "\00C8";
 }
-.elgg-icon-star-empty {
+.elgg-icon-star-empty:before:hover {
 }
-.elgg-icon-star:hover {
+.elgg-icon-star:before {
+	content: "\0045";
 }
-.elgg-icon-star {
+.elgg-icon-star-sub:before {
+	content: "\0045";
+	font-size: 24px;
+	line-height: 15px;
+}
+.elgg-icon-star-sub.favorited {
+	color: #FA3;
+}
+.elgg-icon-star:before:hover {
 }
 .elgg-icon-tag:hover {
 }
@@ -346,6 +358,9 @@
 .elgg-icon-thumbs-up:before {
 	content: "\AA00";
 }
+.elgg-icon-thumbs-up-alt.liked:before, .elgg-icon-thumbs-up.liked:before {
+	color: #0A0;
+}
 .elgg-icon-thumbs-up:hover:before {
 }
 .elgg-icon-trash:before {
@@ -374,14 +389,28 @@
 .elgg-icon.external {
 	width: 0 !important;
 }
-a.external:after {
-	content: "\AC04";
+a.external:after, a.media-image-popup:after, .elgg-river-message a.media-video-popup:after {
 	cursor: pointer;
 	font-family: 'ggouv';
 	font-size: 28px;
-	line-height: 0.75;
-	margin: 0 -2px 0 2px;
+	line-height: 0;
+	margin-left: 2px;
 	font-weight: normal;
+	display: inline-block; /*don't underline*/
+}
+a.external:after {
+	content: "\AC04";
+}
+a.media-image-popup:after {
+	content: "\0070";
+	vertical-align: -6px;
+}
+.elgg-river-message a.media-video-popup:after {
+	content: "\0076";
+	vertical-align: -6px;
+}
+a.external, a.media-image-popup, .elgg-river-message a.media-video-popup {
+	white-space: nowrap;
 }
 
 /* ggouv */

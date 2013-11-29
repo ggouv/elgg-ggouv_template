@@ -62,9 +62,9 @@
 		<p>Il est possible d'afficher des détails d'une personne en cliquant sur son avatar ou sur sa @mention.</p>
 		<p>Cliquez sur « Tous les membres » et trouvez des personnes qui vous intéressent, vous pourrez alors suivre leur activité.</p>
 	</li>
-	<li data-class="elgg-menu-item-groups .ggouv-menu-child-shadow" data-options="tipLocation:right" data-button="2. Le hub de communication">
-		<span class="preStep hidden">$('.elgg-menu-item-groups').addClass('hover');</span>
-		<span class="postStep hidden">$('.elgg-menu-item-groups').removeClass('hover');</span>
+	<li data-class="slidr-subheader" data-options="tipLocation:left" data-button="2. Le hub de communication">
+		<span class="preStep hidden">$('.elgg-menu-item-groups').addClass('hover');ggouv.slidr('open', 300);</span>
+		<span class="postStep hidden">$('.elgg-menu-item-groups').removeClass('hover');ggouv.slidr();</span>
 		<h2>Les groupes</h2>
 		<p>Les groupes sont représentés par le caractère « ! ».<br>Dans ce menu s'afficheront tous les groupes dont vous êtes membres ou que vous avez créés.
 		<p>Vous pouvez, comme avec @, mentionner un groupe dans vos écrits avec ! puis le nom du groupe.</p>

@@ -188,12 +188,8 @@
 .groups-latest-reply {
 	float: right;
 }
-#group_activity_module .column-header {
+#group_activity_module .elgg-column-edit-button {
 	display: none;
-}
-.elgg-layout-one-sidebar #group_activity_module {
-	position: relative;
-	width: 100%;
 }
 #group_activity_module .elgg-head {
 	background: none repeat scroll 0 0 #E4E4E4;
@@ -206,18 +202,13 @@
 #group_activity_module .elgg-module-info > .elgg-head:hover * {
 	color: #333 !important;
 }
-#group_activity_module .elgg-head h3:before {
-	content: 'w';
-	font-size: 50px;
-	font-family: 'ggouv';
-	margin-right: 5px;
-	float: left;
-	font-weight: normal;
+#group_activity_module .elgg-tabs span {
+	font-size: 32px;
 }
 .activity-head-list {
 	position: absolute;
 	right: 5px;
-	top: 7px;
+	top: 17px;
 }
 #group_activity_module .elgg-river {
 	overflow: auto;

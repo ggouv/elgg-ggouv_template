@@ -13,9 +13,84 @@ elgg.provide('elgg.ggouv_template');
 // Loaded for the first time only
 elgg.ggouv_template.init = function() {
 
+	$('.elgg-page-body').css('min-height', $(window).height()-48); // prevent white space in bottom
 	// we wait everything is loaded
 	$(document).ready(function() {
+
 		elgg.ggouv_template.reload();
+
+		/*
+		 * slidr
+		 */
+		$('.slidr').removeClass('hidden'); // prevent ugly effect if page height is too short. Only on first load.
+		$('.slidr-body, .slidr-results').height($('.slidr').height() -117); // -108 = - 48 - 40 - 15 = - .slidr-header - .slidr-subheader - padding - .slider-footer
+		$('.elgg-menu-item-groups').mouseenter(function() {
+			var $menuG = $(this).addClass('hover');
+
+			if (!$('body').data('slidr')) {
+				ggouv.slidr('open', 300);
+				$(document).bind('mousemove.slidr-groups', function(e){
+					if(!$(e.target).closest('#slidr-groups').length && !$(e.target).closest($menuG).length) {
+						$(document).unbind('mousemove.slidr-groups');
+						$menuG.removeClass('hover');
+						ggouv.slidr();
+					}
+				});
+			}
+		}).click(function() {
+			$('#slidr-groups').find('input').select();
+		});
+		// search group
+		var $sgi = $('#slidr-groups .slidr-header input'),
+			cleanSlidrSearch = function() {
+				$('#slidr-groups .slidr-results').removeClass('results').addClass('hidden').find('ul').html('');
+				$('#slidr-groups .slidr-header input').val('');
+			};
+
+		$sgi.keyup(function() {
+			if ($(this).val() == '') cleanSlidrSearch();
+		}).autocomplete({
+			html: "html",
+			minLength: 2,
+			search: function(event, ui) {
+				$('#slidr-groups .slidr-results').removeClass('hidden').find('ul').html('');
+			},
+			source: elgg.get_site_url()+'livesearch?match_on=groups',
+			autoFocus: true
+		});
+		var data = $sgi.data('autocomplete');
+		$sgi.data('autocomplete', $.extend(data, {
+			_renderMenu: function(ul, items) {
+				var render = '';
+				$.each( items, function( index, item ) {
+					render += '<li><div class="elgg-image-block elgg-autocomplete-item clearfix"><div class="elgg-image">'+item.icon+
+						'</div><div class="elgg-body"><h3><a href="'+item.url+'">'+item.name+'</a></h3><div class="elgg-subtext">'+item.desc.slice(0, 140)+'</div></div></div></li>';
+				});
+				$('#slidr-groups .slidr-results').addClass('results').find('ul').append(render);
+				$(ul).attr('style', 'opacity:0;');
+			}
+		}));
+		$('#slidr-groups .slidr-results .elgg-icon-delete').click(function() {
+			cleanSlidrSearch();
+		})
+
+
+
+		// button to hide and show sidebar when width is less than 1200px
+		$('.toggle-sidebar-button').click(function() {
+			if ($('.cloned-sidebar').length) {
+				$('.cloned-sidebar').animate({right: '-='+$('.cloned-sidebar').width()}, function() {
+					$('.cloned-sidebar').remove();
+				})
+			} else {
+				$('.elgg-sidebar').clone(true, true)
+					.attr('class', 'cloned-sidebar')
+					.appendTo('.elgg-layout:not(.hidden)')
+					.css({right: -$('.cloned-sidebar').width()})
+					.animate({right: '+='+$('.cloned-sidebar').width()})
+						.find('elgg-menu-owner-block').addClass('tiny');
+			}
+		})
 
 		// ggouv logo
 		$('.elgg-menu-item-logo').click(function() {
@@ -62,23 +137,6 @@ elgg.ggouv_template.init = function() {
 				'-o-transform': 'rotateX(' + degree + 'deg)',
 				'transform': 'rotateX(' + degree + 'deg)'
 			}).data('rotation', degree);
-		});
-
-		// sidebar
-		var lastScrollTop = 0; // global var to reset it when page change by ajax
-		$(window).bind('scroll.sidebar', function() {
-			var st = this.scrollY,
-				sb = $('.elgg-sidebar'),
-				sbd = sb.data('bpx'),
-				i;
-
-			if (parseFloat(sb.css('bottom')) <= 0 && !elgg.isUndefined(sbd)) {
-				i = parseFloat(sb.css('bottom')) - parseFloat((lastScrollTop-st)/2);
-				if (i > 0) i = 0;
-				if (i < sbd) i = sbd;
-				sb.css({'bottom': i +'px'});
-			}
-			lastScrollTop = st;
 		});
 
 		// goTop button
@@ -170,6 +228,7 @@ elgg.ggouv_template.init = function() {
 		if (!$('.elgg-page-admin').length) elgg.ggouv_template.resizeSidebar();
 
 		var texta = $('.input-markdown');
+		$('.elgg-page-body').css('min-height', $(window).height()-48);
 		if (texta) {
 			texta.each(function() {
 				var textarea = $(this),
@@ -269,6 +328,7 @@ elgg.ggouv_template.init = function() {
 elgg.register_hook_handler('init', 'system', elgg.ggouv_template.init);
 
 
+
 /**
  * Reload template of ggouv
  */
@@ -281,31 +341,59 @@ elgg.ggouv_template.reload = function() {
 	if (!$('#section1').data('homepage')) $('body').removeClass('homepage');
 
 	if (!$('.elgg-page-admin').length) {
-		var TheColumn = $('#group_activity_module');
+		var $gam = $('#group_activity_module'),
+			$es = $('.elgg-sidebar').data('right_origin', '0'),
+			$es2 = $('.elgg-sidebar-2'),
+			$tsb = $('.toggle-sidebar-button');
 
-		if (TheColumn.is(':visible')) {
-			elgg.deck_river.LoadRiver(TheColumn, elgg.get_page_owner_guid());
+		// load river in group profile
+		if ($gam.is(':visible')) {
+			var $column = $gam.find('ul.elgg-body > li:first-child');
+			//elgg.deck_river.LoadRiver($gam, elgg.get_page_owner_guid());
+			elgg.deck_river.LoadRiver($column, $column.children('.column-header').data());
+
+			// auto scroll columns
+			$gam.find('.elgg-river').bind('scroll.moreItem', function() {
+				var $this = $(this),
+					$rtt = $this.closest('.column-river').find('.river-to-top');
+
+				if ($this.scrollTop()+$this.height() == $this.get(0).scrollHeight) {
+					$this.find('.moreItem').click();
+				}
+				if ($this.scrollTop() > 0) {
+					$rtt.removeClass('hidden');
+				} else {
+					$rtt.addClass('hidden');
+				}
+			});
 		}
-		$('.elgg-sidebar, .elgg-sidebar-2').fitElement('width', 5, { minSize: '252.8px', maxSize: '360px' }, $(window), function() {
-			$('.elgg-sidebar-2, .elgg-layout-one-sidebar, .elgg-sidebar-2 > *').css('margin-right', $('.elgg-sidebar').width() + 30);
+
+		$es.add($es2).fitElement('width', 5, { minSize: '252.8px', maxSize: '360px' }, $(window), function() {
+			var mR = $es.outerWidth() + 10;
+
+			if ($es2.is(':visible')) {
+				$es2.css('right', mR).data('right_origin', mR);
+				mR = mR * 2 - 20;
+			}
+			$('.elgg-page .elgg-layout:not(.hidden, .elgg-river-layout)').css('margin-right', mR).data('right_origin', mR);
 		});
 		elgg.ggouv_template.resizeSidebar();
 	}
 
 	// Resize if groups-profile-fields is taller than 200px
 	if ($('.groups-profile-fields').length) {
-		var gpf = $('.groups-profile-fields');
+		var $gpf = $('.groups-profile-fields');
 
-		if (gpf.height() > 200) {
-			gpf.height($('.groups-profile .elgg-image').height())
+		if ($gpf.height() > 200) {
+			$gpf.height($('.groups-profile .elgg-image').height())
 				.append($('<div>', {id: 'toggle-group-description'}).html(elgg.echo('groups:description:show_more')).click(function() {
 					var t = $(this);
 					if (t.hasClass('less')) {
-						t.html(elgg.echo('groups:description:show_more')).removeClass('less').appendTo(gpf);
-						gpf.animate({height: $('.groups-profile .elgg-image').height() + 'px'});
+						t.html(elgg.echo('groups:description:show_more')).removeClass('less').appendTo($gpf);
+						$gpf.animate({height: $('.groups-profile .elgg-image').height() + 'px'});
 					} else {
-						t.html(elgg.echo('groups:description:show_less')).addClass('less').appendTo(gpf.find('.description'));
-						gpf.animate({height: '100%'});
+						t.html(elgg.echo('groups:description:show_less')).addClass('less').appendTo($gpf.find('.description'));
+						$gpf.animate({height: '100%'});
 					}
 				}));
 		}
@@ -318,25 +406,31 @@ elgg.ggouv_template.reload = function() {
 		invalidHandler: ggouv.shakeButton
 	});
 
+	// refix position if slidr is open
+	ggouv.slidr('fix');
 
 };
 
 /*
- * Resize, scroll and sidebar
+ * Resize, scroll and fix sidebar
  */
+lastScrollTop = 0; // global var to reset it when page change by ajax
 elgg.ggouv_template.resizeSidebar = function() {
 	if (!$('.elgg-page-admin').length) {
+		var $es = $('.elgg-sidebar'),
+			$es2 = $('.elgg-sidebar-2'),
+			$tsb = $('.toggle-sidebar-button');
+
 		if ($('.sidebar-2-fixed').length) {
-			var sf = $('.sidebar-2-fixed .elgg-sidebar-2 .elgg-river');
+			var sf = $es2.find('.elgg-river');
 			sf.outerHeight($(window).height() - sf.offset().top);
 		}
 
-		if ($('.elgg-sidebar').length) {
-			var sb = $('.elgg-sidebar'),
-				maxHeight = 0,
+		if ($es.length) {
+			var maxHeight = 0,
 				getSidebarHeight = function() {
 					var mH = 0;
-					sb.children('*:not(script)').each(function() {
+					$es.children('*:not(script)').each(function() {
 						mH += $(this).outerHeight(true);
 					});
 					return mH;
@@ -365,15 +459,53 @@ elgg.ggouv_template.resizeSidebar = function() {
 				oc.stop().css({top: (nbrDiff-value)*(slider.height()/nbrDiff) - OwnerOffset.top});
 			}
 
-			var exPos = $(window).height() - sb.find('.elgg-menu-extras-default').height();
-			maxHeight = getSidebarHeight();
-			if (exPos > maxHeight) {
-				sb.height($(window).height() - 48 - 10); // 48 = $('.elgg-page-header').height()   // 10 = sidebar padding
+			var $emed = $es.height('100%').find('.elgg-menu-extras-default'),
+				emedPos = $(window).height() - $emed.outerHeight() - 7, // 7 margin-bottom
+				$emedPrev = $emed.prev(),
+				lastEsPos = $emed.prev().length ? $emed.prev().position().top + $emed.prev().outerHeight() + 48 + 20 : 0,
+				wH = $(window).height() - 48; // 48 = $('.elgg-page-header').height()
+
+			if (emedPos >= lastEsPos) { // if (exPos > maxHeight) {
+				$es.css({bottom: 'auto'}).outerHeight(wH);
+				$emed.css({position: 'absolute'});
+				$(window).unbind('scroll.sidebar');
 			} else {
-				sb.css({'bottom': -(maxHeight-($(window).height()-48-10))}).data('bpx', -(maxHeight-($(window).height()-48-10)));
-				sb.find('.elgg-menu-extras-default').css('position', 'relative');
+				var esH = $es.height('auto').outerHeight()+27;
+
+				$es.css({'bottom': -(esH-wH)});
+				$emed.css('position', 'relative');
+				$(window).unbind('scroll.sidebar').bind('scroll.sidebar', function() {
+					var st = this.scrollY,
+						maxbottom = -($es.outerHeight()+48 - $(window).height()),
+						i;
+
+					if (maxbottom > 0) {
+						$es.css({bottom: 'auto'}).outerHeight($(window).height() - 48);
+						$emed.css({position: 'absolute'});
+					}
+					i = parseFloat($es.css('bottom')) - parseFloat((lastScrollTop-st)/2);
+					if (lastScrollTop-st > 0) { // ca monte
+						if ($es[0].offsetTop >= 48) i = maxbottom;
+						$es.css({'bottom': i +'px'});
+					} else {
+						if (i > 0) i = 0;
+						//if (i < sbd) i = sbd;
+						$es.css({'bottom': i +'px'});
+					}
+
+					lastScrollTop = st;
+				});
 			}
 		}
+
+		// toggle-sidebar-button
+		if ($es.is(':visible')) {
+			$tsb.addClass('hidden');
+		} else if ($es.length) {
+			console.log('iss');
+			$tsb.removeClass('hidden');
+		}
+
 	}
 };
 

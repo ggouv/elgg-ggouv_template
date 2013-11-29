@@ -244,6 +244,8 @@ $french = array(
 	'password' => "Mot de passe",
 	'passwordagain' => "Confirmation du mot de passe",
 	'admin_option' => "Définir cet utilisateur comme administrateur ?",
+	'phone' => "Téléphone",
+	'about' => "A propos",
 
 /**
  * Access
@@ -393,6 +395,7 @@ $french = array(
  * Feeds
  */
 	'feed:rss' => "S'abonner au flux RSS de cette page",
+	'feed:group:activity' => "Suivre l'activité du groupe par RSS",
 
 /**
  * Links
@@ -792,6 +795,7 @@ $french = array(
 	'usersettings:statistics:label:email' => "mail",
 	'usersettings:statistics:label:membersince' => "Membre depuis",
 	'usersettings:statistics:label:lastlogin' => "Dernière connexion",
+	'usersettings:statistics:label:lastaction' => "Dernière action",
 
 /**
  * Activity river
@@ -1159,6 +1163,8 @@ Pour répondre ou voir le contenu de référence, suivez le lien ci-dessous:
 	'js:security:token_refresh_failed:body' => "En attendant, je me suis mis en veille pour des questions de sécurité...",
 	'js:security:token_refresh_failed:wakeup' => "Réveillez moi !",
 	'js:security:token_refreshed' => "La connexion à %s a été restaurée !",
+	'js:security:token_refresh_failed' => 'Le contact a été perdu avec %s. Rafraîchissez la page.',
+
 
 /**
  * Languages according to ISO 639-1
@@ -1357,8 +1363,8 @@ Pour répondre ou voir le contenu de référence, suivez le lien ci-dessous:
 	 * Menu items and titles
 	 */
 	'groups' => "Groupes",
-	'groups:owned' => "Les groupes que j'ai créé",
-	'groups:yours' => "Les groupes dont je suis membre",
+	'groups:owned' => "Les groupes que j'ai créés",
+	'groups:memberof' => "Les groupes dont je suis membre",
 	'groups:user' => "Les groupes de %s",
 	'groups:all' => "Tous les groupes",
 	'groups:add' => "Créer un nouveau groupe",
@@ -1383,7 +1389,7 @@ Pour répondre ou voir le contenu de référence, suivez le lien ci-dessous:
 	'groups:owner' => "Créateur",
 	'groups:widget:num_display' => "Nombre de groupes à afficher",
 	'groups:widget:membership' => "Adhésion au groupe",
-	'groups:widgets:description' => "Afficher les groupes dont vous êtes membre dans votre profil",
+	'groups:widgets:description' => "Afficher les groupes dont vous êtes membres dans votre profil",
 	'groups:noaccess' => "Vous n'avez pas accès au groupe",
 	'groups:permissions:error' => "Vous n'avez pas les autorisations pour çà",
 	'groups:ingroup' => "dans le groupe",
@@ -1411,7 +1417,6 @@ Pour répondre ou voir le contenu de référence, suivez le lien ci-dessous:
 	'groups:search_in_group' => "Chercher dans ce groupe",
 	'groups:acl' => "Groupe : %s",
 
-	'groups:activity' => "Activité du Groupe",
 	'groups:enableactivity' => "Rendre disponible Activité de groupe",
 	'groups:activity:none' => "Il n'y a pas encore d'activité de groupe",
 
@@ -1897,11 +1902,10 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'groups:metagroup' => "Méta-groupe",
 	'groups:typogroup' => "Typo-groupe",
 	'groups:localgroup' => "Groupe local",
-	'groups:metagroups' => "Méta-groupes",
-	'groups:typogroups' => "Typo-groupes",
+	'groups:metagroups' => "Méta groupes",
+	'groups:typogroups' => "Typo groupes",
 	'groups:localgroups' => "Groupes locaux",
 	'groups:localgroup:departement' => "Département",
-	'groups:my_local_group' => "Mon groupe local",
 	'groups:description:show_more' => "Afficher plus",
 	'groups:description:show_less' => "Afficher moins",
 
@@ -1926,6 +1930,10 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'ggouv:search:localgroups:notfound' => "La commune n'a pas été trouvée.",
 	'xoxco:removing_tag' => "Enlever ce mot-clé",
 	'xoxco:input:default' => "Tapez ↲ ou , pour séparer les mots-clés",
+	'autocomplete:placeholder' => "Entrez le nom",
+	'autocomplete:placeholder:all' => "Entrez le nom",
+	'autocomplete:placeholder:groups' => "Entrez le nom du groupe",
+	'autocomplete:placeholder:users' => "Entrez le nom du gitoyen",
 	'forms:not_valid' => "Le formulaire n'est pas valide !",
 	'forms:required' => "Ce champ est obligatoire !",
 	'forms:remote' => "Ce champ n'est pas valide.",
@@ -2041,9 +2049,12 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'widget:size_items:tiny_image' => "Petite image",
 	'slidr:widget:group:owned' => "Afficher les groupes que j'ai créé",
 	'slidr:widget:group:memberof' => "Afficher les groupes dont je suis membre",
+	'groups:favorites' => "Groupes favoris",
+	'search:group' => "Chercher un groupe",
 	'dashboard:widget:owned_groups:nogroup' => "Vous n'avez pas encore créé de groupe.",
 	'dashboard:widget:memberof_groups:nogroup' => "Allez sur la page affichant <a href=\"%s\">tous les groupes</a> et rejoignez les groupes qui vous plaisent !",
-	''
+	'dashboard:widget:favorite_groups:nogroup' => "Glissez un groupe ici pour l'ajouter.",
+
 );
 
 add_translation("fr", $french);

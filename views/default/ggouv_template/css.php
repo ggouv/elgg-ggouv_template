@@ -3,10 +3,10 @@
  */
 
 .elgg-page-default {
-	min-width: 0px;
+	min-width: 0;
 }
 .homepage .elgg-page-body, .homepage .elgg-main {
-	margin-left: 0 !important;
+	padding-left: 0 !important;
 }
 .homepage .elgg-layout-one-column {
 	margin-right: 0;
@@ -394,7 +394,10 @@
 /*
 * nolog css when non logged in user
 */
-.elgg-page-header.nolog {
+.nolog .elgg-page-default {
+	margin-left: 0;
+}
+.nolog .elgg-page-header {
 	background: #1F2E3D;
 	-webkit-box-shadow: 0 5px 5px 0 white;
 	box-shadow: 0 5px 5px 0 white;
@@ -458,8 +461,7 @@
 .elgg-inner-nolog .float-alt:hover .visible-desktop {
 	display: block !important;
 }
-.elgg-page-default .elgg-page-body.nolog {
-	margin:0 0 0 20px;
+.elgg-page-default.nolog .elgg-page-body {
 	padding-top:48px;
 }
 .elgg-page-default .shareButtons {
@@ -525,6 +527,7 @@
 	width: 27px;
 	text-shadow: -0.1em 0 0.03em #0f0;
 	float: left;
+	position: relative;
 }
 .elgg-menu-item-logo a:before, .elgg-menu-item-logo a:after {
 	position: absolute;
@@ -616,12 +619,12 @@
 #site-info-popup {
 	background-color: #1F2E3D;
 	bottom: 0;
+	left: 40px;
 	box-shadow: 0 0 6px 4px #0A0A0A inset;
 	margin: 0 -10px -20px;
 	padding: 10px 10px 30px;
 	position: fixed;
 	width: 100%;
-	z-index: 11;
 }
 #site-info-popup .spotlight {
 	margin: 0 10%;
@@ -635,6 +638,206 @@
 	position: absolute;
 	top: 10px;
 }
+
+/*
+ * Sliders
+ */
+.slidr {
+	position: fixed;
+	top: 0;
+	background: #e4ecf5;
+	width: 300px;
+	height: 100%;
+}
+.slidr-left {
+	left: 40px;
+}
+.slidr-header {
+	background: #88AFD6;
+	height: 28px;
+}
+.slidr-header input {
+	background: white;
+	margin-top: 0px;
+	border-color: #4690D6;
+	border-radius: 4px;
+}
+.slidr-header input:focus {
+	background: white;
+}
+.slidr-subheader {
+	box-shadow: 0 4px 4px 0px rgba(10, 10, 10, 0.1);
+	-webkit-box-shadow: 0 4px 4px 0px rgba(10, 10, 10, 0.1);
+	background: #88AFD6;
+}
+.slidr-subheader > li {
+	display: inline-block;
+	font-size: 0.85em;
+	line-height: 40px;
+}
+.slidr-subheader a {
+	width: 60px;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	background: white;
+}
+.slidr-subheader span {
+	vertical-align: middle;
+	line-height: 15px;
+	display: inline-block;
+}
+.slidr-subheader a:hover {
+	background: #0054A7;
+	color: white;
+}
+.slidr-body {
+	overflow-y: auto;
+	height: 100%;
+	position: relative;
+}
+.slidr-body .elgg-module-widget {
+	margin: 0 5px 5px;
+	margin: 0 0 5px;
+	padding: 0;
+}
+.slidr-body .elgg-module-widget , .slidr-body .elgg-module-widget > .elgg-head {
+	background: transparent;
+}
+.slidr-body .elgg-module-widget > .elgg-head {
+	margin: 0 10px;
+}
+.slidr-body .elgg-module-widget > .elgg-head h3 {
+	padding: 6px 25px 0 30px;
+	font-size: 1em;
+}
+.slidr-body .elgg-menu-item-settings, .slidr-body .elgg-menu-item-delete {
+	display: none;
+}
+.slidr-body .elgg-menu-widget > .elgg-menu-item-collapse {
+	left: 20px;
+}
+.slidr-body .elgg-head:hover .elgg-menu-item-settings, .slidr-body .elgg-head:hover .elgg-menu-item-delete {
+	display: block;
+}
+.slidr-body .elgg-module-widget > .elgg-body {
+	background: transparent;
+	border-top: 2px solid #CCC;
+	overflow: visible;
+	display: inline-block;
+}
+.slidr-body .elgg-widget-content {
+	padding: 5px 15px;
+}
+.slidr-body .elgg-widget-edit {
+	background: white;
+	border-bottom: 2px solid #CCC;
+	padding: 10px;
+	width: 280px;
+}
+.slidr-body .elgg-widget-content .tiny li {
+	padding: 0;
+	border: none;
+}
+.slidr-body .elgg-widget-content .elgg-body {
+	overflow: hidden;
+	width: 200px;
+	padding-bottom: 5px;
+}
+.slidr-body .elgg-widget-content .tiny .elgg-body {
+	padding-top: 4px;
+}
+.slidr-results {
+	width: 100%;
+	position: absolute;
+	background: #E4ECF5;
+	z-index: 1;
+}
+.slidr-results .loader {
+	text-align: center;
+	margin-top: 20%;
+}
+.slidr-results.results .loader {
+	display: none;
+}
+.slidr-footer {
+	height: 19px;
+	width: 100%;
+	text-align: center;
+	bottom: 0;
+	position: absolute;
+	line-height: 20px;
+	box-shadow: 0 -4px 4px 0 rgba(10, 10, 10, 0.1);
+	-webkit-box-shadow: 0 -4px 4px 0 rgba(10, 10, 10, 0.1);
+}
+#slidr-groups .elgg-widgets-add-panel {
+	position: absolute;
+	bottom: 19px;
+	margin: 0;
+	border: none;
+	border-top: 2px solid #CCC;
+	background: white;
+	width: 280px;
+}
+.slidr-footer .widget-add-button {
+	color: white;
+	font-weight: bold;
+	display: block;
+	text-decoration: none;
+	background: #88AFD6;
+}
+.slidr-footer .widget-add-button:hover {
+	background: #0054A7;
+}
+#slidr-groups .elgg-widgets-add-panel li {
+	width: 250px;
+}
+.slidr .elgg-widget-content .elgg-list.small_image li {
+	float: left;
+	border: none;
+	padding: 5px 2.5px 0;
+}
+.slidr .elgg-widget-content .elgg-list.small li {
+	padding: 5px 0 2px;
+}
+.slidr .elgg-widget-content .elgg-list.tiny_image li {
+	display: inline-block;
+	border: none;
+	padding: 5px 4.39px 0;
+}
+.slidr .elgg-widget-instance-favorites_groups .elgg-body.ui-state-highlight {
+	background: rgba(255, 150, 150, 0.5);
+}
+.slidr .elgg-widget-instance-favorites_groups .elgg-body.ui-state-active {
+	background: #0F9;
+}
+.slidr-body .elgg-widget-content .elgg-list .ui-sortable-placeholder {
+	border: 2px dashed #88AFD6 !important;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	visibility: visible !important;
+}
+.slidr-body .elgg-widget-content .elgg-list.tiny_image .ui-sortable-placeholder {
+	width: 25px;
+	height: 25px;
+	margin: 5px 4.39px 0;
+}
+.slidr-body .elgg-widget-content .elgg-list li.ui-sortable-helper {
+	background: white;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5) !important;
+	-webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+	cursor: crosshair;
+}
+.slidr-body .elgg-widget-instance-favorites_groups .elgg-list li:hover {
+	cursor: move;
+	box-shadow: 0 0 1px #CCC;
+}
+.group-info-popup.ui-sortable-helper, .group-info-popup.ui-draggable-dragging {
+	width: auto !important;
+	height: auto !important;
+}
+
 
 /*
 * topbar sub-menu
@@ -657,10 +860,6 @@
 	padding: 10px;
 	background-color: #1F2E3D;
 	margin: 10px 10px 10px 0;
-}
-
-.elgg-menu-item-groups .ggouv-menu-child-shadow {
-
 }
 .elgg-menu-item-groups table ul ul {
 	height: 100%;
@@ -707,17 +906,6 @@
 	background-color: transparent;
 }
 
-/*
- * Layout
- */
-.sidebar-2-fixed .elgg-sidebar-2 > * {
-	position: fixed;
-	max-width: 360px;
-}
-.elgg-sidebar-2 .elgg-river {
-	border-top: 1px solid #CCC;
-}
-
 
 /*
 * river
@@ -749,14 +937,14 @@
 	content: "∇";
 	font-size: 3em;
 	font-weight: bold;
-	padding: 6px;
+	padding: 8px 6px 4px;
 }
 .column-header.twitter:before {
 	content: "\0054";
 }
 .column-header.facebook:before {
 	content: "\0046";
-	padding: 5px 2px;
+	padding: 6px 2px;
 	font-size: 3.4em;
 }
 .elgg-list-item {
@@ -861,6 +1049,10 @@
  */
 h2.markdown-wiki-create .elgg-button-action {
 	text-transform: none;
+}
+.markdown-body {
+	font-size: 1.1em;
+	line-height: 1.5;
 }
 .markdown-body .subject {
 	width: 100%;
@@ -974,9 +1166,31 @@ kbd {
 	font-weight: normal;
 	color: #333;
 }
-
-
-
+.toggle .markdown-menu li a {
+	font-size: 0;
+}
+.toggle .markdown-menu li a:before {
+	font-family: 'ggouv';
+	font-size: 31px;
+	line-height: 20px;
+}
+.toggle .markdown-menu .elgg-menu-item-preview a:before {
+	content: "\006F";
+}
+.toggle .markdown-menu .elgg-menu-item-output a:before {
+	content: "\E032";
+}
+.toggle .markdown-menu .elgg-menu-item-snippets a:before {
+	content: "\ABFC";
+}
+.toggle .markdown-menu .elgg-menu-item-help a:before {
+	content: "\0071";
+}
+@media (max-width: 1279px) {
+	.markdown-body {
+		font-size: 1em;
+	}
+}
 /*
  * Plugin workflow
  */

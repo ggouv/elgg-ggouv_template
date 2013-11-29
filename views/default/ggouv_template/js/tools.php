@@ -90,6 +90,7 @@ ggouv.super_popup.create = function(options) {
 	if (options.cancel === true) options.cancel = elgg.echo('cancel');
 
 	$('.elgg-page').prepend(superPopupTemplate(options));
+	$('.tipsy').remove();
 	execFunction(options.createdCallback);
 	var sP = $('#super-popup');
 
@@ -300,6 +301,48 @@ ggouv.getParamsMap = function(maxZoom) {
 				attribution: ''
 			})
 		]
+	}
+};
+
+
+
+/**
+ * Slide elgg-page-default right or left to provide a panel under the page
+ * @param  {string} action      Possible value :
+ *                                              'open' (slide the page), 
+ *                                              'fix' (fix css on some element when page change. Called on History chang.),
+ *                                              no value close the panel
+ * @param  {int}    dist        Distance of the slide. Default : 250px
+ */
+ggouv.slidr = function(action, dist) {
+	var $epd = $('.elgg-page-default'),
+		$es = $('.elgg-sidebar, .elgg-sidebar-2'),
+		$el = $('.elgg-page .elgg-layout:not(.hidden)'),
+		distData = $('body').data('slidr'),
+		s = 250,
+		a  = 'animate';
+
+	if (action == 'open' && !distData) {
+
+		$('body').data('slidr', dist);
+		$epd[a]({marginLeft: '+='+dist+'px'}, s);
+		$es[a]({right: '-='+dist+'px'}, s);
+		$el[a]({marginRight: '-='+dist+'px'}, s);
+
+	} else if (action == 'fix' && distData) {
+
+		$es.css({right: '-='+distData+'px'});
+		$el.css({marginRight: '-='+distData+'px'});
+
+	} else if (distData) {
+
+		$('body').removeData('slidr');
+		$epd.stop('marginLeft', true, true)[a]({marginLeft: 40}, s);
+		$es.stop('right', true, true).each(function(i, e) {
+			$(e)[a]({right: $(e).data('right_origin')+'px'}, s);
+		});
+		$el.stop('marginRight', true, true)[a]({marginRight: $el.data('right_origin')+'px'}, s);
+
 	}
 };
 

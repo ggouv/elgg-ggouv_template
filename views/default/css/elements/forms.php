@@ -80,14 +80,15 @@ textarea {
 	background-color: #CCC;
 	border-radius: 4px;
 	color: white;
-	font-size: 28px;
+	font-size: 27px;
 	height: 18px;
 	position: absolute;
 	right: 3px;
-	top: 24px;
-	width: 18px;
+	top: 31px;
+	width: 19px;
 	cursor: pointer;
-	z-index: 1;
+	z-index: 2;
+	text-align: center;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { /* hack Chrome / Safari */
 	.description-wrapper .toggle-preview {

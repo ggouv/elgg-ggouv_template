@@ -8,7 +8,7 @@ $user = elgg_get_page_owner_entity();
 
 $profile_fields = elgg_get_config('profile_fields');
 
-echo '<ul class="user-stats mbm">';
+echo '<ul class="user-stats mbs pts">';
 
 $followers = elgg_get_entities_from_relationship(array(
 	'relationship' => 'friend',
@@ -17,7 +17,7 @@ $followers = elgg_get_entities_from_relationship(array(
 	'count' => true,
 	'limit' => 0
 ));
-echo '<li><div class="stats">' . $followers . '</div>' . elgg_echo('friends:followers') . '</li>';
+echo '<li><a href="'.elgg_get_site_url().'friendsof/'.$user->username.'"><div class="stats">' . $followers . '</div>' . elgg_echo('friends:followers') . '</a></li>';
 
 $following = elgg_get_entities_from_relationship(array(
 	'relationship' => 'friend',
@@ -26,25 +26,25 @@ $following = elgg_get_entities_from_relationship(array(
 	'count' => true,
 	'limit' => 0
 ));
-echo '<li><div class="stats">' . $following . '</div>' . elgg_echo('friends:following') . '</li>';
+echo '<li><a href="'.elgg_get_site_url().'friends/'.$user->username.'"><div class="stats">' . $following . '</div>' . elgg_echo('friends:following') . '</a></li>';
 
 $messages = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'thewire',
-	'owner_guid' => $user->guid,
+	'owner_guid' => $user->getGUID(),
 	'count' => true,
 	'limit' => 0
 ));
-echo '<li><div class="stats">' . $messages . '</div>' . elgg_echo('item:object:thewire') . '</li>';
+echo '<li><a href="'.elgg_get_site_url().'message/owner/'.$user->username.'"><div class="stats">' . $messages . '</div>' . elgg_echo('item:object:thewire') . '</a></li>';
 
 $ideas = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'idea',
-	'owner_guid' => $user->guid,
+	'owner_guid' => $user->getGUID(),
 	'count' => true,
 	'limit' => 0
 ));
-echo '<li><div class="stats">' . $ideas . '</div>' . elgg_echo('item:object:idea') . '</li>';
+echo '<li><a href="'.elgg_get_site_url().'brainstorm/owner/'.$user->username.'"><div class="stats">' . $ideas . '</div>' . elgg_echo('item:object:idea') . '</a></li>';
 
 echo '</ul>';
 
@@ -90,7 +90,9 @@ if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
 	}
 }
 
-echo '<div class="even"><b>' . elgg_echo("profile:time_created") . '&nbsp;: </b>' . elgg_get_friendly_time($user->time_created) . '</div>';
+echo '<div class="even"><b>' . elgg_echo('profile:time_created') . '&nbsp;: </b>' . elgg_get_friendly_time($user->time_created) . '</div>';
+echo '<div class="even"><b>' . elgg_echo('usersettings:statistics:label:lastlogin') . '&nbsp;: </b>' . elgg_get_friendly_time($user->last_login) . '</div>';
+echo '<div class="even"><b>' . elgg_echo('usersettings:statistics:label:lastaction') . '&nbsp;: </b>' . elgg_get_friendly_time($user->last_action) . '</div>';
 
 if (!elgg_get_config('profile_custom_fields')) {
 	if ($user->isBanned()) {

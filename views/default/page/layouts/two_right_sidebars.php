@@ -24,11 +24,7 @@ $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
 ?>
 
 <div class="<?php echo $class; ?>">
-	<div class="elgg-sidebar">
-		<?php
-			echo elgg_view('page/elements/sidebar', $vars);
-		?>
-	</div>
+
 	<?php if ($vars['sidebar_2']) { ?>
 		<div class="elgg-sidebar-2 mlm ptm">
 			<?php
@@ -39,10 +35,16 @@ $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
 		<div class="elgg-sidebar-2-none ptm"></div>
 	<?php } ?>
 
+	<div class="elgg-sidebar">
+		<?php
+			echo elgg_view('page/elements/sidebar', $vars);
+		?>
+	</div>
+
 	<div class="elgg-main elgg-body margin-tablet">
 		<?php
 			echo $nav;
-			
+
 			if (isset($vars['title'])) {
 				echo elgg_view_title($vars['title']);
 			}
@@ -55,4 +57,5 @@ $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
 			}
 		?>
 	</div>
+
 </div>

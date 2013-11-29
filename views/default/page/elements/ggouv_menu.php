@@ -113,7 +113,7 @@ if ($user) {
 	$sub_menu .= '</tr></table></ul></ul>';
 
 	echo '<li class="elgg-menu-item-groups gwf ggouv-menu-parent scale rotate">' .
-			'<a class="t" href="#">!</a>' . $sub_menu .
+			'<a id="exclam-groups-icon" class="t" href="#">!</a>' . //$sub_menu .
 		'</li>';
 
 	// menu puzzle
@@ -122,6 +122,7 @@ if ($user) {
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
 						'<li><a href="' . $site_url . 'split/">' . elgg_echo('split-your-elgg:screen') . '</a></li>' .
+						'<li><a href="' . $site_url . 'bookmarklet/install">' . elgg_echo('bookmarklet') . '</a></li>' .
 				'</ul>' .
 			'</ul>' .
 		'</li>';

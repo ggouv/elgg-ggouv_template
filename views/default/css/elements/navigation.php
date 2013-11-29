@@ -90,10 +90,8 @@
 	BREADCRUMBS
 *************************************** */
 .elgg-breadcrumbs {
-	font-size: 80%;
 	font-weight: bold;
-	line-height: 1.2em;
-	color: #bababa;
+	color: #BBB;
 }
 .elgg-breadcrumbs > li {
 	display: inline-block;
@@ -101,7 +99,7 @@
 .elgg-breadcrumbs > li:after {
 	content: "\2192";
 	font-family: "ggouv";
-	font-size: 16px;
+	font-size: 24px;
 	font-weight: normal;
 	padding: 0 4px;
 	vertical-align: middle;
@@ -116,9 +114,8 @@
 }
 
 .elgg-main .elgg-breadcrumbs {
-	position: relative;
-	top: -6px;
-	left: 0;
+	height: 28px;
+	padding-top: 2px;
 }
 
 /* ***************************************
@@ -272,7 +269,6 @@
 *************************************** */
 .elgg-menu-title {
 	float: right;
-	margin-top: -9px;
 }
 
 .elgg-menu-title > li {

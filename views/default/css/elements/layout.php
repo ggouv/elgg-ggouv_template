@@ -18,11 +18,16 @@
 <?php // the width is on the page rather than topbar to handle small viewports ?>
 .elgg-page-default {
 	min-width: 320px;
+	margin-left: 40px;
 }
 .elgg-page-default .elgg-page-body {
-	margin: 0 0 0 60px;
+	min-height: 3000px; /* prevent ugly effect, resized by js */
 	position: relative;
-	padding-top: 48px;
+	padding: 48px 0 0 20px;
+	background: white;
+	overflow: hidden;
+	box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.2);
+	-webkit-box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.2);
 }
 #elgg-page-header-container .elgg-inner {
 	position: relative;
@@ -43,10 +48,12 @@
 	height: 100%;
 	position: fixed;
 	top: 0;
+	left: 0;
 	width: 40px;
 	border: none;
 	z-index: 11;
 	box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.4);
+	-webkit-box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.4);
 }
 .elgg-page-topbar > .elgg-inner {
 	padding: 0;
@@ -75,15 +82,15 @@
 	width: 100%;
 	z-index: 10;
 	background: white;
-	-webkit-box-shadow: 0px 5px 5px 0px white;
-	-moz-box-shadow: 0px 5px 5px 0px white;
-	box-shadow: 0px 5px 5px 0px white;
+	-webkit-box-shadow: 3px 5px 5px 0px white;
+	-moz-box-shadow: 3px 5px 5px 0px white;
+	box-shadow: 3px 5px 5px 0px white;
 }
 .rotator {
 	background: #4189CB;
 	float: left;
 	height: 48px;
-	width: 72px;
+	width: 32px;
 	z-index: 1;
 	overflow: hidden;
 	-webkit-transform: translateZ(0px);
@@ -91,11 +98,8 @@
 	-o-transform: translateZ(0px);
 	-ms-transform: translateZ(0px);
 	transform: translateZ(0px);
-	-webkit-box-shadow: 0 -3px 5px #333333;
-	box-shadow: 0 -3px 5px #333333;
-}
-.rotator .arrows {
-	margin-left: 40px;
+	-webkit-box-shadow: 3px -3px 5px rgba(51, 51, 51, 0.5);
+	box-shadow: 3px -3px 5px rgba(51, 51, 51, 0.5);
 }
 .rotator .arrows div {
 	color: white;
@@ -110,7 +114,7 @@
 	font-size: 36px;
 }
 #elgg-page-header-container {
-	margin-left: 72px;
+	margin-left: 32px;
 	height: 48px;
 	-webkit-transform-origin: 0 center -13.8465px;
 	-moz-transform-origin: 0 center -13.8465px;
@@ -201,29 +205,61 @@
 	margin-right: 20px;
 }
 .elgg-layout-two-sidebar {
-	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/two_sidebar_background.gif) repeat-y right top;
+	background-color: #EEE;
 }
 .elgg-menu-owner-block .elgg-menu-item-activity {
 	display: none;
 }
-@media (max-width: 1279px) {
-	.elgg-layout-two-right-sidebar .elgg-main.margin-tablet {
-		margin-right: 282.8px;
-	}
-	.elgg-sidebar-2 {
+.elgg-layout-two-right-sidebar {
+	margin-right: 760px;
+}
+@media (max-width: 1200px) {
+	.elgg-sidebar-2 + .elgg-sidebar {
 		display: none;
 	}
-	.elgg-menu-owner-block .elgg-menu-item-activity {
-		display: block;
+}
+@media (max-width: 979px) {
+	.elgg-layout {
+		margin-right: 10px !important;
 	}
+	.fixed-deck .elgg-layout {
+		margin-right: 0 !important;
+	}
+	.elgg-sidebar {
+		display: none;
+	}
+}
+.toggle-sidebar-button {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 9999;
+	width: 40px;
+	height: 48px;
+	text-align: center;
+	font-size: 4em;
+	line-height: 100%;
+	color: white;
+	background: #4690D6;
+	box-shadow: 0 -4px 6px 4px rgba(10, 10, 10, 0.2);
+	-webkit-box-shadow: 0 -4px 6px 4px rgba(10, 10, 10, 0.2);
 }
 .elgg-sidebar {
 	position: fixed;
 	padding: 10px 10px 0;
 	right: 0;
 	width: 360px;
+	height: 100%;
 	margin-left: 10px;
 	background-color: #EEE;
+}
+.cloned-sidebar {
+	position: fixed;
+	top: 48px;
+	padding: 10px 10px 0;
+	background: #EEE;
+	box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.2);
+	-webkit-box-shadow: 0 0 6px 4px rgba(10, 10, 10, 0.2);
 }
 #goTop {
 	position: fixed;
@@ -251,19 +287,19 @@
 	margin: 0 10px 0 0;
 }
 .elgg-sidebar-2 {
-	position: relative;
-	float: right;
+	position: fixed;
 	width: 360px;
-	margin-right: 390px;
+	right: 390px;
 }
 .elgg-sidebar-2-none {
 	float: right;
-	margin-right: 390px;
+	right: 390px;
 }
+
 .elgg-main {
 	position: relative;
 	min-height: 360px;
-	padding: 10px;
+	padding: 10px 0 0;
 }
 .elgg-main > .elgg-head {
 	padding-bottom: 3px;

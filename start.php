@@ -194,7 +194,36 @@ function elgg_ggouv_template_init() {
 	setlocale(LC_TIME, $user->language, strtolower($user->language) . '_' . strtoupper($user->language) . '.UTF-8');
 
 	elgg_register_event_handler('login', 'user', 'ggouv_login_user_event');
+
+
+// widgets
+	// widgets on group slidr-menu
+	elgg_register_widget_type(
+		'owned_groups',
+		elgg_echo('groups:owned'),
+		elgg_echo('slidr:widget:group:owned'),
+		'slidr-group',
+		true
+	);
+	elgg_register_widget_type(
+		'memberof_groups',
+		elgg_echo('groups:memberof'),
+		elgg_echo('slidr:widget:group:memberof'),
+		'slidr-group',
+		true
+	);
+	/*elgg_register_widget_type(
+		'favorites_groups',
+		elgg_echo('groups:favorites'),
+		elgg_echo('slidr:widget:group:favorites'),
+		'slidr-group',
+		true
+	);*/
+
+	elgg_register_plugin_hook_handler('get_list', 'default_widgets', 'slidr_group_default_widgets');
+
 }
+
 
 
 /**
@@ -916,6 +945,85 @@ function ggouv_groups_entity_menu_setup($hook, $type, $return, $params) {
 
 	return $return;
 }
+
+
+/**
+ * Widget menu is a set of widget controls
+ * @access private
+ */
+function ggouv_widget_menu_setup($hook, $type, $return, $params) {
+
+	$widget = $params['entity'];
+	/* @var ElggWidget $widget */
+	$show_edit = elgg_extract('show_edit', $params, true);
+
+	$collapse = array(
+		'name' => 'collapse',
+		'text' => ' ',
+		'href' => "#elgg-widget-content-$widget->guid",
+		'class' => 'elgg-widget-collapse-button',
+		'rel' => 'toggle',
+		'priority' => 1
+	);
+	$return[] = ElggMenuItem::factory($collapse);
+
+	if ($widget->canEdit()) {
+		if (!elgg_in_context('slidr-group')) {
+			$delete = array(
+				'name' => 'delete',
+				'text' => elgg_view_icon('delete-alt'),
+				'title' => elgg_echo('widget:delete', array($widget->getTitle())),
+				'href' => "action/widgets/delete?widget_guid=$widget->guid",
+				'is_action' => true,
+				'class' => 'elgg-widget-delete-button',
+				'id' => "elgg-widget-delete-button-$widget->guid",
+				'priority' => 900
+			);
+			$return[] = ElggMenuItem::factory($delete);
+		}
+
+		if ($show_edit) {
+			$edit = array(
+				'name' => 'settings',
+				'text' => elgg_view_icon('settings-alt'),
+				'title' => elgg_echo('widget:edit'),
+				'href' => "#widget-edit-$widget->guid",
+				'class' => "elgg-widget-edit-button",
+				'rel' => 'toggle',
+				'priority' => 800,
+			);
+			$return[] = ElggMenuItem::factory($edit);
+		}
+	}
+
+	return $return;
+}
+
+
+
+/**
+ * Register user slidr-group with default widgets
+ *
+ * @param unknown_type $hook
+ * @param unknown_type $type
+ * @param unknown_type $return
+ * @param unknown_type $params
+ * @return array
+ */
+function slidr_group_default_widgets($hook, $type, $return, $params) {
+	$return[] = array(
+		'name' => elgg_echo('slidr-group'),
+		'widget_context' => 'slidr-group',
+		'widget_columns' => 1,
+
+		'event' => 'create',
+		'entity_type' => 'user',
+		'entity_subtype' => ELGG_ENTITIES_ANY_VALUE,
+	);
+
+	return $return;
+}
+
 
 
 
