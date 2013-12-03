@@ -528,7 +528,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 
 	// Reload plugins
 	elgg.deck_river.reload();
-	elgg.markdown_wiki.init();
+	elgg.markdown_wiki.reload();
 	elgg.brainstorm.init();
 	//elgg.bookmarks.reload();
 	elgg.tags.init();
