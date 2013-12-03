@@ -121,8 +121,8 @@ if ($user) {
 			'<a class="t" href="#">&#44044;</a>' . // unicode AC0C
 			'<ul class="ggouv-menu-child">' .
 				'<ul class="ggouv-menu-child-shadow">' .
+						'<li><a href="' . $site_url . 'bookmarklet/install">' . elgg_echo('ggouvlet:install') . '</a></li>' .
 						'<li><a href="' . $site_url . 'split/">' . elgg_echo('split-your-elgg:screen') . '</a></li>' .
-						'<li><a href="' . $site_url . 'bookmarklet/install">' . elgg_echo('bookmarklet') . '</a></li>' .
 				'</ul>' .
 			'</ul>' .
 		'</li>';

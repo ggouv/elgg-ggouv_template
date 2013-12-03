@@ -1952,6 +1952,7 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'thewire:put_shortlink_in_wire' => "Ajouter le lien dans le lanceur",
 	'thewire:put_title_shortlink_in_wire' => "Ajouter le titre et le lien",
 	'share:on' => "Partager sur",
+	'ggouvlet:install' => "Installer le ggouvlet",
 
 	/**
 	 * System message
