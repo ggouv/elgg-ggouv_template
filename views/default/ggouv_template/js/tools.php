@@ -325,6 +325,7 @@ ggouv.slidr = function(action, dist) {
 	if (action == 'open' && !distData) {
 
 		$('body').data('slidr', dist);
+		if (elgg.isUndefined($el.data('right_origin'))) $el.data('right_origin', parseInt($el.css('margin-right')));
 		$epd[a]({marginLeft: '+='+dist+'px'}, s);
 		$es[a]({right: '-='+dist+'px'}, s);
 		$el[a]({marginRight: '-='+dist+'px'}, s);
