@@ -542,7 +542,7 @@ TEXT;
  */
 function ggouv_views_add_rss_link() {
 	global $autofeed;
-	if (isset($autofeed) && $autofeed == true) {
+	if (isset($autofeed) && $autofeed == true && !elgg_instanceof(elgg_get_page_owner_entity(), 'group')) {
 		$url = full_url();
 		if (substr_count($url, '?')) {
 			$url .= "&view=rss";
@@ -555,7 +555,7 @@ function ggouv_views_add_rss_link() {
 			'name' => 'rss',
 			'text' => elgg_view_icon('rss'),
 			'href' => $url,
-			'class' => 'tooltip s',
+			'link_class' => 'tooltip s',
 			'title' => elgg_echo('feed:rss'),
 			'target' => '_blank'   // added for ggouv
 		));
@@ -828,10 +828,10 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 
 	if ($entity->getType() != 'group') {
 		$options = array(
-			'name' => 'shortlink',
-			'text' => 'r',
+			'name' => 'share',
+			'text' => elgg_view_icon('share'),
 			'title' => elgg_echo('menu:shortlink'),
-			'class' => 'ggouv-share gwf tooltip s t prs',
+			'class' => 'ggouv-share gwf tooltip s t prs noajaxified',
 			'onclick' => 'javascript:void(0)',
 			'href' => elgg_get_plugin_setting('site_shorturl', 'elgg-deck_river') . alphaID($entity->getGUID()),
 			'data-title' => $entity->title,
@@ -1187,7 +1187,7 @@ function gravatar_avatar_hook($hook, $type, $url, $params) {
  * Add a menu item to the annotations
  */
 function editablecomments_annotation_menu($hook, $type, $return, $params) {
-	if ($params['annotation']->name == 'generic_comment') {
+	if ($params['annotation']->name == 'generic_comment' && elgg_is_logged_in()) {
 
 		$options = array(
 			'name' => 'comment-reply',
