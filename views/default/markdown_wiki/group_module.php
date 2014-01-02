@@ -11,7 +11,7 @@
 
 $group = elgg_get_page_owner_entity();
 
-if ($group->markdown_wiki_enable != "yes") {
+if ($group->markdown_wiki_enable == "no") {
 	return true;
 }
 

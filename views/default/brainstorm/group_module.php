@@ -5,9 +5,9 @@
  * @package Brainstorm
  */
 
-$group_guid = elgg_get_page_owner_entity();
+$group = elgg_get_page_owner_entity();
 
-if ($group->brainstorm_enable != "yes") {
+if ($group->brainstorm_enable == "no") {
 	return true;
 }
 

@@ -5,7 +5,7 @@
 
 $group = elgg_get_page_owner_entity();
 
-if ($group->answers_enable != "yes") {
+if ($group->answers_enable == "no") {
 	return true;
 }
 

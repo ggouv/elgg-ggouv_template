@@ -44,7 +44,6 @@ function elgg_ggouv_template_init() {
 	elgg_load_js('leaflet.js');
 	elgg_load_js('history.js');
 	elgg_load_js('jquery-validation');
-	elgg_load_js('jquery.caretposition');
 	elgg_load_js('jquery.tipsy');
 	elgg_load_js('responsiveslides');
 

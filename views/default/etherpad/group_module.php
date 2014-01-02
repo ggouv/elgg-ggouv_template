@@ -8,7 +8,7 @@
 
 $group = elgg_get_page_owner_entity();
 
-if ($group->etherpad_enable != "yes") {
+if ($group->etherpad_enable == "no") {
 	return true;
 }
 
