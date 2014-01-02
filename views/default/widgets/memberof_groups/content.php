@@ -9,6 +9,8 @@ $sort = $vars['entity']->sort_items;
 
 elgg_push_context('widgets');
 
+if ($vars['entity']->num_display == 'all') $vars['entity']->num_display = 0;
+
 $params = array(
 	'type' => 'group',
 	'subtype' => 0,

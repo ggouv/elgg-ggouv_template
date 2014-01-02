@@ -23,7 +23,7 @@ $params = array(
 		12 => '12',
 		16 => '16',
 		24 => '24',
-		0 => elgg_echo('all')
+		'all' => elgg_echo('all')
 	)
 );
 $num_dropdown = elgg_view('input/dropdown', $params);
