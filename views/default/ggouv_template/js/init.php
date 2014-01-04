@@ -12,6 +12,7 @@ elgg.provide('elgg.ggouv_template');
 
 // Loaded for the first time only
 elgg.ggouv_template.init = function() {
+	document.domain = elgg.parse_url(elgg.get_site_url()).host; // set it for iframe
 
 	$('.elgg-page-body').css('min-height', $(window).height()-48); // prevent white space in bottom
 	// we wait everything is loaded

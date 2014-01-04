@@ -534,7 +534,7 @@ elgg.ggouv_template.reloadJsFunctions = function() {
 	elgg.tags.init();
 	elgg.workflow.reload();
 	elgg.answers.init();
-	//elgg.ggouv_pad.reload();
+	elgg.ggouv_pad.reload();
 	elgg.ggouv_template.reload();
 
 	// Reload autocomplete elgg.userpicker.userList @todo remove it for next version. Elgg 1.8.9 don't fix it
