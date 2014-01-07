@@ -536,7 +536,7 @@
 .workflow_board:before, .elgg-menu-item-workflow a:before {
 	content: 'O';
 }
-.question:before, .elgg-menu-item-questions a:before {
+.question:before, .elgg-menu-item-questions a:before, .answer:before {
 	content: 'Q';
 }
 .discussion:before, .elgg-menu-item-discussion a:before {
@@ -545,7 +545,7 @@
 .blog:before, .elgg-menu-item-blog a:before {
 	content: 'B';
 }
-.etherpad:before, .elgg-menu-item-etherpad a:before {
+.pad:before, .elgg-menu-item-pad a:before {
 	content: 'P';
 }
 .thewire:before, .elgg-menu-item-thewire a:before {

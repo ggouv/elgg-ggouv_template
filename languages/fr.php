@@ -2008,6 +2008,7 @@ Si vous ne pouvez pas cliquer sur le lien, faites un copier/coller dans votre na
 	'river:ingroup:create:object:mandat' => "pour le groupe %s",
 	'river:ingroup:create:object:question' => "au groupe %s",
 	'river:ingroup:create:object:bookmarks' => "dans le groupe %s",
+	'river:ingroup:create:object:pad' => "dans le groupe %s",
 
 	'river_elected_more_message:first_random' => "<br/><span class='elgg-subtext'>Tirage au sort lancé automatiquement pour la première élection.</span>",
 

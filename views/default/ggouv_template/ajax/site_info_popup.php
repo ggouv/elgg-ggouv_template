@@ -66,7 +66,7 @@ $stat = array(
 	'blogs' => elgg_get_entities(array('type' => 'object', 'subtype' => 'blog', 'count' => true, 'limit' => 0)),
 	'ideas' => elgg_get_entities(array('type' => 'object', 'subtype' => 'idea', 'count' => true, 'limit' => 0)),
 	'workflow_card' => elgg_get_entities(array('type' => 'object', 'subtype' => 'workflow_card', 'count' => true, 'limit' => 0)),
-	'pads' => elgg_get_entities(array('type' => 'object', 'subtype' => 'etherpad', 'count' => true, 'limit' => 0)),
+	'pads' => elgg_get_entities(array('type' => 'object', 'subtype' => 'pad', 'count' => true, 'limit' => 0)),
 	//'file' => elgg_get_entities(array('type' => 'object', 'subtype' => 'file', 'count' => true, 'limit' => 0)),
 );
 
@@ -84,7 +84,7 @@ echo elgg_view('page/elements/spotlight', array(
 		'workflow/all' => $stat['workflow_card'] . ' ' . elgg_echo('item:object:workflow_card'),
 		'wiki/all' => $stat['pages'] . ' ' . elgg_echo('item:object:markdown_wiki'),
 		'blog/all' => $stat['blogs'] . ' ' . elgg_echo('item:object:blog'),
-		'pad/all' => $stat['pads'] . ' ' . elgg_echo('item:object:etherpad'),
+		'pad/all' => $stat['pads'] . ' ' . elgg_echo('item:object:pad'),
 		//'file/all' => $items['file'] . ' ' . elgg_echo('item:object:file'),
 		//'tidypics/all' => $items['photos'] . ' ' . elgg_echo('item:object:photo'),
 	),
