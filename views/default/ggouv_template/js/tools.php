@@ -1,5 +1,11 @@
 elgg.provide('ggouv');
 
+// helper temporaire
+elgg.markdown_wiki.ShowdownConvert = function(textToConvert) {
+	var converter = new Showdown.converter({ extensions: ['showdownggouv'] });
+	return converter.makeHtml(textToConvert);
+};
+
 
 /*
  * Tools for jquery validation forms
