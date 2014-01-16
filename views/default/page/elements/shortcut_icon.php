@@ -4,8 +4,7 @@
  */
 ?>
 
-<link rel="icon" type="image/png" href="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/favicon/favicon.png" />
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/favicon/favicon.ico" />
+<link id="favicon" rel="shortcut icon" type="image/png" href="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/favicon/favicon.png" />
 
 <?php /* seems not usefull, apple goes automaticaly search on disk for these format :
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">

@@ -114,7 +114,9 @@ ggouv.super_popup.create = function(options) {
 ggouv.super_popup.deactivate = function() {
 	$('html').removeClass('super-popup-active');
 	$('#super-popup').remove(); // @todo if many super popup was created, only one is deleted. Should remove all.
-	setTimeout(function() {elgg.deck_river.SetColumnsHeight();},500);
+	setTimeout(function() {
+		if ($('body').hasClass('fixed-deck')) elgg.deck_river.SetColumnsHeight();
+	},500);
 };
 
 
@@ -309,7 +311,7 @@ ggouv.getParamsMap = function(maxZoom) {
 /**
  * Slide elgg-page-default right or left to provide a panel under the page
  * @param  {string} action      Possible value :
- *                                              'open' (slide the page), 
+ *                                              'open' (slide the page),
  *                                              'fix' (fix css on some element when page change. Called on History chang.),
  *                                              no value close the panel
  * @param  {int}    dist        Distance of the slide. Default : 250px
@@ -347,6 +349,161 @@ ggouv.slidr = function(action, dist) {
 	}
 };
 
+
+
+/**
+ * helper to know if user is on the page or another tab/application.
+ * Use HTML5 PageVisibilityAPI.
+ * @return {[boolean]} false, window is hidden. Else, true : user is on ggouv !
+ */
+elgg.provide('ggouv.visibility');
+
+// helper to get visibility property
+ggouv.visibility.getHiddenProp = function() {
+	var prefixes = ['webkit','moz','ms','o'];
+
+	// if 'hidden' is natively supported just return it
+	if ('hidden' in document) return 'hidden';
+
+	// otherwise loop over all the known prefixes until we find one
+	for (var i = 0; i < prefixes.length; i++){
+		if ((prefixes[i] + 'Hidden') in document) return prefixes[i] + 'Hidden';
+	}
+
+	// otherwise it's not supported
+	return null;
+};
+
+// check if window is hidden.
+ggouv.visibility.isWindowHidden = function() {
+	var prop = ggouv.visibility.getHiddenProp();
+
+	if (!prop) return false;
+	return document[prop];
+};
+
+// trigger event when visibility change
+ggouv.visibility.change = function() {
+	var prop = ggouv.visibility.getHiddenProp();
+
+	if (!prop) return false;
+	$(document).bind(prop.replace(/[H|h]idden/,'') + 'visibilitychange', function(evt) {
+		if (ggouv.visibility.isWindowHidden()) {
+			elgg.trigger_hook('ggouv_visibility_change', 'hidden');
+		} else {
+			elgg.trigger_hook('ggouv_visibility_change', 'visible');
+		}
+	});
+};
+elgg.register_hook_handler('init', 'system', ggouv.visibility.change);
+/*
+$([window, document]).focus(function(){
+	console.log('focus');
+}).blur(function(){
+	console.log('hidden');
+});*/
+
+
+
+/**
+ * Notification system in browser. Add count in favicon and play sound if window is hidden.
+ */
+ggouv.notify = function() {
+	var beep = $('#beep-audio')[0];
+
+	if (ggouv.visibility.isWindowHidden()) {
+		beep.play();
+		ggouv.favicon.increase(true);
+	} else if (window.console) {
+		console.log('ggouv.notify triggered ! Favicon and beep only work if window is hidden.');
+	}
+};
+
+
+
+/**
+ * Favicon notification
+ */
+elgg.provide('ggouv.favicon');
+
+ggouv.favicon.notify = function(num, blink) {
+	var blink = blink || false;
+	if (num > 99) num = 99;
+
+	var canvas = $('<canvas>')[0],
+		ctx,
+		img = new Image(),
+		$fav = $('#favicon').data('num', num),
+		favLink = $fav.data('original_favicon') ? $fav.data('original_favicon') : $fav.data('original_favicon', $fav.attr('href')).attr('href');
+
+	if (canvas.getContext && num > 0) {
+		canvas.height = canvas.width = 48;
+		ctx = canvas.getContext('2d');
+		img.src = favLink;
+
+		img.onload = function () {
+			// write image
+			ctx.drawImage(this, 0, 0);
+
+			// write circle //rounded rectangle
+			ctx.fillStyle = '#F90';
+			ctx.arc(24, 22, 19, 0, 2 * Math.PI, false);
+			ctx.fill();
+			//ctx.fillRect(num>9?0:8, 24, num>9?48:32, 24);
+
+			// write num
+			ctx.font = 'bold 26px "helvetica", sans-serif';
+			ctx.textAlign = 'center';
+			ctx.fillStyle = '#fff';
+			ctx.fillText(num, 24, 31); // circle
+			//ctx.fillText(num, 24, 45); // rect
+
+			$fav.attr('href', canvas.toDataURL('image/png'));
+
+			if (blink) ggouv.favicon.blink();
+		};
+	}
+};
+
+// clear favicon to restore original.
+ggouv.favicon.clear = function() {
+	var $fav = $('#favicon'),
+		favLink = $fav.data('original_favicon');
+
+	$fav.removeData().attr('href', favLink); // remove all data !
+	clearInterval(ggouv.favicon.interval);
+};
+
+// Increase count in favicon
+ggouv.favicon.increase = function(blink) {
+	var num = $('#favicon').data('num') || 0;
+	ggouv.favicon.notify(num+1, blink);
+};
+
+// Blink favicon
+ggouv.favicon.blink = function(stop) {
+	var stop = stop || false,
+		$fav = $('#favicon');
+
+	if (!stop && !$fav.data('blinked') && $fav.data('original_favicon')) {
+		ggouv.favicon.interval = setInterval(function() {
+			var href = $fav.data('blinked', true).attr('href');
+
+			if (/^d/.test(href)) {
+				$fav.data('notify_favicon', href);
+				$fav.attr('href', $fav.data('original_favicon'));
+			} else {
+				$fav.attr('href', $fav.data('notify_favicon'));
+			}
+		}, 600);
+	} else if (stop) {
+		$fav.removeData('blinked').attr('href', $fav.data('notify_favicon'));
+		clearInterval(ggouv.favicon.interval);
+	}
+};
+
+// register hook that clear favicon when window return visible
+elgg.register_hook_handler('ggouv_visibility_change', 'visible', ggouv.favicon.clear);
 
 
 /**
@@ -469,11 +626,11 @@ $.fn.searchlocalgroup = function(options) {
 
 //override confirm
 /*(function() {
-  var proxied = window.confirm;
-  window.confirm = function() {
-    // do something here
-    return proxied.apply(this, arguments);
-  };
+	var proxied = window.confirm;
+	window.confirm = function() {
+		// do something here
+		return proxied.apply(this, arguments);
+	};
 })();*/
 
 /**
@@ -534,42 +691,42 @@ window.confirm = function (msg) {
 	$dialog_alert.html(msg).dialog('open');
 };*
 $dialog_confirm = $('<div></div>').dialog({
-            resizable: false,
-            height: 100,
-            modal: true,
-            autoOpen: false,
-            buttons: {
-                "Ok - Configurable": function () {
-                    $(this).dialog("close");
-                    return window.alert.apply(this);
-                },
-                "Cancel - Configurable": function () {
-                    $(this).dialog("close");
-                    return false;
-                }
-            }
-        });
+						resizable: false,
+						height: 100,
+						modal: true,
+						autoOpen: false,
+						buttons: {
+								"Ok - Configurable": function () {
+										$(this).dialog("close");
+										return window.alert.apply(this);
+								},
+								"Cancel - Configurable": function () {
+										$(this).dialog("close");
+										return false;
+								}
+						}
+				});
 
 ggouv_confirm = function (msg, size) {
 	//ggouv_super_popup(msg, 'tiny');
 	$( "#super-popup").html(msg).dialog({
-            resizable: false,
-            height:140,
-            modal: true,
-            //autoOpen: false,
-            buttons: {
-                "Yes": function()
-                {
-                    $(this).dialog( "close" );
-                    return true;
-                },
-                "No": function()
-                {
-                    $( this ).dialog( "close" );
-                    return false;
-                }
-            }
-        });
+						resizable: false,
+						height:140,
+						modal: true,
+						//autoOpen: false,
+						buttons: {
+								"Yes": function()
+								{
+										$(this).dialog( "close" );
+										return true;
+								},
+								"No": function()
+								{
+										$( this ).dialog( "close" );
+										return false;
+								}
+						}
+				});
 };*/
 
 

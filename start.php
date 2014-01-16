@@ -98,6 +98,9 @@ function elgg_ggouv_template_init() {
 
 //~/Sites/ggouv/ggouv/engine/lib/user_settings.php
 
+	// register avatar handler
+	elgg_register_page_handler('avatar', 'avatar_handler');
+
 	// register tour handler
 	elgg_register_page_handler('tour', 'tour_handler');
 
@@ -457,7 +460,6 @@ function ggouv_twitter_api_pagehandler($page) {
 	if (!isset($page[0])) {
 		return false;
 	}
-
 
 	elgg_load_library('twitter_api');
 

@@ -41,3 +41,10 @@
 		</a>
 	<div>
 </script>
+
+<!-- sound for notification -->
+<audio id="beep-audio" class="hidden">
+<source src="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/sounds/ggouv-you-wouldnt-believe.mp3">
+<source src="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/sounds/ggouv-you-wouldnt-believe.wav">
+<source src="<?php echo elgg_get_site_url(); ?>mod/elgg-ggouv_template/graphics/sounds/ggouv-you-wouldnt-believe.ogg">
+</audio>
