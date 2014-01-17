@@ -84,7 +84,7 @@ textarea {
 	height: 18px;
 	position: absolute;
 	right: 3px;
-	top: 31px;
+	top: 3px;
 	width: 19px;
 	cursor: pointer;
 	z-index: 2;

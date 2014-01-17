@@ -134,6 +134,10 @@ function elgg_ggouv_template_init() {
 	elgg_register_plugin_hook_handler('profile:fields', 'profile', 'ggouv_profile_defaults');
 	elgg_register_plugin_hook_handler('entity:icon:url', 'user', 'gravatar_avatar_hook', 900);
 
+	// Override menu
+	elgg_unregister_plugin_hook_handler('register', 'menu:entity', 'elgg_users_setup_entity_menu');
+	elgg_register_plugin_hook_handler('register', 'menu:entity', 'ggouv_users_setup_entity_menu', 501);
+
 	// hook for election
 	elgg_register_plugin_hook_handler('election', 'bycandidat', 'ggouv_election_when_candidat_added');
 
@@ -931,6 +935,56 @@ function ggouv_entity_menu_setup($hook, $type, $return, $params) {
 			'priority' => 300,
 		);
 		$return[] = ElggMenuItem::factory($options);
+	}
+
+	return $return;
+}
+
+
+/**
+ * Setup the menu shown with an entity
+ * GGOUV : override elgg_users_setup_entity_menu
+ *
+ * @param string $hook
+ * @param string $type
+ * @param array $return
+ * @param array $params
+ * @return array
+ *
+ * @access private
+ */
+function ggouv_users_setup_entity_menu($hook, $type, $return, $params) {
+	if (elgg_in_context('widgets')) {
+		return $return;
+	}
+
+	$entity = $params['entity'];
+	if (!elgg_instanceof($entity, 'user')) {
+		return $return;
+	}
+	/* @var ElggUser $entity */
+
+	if ($entity->isBanned()) {
+		$banned = elgg_echo('banned');
+		$options = array(
+			'name' => 'banned',
+			'text' => "<span>$banned</span>",
+			'href' => false,
+			'priority' => 0,
+		);
+		$return = array(ElggMenuItem::factory($options));
+	} else {
+		$return = array();
+		if (isset($entity->location)) {
+			$location = htmlspecialchars($entity->location, ENT_QUOTES, 'UTF-8', false);
+			$options = array(
+				'name' => 'location',
+				'text' => "<span>$location</span>",
+				'href' => "groups/profile/$location",
+				'priority' => 150,
+			);
+			$return[] = ElggMenuItem::factory($options);
+		}
 	}
 
 	return $return;

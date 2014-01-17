@@ -402,9 +402,9 @@ elgg.ggouv_template.loadPage = function(url, data) {
 						var numOrigin = elgg.isUndefined(orignParsed.query) ? 0 : parseInt(orignParsed.query.match(/offset=(\d+)/)[1]),
 							numDest = parseInt(urlOffset[1]);
 
-						$('.elgg-page-body .elgg-main .elgg-pagination').html(respBody.find('.elgg-main .elgg-pagination').html());
+						$('.elgg-page-body .elgg-layout:visible .elgg-main .elgg-pagination').html(respBody.find('.elgg-main .elgg-pagination').html());
 						if (numOrigin < numDest) {
-							var u = $('.elgg-page-body .elgg-main .elgg-list'),
+							var u = $('.elgg-page-body .elgg-layout:visible .elgg-main .elgg-list'),
 								slideWidth = u.outerWidth(true),
 								v = respBody.find('.elgg-main .elgg-list').clone().css({
 									position: 'absolute',
@@ -416,7 +416,7 @@ elgg.ggouv_template.loadPage = function(url, data) {
 								v.removeAttr('style');
 							});
 						} else {
-							var u = $('.elgg-page-body .elgg-main .elgg-list'),
+							var u = $('.elgg-page-body .elgg-layout:visible .elgg-main .elgg-list'),
 								slideWidth = u.outerWidth(true),
 								v = respBody.find('.elgg-main .elgg-list').clone().css({
 									position: 'absolute',
