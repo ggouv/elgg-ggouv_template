@@ -9,14 +9,18 @@ $sort = $vars['entity']->sort_items;
 
 elgg_push_context('widgets');
 
-if ($vars['entity']->num_display == 'all') $vars['entity']->num_display = 0;
+if ($vars['entity']->num_display == 'all') {
+	$num_display = 0;
+} else {
+	$num_display = $vars['entity']->num_display;
+}
 
 $params = array(
 	'type' => 'group',
 	'subtype' => 0,
 	'owner_guid' => $user_guid,
 	'order_by' => 'e.' . $sort . ' desc',
-	'limit' => $vars['entity']->num_display,
+	'limit' => $num_display,
 	'pagination' => false,
 	'full_view' => false,
 	'size' => $vars['entity']->size_items,
