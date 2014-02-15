@@ -543,6 +543,12 @@ TEXT;
  * Provide handler to return avatar for user and group
  * URLs take the form of
  *
+ *  Defaults Elgg avatar handler:
+ * /avatar/edit/<username>
+ * /avatar/view/<username>/<size>/<icontime>
+ *
+ *  Added:
+ *
  *  user avatar:      avatar/user/username
  *  user avatar:      avatar/user/username?size=$size
  *  user avatar:      avatar/user/username/$size
@@ -559,7 +565,20 @@ function avatar_handler($page) {
 		exit;
 	}
 
-	if ($page[0] == 'user') {
+	if ($page[0] == 'edit') {
+		global $CONFIG;
+		$user = get_user_by_username($page[1]);
+		elgg_set_page_owner_guid($user->getGUID());
+		require_once("{$CONFIG->path}pages/avatar/edit.php");
+		return true;
+	} else if ($page[0] == 'view') {
+		global $CONFIG;
+		$user = get_user_by_username($page[1]);
+		elgg_set_page_owner_guid($user->getGUID());
+		set_input('size', $page[2]);
+		require_once("{$CONFIG->path}pages/avatar/view.php");
+		return true;
+	} else if ($page[0] == 'user') {
 		$object = get_user_by_username($page[1]);
 	} else if ($page[0] == 'group'){
 		$object = search_group_by_title($page[1]);
